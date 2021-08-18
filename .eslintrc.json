@@ -1,0 +1,20 @@
+{
+  "extends": ["next", "airbnb", "prettier"],
+  "rules": {
+    "jsx-quotes": [1, "prefer-double"],
+    "import/prefer-default-export": "off",
+    "import/no-unresolved": "off",
+    "react/prop-types": "off",
+    "no-undef": "warn",
+    "no-unused-vars": "warn",
+    "import/order": "off",
+    "react/self-closing-comp": "warn",
+    "react/jsx-props-no-spreading": "off",
+    "no-shadow": "off",
+    "import/named": "off",
+    "react/react-in-jsx-scope": "off",
+    "default-case": "off",
+    "consistent-return": "off",
+    "jsx-a11y/anchor-is-valid": "off"
+  }
+}
