@@ -1,0 +1,46 @@
+@font-face {
+  font-family: 'Formular';
+  src: url('/fonts/Formular-Regular.eot');
+  src: local('Formular'), url('/fonts/Formular-Regular.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/Formular-Regular.woff2') format('woff2'),
+    url('/fonts/Formular-Regular.woff') format('woff'),
+    url('/fonts/Formular-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Formular';
+  src: url('/fonts/Formular-Medium.eot');
+  src: local('Formular Medium'), local('/fonts/Formular-Medium'),
+    url('/fonts/Formular-Medium.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/Formular-Medium.woff2') format('woff2'),
+    url('/fonts/Formular-Medium.woff') format('woff'),
+    url('/fonts/Formular-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Formular';
+  src: url('/fonts/Formular-Bold.eot');
+  src: local('Formular Bold'), local('/fonts/Formular-Bold'),
+    url('/fonts/Formular-Bold.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/Formular-Bold.woff2') format('woff2'),
+    url('/fonts/Formular-Bold.woff') format('woff'),
+    url('/fonts/Formular-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'HKGrotesk-Bold';
+  src: url('/fonts/HKGrotesk-Bold.eot');
+  src: local('HKGrotesk Bold'), local('/fonts/HKGrotesk-Bold'),
+    url('/fonts/HKGrotesk-Bold.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/HKGrotesk-Bold.woff2') format('woff2'),
+    url('/fonts/HKGrotesk-Bold.woff') format('woff'),
+    url('/fonts/HKGrotesk-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
