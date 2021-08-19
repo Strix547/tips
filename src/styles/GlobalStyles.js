@@ -18,13 +18,13 @@ export const GlobalStyles = createGlobalStyle`
   
   body {
     font-family: 'Formular';
-    font-size: 16px;
+    font-size: var(--font-size-reg);
     font-weight: 400;
-    color: #000;
+    color: var(--color-black-100);
   }
 
   a {
-    color: #000;
+    color: var(--color-black-100);
     text-decoration: none;
   }
 `

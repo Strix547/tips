@@ -1,5 +1,5 @@
 import styled from 'styled-components'
 
-export const Recipients = styled.div`
+export const MediaAboutUs = styled.div`
 
 `

@@ -1,0 +1,1 @@
+export { MediaAboutUsSection } from './MediaAboutUs'

@@ -30,7 +30,7 @@ export const Button = styled.button`
   padding: 0 44px;
   font-family: 'Formular';
   font-weight: 500;
-  font-size: 16px;
+  font-size: var(--font-size-reg);
   color: #fff;
   background: var(--gradient-green);
   /* box-shadow: 0px 15px 30px rgba(84, 167, 92, 0.15); */

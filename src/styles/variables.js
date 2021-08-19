@@ -4,6 +4,16 @@ export const variables = css`
   :root {
     --color-primary-100: #54a75c;
     --color-primary-200: #3bc76b;
+    --color-primary-300: #479b4e;
+
+    --color-black-100: #101011;
+    --color-black-200: #313436;
+
+    --color-gray-100: #f3f5f7;
+    --color-gray-200: #e1e3e1;
+
+    --color-blue-100: #156bed;
+    --color-red-100: #f83939;
 
     --gradient-green: linear-gradient(0deg, var(--color-primary-200), var(--color-primary-200)),
       linear-gradient(0deg, #479b4e, #479b4e), linear-gradient(0deg, #3fa949, #3fa949),

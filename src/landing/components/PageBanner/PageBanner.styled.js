@@ -27,7 +27,7 @@ export const Left = styled.div`
 export const Subtitle = styled(Text)`
   max-width: 560px;
   margin-top: 30px;
-  font-size: 20px;
+  font-size: var(--font-size-600);
   font-weight: 500;
   line-height: 28px;
 `
@@ -51,5 +51,6 @@ export const ImgContainer = styled.div`
 export const Img = styled.div`
   position: absolute;
   left: 482px;
-  bottom: -87px;
+  bottom: 50x;
+  z-index: 10;
 `

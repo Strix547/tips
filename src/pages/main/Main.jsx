@@ -1,12 +1,13 @@
-import React, { Fragment } from 'react'
-
 import { Header } from 'layout'
 import { PageBanner } from 'landing/components'
+import { TariffsSection, TrustUsSection, MediaAboutUsSection } from 'landing/sections'
 import { Button } from 'ui'
+
+import { UsersSection, HowServiceWorkSection, WhereCanUseSection } from './sections'
 
 import * as S from './Main.styled'
 
-import dashboard from '@public/img/pages/main/dashboard.png'
+import dashboard from '@public/img/pages/main/banner-dashboard.png'
 
 export const MainPage = () => {
   const bannerActions = (
@@ -17,7 +18,7 @@ export const MainPage = () => {
   )
 
   return (
-    <S.Main>
+    <S.MainPage>
       <Header />
 
       <PageBanner
@@ -26,6 +27,13 @@ export const MainPage = () => {
         actions={bannerActions}
         img={dashboard}
       />
-    </S.Main>
+
+      <UsersSection />
+      <HowServiceWorkSection />
+      <WhereCanUseSection />
+      <TariffsSection />
+      <TrustUsSection />
+      <MediaAboutUsSection />
+    </S.MainPage>
   )
 }
