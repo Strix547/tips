@@ -40,7 +40,10 @@ export const BoxList = () => {
         'Добавить ссылку на отправку чаевых в рассылку (SMS/E-mail/PUSH-уведомления)',
         'Регистрировать пользователей, получать статистику и многое другое'
       ],
-      preview: [recipientCard, emotionsBlock]
+      preview: [
+        { label: 'recipient card', img: recipientCard },
+        { label: 'emotions block', img: emotionsBlock }
+      ]
     },
     {
       title: 'Интеграция с кассовым ПО',

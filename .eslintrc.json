@@ -15,6 +15,7 @@
     "react/react-in-jsx-scope": "off",
     "default-case": "off",
     "consistent-return": "off",
-    "jsx-a11y/anchor-is-valid": "off"
+    "jsx-a11y/anchor-is-valid": "off",
+    "arrow-body-style": "off"
   }
 }

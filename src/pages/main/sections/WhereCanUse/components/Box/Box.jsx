@@ -16,9 +16,9 @@ export const Box = ({ title, subtitle, points = [], preview }) => {
     <S.Box>
       <S.Top>
         {Array.isArray(preview) ? (
-          preview.map((src) => (
-            <S.ImgContainer key={src}>
-              <Img src={src} alt={title} />
+          preview.map(({ label, img }) => (
+            <S.ImgContainer key={label}>
+              <Img src={img} alt={label} />
             </S.ImgContainer>
           ))
         ) : (

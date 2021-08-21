@@ -1,8 +1,12 @@
-import { Header } from 'layout'
+import { Header, Footer } from 'layout'
 import { PageBanner } from 'landing/components'
-import { TariffsSection, TrustUsSection, MediaAboutUsSection } from 'landing/sections'
+import {
+  TariffsSection,
+  TrustUsSection,
+  MediaAboutUsSection,
+  ConnectFormSection
+} from 'landing/sections'
 import { Button } from 'ui'
-
 import { UsersSection, HowServiceWorkSection, WhereCanUseSection } from './sections'
 
 import * as S from './Main.styled'
@@ -34,6 +38,9 @@ export const MainPage = () => {
       <TariffsSection />
       <TrustUsSection />
       <MediaAboutUsSection />
+      <ConnectFormSection />
+
+      <Footer />
     </S.MainPage>
   )
 }

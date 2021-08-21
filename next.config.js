@@ -3,7 +3,7 @@ const path = require('path')
 
 module.exports = {
   ...withReactSvg({
-    include: path.resolve(__dirname, 'public/icons'),
+    include: path.resolve(__dirname, 'public'),
     webpack(config) {
       return config
     }

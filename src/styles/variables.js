@@ -11,6 +11,9 @@ export const variables = css`
 
     --color-gray-100: #f3f5f7;
     --color-gray-200: #e1e3e1;
+    --color-gray-300: #777d82;
+    --color-gray-400: #c8c9cf;
+    --color-gray-500: #55595b;
 
     --color-blue-100: #156bed;
     --color-red-100: #f83939;

@@ -4,7 +4,7 @@ import { Heading, Text, Wrapper } from 'styled'
 
 export { Heading, Text, Wrapper }
 
-export const PageBanner = styled.div`
+export const PageBanner = styled.section`
   display: flex;
   align-items: center;
   height: 650px;

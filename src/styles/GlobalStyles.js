@@ -11,16 +11,12 @@ export const GlobalStyles = createGlobalStyle`
     min-height: 100vh;
   }
 
-  #root {
-    display: flex;
-    overflow-x: hidden;
-  }
-  
   body {
     font-family: 'Formular';
     font-size: var(--font-size-reg);
     font-weight: 400;
     color: var(--color-black-100);
+    overflow-x: hidden;
   }
 
   a {
