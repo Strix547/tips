@@ -1,11 +1,19 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-import { Text } from 'styled'
+import { Wrapper, Heading, Text } from 'styled'
 import { Button } from 'ui/Button/Button.styled'
 import { CheckboxRow } from 'ui/Checkbox/Checkbox.styled'
 import { FormField } from 'ui/FormField/FormField.styled'
 
 export { Text }
+
+export const sectionStyles = css`
+  overflow-x: hidden;
+
+  ${Wrapper} > ${Heading}:first-of-type {
+    margin-bottom: 30px;
+  }
+`
 
 export const Content = styled.div`
   position: relative;
@@ -26,7 +34,7 @@ export const FormContainer = styled.div`
   margin: 40px auto 0;
   padding: 40px 20px 20px;
   background: #ffffff;
-  border: 1px solid #f7f9fb;
+  border: 1px solid var(--color-gray-600);
   box-shadow: 0px 10px 40px rgba(54, 54, 65, 0.1);
   border-radius: 20px;
   box-sizing: border-box;

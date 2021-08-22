@@ -7,7 +7,7 @@ import { Button } from 'ui/Button/Button.styled'
 export { Wrapper, Text }
 
 export const Footer = styled.footer`
-  background: #f7f9fb;
+  background: var(--color-gray-600);
 `
 
 export const Top = styled.div`
@@ -96,7 +96,7 @@ export const SubscriptionForm = styled.form`
     height: 50px;
     padding-right: 50px;
     background: #fff;
-    border: 1px solid #c8c9cf;
+    border: 1px solid var(--color-gray-400);
     border-radius: 36px;
   }
 
@@ -160,9 +160,24 @@ export const NetworkList = styled.ul`
     border-radius: 50%;
     transition: 0.3s;
 
-    &:hover {
-      background: rgba(59, 199, 107, 0.1);
+    svg,
+    svg path {
       transition: 0.3s;
+    }
+
+    &:hover {
+      background: #e5f4ed;
+      transition: 0.3s;
+
+      svg {
+        fill: var(--color-primary-200);
+        transition: 0.3s;
+
+        path {
+          fill: var(--color-primary-200);
+          transition: 0.3s;
+        }
+      }
     }
 
     &:not(:last-child) {

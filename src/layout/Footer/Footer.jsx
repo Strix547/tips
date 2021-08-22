@@ -117,9 +117,7 @@ export const Footer = () => {
         </S.Top>
 
         <S.Bottom>
-          <S.Copyright>
-            <S.Text>© 2021 «Tips.me»‎</S.Text>
-          </S.Copyright>
+          <S.Copyright>© 2021 «Tips.me»‎</S.Copyright>
 
           <S.PaymentServices>
             <S.Text>Принимаем к оплате</S.Text> <ul>{paymentServiceList}</ul>

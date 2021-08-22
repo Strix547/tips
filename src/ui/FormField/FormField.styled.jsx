@@ -41,7 +41,7 @@ export const FormField = styled((props) => (
     padding-left: 20px;
     font-size: var(--font-size-md);
     color: var(--color-gray-300);
-    border: 1px solid #c8c9cf;
+    border: 1px solid var(--color-gray-400);
     border-radius: 8px;
     cursor: text;
     box-sizing: border-box;

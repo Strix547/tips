@@ -2,6 +2,9 @@ import styled from 'styled-components'
 
 import { Wrapper, Heading, Text } from 'styled'
 import { Button } from 'ui/Button/Button.styled'
+import { media } from 'styles/media'
+
+const media1000 = media.createMedia(1000)
 
 export { Wrapper, Heading, Text }
 
@@ -10,6 +13,12 @@ export const Left = styled.div`
 
   ${Button} {
     margin-top: 30px;
+  }
+
+  ${media1000} {
+    width: 100%;
+    padding: 0 40px;
+    box-sizing: border-box;
   }
 `
 
@@ -71,6 +80,10 @@ export const ImgContainer = styled.div`
     position: relative;
     z-index: 10;
   }
+
+  ${media1000} {
+    margin-top: 95px;
+  }
 `
 
 export const Circle = styled.div`
@@ -131,6 +144,18 @@ export const RowSection = styled.div`
         top: 58px;
         left: 249px;
       }
+    }
+  }
+
+  ${media1000} {
+    flex-direction: column;
+
+    &:not(:last-child) {
+      margin-bottom: 115px;
+    }
+
+    &:nth-child(2) ${LeftTop} ${Heading}, ${LeftTop} &:nth-child(3) ${Heading} {
+      width: 100%;
     }
   }
 `

@@ -12,6 +12,7 @@ import { UsersSection, HowServiceWorkSection, WhereCanUseSection } from './secti
 import * as S from './Main.styled'
 
 import dashboard from '@public/img/pages/main/banner-dashboard.png'
+import dashboardMobile from '@public/img/pages/main/banner-dashboard-mobile.png'
 
 export const MainPage = () => {
   const bannerActions = (
@@ -25,22 +26,24 @@ export const MainPage = () => {
     <S.MainPage>
       <Header />
 
-      <PageBanner
-        title="Получайте чаевые мгновенно. Где угодно. От кого-либо"
-        subtitle="Оплачивайте чаевые мгновенно. Где угодно. Любому получателю в мире"
-        actions={bannerActions}
-        img={dashboard}
-      />
+      <main>
+        <PageBanner
+          title="Получайте чаевые мгновенно. Где угодно. От кого-либо"
+          subtitle="Оплачивайте чаевые мгновенно. Где угодно. Любому получателю в мире"
+          actions={bannerActions}
+          img={{ desktop: dashboard, mobile: dashboardMobile }}
+        />
 
-      <UsersSection />
-      <HowServiceWorkSection />
-      <WhereCanUseSection />
-      <TariffsSection />
-      <TrustUsSection />
-      <MediaAboutUsSection />
-      <ConnectFormSection />
+        <UsersSection />
+        {/* <HowServiceWorkSection /> */}
+        {/* <WhereCanUseSection /> */}
+        {/* <TariffsSection /> */}
+        <TrustUsSection />
+        <MediaAboutUsSection />
+        {/* <ConnectFormSection /> */}
+      </main>
 
-      <Footer />
+      {/* <Footer /> */}
     </S.MainPage>
   )
 }

@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components'
 
+import { media } from 'styles/media'
+
 const getLevelStyles = (level) => {
   switch (level) {
     case 1:
@@ -7,6 +9,11 @@ const getLevelStyles = (level) => {
       return css`
         font-size: var(--font-size-100);
         line-height: 56px;
+
+        ${media.mobile} {
+          font-size: var(--font-size-400);
+          line-height: 42px;
+        }
       `
     case 3:
       return css`

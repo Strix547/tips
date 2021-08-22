@@ -15,7 +15,7 @@ export const ConnectFormSection = () => {
   const useFormProps = useForm()
 
   return (
-    <Section id="connect-form-section" title={['Форма подключения', 'Бизнес-площадки к системе']}>
+    <Section title={['Форма подключения', 'Бизнес-площадки к системе']} styles={S.sectionStyles}>
       <S.Content>
         <S.Subtitle>
           Посетитель может оставить заявку на звонок менеджера для консультации по подключению

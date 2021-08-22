@@ -1,19 +1,25 @@
-import React from 'react'
-
 import * as S from './Section.styled'
 
-export const Section = ({ id, title, children, gray }) => {
+export const Section = ({ id, title, children, fullWidth, gray, styles }) => {
   const titleWithRows = Array.isArray(title)
     ? title.map((row) => <span key={row}>{row}</span>)
     : title
 
-  return (
-    <S.Section id={id} gray={gray}>
-      <S.Wrapper>
-        <S.Heading level={1}>{titleWithRows}</S.Heading>
+  const heading = <S.Heading level={1}>{titleWithRows}</S.Heading>
 
-        {children}
-      </S.Wrapper>
+  return (
+    <S.Section id={id} gray={gray} styles={styles}>
+      {!fullWidth ? (
+        <S.Wrapper>
+          {heading}
+          {children}
+        </S.Wrapper>
+      ) : (
+        <>
+          {heading}
+          {children}
+        </>
+      )}
     </S.Section>
   )
 }

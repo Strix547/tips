@@ -1,8 +1,11 @@
+import { useMediaQuery } from 'react-responsive'
 import Img from 'next/image'
 
 import * as S from './PageBanner.styled'
 
 export const PageBanner = ({ title, subtitle, features, actions, img }) => {
+  const widthMore630 = useMediaQuery({ minWidth: 630 })
+
   const featureList = features
 
   return (
@@ -20,7 +23,11 @@ export const PageBanner = ({ title, subtitle, features, actions, img }) => {
 
         <S.ImgContainer>
           <S.Img>
-            <Img src={img} alt="dashboard" layout="fixed" />
+            {widthMore630 ? (
+              <Img src={img.desktop} alt="dashboard" layout="fixed" />
+            ) : (
+              <Img src={img.mobile} alt="dashboard" layout="fixed" />
+            )}
           </S.Img>
         </S.ImgContainer>
       </S.Wrapper>
