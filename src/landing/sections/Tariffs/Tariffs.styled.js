@@ -1,9 +1,20 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { Text } from 'styled'
 import { Button } from 'ui/Button/Button.styled'
 
+import { media } from 'styles/media'
+
+const media1030 = media.createMedia(1030)
+const media740 = media.createMedia(740)
+const media570 = media.createMedia(570)
+
 export { Text }
+
+export const sectionStyles = css`
+  position: relative;
+  overflow-x: hidden;
+`
 
 export const Content = styled.div`
   display: flex;
@@ -20,6 +31,22 @@ export const Card = styled.div`
   box-shadow: 0px 10px 40px rgba(20, 32, 60, 0.05);
   border-radius: 20px;
   box-sizing: border-box;
+
+  ${media1030} {
+    position: relative;
+    padding: 50px 40px;
+    z-index: 10;
+  }
+
+  ${media740} {
+    width: 100%;
+  }
+
+  ${media570} {
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    padding: 30px;
+  }
 `
 
 export const CardLeft = styled.div`
@@ -38,7 +65,34 @@ export const CardLeft = styled.div`
   }
 
   ${Button} {
-    margin-top: 36px;
+    margin-top: 35px;
+  }
+
+  ${media570} {
+    ${Text}:nth-child(1) {
+      margin-top: 20px;
+    }
+  }
+
+  ${media.mobile} {
+    ${Text} {
+      &:nth-child(1) {
+        font-size: var(--font-size-md);
+        line-height: 28px;
+      }
+
+      &:nth-child(2) {
+        margin-top: 10px;
+        font-size: var(--font-size-reg);
+        line-height: 22px;
+      }
+    }
+
+    ${Button} {
+      width: 100%;
+      margin-top: 30px;
+      padding: 0 40px;
+    }
   }
 `
 
@@ -56,6 +110,21 @@ export const Percentage = styled.div`
   border: 1px dashed var(--color-blue-100);
   border-radius: 50%;
   box-sizing: border-box;
+
+  ${media570} {
+    margin-left: 0;
+  }
 `
 
-export const Img = styled.div``
+export const Img = styled.div`
+  ${media1030} {
+    position: absolute;
+    width: 436px;
+    height: 367px;
+    left: 522px;
+  }
+
+  ${media740} {
+    display: none;
+  }
+`

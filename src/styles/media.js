@@ -3,10 +3,11 @@ const createMedia = (maxWidth) => {
 }
 
 const wrapperHorizontalPaddings = 40
+const wrapperSmHorizontalPaddings = 30
 
 export const MEDIA_LAPTOP = 1170 + wrapperHorizontalPaddings
-export const MEDIA_TABLET = 768 + wrapperHorizontalPaddings
-export const MEDIA_MOBILE = 375 + wrapperHorizontalPaddings
+export const MEDIA_TABLET = 768 + wrapperSmHorizontalPaddings
+export const MEDIA_MOBILE = 375 + wrapperSmHorizontalPaddings
 
 export const media = {
   createMedia,

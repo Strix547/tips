@@ -11,7 +11,7 @@ export const RowSection = ({ title, subtitle, detailsLink, features, action, img
   const featureList = features.map((title) => <li key={title}>{title}</li>)
 
   return (
-    <S.RowSection reversed={reversed}>
+    <S.RowSection $reversed={reversed}>
       <S.Left>
         <S.LeftTop>
           <S.Heading level={3}>{title}</S.Heading>

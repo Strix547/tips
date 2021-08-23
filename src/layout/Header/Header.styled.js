@@ -175,7 +175,6 @@ export const Overlay = styled.div`
   width: 100vw;
   height: 100vh;
   background: rgba(16, 17, 18, 0.3);
-  transition: top 0.9s ease-in-out 0.1s;
   cursor: pointer;
   z-index: 100;
 
@@ -183,6 +182,5 @@ export const Overlay = styled.div`
     open &&
     css`
       top: 0;
-      transition: top 0.9s ease-in-out 0.1s;
     `}
 `

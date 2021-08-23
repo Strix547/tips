@@ -1,15 +1,21 @@
+import { useMediaQuery } from 'react-responsive'
+
 import { Box } from '../Box'
 
 import * as S from './BoxList.styled'
 
-import qrFirst from '@public/img/pages/main/qr-1.png'
-import qrSecond from '@public/img/pages/main/qr-2.png'
-import qrThird from '@public/img/pages/main/qr-3.png'
+import qrFirst from '@public/img/landing/qr-1.png'
+import qrSecond from '@public/img/landing/qr-2.png'
+import qrSecondMobile from '@public/img/landing/qr-2-mobile.png'
+import qrThird from '@public/img/landing/qr-3.png'
 
-import recipientCard from '@public/img/pages/main/recipient-card.png'
-import emotionsBlock from '@public/img/pages/main/emotions-block.png'
+import recipientCard from '@public/img/landing/recipient-card.png'
+import recipientCardMobile from '@public/img/landing/recipient-card-mobile.png'
+import emotionsBlock from '@public/img/landing/emotions-block.png'
 
 export const BoxList = () => {
+  const screenMore700 = useMediaQuery({ minWidth: 701 })
+
   const boxes = [
     {
       title: 'Чаевые по QR-коду',
@@ -30,7 +36,7 @@ export const BoxList = () => {
         'На стриме',
         'В мессенджерах'
       ],
-      preview: qrSecond
+      preview: screenMore700 ? qrSecond : qrSecondMobile
     },
     {
       title: 'Интеграция по API и SDK',
@@ -40,10 +46,12 @@ export const BoxList = () => {
         'Добавить ссылку на отправку чаевых в рассылку (SMS/E-mail/PUSH-уведомления)',
         'Регистрировать пользователей, получать статистику и многое другое'
       ],
-      preview: [
-        { label: 'recipient card', img: recipientCard },
-        { label: 'emotions block', img: emotionsBlock }
-      ]
+      preview: screenMore700
+        ? [
+            { label: 'recipient card', img: recipientCard },
+            { label: 'emotions block', img: emotionsBlock }
+          ]
+        : [{ label: 'recipient card', img: recipientCardMobile }]
     },
     {
       title: 'Интеграция с кассовым ПО',

@@ -5,10 +5,10 @@ import { Button } from 'ui'
 
 import * as S from './Tariffs.styled'
 
-import backgroundImg from '@public/img/pages/main/tariff-img.png'
+import backgroundImg from '@public/img/landing/tariff-img.png'
 
 export const TariffsSection = () => (
-  <Section title="Тарифы" gray>
+  <Section title="Тарифы" gray styles={S.sectionStyles}>
     <S.Content>
       <S.Card>
         <S.CardLeft>

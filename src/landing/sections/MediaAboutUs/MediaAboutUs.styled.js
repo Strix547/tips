@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { Heading, Text } from 'styled'
+import { media } from 'styles/media'
 
 export { Text }
 
@@ -18,11 +19,21 @@ export const Content = styled.div`
   }
 
   .swiper-slide {
-    width: 371px;
+    width: 370px;
   }
 
   .swiper-wrapper {
     transition-timing-function: linear;
+  }
+
+  ${media.createMedia(560)} {
+    .swiper-container {
+      padding-top: 40px;
+    }
+
+    .swiper-slide {
+      width: 290px;
+    }
   }
 `
 

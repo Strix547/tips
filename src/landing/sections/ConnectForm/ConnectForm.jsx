@@ -2,14 +2,14 @@ import { FormProvider, useForm } from 'react-hook-form'
 import Link from 'next/link'
 
 import { Section } from 'landing/components'
-import { FormField, Checkbox, Button } from 'ui'
+import { FormField, Checkbox, PhoneField, Button } from 'ui'
 
 import { ROUTES } from 'core/routes'
 
 import * as S from './ConnectForm.styled'
 
-import GreenDotesSvg from '@public/img/pages/main/green-dotes.svg'
-import LineSvg from '@public/img/pages/main/line.svg'
+import GreenDotesSvg from '@public/img/landing/green-dotes.svg'
+import LineSvg from '@public/img/landing/line.svg'
 
 export const ConnectFormSection = () => {
   const useFormProps = useForm()
@@ -26,7 +26,7 @@ export const ConnectFormSection = () => {
           <S.Form>
             <FormProvider {...useFormProps}>
               <FormField name="name" label="Имя" placeholder="Введите Ваше имя" />
-              <FormField name="name" label="Телефон" placeholder="Введите Ваше имя" />
+              <PhoneField name="phone" country="ru" placeholder="+7 (___) ___-__-__" />
               <FormField name="name" label="Название компании" placeholder="Компания" />
               <Checkbox label="Даю согласие на обработку персональных данных" />
               <Checkbox label="Согласен на маркетинговую рассылку" />

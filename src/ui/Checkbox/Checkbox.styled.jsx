@@ -12,6 +12,7 @@ export const CheckboxRow = styled(({ ...props }) => (
 ))`
   && {
     margin: 0;
+    align-items: flex-start;
   }
 
   .form-control-label {

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
-import { Box, Content, PointList } from '../Box/Box.styled'
+import { Box, Top, Content, PointList, ImgContainer } from '../Box/Box.styled'
+import { media } from 'styles/media'
 
 export const BoxList = styled.ul`
   display: grid;
@@ -40,6 +41,71 @@ export const BoxList = styled.ul`
 
     &:nth-child(3) ${Content} {
       width: 564px;
+    }
+  }
+
+  ${media.laptop} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    ${Box} {
+      &:nth-child(1),
+      &:nth-child(4) {
+        ${Top} {
+          width: 410px;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+
+  ${media.createMedia(700)} {
+    ${Box} {
+      &:nth-child(2) {
+        ${Top} {
+          width: 410px;
+          margin: 0 auto;
+        }
+      }
+
+      &:nth-child(3) {
+        ${ImgContainer} {
+          height: auto;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+
+  ${media.createMedia(650)} {
+    grid-gap: 20px;
+
+    ${Box} {
+      &:nth-child(1) ${PointList}, &:nth-child(2) ${PointList} {
+        display: flex;
+        flex-direction: column;
+      }
+
+      &:nth-child(2) ${PointList} li:nth-child(7) {
+        margin-bottom: 10px;
+      }
+
+      &:nth-child(1) ${Content}, &:nth-child(2) ${Content}, &:nth-child(3) ${Content} {
+        width: 100%;
+      }
+    }
+  }
+
+  ${media.createMedia(490)} {
+    ${Box} {
+      &:nth-child(1),
+      &:nth-child(2),
+      &:nth-child(4) {
+        ${Top} {
+          width: 100%;
+        }
+      }
     }
   }
 `

@@ -16,7 +16,7 @@ import MenuHamburger from '@public/icons/menu-hamburger.svg'
 
 export const Header = () => {
   const [isMenuOpen, setMenuOpen] = useState(false)
-  const widthMore1000 = useMediaQuery({ minWidth: 1000 })
+  const screenMore1000 = useMediaQuery({ minWidth: 1001 })
   const useFormProps = useForm()
 
   const nav = [
@@ -56,7 +56,7 @@ export const Header = () => {
       <S.Container>
         <S.Wrapper>
           <S.Left>
-            {!widthMore1000 && (
+            {!screenMore1000 && (
               <S.MenuButton type="button" onClick={toggleMenuOpen}>
                 <MenuHamburger />
               </S.MenuButton>
@@ -65,7 +65,7 @@ export const Header = () => {
             <Logo />
           </S.Left>
 
-          {widthMore1000 && (
+          {screenMore1000 && (
             <S.Nav>
               <ul>{navList}</ul>
             </S.Nav>
@@ -83,7 +83,7 @@ export const Header = () => {
         </S.Wrapper>
       </S.Container>
 
-      {!widthMore1000 && (
+      {!screenMore1000 && (
         <>
           <S.MenuHamburger open={isMenuOpen}>
             <ul>{navList}</ul>

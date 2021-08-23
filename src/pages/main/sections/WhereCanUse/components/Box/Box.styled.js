@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 
 import { Heading } from 'styled'
+import { media } from 'styles/media'
+
+const media650 = media.createMedia(650)
 
 export const Top = styled.div`
   display: flex;
@@ -38,13 +41,23 @@ export const Content = styled.div`
   box-sizing: border-box;
 `
 
-export const Title = styled(Heading).attrs({ level: 4 })``
+export const Title = styled(Heading).attrs({ level: 4 })`
+  ${media650} {
+    font-size: var(--font-size-500);
+    line-height: 32px;
+  }
+`
 
 export const Subtitle = styled.p`
   margin-top: 10px;
   font-size: var(--font-size-md);
   font-weight: 500;
   line-height: 28px;
+
+  ${media650} {
+    font-size: var(--font-size-reg);
+    line-height: 22px;
+  }
 `
 
 export const PointList = styled.ul`
@@ -65,6 +78,10 @@ export const PointList = styled.ul`
       left: 0;
     }
   }
+
+  ${media650} {
+    margin-top: 15px;
+  }
 `
 
 export const Box = styled.li`
@@ -74,7 +91,28 @@ export const Box = styled.li`
   box-sizing: border-box;
   border-radius: 20px;
 
-  &:not(:last-child) ${Content} {
-    padding-left: 12px;
+  &:not(:last-child) {
+    ${Content} {
+      padding-left: 12px;
+    }
+  }
+
+  ${media.laptop} {
+    width: 670px;
+    box-sizing: border-box;
+  }
+
+  ${media.createMedia(700)} {
+    width: 100%;
+  }
+
+  ${media650} {
+    padding: 20px;
+
+    &:not(:last-child) {
+      ${Content} {
+        padding-left: 0;
+      }
+    }
   }
 `

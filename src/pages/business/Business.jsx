@@ -1,0 +1,70 @@
+import { Header, Footer } from 'layout'
+import { PageBanner } from 'landing/components'
+import {
+  TipsSection,
+  ListIconSection,
+  TariffsSection,
+  TrustUsSection,
+  MediaAboutUsSection,
+  ConnectFormSection
+} from 'landing/sections'
+import { Button } from 'ui'
+
+import dashboard from '@public/img/landing/business-banner-dashboard.png'
+import dashboardMobile from '@public/img/landing/main-banner-dashboard-mobile.png'
+
+import DeviceDesignIcon from '@public/icons/device-design.svg'
+import DeviceWindowSettingsIcon from '@public/icons/devices-window-settings.svg'
+import CashierMachineIcon from '@public/icons/cashier-machine.svg'
+
+export const BusinessPage = () => {
+  const integrationTypes = [
+    {
+      icon: <DeviceDesignIcon />,
+      label: 'Без интеграции',
+      desc: 'Описание возможностей системы по генерации QR кода и информация о статистике'
+    },
+    {
+      icon: <DeviceWindowSettingsIcon />,
+      label: 'Интеграция по API',
+      desc: 'Описание возможностей системы по интеграции с внешними сервисами по API и с мобильными приложениями'
+    },
+    {
+      icon: <CashierMachineIcon />,
+      label: 'Интеграция с кассовым ПО',
+      desc: 'Описание возможностей интеграции с кассовым ПО'
+    }
+  ]
+
+  const bannerFeatures = [
+    'Бесплатно для бизнеса',
+    'Дополнительный заработок для персонала',
+    'Инструмент повышения уровня сервиса и гостеприимства'
+  ]
+
+  const bannerAction = <Button>Подключить чаевые</Button>
+
+  return (
+    <>
+      <Header />
+
+      <main>
+        <PageBanner
+          title="Чаевые картой – удобно гостю, выгодно персоналу"
+          features={bannerFeatures}
+          actions={bannerAction}
+          img={{ desktop: dashboard, mobile: dashboardMobile }}
+        />
+
+        <TipsSection />
+        <ListIconSection title="Возможности интеграции" list={integrationTypes} />
+        <TariffsSection />
+        <TrustUsSection />
+        <MediaAboutUsSection />
+        <ConnectFormSection />
+      </main>
+
+      <Footer />
+    </>
+  )
+}

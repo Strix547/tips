@@ -1,11 +1,11 @@
 import { Section } from 'landing/components'
 import { RowSection } from './components'
 
-import businessDashboard from '@public/img/pages/main/business-dashboard.png'
-import recipientDashboard from '@public/img/pages/main/recipient-dashboard.png'
-import artistDashboard from '@public/img/pages/main/artist-dashboard.png'
-import agentDashboard from '@public/img/pages/main/agent-dashboard.png'
-import payerDashboard from '@public/img/pages/main/payer-dashboard.png'
+import businessDashboard from '@public/img/landing/business-dashboard.png'
+import recipientDashboard from '@public/img/landing/recipient-dashboard.png'
+import artistDashboard from '@public/img/landing/artist-dashboard.png'
+import agentDashboard from '@public/img/landing/agent-dashboard.png'
+import payerDashboard from '@public/img/landing/payer-dashboard.png'
 
 export const UsersSection = () => {
   const sections = [

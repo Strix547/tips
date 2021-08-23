@@ -4,6 +4,12 @@ import { Wrapper, Heading, Text } from 'styled'
 import { Button } from 'ui/Button/Button.styled'
 import { CheckboxRow } from 'ui/Checkbox/Checkbox.styled'
 import { FormField } from 'ui/FormField/FormField.styled'
+import { PhoneField } from 'ui/PhoneField/PhoneField.styled'
+
+import { media } from 'styles/media'
+
+const media640 = media.createMedia(640)
+const media450 = media.createMedia(450)
 
 export { Text }
 
@@ -13,6 +19,14 @@ export const sectionStyles = css`
   ${Wrapper} > ${Heading}:first-of-type {
     margin-bottom: 30px;
   }
+
+  ${media.mobile} {
+    ${Wrapper} > ${Heading}:first-of-type {
+      font-size: var(--font-size-500);
+      line-height: 32px;
+      margin-bottom: 20px;
+    }
+  }
 `
 
 export const Content = styled.div`
@@ -20,12 +34,23 @@ export const Content = styled.div`
 `
 
 export const Subtitle = styled.p`
+  position: relative;
   width: 666px;
   margin: 0 auto;
   font-size: var(--font-size-md);
   font-weight: 500;
   line-height: 28px;
   text-align: center;
+  z-index: 10;
+
+  ${media.createMedia(696)} {
+    width: 100%;
+  }
+
+  ${media.mobile} {
+    font-size: var(--font-size-reg);
+    line-height: 22px;
+  }
 `
 
 export const FormContainer = styled.div`
@@ -40,7 +65,7 @@ export const FormContainer = styled.div`
   box-sizing: border-box;
   z-index: 10;
 
-  ${FormField} {
+  ${FormField}, ${PhoneField} {
     margin-bottom: 20px;
   }
 
@@ -51,11 +76,24 @@ export const FormContainer = styled.div`
   ${CheckboxRow} {
     margin-bottom: 20px;
   }
+
+  ${media640} {
+    width: 100%;
+  }
+
+  ${media450} {
+    margin-top: 30px;
+    padding-top: 30px;
+  }
 `
 
 export const Form = styled.form`
   width: 450px;
   margin: 0 auto;
+
+  ${media640} {
+    width: 100%;
+  }
 `
 
 export const FormBottom = styled.div`
@@ -78,6 +116,13 @@ export const FormBottom = styled.div`
     color: var(--color-primary-200);
     border-bottom: 1px dashed var(--color-primary-200);
   }
+
+  ${media450} {
+    ${Text}, a {
+      font-size: var(--font-size-sm);
+      line-height: 20px;
+    }
+  }
 `
 
 export const Background = styled.div`
@@ -90,7 +135,7 @@ export const Background = styled.div`
   svg {
     position: absolute;
 
-    /* green dotes */
+    /* green dotes left */
     &:nth-child(1) {
       top: -58px;
       left: -35px;
@@ -102,10 +147,14 @@ export const Background = styled.div`
       left: -709px;
     }
 
-    /* green dotes */
+    /* green dotes right */
     &:nth-child(3) {
       right: -35px;
       bottom: -27px;
     }
+  }
+
+  ${media.createMedia(750)} {
+    display: none;
   }
 `

@@ -6,7 +6,7 @@ import { media } from 'styles/media'
 
 const media630 = media.createMedia(630)
 
-export { Heading, Text, Wrapper }
+export { Heading, Wrapper }
 
 export const PageBanner = styled.section`
   height: 650px;
@@ -37,7 +37,7 @@ export const PageBanner = styled.section`
 
 export const Left = styled.div`
   position: relative;
-  width: 590px;
+  width: 575px;
   z-index: 10;
 
   ${media.laptop} {
@@ -71,7 +71,29 @@ export const Subtitle = styled(Text)`
   }
 `
 
-export const FeatureList = styled.ul``
+export const FeatureList = styled.ul`
+  margin-top: 20px;
+
+  li {
+    position: relative;
+    padding-left: 32px;
+    font-size: var(--font-size-md);
+    font-weight: 500;
+    line-height: 28px;
+
+    &:not(:last-child) {
+      margin-bottom: 5px;
+    }
+
+    svg {
+      position: absolute;
+      top: 8px;
+      left: 0;
+      width: 20px;
+      height: 14px;
+    }
+  }
+`
 
 export const ActionRow = styled.div`
   display: flex;

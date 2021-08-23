@@ -3,10 +3,17 @@ import Img from 'next/image'
 
 import * as S from './PageBanner.styled'
 
-export const PageBanner = ({ title, subtitle, features, actions, img }) => {
-  const widthMore630 = useMediaQuery({ minWidth: 630 })
+import CheckIcon from '@public/icons/checkmark.svg'
 
-  const featureList = features
+export const PageBanner = ({ title, subtitle, features = [], actions, img }) => {
+  const screenMore630 = useMediaQuery({ minWidth: 631 })
+
+  const featureList = features.map((text) => (
+    <li key={text}>
+      <CheckIcon />
+      {text}
+    </li>
+  ))
 
   return (
     <S.PageBanner>
@@ -16,18 +23,19 @@ export const PageBanner = ({ title, subtitle, features, actions, img }) => {
 
           {subtitle && <S.Subtitle>{subtitle}</S.Subtitle>}
 
-          {features && <S.FeautureList>{featureList}</S.FeautureList>}
+          {features.length ? <S.FeatureList>{featureList}</S.FeatureList> : null}
 
           <S.ActionRow>{actions}</S.ActionRow>
         </S.Left>
 
         <S.ImgContainer>
           <S.Img>
-            {widthMore630 ? (
-              <Img src={img.desktop} alt="dashboard" layout="fixed" />
-            ) : (
-              <Img src={img.mobile} alt="dashboard" layout="fixed" />
-            )}
+            <Img
+              src={screenMore630 ? img.desktop : img.mobile}
+              alt="dashboard"
+              layout="fixed"
+              unoptimized
+            />
           </S.Img>
         </S.ImgContainer>
       </S.Wrapper>

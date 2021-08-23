@@ -9,10 +9,8 @@ import {
 import { Button } from 'ui'
 import { UsersSection, HowServiceWorkSection, WhereCanUseSection } from './sections'
 
-import * as S from './Main.styled'
-
-import dashboard from '@public/img/pages/main/banner-dashboard.png'
-import dashboardMobile from '@public/img/pages/main/banner-dashboard-mobile.png'
+import dashboard from '@public/img/landing/main-banner-dashboard.png'
+import dashboardMobile from '@public/img/landing/main-banner-dashboard-mobile.png'
 
 export const MainPage = () => {
   const bannerActions = (
@@ -23,7 +21,7 @@ export const MainPage = () => {
   )
 
   return (
-    <S.MainPage>
+    <>
       <Header />
 
       <main>
@@ -36,14 +34,14 @@ export const MainPage = () => {
 
         <UsersSection />
         {/* <HowServiceWorkSection /> */}
-        {/* <WhereCanUseSection /> */}
-        {/* <TariffsSection /> */}
+        <WhereCanUseSection />
+        <TariffsSection />
         <TrustUsSection />
         <MediaAboutUsSection />
-        {/* <ConnectFormSection /> */}
+        <ConnectFormSection />
       </main>
 
-      {/* <Footer /> */}
-    </S.MainPage>
+      <Footer />
+    </>
   )
 }

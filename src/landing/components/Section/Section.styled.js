@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 import { Wrapper, Heading } from 'styled'
+import { media } from 'styles/media'
 
 export { Wrapper, Heading }
 
@@ -15,6 +16,24 @@ export const Section = styled.section`
     flex-direction: column;
     text-align: center;
     margin-bottom: 60px;
+  }
+
+  ${media.tablet} {
+    padding: 80px 0;
+
+    ${Wrapper} > ${Heading}, & > ${Heading}:first-of-type {
+      display: block;
+      margin-bottom: 40px;
+    }
+  }
+
+  ${media.createMedia(560)} {
+    padding: 60px 0;
+
+    ${Wrapper} > ${Heading}, & > ${Heading}:first-of-type {
+      font-size: var(--font-size-400);
+      line-height: 42px;
+    }
   }
 
   ${({ styles }) => styles}

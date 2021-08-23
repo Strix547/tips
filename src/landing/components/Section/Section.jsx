@@ -1,14 +1,14 @@
 import * as S from './Section.styled'
 
-export const Section = ({ id, title, children, fullWidth, gray, styles }) => {
+export const Section = ({ title, children, fullWidth, gray, styles }) => {
   const titleWithRows = Array.isArray(title)
-    ? title.map((row) => <span key={row}>{row}</span>)
+    ? title.map((row) => <span key={row}>{row} </span>)
     : title
 
-  const heading = <S.Heading level={1}>{titleWithRows}</S.Heading>
+  const heading = <S.Heading level={2}>{titleWithRows}</S.Heading>
 
   return (
-    <S.Section id={id} gray={gray} styles={styles}>
+    <S.Section gray={gray} styles={styles}>
       {!fullWidth ? (
         <S.Wrapper>
           {heading}

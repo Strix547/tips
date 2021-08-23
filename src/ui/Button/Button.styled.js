@@ -41,4 +41,11 @@ export const Button = styled.button`
 
   ${({ variant }) => getVariantStyles(variant)}
   ${({ size }) => getSizeStyles(size)}
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      color: var(--color-gray-500);
+      background: #eeeff2;
+      cursor: default;
+    `}
 `

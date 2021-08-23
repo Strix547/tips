@@ -5,7 +5,6 @@ import { media } from 'styles/media'
 const getLevelStyles = (level) => {
   switch (level) {
     case 1:
-    case 2:
       return css`
         font-size: var(--font-size-100);
         line-height: 56px;
@@ -13,6 +12,20 @@ const getLevelStyles = (level) => {
         ${media.mobile} {
           font-size: var(--font-size-400);
           line-height: 42px;
+        }
+      `
+    case 2:
+      return css`
+        font-size: var(--font-size-100);
+        line-height: 56px;
+
+        ${media.tablet} {
+          font-size: var(--font-size-300);
+          line-height: 42px;
+        }
+
+        ${media.mobile} {
+          font-size: var(--font-size-400);
         }
       `
     case 3:
