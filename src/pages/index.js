@@ -1,11 +1,11 @@
-import { AgentsPage } from './Agents'
-import { BusinessPage } from './Business'
-import { FaqPage } from './Faq'
-import { MainPage } from './Main'
-import { PayersPage } from './Payers'
-import { RecipientsPage } from './Recipients'
+import { AgentsPage } from './agents'
+import { BusinessPage } from './business'
+import { FaqPage } from './faq'
+import { MainPage } from './main'
+import { PayersPage } from './payers'
+import { RecipientsPage } from './recipients'
 import { SignInPage } from './SignIn'
-import { SupportPage } from './Support'
+import { SupportPage } from './support'
 
 export {
   AgentsPage,
