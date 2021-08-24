@@ -1,3 +1,1 @@
-import { RecipientsPage } from './Recipients'
-
-export default RecipientsPage
+export { RecipientsPage } from './Recipients'

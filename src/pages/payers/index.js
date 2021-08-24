@@ -1,3 +1,1 @@
-import { PayersPage } from './Payers'
-
-export default PayersPage
+export { PayersPage } from './Payers'

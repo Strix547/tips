@@ -1,3 +1,1 @@
-import { BusinessPage } from './Business'
-
-export default BusinessPage
+export { BusinessPage } from './Business'

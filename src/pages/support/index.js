@@ -1,3 +1,1 @@
-import { SupportPage } from './Support'
-
-export default SupportPage
+export { SupportPage } from './Support'

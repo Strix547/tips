@@ -1,3 +1,1 @@
-import { MainPage } from './Main'
-
-export default MainPage
+export { MainPage } from './Main'

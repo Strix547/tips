@@ -1,3 +1,1 @@
-import { FaqPage } from './Faq'
-
-export default FaqPage
+export { FaqPage } from './Faq'

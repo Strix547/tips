@@ -105,7 +105,7 @@ export const FaqPage = () => {
         <AccordionDetails>
           <S.AccordionAnswer expanded={isExpanded}>
             {answer.map((text) => (
-              <S.Text>{text}</S.Text>
+              <S.Text key={text}>{text}</S.Text>
             ))}
           </S.AccordionAnswer>
         </AccordionDetails>
