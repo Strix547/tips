@@ -1,19 +1,23 @@
-import { useMediaQuery } from 'react-responsive'
-import Img from 'next/image'
+import Image from 'next/image'
 
 import * as S from './PageBanner.styled'
 
 import CheckIcon from '@public/icons/checkmark.svg'
 
 export const PageBanner = ({ title, subtitle, features = [], actions, img }) => {
-  const screenMore630 = useMediaQuery({ minWidth: 631 })
-
   const featureList = features.map((text) => (
     <li key={text}>
       <CheckIcon />
       {text}
     </li>
   ))
+
+  const bannerImgProps = {
+    alt: 'dashboard',
+    layout: 'fixed',
+    priority: true,
+    unoptimized: true
+  }
 
   return (
     <S.PageBanner>
@@ -30,13 +34,12 @@ export const PageBanner = ({ title, subtitle, features = [], actions, img }) => 
 
         <S.ImgContainer>
           <S.Img>
-            <Img
-              src={screenMore630 ? img.desktop : img.mobile}
-              alt="dashboard"
-              layout="fixed"
-              unoptimized
-            />
+            <Image {...bannerImgProps} src={img.desktop} />
           </S.Img>
+
+          <S.ImgMobile>
+            <Image {...bannerImgProps} src={img.mobile} />
+          </S.ImgMobile>
         </S.ImgContainer>
       </S.Wrapper>
     </S.PageBanner>

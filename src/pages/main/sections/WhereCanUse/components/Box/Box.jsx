@@ -1,4 +1,4 @@
-import Img from 'next/image'
+import Image from 'next/image'
 
 import * as S from './Box.styled'
 
@@ -18,12 +18,12 @@ export const Box = ({ title, subtitle, points = [], preview }) => {
         {Array.isArray(preview) ? (
           preview.map(({ label, img }) => (
             <S.ImgContainer key={label}>
-              <Img src={img} alt={label} />
+              <Image src={img} alt={label} />
             </S.ImgContainer>
           ))
         ) : (
           <S.TopBox>
-            <Img src={preview} alt={title} />
+            <Image src={preview} alt={title} />
           </S.TopBox>
         )}
       </S.Top>

@@ -1,4 +1,4 @@
-import Img from 'next/image'
+import Image from 'next/image'
 import Link from 'next/link'
 
 import { Button } from 'ui'
@@ -31,7 +31,7 @@ export const RowSection = ({ title, subtitle, detailsLink, features, action, img
       </S.Left>
 
       <S.ImgContainer>
-        <Img src={img} alt={`${title} dashboard`} />
+        <Image src={img} alt={`${title} dashboard`} />
         <S.Circle />
       </S.ImgContainer>
     </S.RowSection>

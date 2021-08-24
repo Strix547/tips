@@ -1,4 +1,4 @@
-import Img from 'next/image'
+import Image from 'next/image'
 
 import { Section } from 'landing/components'
 import { Button } from 'ui'
@@ -21,7 +21,7 @@ export const TariffsSection = () => (
       </S.Card>
 
       <S.Img>
-        <Img src={backgroundImg} alt="фон" />
+        <Image src={backgroundImg} alt="фон" />
       </S.Img>
     </S.Content>
   </Section>

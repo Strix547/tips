@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Autoplay } from 'swiper/core'
-import Img from 'next/image'
+import Image from 'next/image'
 
 import { Section } from 'landing/components'
 
@@ -56,7 +56,7 @@ export const MediaAboutUsSection = () => {
     <SwiperSlide key={label}>
       <S.QuoteCard>
         <S.Logo>
-          <Img src={logo} alt={label} />
+          <Image src={logo} alt={label} />
         </S.Logo>
         <S.Text>{quote}</S.Text>
         <QuoteIcon />

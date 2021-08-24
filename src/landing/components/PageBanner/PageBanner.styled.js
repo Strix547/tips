@@ -143,9 +143,20 @@ export const Img = styled.div`
   }
 
   ${media630} {
-    left: 50%;
-    bottom: -495px;
-    transform: translateX(-50%);
+    display: none;
+  }
+`
+
+export const ImgMobile = styled.div`
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: -495px;
+  transform: translateX(-50%);
+  z-index: 10;
+
+  ${media630} {
+    display: block;
   }
 
   ${media.mobile} {

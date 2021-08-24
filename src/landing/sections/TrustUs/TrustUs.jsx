@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Controller, Autoplay } from 'swiper/core'
-import Img from 'next/image'
+import Image from 'next/image'
 
 import { Section } from 'landing/components'
 
@@ -53,7 +53,7 @@ export const TrustUsSection = () => {
     return logos.map(({ label, logo }) => (
       <SwiperSlide key={label}>
         <S.LogoCard>
-          <Img src={logo} alt={label} />
+          <Image src={logo} alt={label} />
         </S.LogoCard>
       </SwiperSlide>
     ))

@@ -1,5 +1,5 @@
 import { useMediaQuery } from 'react-responsive'
-import Img from 'next/image'
+import Image from 'next/image'
 
 import * as S from './ServiceWorkSteps.styled'
 
@@ -22,7 +22,7 @@ export const ServiceWorkSteps = () => {
 
   const stepList = steps.map(({ title, img }, idx) => (
     <li key={title}>
-      <Img src={img} alt={title} />
+      <Image src={img} alt={title} />
       <S.Text>{title}</S.Text>
       {screenMore1150 && <S.Counter>{idx + 1}</S.Counter>}
     </li>
