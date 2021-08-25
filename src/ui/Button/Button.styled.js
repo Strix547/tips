@@ -33,11 +33,18 @@ export const Button = styled.button`
   font-size: var(--font-size-reg);
   color: #fff;
   background: var(--gradient-green);
-  /* box-shadow: 0px 15px 30px rgba(84, 167, 92, 0.15); */
   border-radius: 40px;
   border: none;
   cursor: pointer;
   box-sizing: border-box;
+
+  svg:first-child {
+    margin-right: 15px;
+  }
+
+  svg:last-child {
+    margin-left: 15px;
+  }
 
   ${({ variant }) => getVariantStyles(variant)}
   ${({ size }) => getSizeStyles(size)}

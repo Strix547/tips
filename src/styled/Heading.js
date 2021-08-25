@@ -41,6 +41,7 @@ const getLevelStyles = (level) => {
     case 5:
       return css`
         font-size: var(--font-size-500);
+        line-height: 32px;
       `
     case 6:
       return css`

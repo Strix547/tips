@@ -1,0 +1,1 @@
+export { UserMainPage } from './Main'

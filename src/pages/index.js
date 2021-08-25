@@ -1,11 +1,13 @@
-import { AgentsPage } from './agents'
-import { BusinessPage } from './business'
-import { FaqPage } from './faq'
-import { MainPage } from './main'
-import { PayersPage } from './payers'
-import { RecipientsPage } from './recipients'
-import { SignInPage } from './SignIn'
-import { SupportPage } from './support'
+import { AgentsPage } from './landing/agents'
+import { BusinessPage } from './landing/business'
+import { FaqPage } from './landing/faq'
+import { MainPage } from './landing/main'
+import { PayersPage } from './landing/payers'
+import { RecipientsPage } from './landing/recipients'
+import { SignInPage } from './landing/SignIn'
+import { SupportPage } from './landing/support'
+
+import { UserMainPage } from './user/main'
 
 export {
   AgentsPage,
@@ -15,5 +17,6 @@ export {
   PayersPage,
   RecipientsPage,
   SignInPage,
-  SupportPage
+  SupportPage,
+  UserMainPage
 }

@@ -10,5 +10,15 @@ export const ROUTES = {
   CREDENTIALS: '/credentials',
   PRIVACY_POLICY: '/privacy-policy',
   PUBLIC_OFFER: '/public-offer',
-  FAQ: '/faq'
+  FAQ: '/faq',
+  MY_QR_CODES: '/qr-codes',
+  MY_REQUISITES: '/requisites',
+  MY_PLATFORMS: '/platforms',
+  MY_EMPLOYEES: '/employees',
+  MY_REVIEWS: '/reviews',
+  PERSONAL_DATA: '/personal',
+  QR_CREATE: '/qr/create',
+  THANK_YOU: '/thank-you',
+  FOR_AGENTS: '/for-agents',
+  LOYALTY: '/loyalty'
 }
