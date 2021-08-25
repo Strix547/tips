@@ -1,5 +1,3 @@
-import { useMediaQuery } from 'react-responsive'
-
 import { Box } from '../Box'
 
 import * as S from './BoxList.styled'
@@ -14,14 +12,12 @@ import recipientCardMobile from '@public/img/landing/recipient-card-mobile.png'
 import emotionsBlock from '@public/img/landing/emotions-block.png'
 
 export const BoxList = () => {
-  const screenMore700 = useMediaQuery({ minWidth: 701 })
-
   const boxes = [
     {
       title: 'Чаевые по QR-коду',
       subtitle: 'Размещайте QR-код на POS-материалах и любой заметной поверхности:',
       points: ['Визитки', 'Нашивки на форму', 'Наклейки', 'Чеки и пречеки', 'Тейбл-тенты'],
-      preview: qrFirst
+      preview: [{ label: 'qr-код заведения', desktop: qrFirst }]
     },
     {
       title: 'Чаевые и донаты по ссылке',
@@ -36,7 +32,7 @@ export const BoxList = () => {
         'На стриме',
         'В мессенджерах'
       ],
-      preview: screenMore700 ? qrSecond : qrSecondMobile
+      preview: [{ label: 'qr-код заведения с сылками', desktop: qrSecond, mobile: qrSecondMobile }]
     },
     {
       title: 'Интеграция по API и SDK',
@@ -46,18 +42,16 @@ export const BoxList = () => {
         'Добавить ссылку на отправку чаевых в рассылку (SMS/E-mail/PUSH-уведомления)',
         'Регистрировать пользователей, получать статистику и многое другое'
       ],
-      preview: screenMore700
-        ? [
-            { label: 'recipient card', img: recipientCard },
-            { label: 'emotions block', img: emotionsBlock }
-          ]
-        : [{ label: 'recipient card', img: recipientCardMobile }]
+      preview: [
+        { label: 'карточка получателя', desktop: recipientCard, mobile: recipientCardMobile },
+        { label: 'блок ваши впечатлений', desktop: emotionsBlock, mobile: null }
+      ]
     },
     {
       title: 'Интеграция с кассовым ПО',
       subtitle:
         'Сервис легко интегрируется с кассовым ПО. Готовые модули для систем iiko, r_keeper, poster позволяют печатать QR-код прямо в чеке/пречеке.',
-      preview: qrThird
+      preview: [{ label: 'qr-код заведения', desktop: qrThird }]
     }
   ]
 

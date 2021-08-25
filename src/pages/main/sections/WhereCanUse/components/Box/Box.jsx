@@ -12,21 +12,23 @@ export const Box = ({ title, subtitle, points = [], preview }) => {
     </li>
   ))
 
+  const previewImages = preview.map(({ label, desktop, mobile }) => (
+    <S.ImgContainer key={label}>
+      <S.Img>
+        <Image src={desktop} alt={label} unoptimized />
+      </S.Img>
+
+      {mobile !== null && (
+        <S.ImgMobile>
+          <Image src={mobile || desktop} alt={label} unoptimized />
+        </S.ImgMobile>
+      )}
+    </S.ImgContainer>
+  ))
+
   return (
     <S.Box>
-      <S.Top>
-        {Array.isArray(preview) ? (
-          preview.map(({ label, img }) => (
-            <S.ImgContainer key={label}>
-              <Image src={img} alt={label} />
-            </S.ImgContainer>
-          ))
-        ) : (
-          <S.TopBox>
-            <Image src={preview} alt={title} />
-          </S.TopBox>
-        )}
-      </S.Top>
+      <S.Top>{previewImages}</S.Top>
 
       <S.Content>
         <S.Title>{title}</S.Title>

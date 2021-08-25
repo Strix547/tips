@@ -31,7 +31,7 @@ export const RowSection = ({ title, subtitle, detailsLink, features, action, img
       </S.Left>
 
       <S.ImgContainer>
-        <Image src={img} alt={`${title} dashboard`} />
+        <Image src={img} alt={`${title} dashboard`} unoptimized />
         <S.Circle />
       </S.ImgContainer>
     </S.RowSection>

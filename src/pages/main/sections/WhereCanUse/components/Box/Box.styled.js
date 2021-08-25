@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Heading } from 'styled'
 import { media } from 'styles/media'
 
+const media700 = media.createMedia(700)
 const media650 = media.createMedia(650)
 
 export const Top = styled.div`
@@ -27,9 +28,11 @@ export const TopBox = styled.div`
 `
 
 export const ImgContainer = styled.div`
-  height: 273px;
+  width: 100%;
+  height: 300px;
   border-radius: 20px;
   box-shadow: 0px 5px 30px rgba(157, 157, 159, 0.2);
+  background: #fff;
 
   &:nth-child(2) {
     height: 223px;
@@ -84,6 +87,28 @@ export const PointList = styled.ul`
   }
 `
 
+export const Img = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  ${media700} {
+    display: none;
+  }
+`
+
+export const ImgMobile = styled.div`
+  display: none;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  ${media700} {
+    display: flex;
+  }
+`
+
 export const Box = styled.li`
   padding: 30px;
   background: var(--color-gray-100);
@@ -97,6 +122,34 @@ export const Box = styled.li`
     }
   }
 
+  &:nth-child(3) {
+    ${ImgContainer} {
+      box-shadow: none;
+      background: transparent;
+
+      ${Img} {
+        align-items: flex-start;
+
+        & > div {
+          box-shadow: 0px 3.88px 15.52px rgba(49, 52, 61, 0.05);
+          border-radius: 20px;
+        }
+      }
+
+      &:nth-child(1) {
+        ${Img} {
+          justify-content: flex-start;
+        }
+      }
+
+      &:nth-child(2) {
+        ${Img} {
+          justify-content: flex-end;
+        }
+      }
+    }
+  }
+
   ${media.laptop} {
     width: 670px;
     box-sizing: border-box;
@@ -104,6 +157,23 @@ export const Box = styled.li`
 
   ${media.createMedia(700)} {
     width: 100%;
+
+    &:nth-child(3) {
+      ${ImgContainer} {
+        width: 100%;
+
+        &:nth-child(2) {
+          display: none;
+        }
+
+        ${ImgMobile} {
+          & > div {
+            box-shadow: 0px 3.88px 15.52px rgba(49, 52, 61, 0.05);
+            border-radius: 20px;
+          }
+        }
+      }
+    }
   }
 
   ${media650} {
