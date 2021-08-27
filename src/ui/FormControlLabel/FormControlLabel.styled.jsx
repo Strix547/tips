@@ -1,8 +1,7 @@
-import React from 'react'
 import styled from 'styled-components'
 import { FormControlLabel as MuiFormControlLabel } from '@material-ui/core'
 
-export const FormControlLabel = styled(({ ...props }) => (
+export const FormControlLabel = styled((props) => (
   <MuiFormControlLabel
     {...props}
     classes={{ root: 'form-control-label-root', label: 'form-control-label' }}

@@ -1,0 +1,1 @@
+export { TipsTable } from './TipsTable'

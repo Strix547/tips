@@ -5,6 +5,7 @@ export const variables = css`
     --color-primary-100: #54a75c;
     --color-primary-200: #3bc76b;
     --color-primary-300: #479b4e;
+    --color-primary-400: #3fa949;
 
     --color-black-100: #101011;
     --color-black-200: #313436;
@@ -15,6 +16,7 @@ export const variables = css`
     --color-gray-400: #c8c9cf;
     --color-gray-500: #55595b;
     --color-gray-600: #f7f9fb;
+    --color-gray-700: #eeeff2;
 
     --color-blue-100: #156bed;
     --color-red-100: #f83939;

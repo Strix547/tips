@@ -46,6 +46,7 @@ export const AccountLayout = styled.div`
 
 export const Content = styled.main`
   grid-area: content;
+  width: calc(100vw - 340px);
   padding: 40px 30px 60px;
   background: #f9fafc;
 `

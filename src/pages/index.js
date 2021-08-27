@@ -8,6 +8,7 @@ import { SignInPage } from './landing/SignIn'
 import { SupportPage } from './landing/support'
 
 import { UserMainPage } from './user/main'
+import { QrCodesPage } from './user/qrCodes'
 
 export {
   AgentsPage,
@@ -18,5 +19,6 @@ export {
   RecipientsPage,
   SignInPage,
   SupportPage,
-  UserMainPage
+  UserMainPage,
+  QrCodesPage
 }

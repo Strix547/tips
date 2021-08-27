@@ -28,7 +28,7 @@ export const SupportPage = () => {
     { label: 'Другое', value: 'other' }
   ]
 
-  const onLetterThemeChange = (_, value) => {
+  const onLetterThemeChange = (value) => {
     setLetterTheme(value)
   }
 
@@ -67,7 +67,7 @@ export const SupportPage = () => {
             <S.ThemeRadioGroup
               name="letterTheme"
               value={letterTheme}
-              onChange={onLetterThemeChange}
+              onChange={(_, value) => onLetterThemeChange(value)}
             >
               {letterThemeRadios}
             </S.ThemeRadioGroup>

@@ -52,7 +52,7 @@ export const Button = styled.button`
     disabled &&
     css`
       color: var(--color-gray-500);
-      background: #eeeff2;
+      background: var(--color-gray-700);
       cursor: default;
     `}
 `

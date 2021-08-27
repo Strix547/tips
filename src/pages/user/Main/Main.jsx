@@ -1,7 +1,5 @@
 import { AccountLayout } from 'layout'
-import { BarChart } from 'components'
-
-import * as S from './Main.styled'
+import { BarChart, TipsTable } from 'components'
 
 export const UserMainPage = () => {
   const onCreateQrClick = () => {}
@@ -9,6 +7,7 @@ export const UserMainPage = () => {
   return (
     <AccountLayout title="Главная" button={{ label: 'Создать QR-код', onClick: onCreateQrClick }}>
       <BarChart title="Статистика входящих оплат" />
+      <TipsTable />
     </AccountLayout>
   )
 }

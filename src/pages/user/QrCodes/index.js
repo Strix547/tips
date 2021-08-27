@@ -1,0 +1,1 @@
+export { QrCodesPage } from './QrCodes'

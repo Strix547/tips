@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Switch as MuiSwitch } from '@material-ui/core'
 
-export const Switch = styled(({ ...props }) => (
+export const Switch = styled((props) => (
   <MuiSwitch
     {...props}
     disableRipple
@@ -46,7 +46,7 @@ export const Switch = styled(({ ...props }) => (
   }
 
   .switch-track {
-    background: #eeeff2;
+    background: var(--color-gray-700);
     opacity: 1;
     border: 1px solid var(--color-gray-400);
     border-radius: 18px;

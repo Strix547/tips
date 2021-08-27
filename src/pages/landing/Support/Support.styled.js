@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import {} from '@material-ui/core'
 
 import { Wrapper, Heading, Text } from 'styled'
 import { Button } from 'ui/Button/Button.styled'
@@ -137,19 +136,8 @@ export const ThemeLabel = styled.p`
 `
 
 export const ThemeRadioGroup = styled(RadioGroup)`
-  && {
-    flex-direction: row;
-  }
-
   grid-gap: 10px;
   margin-top: 15px;
-
-  .form-control-label-root {
-    & > span:first-child {
-      position: absolute;
-      opacity: 0;
-    }
-  }
 `
 
 export const ThemeRadio = styled.div`

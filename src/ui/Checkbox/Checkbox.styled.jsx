@@ -4,7 +4,7 @@ import MuiFormControlLabel from '@material-ui/core/FormControlLabel'
 
 import CheckIcon from '@public/icons/checkmark.svg'
 
-export const CheckboxRow = styled(({ ...props }) => (
+export const CheckboxRow = styled((props) => (
   <MuiFormControlLabel
     {...props}
     classes={{ root: 'form-control-label-root', label: 'form-control-label' }}

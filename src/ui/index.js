@@ -7,6 +7,7 @@ import { FormControlLabel } from './FormControlLabel'
 import { RadioGroup } from './RadioGroup'
 import { PhoneField } from './PhoneField'
 import { Switch } from './Switch'
+import { Table } from './Table'
 
 export {
   Button,
@@ -20,5 +21,6 @@ export {
   FormControlLabel,
   RadioGroup,
   PhoneField,
-  Switch
+  Switch,
+  Table
 }

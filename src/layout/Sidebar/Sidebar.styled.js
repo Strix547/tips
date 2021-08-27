@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Link from 'next/link'
 
 import { Button } from 'ui/Button/Button.styled'
 
@@ -128,6 +129,8 @@ export const Support = styled.div`
     padding: 0;
   }
 `
+
+export const LinkButton = styled(Button).attrs({ as: 'a' })``
 
 export const LogoutButton = styled.button`
   display: flex;
