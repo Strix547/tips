@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import MuiSelect from '@material-ui/core/Select'
 
-import ArrowGrayIcon from '@public/icons/arrows/gray-down.svg'
+import ArrowGrayIcon from '@public/icons/arrows/gray-solid-down.svg'
 
 export const Select = styled((props) => (
   <MuiSelect

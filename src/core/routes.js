@@ -11,7 +11,7 @@ export const ROUTES = {
   PRIVACY_POLICY: '/privacy-policy',
   PUBLIC_OFFER: '/public-offer',
   FAQ: '/faq',
-  ACCOUNT_MY_QR_CODES: '/account/qr',
+  ACCOUNT_MY_QR_CODES: '/account/qr-codes',
   ACCOUNT_MY_REQUISITES: '/account/requisites',
   ACCOUNT_MY_PLATFORMS: '/account/platforms',
   ACCOUNT_MY_EMPLOYEES: '/account/employees',

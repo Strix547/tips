@@ -1,0 +1,1 @@
+export { PlatformQrCard } from './PlatformQrCard'

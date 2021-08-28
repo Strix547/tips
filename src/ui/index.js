@@ -8,6 +8,7 @@ import { RadioGroup } from './RadioGroup'
 import { PhoneField } from './PhoneField'
 import { Switch } from './Switch'
 import { Table } from './Table'
+import { Modal } from './Modal'
 
 export {
   Button,
@@ -22,5 +23,6 @@ export {
   RadioGroup,
   PhoneField,
   Switch,
-  Table
+  Table,
+  Modal
 }
