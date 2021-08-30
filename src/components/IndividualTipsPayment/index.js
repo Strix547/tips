@@ -1,0 +1,1 @@
+export { IndividualTipsPayment } from './IndividualTipsPayment'

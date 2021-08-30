@@ -7,7 +7,7 @@ import { Button } from 'ui/Button/Button.styled'
 
 export { Text }
 
-export const PlatformQrModal = styled(Modal)`
+export const BusinessQrModal = styled(Modal)`
   display: flex;
   justify-content: center;
   align-items: center;

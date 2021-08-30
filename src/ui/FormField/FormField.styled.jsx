@@ -40,7 +40,6 @@ export const FormField = styled((props) => (
     margin-top: 0;
     padding-left: 20px;
     font-size: var(--font-size-md);
-    color: var(--color-gray-300);
     border: 1px solid var(--color-gray-400);
     border-radius: 8px;
     cursor: text;
@@ -81,5 +80,13 @@ export const FormField = styled((props) => (
   }
 
   .form-field-input-error {
+  }
+
+  .MuiInputBase-inputAdornedEnd {
+    margin-right: 20px;
+  }
+
+  .MuiInputBase-adornedEnd {
+    padding-right: 20px;
   }
 `

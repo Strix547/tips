@@ -1,1 +1,0 @@
-export { PlatformQrModal } from './PlatformQrModal'

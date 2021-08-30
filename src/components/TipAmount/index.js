@@ -1,0 +1,1 @@
+export { TipAmount } from './TipAmount'

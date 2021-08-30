@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { WhiteBox } from 'styled'
 import { QrImage } from 'components/QrImage/QrImage.styled'
 
-export const PlatformQrCard = styled(WhiteBox)`
+export const BusinessQrCard = styled(WhiteBox)`
   padding: 20px 30px;
   box-sizing: border-box;
 

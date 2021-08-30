@@ -1,0 +1,1 @@
+export { BusinessQrCard } from './BusinessQrCard'

@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
-import { QrImage, PlatformQrModal } from 'components'
+import { QrImage, BusinessQrModal } from 'components'
 import { Button } from 'ui'
 
-import * as S from './PlatformQrCard.styled'
+import * as S from './BusinessQrCard.styled'
 
 import WalletIcon from '@public/icons/wallet.svg'
 import ChartIcon from '@public/icons/chart.svg'
@@ -12,7 +12,7 @@ import PenIcon from '@public/icons/pen-edit.svg'
 import TrashIcon from '@public/icons/trash.svg'
 import ArrowRightIcon from '@public/icons/arrows/gray-right.svg'
 
-export const PlatformQrCard = ({ label, qr, onChartOpen, onShare, onEdit, onDelete, tag }) => {
+export const BusinessQrCard = ({ label, qr, onChartOpen, onShare, onEdit, onDelete, tag }) => {
   const [isQrModalOpen, setQrModalOpen] = useState(false)
 
   const actions = [
@@ -33,7 +33,7 @@ export const PlatformQrCard = ({ label, qr, onChartOpen, onShare, onEdit, onDele
   ))
 
   return (
-    <S.PlatformQrCard as={tag}>
+    <S.BusinessQrCard as={tag}>
       <S.Label onClick={() => toggleQrModalOpen()}>
         {label}
         <ArrowRightIcon />
@@ -47,7 +47,7 @@ export const PlatformQrCard = ({ label, qr, onChartOpen, onShare, onEdit, onDele
 
       <S.ActionRow>{actionButtons}</S.ActionRow>
 
-      <PlatformQrModal
+      <BusinessQrModal
         open={isQrModalOpen}
         onClose={() => {
           setQrModalOpen(false)
@@ -55,6 +55,6 @@ export const PlatformQrCard = ({ label, qr, onChartOpen, onShare, onEdit, onDele
         label={label}
         qr={qr}
       />
-    </S.PlatformQrCard>
+    </S.BusinessQrCard>
   )
 }

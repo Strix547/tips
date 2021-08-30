@@ -9,6 +9,7 @@ import { PhoneField } from './PhoneField'
 import { Switch } from './Switch'
 import { Table } from './Table'
 import { Modal } from './Modal'
+import { Rating } from './Rating'
 
 export {
   Button,
@@ -24,5 +25,6 @@ export {
   PhoneField,
   Switch,
   Table,
-  Modal
+  Modal,
+  Rating
 }

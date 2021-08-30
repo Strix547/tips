@@ -1,1 +1,0 @@
-export { PlatformQrCard } from './PlatformQrCard'

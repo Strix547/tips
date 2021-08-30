@@ -7,8 +7,11 @@ import { RecipientsPage } from './landing/recipients'
 import { SignInPage } from './landing/SignIn'
 import { SupportPage } from './landing/support'
 
-import { UserMainPage } from './user/main'
-import { QrCodesPage } from './user/qrCodes'
+import { UserMainPage } from './main'
+import { QrCodesPage } from './qrCodes'
+import { QrIndividualPaymentPage } from './qrIndividualPayment'
+import { QrEmployeePaymentPage } from './QrEmployeePayment'
+import { ThankYouPage } from './ThankYou'
 
 export {
   AgentsPage,
@@ -20,5 +23,8 @@ export {
   SignInPage,
   SupportPage,
   UserMainPage,
-  QrCodesPage
+  QrCodesPage,
+  QrIndividualPaymentPage,
+  QrEmployeePaymentPage,
+  ThankYouPage
 }

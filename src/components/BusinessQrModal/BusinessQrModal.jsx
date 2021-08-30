@@ -1,7 +1,10 @@
+import { useState, useEffect } from 'react'
+import Tooltip from '@material-ui/core/Tooltip'
+
 import { QrImage } from 'components'
 import { Button } from 'ui'
 
-import * as S from './PlatformQrModal.styled'
+import * as S from './BusinessQrModal.styled'
 
 import VkIcon from '@public/icons/networks/vk-big.svg'
 import FacebookIcon from '@public/icons/networks/facebook-big.svg'
@@ -10,7 +13,19 @@ import DownloadIcon from '@public/icons/download.svg'
 import CrossIcon from '@public/icons/cross-circle-filled.svg'
 import CopyIcon from '@public/icons/copy.svg'
 
-export const PlatformQrModal = ({ open, onClose, label, qr }) => {
+export const BusinessQrModal = ({ open, onClose, label, qr }) => {
+  const [copyTooltipOpen, setCopyTooltipOpen] = useState(false)
+
+  useEffect(() => {
+    const tooltipTimeout = setTimeout(() => {
+      if (copyTooltipOpen) setCopyTooltipOpen(false)
+    }, 1500)
+
+    return () => {
+      clearTimeout(tooltipTimeout)
+    }
+  }, [copyTooltipOpen])
+
   const link = 'https://tips.me/qr585302862'
 
   const networks = [
@@ -26,12 +41,12 @@ export const PlatformQrModal = ({ open, onClose, label, qr }) => {
   ))
 
   const copyLinkToClipboard = () => {
-    console.log(link)
     navigator.clipboard.writeText(link)
+    setCopyTooltipOpen(true)
   }
 
   return (
-    <S.PlatformQrModal open={open} onClose={onClose}>
+    <S.BusinessQrModal open={open} onClose={onClose}>
       <S.Wrapper>
         <S.Top>
           <S.Label>QR-код {label}</S.Label>
@@ -42,12 +57,14 @@ export const PlatformQrModal = ({ open, onClose, label, qr }) => {
           <S.LinkRow>
             <S.Text>Основная ссылка для получения денег</S.Text>
 
-            <S.Link>
-              {link}
-              <Button iconStart={<CopyIcon />} onClick={copyLinkToClipboard}>
-                Скопировать
-              </Button>
-            </S.Link>
+            <Tooltip open={copyTooltipOpen} title="Скопировано">
+              <S.Link>
+                {link}
+                <Button iconStart={<CopyIcon />} onClick={copyLinkToClipboard}>
+                  Скопировать
+                </Button>
+              </S.Link>
+            </Tooltip>
           </S.LinkRow>
 
           <QrImage src={qr} />
@@ -62,6 +79,6 @@ export const PlatformQrModal = ({ open, onClose, label, qr }) => {
           </S.Share>
         </S.Main>
       </S.Wrapper>
-    </S.PlatformQrModal>
+    </S.BusinessQrModal>
   )
 }

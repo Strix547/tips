@@ -1,5 +1,5 @@
 import { AccountLayout } from 'layout'
-import { PlatformQrCard } from 'components'
+import { BusinessQrCard } from 'components'
 
 import * as S from './QrCodes.styled'
 
@@ -22,7 +22,7 @@ export const QrCodesPage = () => {
   ]
 
   const qrCodeList = qrCodes.map(({ label, qr }) => (
-    <PlatformQrCard key={label} tag="li" label={label} qr={qr} />
+    <BusinessQrCard key={label} tag="li" label={label} qr={qr} />
   ))
 
   return (
