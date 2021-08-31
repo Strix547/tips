@@ -6,11 +6,14 @@ import { Select } from 'ui/Select/Select.styled'
 
 import { media } from 'styles/media'
 
-export const media1000 = media.createMedia(1000)
+export const media1100 = media.createMedia(1100)
 
 export { Wrapper, Text }
 
-export const Header = styled.header``
+export const Header = styled.header`
+  position: relative;
+  z-index: 1400;
+`
 
 export const Container = styled.div`
   position: relative;
@@ -22,6 +25,7 @@ export const Container = styled.div`
 
   ${Wrapper} {
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     height: 100%;
   }
@@ -51,8 +55,6 @@ export const MenuButton = styled.button`
 `
 
 export const Nav = styled.nav`
-  margin-left: 145px;
-
   ul {
     display: flex;
 
@@ -81,7 +83,6 @@ export const Nav = styled.nav`
 export const Right = styled.div`
   display: flex;
   align-items: center;
-  margin-left: auto;
 
   ${Button} {
     height: 48px;
@@ -96,6 +97,51 @@ export const Right = styled.div`
 
   ${media.laptop} {
     margin-left: 0;
+  }
+`
+
+export const User = styled.div`
+  display: flex;
+  margin-left: 30px;
+
+  ${media.createMedia(700)} {
+    margin-left: 20px;
+  }
+`
+
+export const UserAvatar = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  background: var(--color-gray-600);
+  border: 1px solid var(--color-gray-200);
+  border-radius: 50%;
+  box-sizing: border-box;
+`
+
+export const UserInfo = styled.div`
+  margin-left: 15px;
+
+  ${Text} {
+    /* fullName */
+    &:first-child {
+      max-width: 170px;
+      font-weight: 500;
+      line-height: 22px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    /* email */
+    &:last-child {
+      font-size: var(--font-size-sm);
+      color: #62687a;
+      line-height: 20px;
+    }
   }
 `
 
@@ -130,13 +176,10 @@ export const LanguageSelect = styled(Select)`
   }
 `
 
-export const MenuHamburger = styled.nav`
-  position: absolute;
-  left: 0;
-  top: -250px;
+export const DropdownMenu = styled.nav`
   width: 100vw;
-  height: 250px;
-  padding: 30px 20px;
+  height: 320px;
+  padding: 100px 20px 30px;
   background: #fff;
   box-shadow: 0px 5px 20px rgba(46, 51, 68, 0.05);
   transition: 1s;
@@ -174,7 +217,7 @@ export const Overlay = styled.div`
   top: -100vh;
   width: 100vw;
   height: 100vh;
-  background: rgba(16, 17, 18, 0.3);
+
   cursor: pointer;
   z-index: 100;
 

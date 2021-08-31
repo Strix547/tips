@@ -10,6 +10,10 @@ import {
   Nav as HeaderNav
 } from 'layout/Header/Header.styled'
 
+import { media } from 'styles/media'
+
+const media1280 = media.createMedia(1280)
+
 export { Heading }
 
 export const AccountLayout = styled.div`
@@ -25,7 +29,9 @@ export const AccountLayout = styled.div`
   }
 
   ${Header} {
+    position: relative;
     grid-area: header;
+    z-index: 100;
   }
 
   ${HeaderLeft} {
@@ -42,13 +48,44 @@ export const AccountLayout = styled.div`
   ${HeaderNav} {
     margin-left: 0;
   }
+
+  ${media1280} {
+    display: block;
+
+    ${Sidebar} {
+      display: none;
+    }
+  }
+
+  ${media.tablet} {
+    ${HeaderWrapper} {
+      padding: 0 20px;
+    }
+  }
 `
 
 export const Content = styled.main`
+  display: flex;
+  flex-direction: column;
   grid-area: content;
   width: calc(100vw - 340px);
+  min-height: calc(100vh - 70px - 100px);
   padding: 40px 30px 60px;
   background: #f9fafc;
+
+  ${media1280} {
+    width: 100%;
+    min-height: calc(100vh - 70px);
+    box-sizing: border-box;
+  }
+
+  ${media.tablet} {
+    padding: 30px 20px 45px;
+  }
+
+  ${media.mobile} {
+    padding: 30px 15px 30px;
+  }
 `
 
 export const ContentHead = styled.div`
@@ -71,5 +108,8 @@ export const ContentHead = styled.div`
         stroke: #fff;
       }
     }
+  }
+
+  ${media.createMedia(440)} {
   }
 `

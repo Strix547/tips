@@ -6,18 +6,18 @@ import { ROUTES } from 'core/routes'
 
 import * as S from './Sidebar.styled'
 
-import PieChartIcon from '@public/icons/sidebar/pie-chart.svg'
-import QrScanIcon from '@public/icons/sidebar/qr-scan.svg'
-import BriefCaseIcon from '@public/icons/sidebar/briefcase.svg'
-import CreditCardIcon from '@public/icons/sidebar/credit-card.svg'
-import UserIcon from '@public/icons/sidebar/user.svg'
-import PaperIcon from '@public/icons/sidebar/paper.svg'
-import UserGroupIcon from '@public/icons/sidebar/user-group.svg'
-import StarIcon from '@public/icons/sidebar/star.svg'
-import TagIcon from '@public/icons/sidebar/tag.svg'
-import LogoutIcon from '@public/icons/sidebar/logout.svg'
+import PieChartIcon from '@public/icons/pie-chart.svg'
+import QrScanIcon from '@public/icons/qr-scan.svg'
+import BriefCaseIcon from '@public/icons/briefcase.svg'
+import CreditCardIcon from '@public/icons/credit-card.svg'
+import UserIcon from '@public/icons/user.svg'
+import PaperIcon from '@public/icons/paper.svg'
+import UserGroupIcon from '@public/icons/user-group.svg'
+import StarIcon from '@public/icons/star.svg'
+import TagIcon from '@public/icons/tag.svg'
+import LogoutIcon from '@public/icons/logout.svg'
 
-import UserWithLaptopSvg from '@public/icons/sidebar/user-with-laptop.svg'
+import UserWithLaptopSvg from '@public/icons/user-with-laptop.svg'
 
 export const Sidebar = () => {
   const nav = [
@@ -32,7 +32,7 @@ export const Sidebar = () => {
       link: ROUTES.ACCOUNT_MY_EMPLOYEES,
       icon: <UserGroupIcon />
     },
-    { label: 'Мои отзывы', link: ROUTES.ACCOUNT_MY_REVIEWS, icon: <StarIcon /> },
+    { label: 'Мои отзывы', link: ROUTES.ACCOUNT_MY_REVIEWS, icon: <StarIcon fill="#777D82" /> },
     { label: 'Программа лояльности', link: ROUTES.LOYALTY, icon: <TagIcon /> }
   ]
 

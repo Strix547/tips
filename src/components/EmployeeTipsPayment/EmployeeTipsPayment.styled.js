@@ -3,6 +3,10 @@ import styled from 'styled-components'
 import { Text } from 'styled'
 import { Button } from 'ui/Button/Button.styled'
 
+import { media } from 'styles/media'
+
+const media700 = media.createMedia(700)
+
 export { Text }
 
 export const EmployeeTipsPayment = styled.div`
@@ -13,12 +17,22 @@ export const EmployeeTipsPayment = styled.div`
   border: 2px solid var(--color-gray-200);
   border-radius: 10px;
   box-sizing: border-box;
+
+  ${media700} {
+    width: 100%;
+    padding: 0 15px;
+    border: none;
+  }
 `
 
 export const Top = styled.div`
   padding-top: 40px;
   padding-bottom: 25px;
   border-bottom: 2px solid var(--color-gray-200);
+
+  ${media700} {
+    padding-top: 0;
+  }
 `
 
 export const Main = styled.div`
@@ -39,6 +53,10 @@ export const Main = styled.div`
     color: var(--color-gray-300);
     line-height: 20px;
     text-align: center;
+  }
+
+  ${media700} {
+    padding-bottom: 0;
   }
 `
 

@@ -1,11 +1,17 @@
 import styled from 'styled-components'
-import Link from 'next/link'
 
 import { Button } from 'ui/Button/Button.styled'
 
+import { media } from 'styles/media'
+
 export const Sidebar = styled.aside`
+  position: fixed;
   width: 280px;
   height: 100vh;
+
+  ${media.createMedia(1280)} {
+    position: static;
+  }
 `
 
 export const Top = styled.div`
@@ -20,6 +26,7 @@ export const Top = styled.div`
 
 export const Main = styled.div`
   margin: 40px 10px 0;
+  padding-bottom: 20px;
 `
 
 export const Nav = styled.ul``

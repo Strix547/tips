@@ -1,7 +1,13 @@
+import { useMediaQuery } from 'react-responsive'
+import { Bar } from 'react-chartjs-2'
+
+import { MEDIA_TABLET } from 'styles/media'
 import * as S from './BarChart.styled'
 
 export const BarChart = ({ title }) => {
-  const getBarData = (canvas) => {
+  const screenTablet = useMediaQuery({ maxWidth: MEDIA_TABLET })
+
+  const createLinearGradient = (canvas) => {
     const ctx = canvas.getContext('2d')
     const w = canvas.width
     const h = canvas.height
@@ -24,8 +30,26 @@ export const BarChart = ({ title }) => {
     gradient.addColorStop(0.5, '#E04A2D')
     gradient.addColorStop(1, '#F5CE58')
 
+    return gradient
+  }
+
+  const getBarData = (canvas) => {
+    const getArrBaseOnWidth = (arr) => {
+      const windowWidth = window.outerWidth
+
+      if (windowWidth <= 470) {
+        return arr.slice(0, 5)
+      }
+
+      if (windowWidth <= MEDIA_TABLET) {
+        return arr.slice(0, 10)
+      }
+
+      return arr.slice(0, 17)
+    }
+
     return {
-      labels: [
+      labels: getArrBaseOnWidth([
         '15',
         '16',
         '17',
@@ -43,13 +67,14 @@ export const BarChart = ({ title }) => {
         '29',
         '30',
         '31'
-      ],
+      ]),
       datasets: [
         {
-          data: [
-            590, 410, 580, 580, 590, 590, 420, 480, 490, 500, 539, 500, 420, 480, 510, 440, 510
-          ],
-          backgroundColor: [gradient],
+          data: getArrBaseOnWidth(
+            [590, 410, 580, 580, 590, 590, 420, 480, 490, 500, 539, 500, 420, 480, 510, 440, 510],
+            screenTablet
+          ),
+          backgroundColor: [createLinearGradient(canvas)],
           borderRadius: { topLeft: 5, topRight: 5 }
         }
       ]
@@ -130,16 +155,6 @@ export const BarChart = ({ title }) => {
     tooltipEl.style.boxSizing = 'border-box'
     tooltipEl.style.pointerEvents = 'none'
     tooltipEl.style.transition = '0.3s'
-
-    // triangleEl.style.position = 'absolute'
-    // triangleEl.style.width = 32
-    // triangleEl.style.height = 17
-    // triangleEl.style.bottom = 0
-    // triangleEl.style.left = '50%'
-    // triangleEl.style.transform = 'translateX(-50%)'
-    // triangleEl.style.borderWidth = 10
-    // triangleEl.style.borderStyle = 'solid'
-    // triangleEl.style.borderColor = 'transparent #FFFFFF transparent transparent'
   }
 
   const tooltip = {
@@ -158,7 +173,7 @@ export const BarChart = ({ title }) => {
         display: false
       },
       ticks: {
-        padding: 15,
+        padding: 8,
         color: '#313436',
         font: {
           family: 'Formular',
@@ -180,13 +195,14 @@ export const BarChart = ({ title }) => {
         callback(value, index) {
           if (index % 2 === 0) return value
         },
-        padding: 15,
         color: '#9FA0A0',
         font: {
           family: 'Formular',
           size: 14,
           weight: 500
-        }
+        },
+        padding: 12,
+        crossAlign: 'far'
       }
     }
   }
@@ -195,19 +211,24 @@ export const BarChart = ({ title }) => {
     <S.BarChart>
       <S.Heading level={6}>{title}</S.Heading>
 
-      <S.Bar
-        data={getBarData}
-        options={{
-          plugins: {
-            legend: {
-              display: false
+      <S.BarContainer>
+        <Bar
+          data={getBarData}
+          options={{
+            plugins: {
+              legend: {
+                display: false
+              },
+              tooltip
             },
-            tooltip
-          },
-          scales,
-          maintainAspectRatio: false
-        }}
-      />
+            scales,
+            responsive: true,
+            maintainAspectRatio: false
+          }}
+        />
+      </S.BarContainer>
+
+      <S.Month>Май</S.Month>
     </S.BarChart>
   )
 }

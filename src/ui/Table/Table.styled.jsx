@@ -31,18 +31,18 @@ export const Table = styled((props) => (
         overflow: hidden;
       }
 
-      &-dataContainer {
-        margin: 0 30px;
-      }
-
-      &-columnsContainer,
       &-cell {
         border-bottom: 1px solid #e0e3e1;
       }
 
       &-columnHeader,
       &-cell {
-        padding: 0;
+        padding-left: 0;
+        padding-right: 20px;
+
+        &:last-child {
+          padding-right: 0;
+        }
 
         &:focus,
         &:focus-within {
@@ -69,7 +69,7 @@ export const Table = styled((props) => (
       }
 
       &-columnsContainer {
-        padding: 0 0 0 30px;
+        border-bottom: none;
       }
 
       &-cell {
@@ -83,17 +83,6 @@ export const Table = styled((props) => (
 
       &-row {
         position: relative;
-
-        &::after {
-          content: '';
-          position: absolute;
-          width: 30px;
-          height: 60px;
-          top: 0;
-          right: 30px;
-          background: #fff;
-          z-index: 100;
-        }
 
         &:hover {
           background-color: #fff;

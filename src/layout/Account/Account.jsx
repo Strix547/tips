@@ -10,7 +10,7 @@ export const AccountLayout = ({ title, button, children }) => {
   return (
     <S.AccountLayout>
       <Sidebar />
-      <Header />
+      <Header withSidebar />
 
       <S.Content>
         {title && (

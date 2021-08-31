@@ -10,6 +10,7 @@ import { Switch } from './Switch'
 import { Table } from './Table'
 import { Modal } from './Modal'
 import { Rating } from './Rating'
+import { Drawer } from './Drawer'
 
 export {
   Button,
@@ -26,5 +27,6 @@ export {
   Switch,
   Table,
   Modal,
-  Rating
+  Rating,
+  Drawer
 }

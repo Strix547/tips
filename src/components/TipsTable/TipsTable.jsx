@@ -1,3 +1,5 @@
+import { useMediaQuery } from 'react-responsive'
+
 import { TimePeriodFilter } from 'components'
 import { ExcelDownload } from 'common'
 import { Table } from 'ui'
@@ -8,6 +10,7 @@ import { formatPrice } from 'utils'
 import * as S from './TipsTable.styled'
 
 export const TipsTable = () => {
+  const screenLess750 = useMediaQuery({ maxWidth: 750 })
   const currency = '₽'
 
   const getColumnWidthPerecentFromTableWidth = (columnWidth, tableWidth) => {
@@ -15,22 +18,27 @@ export const TipsTable = () => {
   }
 
   const columns = [
-    { headerName: 'Дата', field: 'date', flex: getColumnWidthPerecentFromTableWidth(75, 1040) },
+    {
+      headerName: 'Дата',
+      field: 'date',
+      minWidth: 95,
+      flex: getColumnWidthPerecentFromTableWidth(75, 1040)
+    },
     {
       headerName: 'Страна',
       field: 'country',
+      minWidth: 90,
       flex: getColumnWidthPerecentFromTableWidth(110, 1040)
     },
     {
       headerName: 'Размер чаевых',
       field: 'tips',
-
+      minWidth: 150,
       flex: getColumnWidthPerecentFromTableWidth(130, 1040)
     },
     {
-      headerName: 'Комиссия, вкл. в размер чаевых',
+      headerName: 'Комиссия',
       field: 'fee',
-
       flex: getColumnWidthPerecentFromTableWidth(255, 1040)
     },
     {
@@ -41,7 +49,7 @@ export const TipsTable = () => {
     {
       headerName: 'Номер карты',
       field: 'cardNumber',
-      flex: getColumnWidthPerecentFromTableWidth(135, 1040)
+      width: 135
     }
   ]
 
@@ -183,6 +191,107 @@ export const TipsTable = () => {
     }
   ]
 
+  const incomingPaymentStatistic = [
+    {
+      id: 1,
+      date: new Date(),
+      country: 'Netherlands',
+      tipAmount: 12000,
+      fee: 300,
+      email: 'konovalova@gmail.com',
+      cardNumber: '4543 **** 5944'
+    },
+    {
+      id: 11,
+      date: new Date(),
+      country: 'Netherlands',
+      tipAmount: 12000,
+      fee: 300,
+      email: 'konovalova@gmail.com',
+      cardNumber: '4543 **** 5944'
+    },
+    {
+      id: 12,
+      date: new Date(),
+      country: 'Netherlands',
+      tipAmount: 12000,
+      fee: 300,
+      email: 'konovalova@gmail.com',
+      cardNumber: '4543 **** 5944'
+    },
+    {
+      id: 13,
+      date: new Date(),
+      country: 'Netherlands',
+      tipAmount: 12000,
+      fee: 300,
+      email: 'konovalova@gmail.com',
+      cardNumber: '4543 **** 5944'
+    },
+    {
+      id: 14,
+      date: new Date(),
+      country: 'Netherlands',
+      tipAmount: 12000,
+      fee: 300,
+      email: 'konovalova@gmail.com',
+      cardNumber: '4543 **** 5944'
+    },
+    {
+      id: 15,
+      date: new Date(),
+      country: 'Netherlands',
+      tipAmount: 12000,
+      fee: 300,
+      email: 'konovalova@gmail.com',
+      cardNumber: '4543 **** 5944'
+    },
+    {
+      id: 16,
+      date: new Date(),
+      country: 'Netherlands',
+      tipAmount: 12000,
+      fee: 300,
+      email: 'konovalova@gmail.com',
+      cardNumber: '4543 **** 5944'
+    }
+  ]
+
+  const tipCardList = incomingPaymentStatistic.map(
+    ({ id, date, country, tipAmount, fee, email, cardNumber }) => {
+      return (
+        <S.TipCard key={id}>
+          <S.TipCardTop>
+            <S.Text>{date.toLocaleDateString()}</S.Text>
+            <S.Text>{formatPrice(tipAmount, currency)}</S.Text>
+          </S.TipCardTop>
+
+          <S.TipCardMain>
+            <S.TipCardRow>
+              <S.Text>Комиссия</S.Text>
+              <S.Text>{formatPrice(fee, currency)}</S.Text>
+            </S.TipCardRow>
+
+            <S.TipCardRow>
+              <S.Text>Страна</S.Text>
+              <S.Text>{country}</S.Text>
+            </S.TipCardRow>
+
+            <S.TipCardRow>
+              <S.Text>Пользователь</S.Text>
+              <S.Text>{email}</S.Text>
+            </S.TipCardRow>
+
+            <S.TipCardRow>
+              <S.Text>Номер карты</S.Text>
+              <S.Text>{cardNumber}</S.Text>
+            </S.TipCardRow>
+          </S.TipCardMain>
+        </S.TipCard>
+      )
+    }
+  )
+
   return (
     <S.TipsTable>
       <S.Top>
@@ -192,7 +301,13 @@ export const TipsTable = () => {
 
       <S.TableContainer>
         <StatisticRow tips={100600} fee={70000} receiptAverage={5000} />
-        <Table columns={columns} rows={rows} />
+
+        {!screenLess750 ? (
+          <Table columns={columns} rows={rows} />
+        ) : (
+          <S.TipCardList>{tipCardList}</S.TipCardList>
+        )}
+
         <StatisticRow tips={100600} fee={70000} receiptAverage={5000} />
       </S.TableContainer>
     </S.TipsTable>
