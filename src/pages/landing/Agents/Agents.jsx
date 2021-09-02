@@ -8,10 +8,12 @@ import {
   MediaAboutUsSection,
   ConnectFormSection
 } from 'landing/sections'
-import { Button } from 'ui'
+import { LinkButton } from 'ui'
+
+import { ROUTES } from 'core/routes'
 
 import dashboard from '@public/img/landing/agents-banner-dashboard.png'
-import dashboardMobile from '@public/img/landing/main-banner-dashboard-mobile.png'
+import dashboardMobile from '@public/img/landing/agents-banner-dashboard-mobile.png'
 
 import SheetIcon from '@public/icons/sheet.svg'
 import DeviceDesignClickIcon from '@public/icons/device-design-click.svg'
@@ -38,7 +40,7 @@ export const AgentsPage = () => {
     'Дополните свой портфель актуальным сервисом'
   ]
 
-  const bannerAction = <Button>Стать агентом</Button>
+  const bannerAction = <LinkButton href={ROUTES.AUTH}>Стать агентом</LinkButton>
 
   return (
     <>

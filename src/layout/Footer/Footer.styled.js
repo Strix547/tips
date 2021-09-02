@@ -199,6 +199,10 @@ export const SubscriptionForm = styled.form`
     padding: 0;
     height: 40px;
     border-radius: 50%;
+
+    svg {
+      margin: 0;
+    }
   }
 
   ${media1120} {

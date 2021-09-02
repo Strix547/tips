@@ -8,11 +8,13 @@ import {
   MediaAboutUsSection,
   ConnectFormSection
 } from 'landing/sections'
-import { Button } from 'ui'
+import { LinkButton } from 'ui'
 import { HowServiceWorkSection } from './sections'
 
+import { ROUTES } from 'core/routes'
+
 import dashboard from '@public/img/landing/recipients-banner-dashboard.png'
-import dashboardMobile from '@public/img/landing/main-banner-dashboard-mobile.png'
+import dashboardMobile from '@public/img/landing/recipients-banner-dashboard-mobile.png'
 
 import SheetIcon from '@public/icons/sheet.svg'
 
@@ -40,7 +42,7 @@ export const RecipientsPage = () => {
     'Расчеты обеспечивает Тинькофф'
   ]
 
-  const bannerAction = <Button>Получать чаевые</Button>
+  const bannerAction = <LinkButton href={ROUTES.AUTH}>Получать чаевые</LinkButton>
 
   return (
     <>

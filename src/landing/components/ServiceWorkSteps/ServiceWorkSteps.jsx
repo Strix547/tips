@@ -1,5 +1,10 @@
+import { useRef } from 'react'
 import { useMediaQuery } from 'react-responsive'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import SwiperCore, { Controller, Navigation } from 'swiper/core'
 import Image from 'next/image'
+
+import { MEDIA_LAPTOP } from 'styles/media'
 
 import * as S from './ServiceWorkSteps.styled'
 
@@ -9,8 +14,13 @@ import screenScanQr from '@public/img/landing/screen-scan-qr.png'
 import screenPay from '@public/img/landing/screen-pay.png'
 import screenThank from '@public/img/landing/screen-thank.png'
 
+import ArrowGreenIcon from '@public/icons/arrows/green-right.svg'
+
+SwiperCore.use([Controller, Navigation])
+
 export const ServiceWorkSteps = () => {
-  const screenMore1150 = useMediaQuery({ minWidth: 1151 })
+  const sliderRef = useRef(null)
+  const isLaptop = useMediaQuery({ maxWidth: MEDIA_LAPTOP })
 
   const steps = [
     { title: 'Регистрация в сервисе', img: screenSignUp },
@@ -20,13 +30,58 @@ export const ServiceWorkSteps = () => {
     { title: 'Получатель получает деньги', img: screenThank }
   ]
 
+  const sliderSettings = {
+    navigation: true,
+    centeredSlides: true,
+    slidesPerView: 1,
+    initialSlide: 1,
+    breakpoints: {
+      960: {
+        slidesPerView: 3
+      },
+      660: {
+        slidesPerView: 2,
+        initialSlide: 0,
+        centeredSlides: false
+      },
+      320: {
+        initialSlide: 0,
+        slidesPerView: 1
+      }
+    }
+  }
+
   const stepList = steps.map(({ title, img }, idx) => (
     <li key={title}>
-      <Image src={img} alt={title} />
+      <Image src={img} alt={title} unoptimized />
       <S.Text>{title}</S.Text>
-      {screenMore1150 && <S.Counter>{idx + 1}</S.Counter>}
+      <S.Counter>{idx + 1}</S.Counter>
     </li>
   ))
 
-  return <S.ServiceWorkSteps>{stepList}</S.ServiceWorkSteps>
+  const stepListSlides = steps.map(({ title, img }, idx) => (
+    <SwiperSlide key={title}>
+      <Image src={img} alt={title} layout="fixed" unoptimized />
+      <S.Text>{title}</S.Text>
+      <S.Counter>{idx + 1}</S.Counter>
+    </SwiperSlide>
+  ))
+
+  return !isLaptop ? (
+    <S.ServiceWorkSteps>{stepList}</S.ServiceWorkSteps>
+  ) : (
+    <S.Slider>
+      <Swiper {...sliderSettings} ref={sliderRef}>
+        <S.NavArrow onClick={() => sliderRef?.current?.swiper?.slidePrev()}>
+          <ArrowGreenIcon />
+        </S.NavArrow>
+
+        {stepListSlides}
+
+        <S.NavArrow onClick={() => sliderRef?.current?.swiper?.slideNext()}>
+          <ArrowGreenIcon />
+        </S.NavArrow>
+      </Swiper>
+    </S.Slider>
+  )
 }

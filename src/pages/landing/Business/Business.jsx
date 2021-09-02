@@ -8,10 +8,12 @@ import {
   MediaAboutUsSection,
   ConnectFormSection
 } from 'landing/sections'
-import { Button } from 'ui'
+import { LinkButton } from 'ui'
+
+import { ROUTES } from 'core/routes'
 
 import dashboard from '@public/img/landing/business-banner-dashboard.png'
-import dashboardMobile from '@public/img/landing/main-banner-dashboard-mobile.png'
+import dashboardMobile from '@public/img/landing/business-banner-dashboard-mobile.png'
 
 import DeviceDesignIcon from '@public/icons/device-design.svg'
 import DeviceWindowSettingsIcon from '@public/icons/devices-window-settings.svg'
@@ -42,7 +44,7 @@ export const BusinessPage = () => {
     'Инструмент повышения уровня сервиса и гостеприимства'
   ]
 
-  const bannerAction = <Button>Подключить чаевые</Button>
+  const bannerAction = <LinkButton href={ROUTES.AUTH}>Подключить чаевые</LinkButton>
 
   return (
     <>

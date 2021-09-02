@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
-import SwiperCore, { Autoplay } from 'swiper/core'
+import { Autoplay } from 'swiper'
 import Image from 'next/image'
 
 import { Section } from 'landing/components'
@@ -10,10 +10,9 @@ import * as S from './MediaAboutUs.styled'
 import QuoteIcon from '@public/icons/quote.svg'
 import vedomostiLogo from '@public/img/placeholders/vedomosti.png'
 
-SwiperCore.use([Autoplay])
-
 export const MediaAboutUsSection = () => {
   const sliderSettings = {
+    modules: [Autoplay],
     slidesPerView: 'auto',
     spaceBetween: 30,
     autoplay: { delay: 0, disableOnInteraction: false },

@@ -11,6 +11,7 @@ import { Table } from './Table'
 import { Modal } from './Modal'
 import { Rating } from './Rating'
 import { Drawer } from './Drawer'
+import { LinkButton } from './LinkButton'
 
 export {
   Button,
@@ -28,5 +29,6 @@ export {
   Table,
   Modal,
   Rating,
-  Drawer
+  Drawer,
+  LinkButton
 }

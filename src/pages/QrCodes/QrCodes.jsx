@@ -6,8 +6,6 @@ import * as S from './QrCodes.styled'
 import qrPlaceholder from '@public/img/placeholders/qr.png'
 
 export const QrCodesPage = () => {
-  const onAddQrClick = () => {}
-
   const qrCodes = [
     { label: 'Ресторан Жиши-Суши', qr: qrPlaceholder },
     { label: 'Ресторан Жиши-Суши1', qr: qrPlaceholder },
@@ -20,6 +18,8 @@ export const QrCodesPage = () => {
     { label: 'Ресторан Жиши-Суши8', qr: qrPlaceholder },
     { label: 'Ресторан Жиши-Суши9', qr: qrPlaceholder }
   ]
+
+  const onAddQrClick = () => {}
 
   const qrCodeList = qrCodes.map(({ label, qr }) => (
     <BusinessQrCard key={label} tag="li" label={label} qr={qr} />

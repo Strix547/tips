@@ -31,7 +31,7 @@ export const PageBanner = styled.section`
 
   ${media630} {
     height: auto;
-    padding-bottom: 518px;
+    padding-bottom: 30px;
   }
 `
 
@@ -124,6 +124,11 @@ export const ImgContainer = styled.div`
   left: 15px;
   width: 100vw;
   height: 100%;
+
+  ${media630} {
+    position: static;
+    margin-top: 30px;
+  }
 `
 
 export const Img = styled.div`
@@ -149,18 +154,13 @@ export const Img = styled.div`
 
 export const ImgMobile = styled.div`
   display: none;
-  position: absolute;
-  left: 50%;
-  bottom: -495px;
-  transform: translateX(-50%);
-  z-index: 10;
 
   ${media630} {
-    display: block;
+    display: flex;
+    justify-content: center;
   }
 
   ${media.mobile} {
-    left: -15px;
-    transform: none;
+    justify-content: flex-start;
   }
 `

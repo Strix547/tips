@@ -3,7 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { useMediaQuery } from 'react-responsive'
 import Link from 'next/link'
 
-import { Button, MenuItem, Drawer } from 'ui'
+import { LinkButton, MenuItem, Drawer } from 'ui'
 import { Sidebar } from 'layout'
 import { Logo } from 'common'
 
@@ -122,7 +122,9 @@ export const Header = ({ withSidebar }) => {
                 ) : null}
               </S.User>
             ) : (
-              <Button size="inline">Вход</Button>
+              <LinkButton href={ROUTES.AUTH} size="inline">
+                Вход
+              </LinkButton>
             )}
           </S.Right>
         </S.Wrapper>

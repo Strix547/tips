@@ -34,11 +34,11 @@ export const PageBanner = ({ title, subtitle, features = [], actions, img }) => 
 
         <S.ImgContainer>
           <S.Img>
-            <Image {...bannerImgProps} src={img.desktop} />
+            <Image {...bannerImgProps} src={img.desktop} unoptimized />
           </S.Img>
 
           <S.ImgMobile>
-            <Image {...bannerImgProps} src={img.mobile} />
+            <Image {...bannerImgProps} src={img.mobile} unoptimized />
           </S.ImgMobile>
         </S.ImgContainer>
       </S.Wrapper>

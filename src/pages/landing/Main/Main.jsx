@@ -6,8 +6,10 @@ import {
   MediaAboutUsSection,
   ConnectFormSection
 } from 'landing/sections'
-import { Button } from 'ui'
+import { LinkButton } from 'ui'
 import { UsersSection, HowServiceWorkSection, WhereCanUseSection } from './sections'
+
+import { ROUTES } from 'core/routes'
 
 import dashboard from '@public/img/landing/main-banner-dashboard.png'
 import dashboardMobile from '@public/img/landing/main-banner-dashboard-mobile.png'
@@ -15,8 +17,11 @@ import dashboardMobile from '@public/img/landing/main-banner-dashboard-mobile.pn
 export const MainPage = () => {
   const bannerActions = (
     <>
-      <Button>Получать чаевые</Button>
-      <Button variant="bordered">Оплатить чаевые</Button>
+      <LinkButton href={ROUTES.RECIPIENTS}>Получать чаевые</LinkButton>
+
+      <LinkButton href={ROUTES.PAYERS} variant="bordered">
+        Оплатить чаевые
+      </LinkButton>
     </>
   )
 
@@ -33,7 +38,7 @@ export const MainPage = () => {
         />
 
         <UsersSection />
-        {/* <HowServiceWorkSection /> */}
+        <HowServiceWorkSection />
         <WhereCanUseSection />
         <TariffsSection />
         <TrustUsSection />

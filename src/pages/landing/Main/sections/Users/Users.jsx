@@ -1,6 +1,8 @@
 import { Section } from 'landing/components'
 import { RowSection } from './components'
 
+import { ROUTES } from 'core/routes'
+
 import businessDashboard from '@public/img/landing/business-dashboard.png'
 import recipientDashboard from '@public/img/landing/recipient-dashboard.png'
 import artistDashboard from '@public/img/landing/artist-dashboard.png'
@@ -12,7 +14,7 @@ export const UsersSection = () => {
     {
       title: 'Бизнесу',
       subtitle: 'Мотивируйте сотрудников и повышайте лояльность гостей',
-      detailsLink: '/',
+      pageLink: ROUTES.BUSINESS,
       features: [
         'Бесплатно для бизнеса',
         'Дополнительный заработок для',
@@ -25,7 +27,7 @@ export const UsersSection = () => {
     {
       title: 'Работникам сферы услуг',
       subtitle: 'Принимайте безналичные чаевые по QR-коду или ссылке',
-      detailsLink: '/',
+      pageLink: ROUTES.RECIPIENTS,
       features: [
         'Не облагаются налогом',
         'Моментальное зачисление на банковскую карту',
@@ -37,7 +39,7 @@ export const UsersSection = () => {
     {
       title: 'Блогерам, артистам и музыкантам',
       subtitle: 'Принимайте донаты и адресные пожертвования на сайте, в блоге и соцсетях',
-      detailsLink: '/',
+      pageLink: ROUTES.RECIPIENTS,
       features: [
         'Множество опций по настройке персональной страницы оплаты',
         'Моментальное зачисление на банковскую карту',
@@ -49,7 +51,7 @@ export const UsersSection = () => {
     {
       title: 'Агентам',
       subtitle: 'Приглашайте людей и получайте от их чеков проценты',
-      detailsLink: '/',
+      pageLink: ROUTES.AGENTS,
       features: [
         'Не облагаются налогом',
         'Моментальное зачисление на банковскую карту',
@@ -61,7 +63,7 @@ export const UsersSection = () => {
     {
       title: 'Плательщикам',
       subtitle: 'Участвуйте в нашей программе лояльности',
-      detailsLink: '/',
+      pageLink: ROUTES.PAYERS,
       features: [
         'Бесплатно для бизнеса',
         'Дополнительный заработок для',

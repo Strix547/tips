@@ -1,13 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { Button } from 'ui'
+import { LinkButton } from 'ui'
 
 import * as S from './RowSection.styled'
 
 import ArrowIcon from '@public/icons/arrows/green-right.svg'
 
-export const RowSection = ({ title, subtitle, detailsLink, features, action, img, reversed }) => {
+export const RowSection = ({ title, subtitle, pageLink, features, action, img, reversed }) => {
   const featureList = features.map((title) => <li key={title}>{title}</li>)
 
   return (
@@ -16,18 +16,19 @@ export const RowSection = ({ title, subtitle, detailsLink, features, action, img
         <S.LeftTop>
           <S.Heading level={3}>{title}</S.Heading>
 
-          <Link href={detailsLink}>
+          <Link href={pageLink}>
             <a>
               Подробнее
               <ArrowIcon />
             </a>
           </Link>
         </S.LeftTop>
+
         <S.Subtitle>{subtitle}</S.Subtitle>
 
         <S.FeatureList>{featureList}</S.FeatureList>
 
-        <Button>{action.label}</Button>
+        <LinkButton href={pageLink}>{action.label}</LinkButton>
       </S.Left>
 
       <S.ImgContainer>

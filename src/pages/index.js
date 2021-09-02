@@ -1,17 +1,18 @@
-import { AgentsPage } from './landing/agents'
-import { BusinessPage } from './landing/business'
-import { FaqPage } from './landing/faq'
-import { MainPage } from './landing/main'
-import { PayersPage } from './landing/payers'
-import { RecipientsPage } from './landing/recipients'
-import { SignInPage } from './landing/SignIn'
-import { SupportPage } from './landing/support'
+import { AgentsPage } from './landing/Agents'
+import { BusinessPage } from './landing/Business'
+import { FaqPage } from './landing/Faq'
+import { MainPage } from './landing/Main'
+import { PayersPage } from './landing/Payers'
+import { RecipientsPage } from './landing/Recipients'
+import { AuthPage } from './landing/SignIn'
+import { SupportPage } from './landing/Support'
 
-import { UserMainPage } from './main'
-import { QrCodesPage } from './qrCodes'
-import { QrIndividualPaymentPage } from './qrIndividualPayment'
+import { UserMainPage } from './Main'
+import { QrCodesPage } from './QrCodes'
+import { QrIndividualPaymentPage } from './QrIndividualPayment'
 import { QrEmployeePaymentPage } from './QrEmployeePayment'
 import { ThankYouPage } from './ThankYou'
+import { QrCreatePage } from './QrCreate'
 
 export {
   AgentsPage,
@@ -20,11 +21,12 @@ export {
   MainPage,
   PayersPage,
   RecipientsPage,
-  SignInPage,
+  AuthPage,
   SupportPage,
   UserMainPage,
   QrCodesPage,
   QrIndividualPaymentPage,
   QrEmployeePaymentPage,
-  ThankYouPage
+  ThankYouPage,
+  QrCreatePage
 }

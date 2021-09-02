@@ -35,8 +35,8 @@ export const Footer = () => {
   const navSecondColumn = [
     { label: 'Частые вопросы', link: ROUTES.FAQ },
     { label: 'Служба поддержки', link: ROUTES.SUPPORT },
-    { label: 'Войти в кабинет', link: ROUTES.SIGN_IN },
-    { label: 'Зарегистрироваться‎', link: ROUTES.SIGN_UP }
+    { label: 'Войти в кабинет', link: ROUTES.AUTH },
+    { label: 'Зарегистрироваться‎', link: ROUTES.AUTH }
   ]
 
   const paymentServices = [

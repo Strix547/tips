@@ -1,0 +1,1 @@
+export { QrCreatePage } from './QrCreate'

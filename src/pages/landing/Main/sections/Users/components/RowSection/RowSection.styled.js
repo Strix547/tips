@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 import { Wrapper, Heading, Text } from 'styled'
 import { Button } from 'ui/Button/Button.styled'
+
 import { media } from 'styles/media'
 
 const media1110 = media.createMedia(1110)
@@ -10,9 +11,13 @@ const media560 = media.createMedia(560)
 export { Wrapper, Heading, Text }
 
 export const Left = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   width: 510px;
 
   ${Button} {
+    width: auto;
     margin-top: 30px;
   }
 

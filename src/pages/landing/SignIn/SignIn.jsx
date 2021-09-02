@@ -11,7 +11,7 @@ import * as S from './SignIn.styled'
 
 import CommentRegulationIcon from '@public/img/landing/comment-regulation.svg'
 
-export const SignInPage = () => {
+export const AuthPage = () => {
   const useFormProps = useForm()
   const isTablet = useMediaQuery({ maxWidth: MEDIA_TABLET })
 

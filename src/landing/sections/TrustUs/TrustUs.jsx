@@ -14,14 +14,13 @@ import DodoLogo from '@public/img/placeholders/dodo.png'
 SwiperCore.use([Controller, Autoplay])
 
 export const TrustUsSection = () => {
-  const [firstSlider, setFirstSlider] = useState(null)
-  const [secondSlider, setSecondSlider] = useState(null)
+  const [sliderController, setSliderController] = useState(null)
 
   useEffect(() => {
-    if (secondSlider) {
-      secondSlider.setTranslate(-131)
+    if (sliderController) {
+      sliderController.setTranslate(-131)
     }
-  }, [secondSlider])
+  }, [sliderController])
 
   const logosFirstLine = [
     { label: 'terrassa1', logo: TerrassaLogo },
@@ -53,7 +52,7 @@ export const TrustUsSection = () => {
     return logos.map(({ label, logo }) => (
       <SwiperSlide key={label}>
         <S.LogoCard>
-          <Image src={logo} alt={label} />
+          <Image src={logo} alt={label} unoptimized />
         </S.LogoCard>
       </SwiperSlide>
     ))
@@ -63,20 +62,15 @@ export const TrustUsSection = () => {
     <Section title="Нам доверяют" fullWidth>
       <S.Content>
         <S.Line>
-          <Swiper
-            {...sliderSettings}
-            controller={{ control: firstSlider }}
-            onSwiper={setFirstSlider}
-          >
-            {createLogoSlides(logosFirstLine)}
-          </Swiper>
+          <Swiper {...sliderSettings}>{createLogoSlides(logosFirstLine)}</Swiper>
         </S.Line>
+
         <S.Line>
           <Swiper
             {...sliderSettings}
             speed={10000}
-            controller={{ control: secondSlider }}
-            onSwiper={setSecondSlider}
+            controller={{ control: sliderController }}
+            onSwiper={setSliderController}
           >
             {createLogoSlides(logosSecondLine)}
           </Swiper>

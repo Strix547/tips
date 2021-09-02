@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 import { Logo } from 'common'
+import { LinkButton } from 'ui'
 
 import { ROUTES } from 'core/routes'
 
@@ -22,17 +23,17 @@ import UserWithLaptopSvg from '@public/icons/user-with-laptop.svg'
 export const Sidebar = () => {
   const nav = [
     { label: 'Главная', link: '/', icon: <PieChartIcon /> },
-    { label: 'Мои QR', link: ROUTES.ACCOUNT_MY_QR_CODES, icon: <QrScanIcon /> },
+    { label: 'Мои QR', link: ROUTES.ACCOUNT_QR_CODES, icon: <QrScanIcon /> },
     { label: 'Агентам', link: ROUTES.FOR_AGENTS, icon: <BriefCaseIcon /> },
-    { label: 'Мои реквизиты', link: ROUTES.ACCOUNT_MY_REQUISITES, icon: <CreditCardIcon /> },
+    { label: 'Мои реквизиты', link: ROUTES.ACCOUNT_REQUISITES, icon: <CreditCardIcon /> },
     { label: 'Персональные данные', link: ROUTES.ACCOUNT_PERSONAL_DATA, icon: <UserIcon /> },
-    { label: 'Мои площадки', link: ROUTES.ACCOUNT_MY_PLATFORMS, icon: <PaperIcon /> },
+    { label: 'Мои площадки', link: ROUTES.ACCOUNT_PLATFORMS, icon: <PaperIcon /> },
     {
       label: 'Мои сотрудники',
-      link: ROUTES.ACCOUNT_MY_EMPLOYEES,
+      link: ROUTES.ACCOUNT_EMPLOYEES,
       icon: <UserGroupIcon />
     },
-    { label: 'Мои отзывы', link: ROUTES.ACCOUNT_MY_REVIEWS, icon: <StarIcon fill="#777D82" /> },
+    { label: 'Мои отзывы', link: ROUTES.ACCOUNT_REVIEWS, icon: <StarIcon fill="#777D82" /> },
     { label: 'Программа лояльности', link: ROUTES.LOYALTY, icon: <TagIcon /> }
   ]
 
@@ -58,9 +59,7 @@ export const Sidebar = () => {
         <S.Support>
           <UserWithLaptopSvg />
 
-          <Link href={ROUTES.SUPPORT} prefetch passHref>
-            <S.LinkButton>Служба поддержки</S.LinkButton>
-          </Link>
+          <LinkButton href={ROUTES.SUPPORT}>Служба поддержки</LinkButton>
         </S.Support>
 
         <S.LogoutButton>

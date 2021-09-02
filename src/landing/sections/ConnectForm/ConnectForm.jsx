@@ -37,7 +37,7 @@ export const ConnectFormSection = () => {
           <S.FormBottom>
             <S.Text>
               Если вы физлицо - получатель чаевых, <br />
-              <Link href={ROUTES.SIGN_UP}>
+              <Link href={ROUTES.AUTH}>
                 <a>зарегистрируйтесь</a>
               </Link>{' '}
               в сервисе

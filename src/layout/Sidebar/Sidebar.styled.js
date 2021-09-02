@@ -137,8 +137,6 @@ export const Support = styled.div`
   }
 `
 
-export const LinkButton = styled(Button).attrs({ as: 'a' })``
-
 export const LogoutButton = styled.button`
   display: flex;
   align-items: center;

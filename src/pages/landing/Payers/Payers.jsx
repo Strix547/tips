@@ -8,10 +8,12 @@ import {
   MediaAboutUsSection,
   ConnectFormSection
 } from 'landing/sections'
-import { Button } from 'ui'
+import { LinkButton } from 'ui'
+
+import { ROUTES } from 'core/routes'
 
 import dashboard from '@public/img/landing/payers-banner-dashboard.png'
-import dashboardMobile from '@public/img/landing/main-banner-dashboard-mobile.png'
+import dashboardMobile from '@public/img/landing/payers-banner-dashboard-mobile.png'
 
 import PackageIcon from '@public/icons/package.svg'
 import CartIcon from '@public/icons/cart.svg'
@@ -35,8 +37,11 @@ export const PayersPage = () => {
 
   const bannerActions = (
     <>
-      <Button>Получать чаевые</Button>
-      <Button variant="bordered">Оплатить чаевые</Button>
+      <LinkButton href={ROUTES.AUTH}>Получать чаевые</LinkButton>
+
+      <LinkButton href={ROUTES.AUTH} variant="bordered">
+        Оплатить чаевые
+      </LinkButton>
     </>
   )
 

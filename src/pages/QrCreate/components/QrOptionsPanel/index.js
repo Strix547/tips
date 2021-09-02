@@ -1,0 +1,1 @@
+export { QrOptionsPanel } from './QrOptionsPanel'
