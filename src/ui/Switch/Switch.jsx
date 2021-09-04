@@ -2,7 +2,7 @@ import { Controller, useFormContext } from 'react-hook-form'
 import { FormControlLabel } from 'ui'
 import * as S from './Switch.styled'
 
-export const Switch = ({ name, label, rules, value }) => {
+export const Switch = ({ name, label, rules, value, size }) => {
   const { control } = useFormContext()
 
   return (
@@ -16,7 +16,7 @@ export const Switch = ({ name, label, rules, value }) => {
             {label ? (
               <FormControlLabel label={label} control={<S.Switch {...field} value={value} />} />
             ) : (
-              <S.Switch {...field} value={value} />
+              <S.Switch {...field} value={value} size={size} />
             )}
           </S.SwitchField>
         )

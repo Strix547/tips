@@ -12,6 +12,7 @@ import { Modal } from './Modal'
 import { Rating } from './Rating'
 import { Drawer } from './Drawer'
 import { LinkButton } from './LinkButton'
+import { ColorPickerField } from './ColorPickerField'
 
 export {
   Button,
@@ -30,5 +31,6 @@ export {
   Modal,
   Rating,
   Drawer,
-  LinkButton
+  LinkButton,
+  ColorPickerField
 }

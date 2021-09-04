@@ -88,5 +88,6 @@ export const FormField = styled((props) => (
 
   .MuiInputBase-adornedEnd {
     padding-right: 20px;
+    color: var(--color-gray-300);
   }
 `

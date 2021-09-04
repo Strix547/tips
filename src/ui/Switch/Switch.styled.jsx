@@ -1,7 +1,31 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Switch as MuiSwitch } from '@material-ui/core'
 
-export const Switch = styled((props) => (
+const getSizeStyles = (size) => {
+  switch (size) {
+    case 'big':
+      return css`
+        width: 64px;
+        height: 32px;
+
+        .switch-base {
+          transform: translateX(-15px);
+
+          &.Mui-checked {
+            transform: translateX(15px);
+          }
+        }
+
+        .switch-thumb {
+          width: 24px;
+          height: 24px;
+          box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.07);
+        }
+      `
+  }
+}
+
+export const Switch = styled(({ size, ...props }) => (
   <MuiSwitch
     {...props}
     disableRipple
@@ -20,6 +44,8 @@ export const Switch = styled((props) => (
     padding: 0;
     margin-right: 10px;
     overflow: visible;
+
+    ${({ size }) => getSizeStyles(size)}
   }
 
   .switch-base {

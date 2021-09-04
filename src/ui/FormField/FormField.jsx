@@ -2,7 +2,7 @@ import { Controller, useFormContext } from 'react-hook-form'
 
 import * as S from './FormField.styled'
 
-export const FormField = ({ name, rules, defaultValue, InputProps, ...props }) => {
+export const FormField = ({ name, rules, defaultValue, InputProps, onlyNumbers, ...props }) => {
   const { control } = useFormContext()
 
   return (
@@ -23,7 +23,12 @@ export const FormField = ({ name, rules, defaultValue, InputProps, ...props }) =
               ...InputProps
             }}
             value={value}
-            onChange={onChange}
+            onChange={(e) => {
+              if (!onlyNumbers) return onChange(e)
+              const { value } = e.target
+
+              return value.length === 0 || !Number.isNaN(parseInt(value, 10)) ? onChange(e) : null
+            }}
           />
         )
       }}
