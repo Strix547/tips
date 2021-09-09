@@ -1,16 +1,12 @@
-import { useMediaQuery } from 'react-responsive'
-
-import { TimePeriodFilter } from 'components'
+import { TimePeriodFilter, StatisticRow } from 'components'
 import { ExcelDownload } from 'common'
 import { Table } from 'ui'
-import { StatisticRow } from './components'
 
 import { formatPrice } from 'utils'
 
 import * as S from './TipsTable.styled'
 
 export const TipsTable = () => {
-  const screenLess750 = useMediaQuery({ maxWidth: 750 })
   const currency = '₽'
 
   const getColumnWidthPerecentFromTableWidth = (columnWidth, tableWidth) => {
@@ -257,6 +253,12 @@ export const TipsTable = () => {
     }
   ]
 
+  const statisticTotal = [
+    { label: 'Всего чаевых', value: 100600 },
+    { label: 'Всего комиссия', value: 70000 },
+    { label: 'Средний чек', value: 5000 }
+  ]
+
   const tipCardList = incomingPaymentStatistic.map(
     ({ id, date, country, tipAmount, fee, email, cardNumber }) => {
       return (
@@ -300,15 +302,12 @@ export const TipsTable = () => {
       </S.Top>
 
       <S.TableContainer>
-        <StatisticRow tips={100600} fee={70000} receiptAverage={5000} />
+        <StatisticRow stats={statisticTotal} />
 
-        {!screenLess750 ? (
-          <Table columns={columns} rows={rows} />
-        ) : (
-          <S.TipCardList>{tipCardList}</S.TipCardList>
-        )}
+        <Table columns={columns} rows={rows} />
+        <S.TipCardList>{tipCardList}</S.TipCardList>
 
-        <StatisticRow tips={100600} fee={70000} receiptAverage={5000} />
+        <StatisticRow stats={statisticTotal} />
       </S.TableContainer>
     </S.TipsTable>
   )

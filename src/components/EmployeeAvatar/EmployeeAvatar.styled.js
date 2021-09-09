@@ -8,11 +8,25 @@ export const EmployeeAvatar = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  grid-gap: 20px;
+`
+
+export const CompanyLogo = styled.div`
+  position: relative;
+  width: 100%;
+  height: 40px;
+
+  img {
+    width: auto !important;
+    height: auto !important;
+    min-width: auto !important;
+    min-height: auto !important;
+    margin: 0 !important;
+  }
 `
 
 export const EmployeeRow = styled.div`
   display: flex;
-  margin-top: 20px;
 `
 
 export const Avatar = styled.div`

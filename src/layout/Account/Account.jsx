@@ -1,3 +1,5 @@
+import { useMediaQuery } from 'react-responsive'
+
 import { Sidebar, Header } from 'layout'
 
 import { Button } from 'ui'
@@ -6,10 +8,12 @@ import * as S from './Account.styled'
 
 import CrossCircleIcon from '@public/icons/cross-circle.svg'
 
-export const AccountLayout = ({ title, button, children }) => {
+export const AccountLayout = ({ title, button, children, styles }) => {
+  const screenMore1280 = useMediaQuery({ minWidth: 1281 })
+
   return (
-    <S.AccountLayout>
-      <Sidebar />
+    <S.AccountLayout styles={styles}>
+      {screenMore1280 && <Sidebar />}
       <Header withSidebar />
 
       <S.Content>

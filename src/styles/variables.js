@@ -6,6 +6,7 @@ export const variables = css`
     --color-primary-200: #3bc76b;
     --color-primary-300: #479b4e;
     --color-primary-400: #3fa949;
+    --color-primary-500: #ecfaf1;
 
     --color-black-100: #101011;
     --color-black-200: #313436;
@@ -20,10 +21,6 @@ export const variables = css`
 
     --color-blue-100: #156bed;
     --color-red-100: #f83939;
-
-    --gradient-green: linear-gradient(0deg, var(--color-primary-200), var(--color-primary-200)),
-      linear-gradient(0deg, #479b4e, #479b4e), linear-gradient(0deg, #3fa949, #3fa949),
-      var(--color-primary-100);
 
     --font-size-100: 48px;
     --font-size-200: 42px;

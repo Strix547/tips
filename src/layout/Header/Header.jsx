@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { useMediaQuery } from 'react-responsive'
+import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 
 import { LinkButton, MenuItem, Drawer } from 'ui'
@@ -8,6 +8,7 @@ import { Sidebar } from 'layout'
 import { Logo } from 'common'
 
 import { ROUTES } from 'core/routes'
+import { useStore } from 'stores'
 
 import * as S from './Header.styled'
 
@@ -16,13 +17,13 @@ import FlagUsa from '@public/icons/flags/usa.svg'
 import MenuHamburger from '@public/icons/menu-hamburger.svg'
 import UserIcon from '@public/icons/user.svg'
 
-export const Header = ({ withSidebar }) => {
+export const Header = observer(({ withSidebar }) => {
+  const {
+    auth: { isAuth }
+  } = useStore()
+
   const useFormProps = useForm()
-  const screenLess540 = useMediaQuery({ maxWidth: 540 })
-  const screenLess1100 = useMediaQuery({ maxWidth: 1100 })
-  const screenLess1280 = useMediaQuery({ maxWidth: 1280 })
   const [isMenuOpen, setMenuOpen] = useState(false)
-  const isAuth = true
   const userFirstName = 'Александр'
   const userLastName = 'Коновалов'
   const userEmail = 'konovalovd@yandex.ru'
@@ -44,34 +45,6 @@ export const Header = ({ withSidebar }) => {
     setMenuOpen(!isMenuOpen)
   }
 
-  const getLeftSide = () => {
-    const menuButton = (
-      <S.MenuButton type="button" onClick={toggleMenuOpen}>
-        <MenuHamburger />
-      </S.MenuButton>
-    )
-
-    const logo = <Logo />
-
-    if (withSidebar) {
-      return screenLess1280 ? (
-        <S.Left>
-          {menuButton}
-          {logo}
-        </S.Left>
-      ) : null
-    }
-
-    return screenLess1100 ? (
-      <S.Left>
-        {menuButton}
-        {logo}
-      </S.Left>
-    ) : (
-      <S.Left>{logo}</S.Left>
-    )
-  }
-
   const navList = nav.map(({ label, link }) => (
     <li key={link}>
       <Link href={link}>
@@ -91,13 +64,16 @@ export const Header = ({ withSidebar }) => {
     <S.Header>
       <S.Container>
         <S.Wrapper>
-          {getLeftSide()}
+          <S.Left withSidebar={withSidebar}>
+            <S.MenuButton type="button" onClick={toggleMenuOpen}>
+              <MenuHamburger />
+            </S.MenuButton>
+            <Logo />
+          </S.Left>
 
-          {!screenLess1100 && (!withSidebar || !screenLess1280) ? (
-            <S.Nav>
-              <ul>{navList}</ul>
-            </S.Nav>
-          ) : null}
+          <S.Nav withSidebar={withSidebar}>
+            <ul>{navList}</ul>
+          </S.Nav>
 
           <S.Right>
             <FormProvider {...useFormProps}>
@@ -112,14 +88,12 @@ export const Header = ({ withSidebar }) => {
                   <UserIcon />
                 </S.UserAvatar>
 
-                {!screenLess540 ? (
-                  <S.UserInfo>
-                    <S.Text>
-                      <span>{userLastName}</span> <span>{userFirstName}</span>
-                    </S.Text>
-                    <S.Text>{userEmail}</S.Text>
-                  </S.UserInfo>
-                ) : null}
+                <S.UserInfo>
+                  <S.Text>
+                    <span>{userLastName}</span> <span>{userFirstName}</span>
+                  </S.Text>
+                  <S.Text>{userEmail}</S.Text>
+                </S.UserInfo>
               </S.User>
             ) : (
               <LinkButton href={ROUTES.AUTH} size="inline">
@@ -136,11 +110,11 @@ export const Header = ({ withSidebar }) => {
         </Drawer>
       ) : (
         <Drawer anchor="top" open={isMenuOpen} elevation={70} onClose={() => toggleMenuOpen()}>
-          <S.DropdownMenu>
+          <S.NavDropdown>
             <ul>{navList}</ul>
-          </S.DropdownMenu>
+          </S.NavDropdown>
         </Drawer>
       )}
     </S.Header>
   )
-}
+})

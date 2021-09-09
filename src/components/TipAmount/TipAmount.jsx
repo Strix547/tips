@@ -6,25 +6,25 @@ import { FormField, FormControlLabel } from 'ui'
 
 import * as S from './TipAmount.styled'
 
-export const TipAmount = ({ onChange }) => {
+export const TipAmount = ({ presets = [100, 149, 299], onChange }) => {
   const useFormProps = useForm()
-  const [baseAmount, setBaseAmount] = useState(149)
+  const [selectedPreset, setSelectedPreset] = useState(presets[0])
   const currency = '₽'
-
-  const baseAmounts = [100, 149, 299]
+  const minPresetValue = Math.min(...presets)
+  const maxPresetValue = Math.max(...presets)
 
   const onBaseAmountChange = (value) => {
-    setBaseAmount(parseInt(value, 10))
+    setSelectedPreset(parseInt(value, 10))
     // onChange(value)
   }
 
-  const baseAmountRadios = baseAmounts.map((value) => {
+  const baseAmountRadios = presets.map((value) => {
     return (
       <FormControlLabel
         key={value}
         value={value}
         label={
-          <S.BaseAmountRadio active={baseAmount === value}>
+          <S.BaseAmountRadio active={selectedPreset === value}>
             {value} {currency}
           </S.BaseAmountRadio>
         }
@@ -39,13 +39,13 @@ export const TipAmount = ({ onChange }) => {
         <FormField
           label="Сумма чаевых"
           name="amount"
-          placeholder="От 100 до 600"
+          placeholder={`От ${minPresetValue} до ${maxPresetValue}`}
           InputProps={{ endAdornment: currency }}
         />
 
         <S.BaseAmountRadioGroup
           name="emodji"
-          value={baseAmount}
+          value={selectedPreset}
           onChange={(_, value) => onBaseAmountChange(value)}
         >
           {baseAmountRadios}

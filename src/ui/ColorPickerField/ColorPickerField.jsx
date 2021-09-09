@@ -29,27 +29,26 @@ export const ColorPickerField = ({ name, rules, label, ...props }) => {
       name={name}
       rules={rules}
       render={({ field }) => {
-        const { onChange } = field
+        const { value, onChange } = field
 
         return (
           <S.ColorPickerField ref={rootRef}>
             <S.Label>{label}</S.Label>
 
             <S.Field onClick={() => setColorPickerOpen(!isColorPickerOpen)}>
-              <S.Color style={{ backgroundColor: color }} />
+              <S.Color color={color} />
               <S.Text>{color}</S.Text>
             </S.Field>
 
             {isColorPickerOpen && (
               <S.ColorPicker
                 {...props}
+                value={value}
                 color={color}
                 onChange={({ hex }) => {
                   setColor(hex)
                 }}
-                onChangeComplete={({ hex }) => {
-                  onChange(hex)
-                }}
+                onChangeComplete={onChange}
               />
             )}
           </S.ColorPickerField>

@@ -8,8 +8,13 @@ import { IndividualAvatar } from './IndividualAvatar'
 import { EmployeeAvatar } from './EmployeeAvatar'
 import { IndividualTipsPayment } from './IndividualTipsPayment'
 import { TipAmount } from './TipAmount'
-import { EmodjiSelect } from './EmodjiSelect'
 import { EmployeeTipsPayment } from './EmployeeTipsPayment'
+import { RecipientCardOptionsPanel } from './RecipientCardOptionsPanel'
+import { RecipientCardPreview } from './RecipientCardPreview'
+import { SupportForm } from './SupportForm'
+import { PlatformCard } from './PlatformCard'
+import { LineChart } from './LineChart'
+import { StatisticRow } from './StatisticRow'
 
 export {
   BarChart,
@@ -22,6 +27,11 @@ export {
   EmployeeAvatar,
   IndividualTipsPayment,
   TipAmount,
-  EmodjiSelect,
-  EmployeeTipsPayment
+  EmployeeTipsPayment,
+  RecipientCardOptionsPanel,
+  RecipientCardPreview,
+  SupportForm,
+  PlatformCard,
+  LineChart,
+  StatisticRow
 }

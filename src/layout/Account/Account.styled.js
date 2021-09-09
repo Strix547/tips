@@ -51,10 +51,6 @@ export const AccountLayout = styled.div`
 
   ${media1280} {
     display: block;
-
-    ${Sidebar} {
-      display: none;
-    }
   }
 
   ${media.tablet} {
@@ -62,6 +58,8 @@ export const AccountLayout = styled.div`
       padding: 0 20px;
     }
   }
+
+  ${({ styles }) => styles}
 `
 
 export const Content = styled.main`
@@ -92,7 +90,7 @@ export const ContentHead = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 
   ${Heading} {
     color: #121212;

@@ -1,11 +1,14 @@
 import { useState } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
 import { Radio } from '@material-ui/core'
 
-import { FormControlLabel } from 'ui'
+import { FormControlLabel, MenuItem, Select, DatePicker } from 'ui'
 
 import * as S from './TimePeriodFilter.styled'
 
 export const TimePeriodFilter = () => {
+  const useFormProps = useForm()
+  const [isDatePickerOpen, setDatePickerOpen] = useState(true)
   const [period, setPeriod] = useState('month')
 
   const periods = [
@@ -28,13 +31,33 @@ export const TimePeriodFilter = () => {
     )
   })
 
+  const periodMenuItems = periods.map(({ label, value }) => (
+    <MenuItem key={label} value={value}>
+      {label}
+    </MenuItem>
+  ))
+
   const onPeriodChange = (value) => {
     setPeriod(value)
   }
 
   return (
-    <S.TimePeriodFilter name="period" value={period} onChange={(_, value) => onPeriodChange(value)}>
-      {periodRadios}
+    <S.TimePeriodFilter>
+      <FormProvider {...useFormProps}>
+        <S.PeriodRadioGroup
+          name="period"
+          value={period}
+          onChange={(_, value) => onPeriodChange(value)}
+        >
+          {periodRadios}
+        </S.PeriodRadioGroup>
+
+        <Select name="period" defaultValue={period}>
+          {periodMenuItems}
+        </Select>
+
+        {/* <DatePicker isOpen={isDatePickerOpen} /> */}
+      </FormProvider>
     </S.TimePeriodFilter>
   )
 }

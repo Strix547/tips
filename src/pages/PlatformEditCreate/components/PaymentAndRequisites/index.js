@@ -1,0 +1,1 @@
+export { PaymentAndRequisites } from './PaymentAndRequisites'

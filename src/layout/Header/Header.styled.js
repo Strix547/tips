@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { Wrapper, Text } from 'styled'
+import { Logo } from 'common/Logo/Logo.styled'
 import { Button } from 'ui/Button/Button.styled'
 import { Select } from 'ui/Select/Select.styled'
 
@@ -9,11 +10,6 @@ import { media } from 'styles/media'
 export const media1100 = media.createMedia(1100)
 
 export { Wrapper, Text }
-
-export const Header = styled.header`
-  position: relative;
-  z-index: 1400;
-`
 
 export const Container = styled.div`
   position: relative;
@@ -37,11 +33,6 @@ export const Container = styled.div`
   }
 `
 
-export const Left = styled.div`
-  display: flex;
-  align-items: center;
-`
-
 export const MenuButton = styled.button`
   margin-right: 20px;
   padding: 0;
@@ -52,6 +43,33 @@ export const MenuButton = styled.button`
   ${media.mobile} {
     margin-right: 15px;
   }
+`
+
+export const Left = styled.div`
+  display: ${({ withSidebar }) => (withSidebar ? 'none' : 'flex')};
+  align-items: center;
+
+  ${MenuButton} {
+    display: none;
+  }
+
+  ${media1100} {
+    ${MenuButton} {
+      display: block;
+    }
+  }
+
+  ${({ withSidebar }) =>
+    withSidebar &&
+    css`
+      ${media.createMedia(1280)} {
+        display: flex !important;
+
+        ${MenuButton} {
+          display: block;
+        }
+      }
+    `}
 `
 
 export const Nav = styled.nav`
@@ -75,9 +93,21 @@ export const Nav = styled.nav`
     }
   }
 
+  ${media1100} {
+    display: none;
+  }
+
   ${media.laptop} {
     margin-left: 0;
   }
+
+  ${({ withSidebar }) =>
+    withSidebar &&
+    css`
+      ${media.createMedia(1280)} {
+        display: none;
+      }
+    `}
 `
 
 export const Right = styled.div`
@@ -143,6 +173,10 @@ export const UserInfo = styled.div`
       line-height: 20px;
     }
   }
+
+  ${media.createMedia(540)} {
+    display: none;
+  }
 `
 
 export const LanguageSelect = styled(Select)`
@@ -176,7 +210,7 @@ export const LanguageSelect = styled(Select)`
   }
 `
 
-export const DropdownMenu = styled.nav`
+export const NavDropdown = styled.nav`
   width: 100vw;
   height: 320px;
   padding: 100px 20px 30px;
@@ -226,4 +260,9 @@ export const Overlay = styled.div`
     css`
       top: 0;
     `}
+`
+
+export const Header = styled.header`
+  position: relative;
+  z-index: 1400;
 `

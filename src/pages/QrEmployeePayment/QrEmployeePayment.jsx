@@ -6,9 +6,9 @@ import * as S from './QrEmployeePayment.styled'
 export const QrEmployeePaymentPage = () => {
   return (
     <AccountLayout title="QR 274920475">
-      <S.Content>
+      <S.RecipientCardContainer>
         <EmployeeTipsPayment />
-      </S.Content>
+      </S.RecipientCardContainer>
     </AccountLayout>
   )
 }

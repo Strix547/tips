@@ -1,1 +1,0 @@
-export { QrOptionsPanel } from './QrOptionsPanel'

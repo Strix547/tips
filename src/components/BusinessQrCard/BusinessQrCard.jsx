@@ -8,7 +8,7 @@ import * as S from './BusinessQrCard.styled'
 import WalletIcon from '@public/icons/wallet.svg'
 import ChartIcon from '@public/icons/chart.svg'
 import ShareIcon from '@public/icons/share.svg'
-import PenIcon from '@public/icons/pen-edit.svg'
+import PenIcon from '@public/icons/pen.svg'
 import TrashIcon from '@public/icons/trash.svg'
 import ArrowRightIcon from '@public/icons/arrows/gray-right.svg'
 

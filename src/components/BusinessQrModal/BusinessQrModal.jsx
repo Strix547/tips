@@ -11,7 +11,7 @@ import FacebookIcon from '@public/icons/networks/facebook-big.svg'
 import InstagramIcon from '@public/icons/networks/instagram-big.svg'
 import DownloadIcon from '@public/icons/download.svg'
 import CrossIcon from '@public/icons/cross-circle-filled.svg'
-import CopyIcon from '@public/icons/copy.svg'
+import CopyIcon from '@public/icons/bind.svg'
 
 export const BusinessQrModal = ({ open, onClose, label, qr }) => {
   const [copyTooltipOpen, setCopyTooltipOpen] = useState(false)

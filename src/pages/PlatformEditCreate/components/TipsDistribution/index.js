@@ -1,0 +1,1 @@
+export { TipsDistribution } from './TipsDistribution'

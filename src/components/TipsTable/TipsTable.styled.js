@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import { WhiteBox, Text } from 'styled'
-import { StatisticRow } from './components/StatisticRow/StatisticRow.styled'
+import { StatisticRow } from 'components/StatisticRow/StatisticRow.styled'
 import { Table } from 'ui/Table/Table.styled'
 
 import { media } from 'styles/media'
@@ -33,7 +33,7 @@ export const Top = styled.div`
   }
 
   ${media.createMedia(920)} {
-    display: none;
+    flex-direction: row;
   }
 
   ${media.tablet} {
@@ -150,6 +150,10 @@ export const TableContainer = styled.div`
     padding: 0;
     margin: 0;
 
+    ${Table} {
+      display: none;
+    }
+
     ${StatisticRow} {
       position: static;
       flex-direction: column;
@@ -171,7 +175,12 @@ export const TableContainer = styled.div`
 `
 
 export const TipCardList = styled.ul`
+  display: none;
   margin-top: 10px;
+
+  ${media750} {
+    display: block;
+  }
 `
 
 export const TipCard = styled(WhiteBox).attrs({ as: 'li' })`

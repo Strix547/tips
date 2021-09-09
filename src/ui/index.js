@@ -13,6 +13,9 @@ import { Rating } from './Rating'
 import { Drawer } from './Drawer'
 import { LinkButton } from './LinkButton'
 import { ColorPickerField } from './ColorPickerField'
+import { Dropzone } from './Dropzone'
+import { Slider } from './Slider'
+import { DatePicker } from './DatePicker'
 
 export {
   Button,
@@ -32,5 +35,8 @@ export {
   Rating,
   Drawer,
   LinkButton,
-  ColorPickerField
+  ColorPickerField,
+  Dropzone,
+  Slider,
+  DatePicker
 }

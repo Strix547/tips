@@ -22,7 +22,7 @@ import UserWithLaptopSvg from '@public/icons/user-with-laptop.svg'
 
 export const Sidebar = () => {
   const nav = [
-    { label: 'Главная', link: '/', icon: <PieChartIcon /> },
+    { label: 'Главная', link: ROUTES.ACCOUNT, icon: <PieChartIcon /> },
     { label: 'Мои QR', link: ROUTES.ACCOUNT_QR_CODES, icon: <QrScanIcon /> },
     { label: 'Агентам', link: ROUTES.FOR_AGENTS, icon: <BriefCaseIcon /> },
     { label: 'Мои реквизиты', link: ROUTES.ACCOUNT_REQUISITES, icon: <CreditCardIcon /> },

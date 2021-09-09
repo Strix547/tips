@@ -1,32 +1,51 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import throttle from 'lodash.throttle'
 
 import { AccountLayout } from 'layout'
-import { QrOptionsPanel, QrPreview } from './components'
+import { RecipientCardOptionsPanel, RecipientCardPreview } from 'components'
 
 import * as S from './QrCreate.styled'
 
 export const QrCreatePage = () => {
   const [qrOptions, setQrOptions] = useState({
-    preset1: null,
-    preset2: null,
-    preset3: null,
+    preset1: 100,
+    preset2: 149,
+    preset3: 299,
     rating: false,
     reviews: false,
     impressions: false,
-    bgColor: '#ffffff',
-    logo: null,
-    buttonColor: '#3BC76B'
+    bgColor: null,
+    buttonColor: null
   })
+  const [companyLogo, setCompanyLogo] = useState(null)
 
-  console.log(qrOptions)
+  const { preset1, preset2, preset3, rating, reviews, impressions, bgColor, buttonColor } =
+    qrOptions
+
+  const createQr = () => {}
+
+  console.log(qrOptions, companyLogo)
 
   return (
     <AccountLayout title="Создать QR-код">
       <S.Content>
-        <QrOptionsPanel options={qrOptions} onOptionsChange={setQrOptions} />
+        <RecipientCardOptionsPanel
+          companyLogo={companyLogo}
+          options={qrOptions}
+          onOptionsChange={setQrOptions}
+          onCompanyLogoChange={(logo) => setCompanyLogo(logo)}
+          onCreateQr={createQr}
+        />
 
-        <QrPreview options={qrOptions} />
+        <RecipientCardPreview
+          tipAmountPresets={[preset1, preset2, preset3]}
+          haveRating={rating}
+          haveReviews={reviews}
+          haveImpression={impressions}
+          companyLogo={companyLogo}
+          bgColor={bgColor?.rgb}
+          buttonColor={buttonColor?.rgb}
+        />
       </S.Content>
     </AccountLayout>
   )

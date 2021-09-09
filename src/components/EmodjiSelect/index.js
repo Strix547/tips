@@ -1,1 +1,0 @@
-export { EmodjiSelect } from './EmodjiSelect'

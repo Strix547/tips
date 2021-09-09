@@ -5,7 +5,18 @@ import * as S from './EmployeeAvatar.styled'
 export const EmployeeAvatar = ({ company, avatar, firstName, lastName }) => {
   return (
     <S.EmployeeAvatar>
-      <Image src={company.logo} alt={company.name} />
+      {company.logo && (
+        <S.CompanyLogo>
+          <Image
+            src={company.logo}
+            alt={company.name}
+            width="100%"
+            height="100%"
+            layout="fill"
+            unoptimized
+          />
+        </S.CompanyLogo>
+      )}
 
       <S.EmployeeRow>
         <S.Avatar>

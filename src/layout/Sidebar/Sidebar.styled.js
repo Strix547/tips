@@ -120,7 +120,7 @@ export const Support = styled.div`
   padding: 20px;
   height: 140px;
   border-radius: 20px;
-  background: #ecfaf1;
+  background: var(--color-primary-500);
   box-sizing: border-box;
 
   svg {

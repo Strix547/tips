@@ -16,6 +16,7 @@
     "default-case": "off",
     "consistent-return": "off",
     "jsx-a11y/anchor-is-valid": "off",
-    "arrow-body-style": "off"
+    "arrow-body-style": "off",
+    "lines-between-class-members": "off"
   }
 }

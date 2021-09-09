@@ -28,8 +28,22 @@ export const Field = styled.div`
 `
 
 export const Color = styled.div`
+  position: relative;
   width: 24px;
   height: 24px;
   margin-right: 10px;
   border-radius: 6px;
+  background: ${({ color }) => color};
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 0;
+    left: 0;
+    border-radius: 6px;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+  }
 `

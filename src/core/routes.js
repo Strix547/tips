@@ -10,6 +10,8 @@ export const ROUTES = {
   PRIVACY_POLICY: '/privacy-policy',
   PUBLIC_OFFER: '/public-offer',
   FAQ: '/faq',
+  ACCOUNT: '/account',
+  FOR_AGENTS: '/account/for-agents',
   ACCOUNT_QR_CODES: '/account/qr-codes',
   ACCOUNT_QR_CREATE: '/account/qr-codes/create',
   ACCOUNT_REQUISITES: '/account/requisites',
@@ -18,6 +20,5 @@ export const ROUTES = {
   ACCOUNT_REVIEWS: '/account/reviews',
   ACCOUNT_PERSONAL_DATA: '/account/personal',
   THANK_YOU: '/thank-you',
-  FOR_AGENTS: '/for-agents',
   LOYALTY: '/loyalty'
 }
