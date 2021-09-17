@@ -19,7 +19,7 @@ export const statisticsStore = makeAutoObservable({
       currency,
       format,
       period,
-      'zone-offset': '+03:00',
+      zoneOffset,
       periodFrom,
       periodTo
     })

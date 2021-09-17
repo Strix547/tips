@@ -3,6 +3,7 @@ import { API } from 'core/axios'
 const root = '/person-payment-page-template'
 
 const transformQrData = ({
+  name,
   personUserId,
   paymentPageId,
   presetPaymentSizes,
@@ -14,16 +15,17 @@ const transformQrData = ({
   return {
     id: paymentPageId,
     userId: personUserId,
+    name,
     amountPresets: presetPaymentSizes,
     impressions: smiles,
     bgColor: backgroundHexColor,
     buttonColor: buttonHexColor,
-    image: qrImagePngRef
+    img: qrImagePngRef
   }
 }
 
 export const getQrCodes = async (userId) => {
-  const { data } = await API.get(`${root}s`, { params: { 'person-user-id': userId } })
+  const { data } = await API.get(`${root}`, { params: { 'person-user-id': userId } })
   return data.map((qr) => transformQrData(qr))
 }
 
@@ -43,8 +45,16 @@ export const getQrCodeData = async (id) => {
   return transformQrData(data)
 }
 
-export const changeQrCode = async ({ id, amountPresets, impressions, bgColor, buttonColor }) => {
+export const changeQrCode = async ({
+  id,
+  name,
+  amountPresets,
+  impressions,
+  bgColor,
+  buttonColor
+}) => {
   return API.post(`${root}/${id}/change`, {
+    name,
     presetPaymentSizes: amountPresets,
     smiles: impressions,
     backgroundHexColor: bgColor,

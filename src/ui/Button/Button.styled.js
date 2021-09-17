@@ -32,7 +32,7 @@ export const Button = styled.button`
   font-weight: 500;
   font-size: var(--font-size-reg);
   color: #fff;
-  background: var(--color-primary-200);
+  background: ${({ color = 'var(--color-primary-200)' }) => color};
   border-radius: 40px;
   border: none;
   cursor: pointer;

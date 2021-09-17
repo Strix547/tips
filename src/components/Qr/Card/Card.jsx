@@ -16,7 +16,7 @@ import PenIcon from '@public/icons/pen.svg'
 import TrashIcon from '@public/icons/trash.svg'
 import ArrowRightIcon from '@public/icons/arrows/gray-right.svg'
 
-export const QrCard = ({ id, label, qr, tag }) => {
+export const QrCard = ({ id, label, img, tag }) => {
   const router = useRouter()
 
   const [isQrModalOpen, setQrModalOpen] = useState(false)
@@ -61,7 +61,7 @@ export const QrCard = ({ id, label, qr, tag }) => {
         <ArrowRightIcon />
       </S.Label>
 
-      <QrImage src={qr} />
+      <QrImage src={img} />
 
       <S.AppleWallet>
         <Button iconStart={<WalletIcon />}>Добавить в Apple Wallet</Button>
@@ -71,11 +71,12 @@ export const QrCard = ({ id, label, qr, tag }) => {
 
       <QrModal
         open={isQrModalOpen}
+        id={id}
+        label={label}
+        img={img}
         onClose={() => {
           setQrModalOpen(false)
         }}
-        label={label}
-        qr={qr}
       />
     </S.QrCard>
   )

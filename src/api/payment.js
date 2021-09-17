@@ -6,6 +6,8 @@ const transformPaymetData = ({
   type,
   paymentPageId,
   presetPaymentSizes,
+  firstName,
+  lastName,
   smiles,
   backgroundHexColor,
   buttonHexColor
@@ -13,6 +15,8 @@ const transformPaymetData = ({
   return {
     type,
     pageId: paymentPageId,
+    firstName,
+    lastName,
     amountPresets: presetPaymentSizes,
     impressions: smiles,
     bgColor: backgroundHexColor,
@@ -21,6 +25,6 @@ const transformPaymetData = ({
 }
 
 export const getIndividualPaymentData = async (qrId) => {
-  const { data } = await API.get(`${root}`, { params: { paymentPageId: qrId } })
+  const { data } = await API.get(`${root}/${qrId}`)
   return transformPaymetData(data)
 }

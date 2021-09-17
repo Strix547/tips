@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-import { WhiteBox, RecipientCard, RecipientCardTop, RecipientCardMain } from 'styled'
+import { WhiteBox, RecipientCard, RecipientCardTop, RecipientCardMain, Heading } from 'styled'
 
 import { media } from 'styles/media'
 
@@ -11,8 +11,15 @@ export const RecipientCardContainer = styled(WhiteBox)`
   min-height: 100vh;
   box-sizing: border-box;
 
-  ${media.createMedia(700)} {
-    padding: 30px 0;
+  ${({ bgColor }) =>
+    bgColor &&
+    css`
+      background: ${bgColor};
+    `}
+
+  ${Heading} {
+    background: #fff;
+    margin-bottom: 30px;
   }
 
   ${RecipientCard} {
@@ -26,6 +33,10 @@ export const RecipientCardContainer = styled(WhiteBox)`
 
   ${media.createMedia(700)} {
     padding: 30px 0;
+
+    ${Heading} {
+      padding: 0 15px;
+    }
 
     ${RecipientCard} {
       width: 100%;

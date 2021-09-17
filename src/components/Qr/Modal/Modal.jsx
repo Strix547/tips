@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react'
 import Tooltip from '@material-ui/core/Tooltip'
+import { useRouter } from 'next/router'
 
 import { QrImage } from 'components'
 import { Button } from 'ui'
+
+import { ROUTES } from 'core/routes'
 
 import * as S from './Modal.styled'
 
@@ -13,7 +16,9 @@ import DownloadIcon from '@public/icons/download.svg'
 import CrossIcon from '@public/icons/cross-circle-filled.svg'
 import CopyIcon from '@public/icons/bind.svg'
 
-export const QrModal = ({ open, onClose, label, qr }) => {
+export const QrModal = ({ id, open, onClose, label, img }) => {
+  const router = useRouter()
+
   const [copyTooltipOpen, setCopyTooltipOpen] = useState(false)
 
   useEffect(() => {
@@ -26,7 +31,7 @@ export const QrModal = ({ open, onClose, label, qr }) => {
     }
   }, [copyTooltipOpen])
 
-  const link = 'https://tips.me/qr585302862'
+  const link = `${window.location.origin}${ROUTES.ACCOUNT_QR_CODES}/${id}`
 
   const networks = [
     { label: 'Vkontakte', icon: <VkIcon /> },
@@ -43,6 +48,10 @@ export const QrModal = ({ open, onClose, label, qr }) => {
   const copyLinkToClipboard = () => {
     navigator.clipboard.writeText(link)
     setCopyTooltipOpen(true)
+  }
+
+  const downloadQr = () => {
+    router.push(`${window.location.origin}${img}`)
   }
 
   return (
@@ -68,9 +77,9 @@ export const QrModal = ({ open, onClose, label, qr }) => {
             </Tooltip>
           </S.LinkRow>
 
-          <QrImage src={qr} />
+          <QrImage src={img} />
 
-          <Button iconStart={<DownloadIcon />} variant="bordered">
+          <Button iconStart={<DownloadIcon />} variant="bordered" onClick={downloadQr}>
             Скачать в формате png
           </Button>
 

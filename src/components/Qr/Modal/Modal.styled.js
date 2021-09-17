@@ -92,6 +92,10 @@ export const Link = styled.div`
 
   & > span {
     font-size: var(--font-size-md);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 5px;
   }
 
   ${Button} {
@@ -106,8 +110,6 @@ export const Link = styled.div`
   ${media620} {
     & > span {
       font-size: var(--font-size-reg);
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
     ${Button} {

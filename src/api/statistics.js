@@ -5,7 +5,7 @@ export const getIncomeStatistics = async ({
   currency = 'eur',
   format,
   zoneOffset,
-  period,
+  period = 'MONTH',
   periodFrom,
   periodTo
 }) => {
@@ -13,7 +13,7 @@ export const getIncomeStatistics = async ({
     params: {
       currency,
       format,
-      zoneOffset,
+      'zone-offset': '+03:00',
       period,
       periodFrom,
       periodTo

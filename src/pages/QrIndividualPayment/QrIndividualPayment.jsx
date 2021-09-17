@@ -1,33 +1,39 @@
 import { useEffect } from 'react'
+import { observer } from 'mobx-react-lite'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-import { AccountLayout } from 'layout'
 import { PaymentCardIndividual } from 'components'
 
 import { paymentStore } from 'store'
 
 import * as S from './QrIndividualPayment.styled'
 
-export const QrIndividualPaymentPage = () => {
+export const QrIndividualPaymentPage = observer(() => {
   const router = useRouter()
+  const { firstName, lastName, bgColor } = paymentStore.individualData
 
   const qrId = router.query.id
 
-  // useEffect(() => {
-  //   paymentStore.getIndividualPaymentData(qrId)
-  // }, [])
+  useEffect(() => {
+    if (qrId) {
+      paymentStore.getIndividualPaymentData(qrId)
+    }
+  }, [qrId])
 
   return (
     <>
       <Head>
-        <title>Оплата чаевых физ. лицу</title>
+        <title>
+          Оплата чаевых {firstName} {lastName}
+        </title>
       </Head>
 
-      <S.RecipientCardContainer>
+      <S.RecipientCardContainer bgColor={bgColor}>
         <S.Heading level={5}>QR {qrId}</S.Heading>
+
         <PaymentCardIndividual />
       </S.RecipientCardContainer>
     </>
   )
-}
+})
