@@ -4,6 +4,7 @@ import { Logo } from 'common'
 import { LinkButton } from 'ui'
 
 import { ROUTES } from 'core/routes'
+import { authStore } from 'store'
 
 import * as S from './Sidebar.styled'
 
@@ -59,10 +60,10 @@ export const Sidebar = () => {
         <S.Support>
           <UserWithLaptopSvg />
 
-          <LinkButton href={ROUTES.SUPPORT}>Служба поддержки</LinkButton>
+          <LinkButton href={ROUTES.ACCOUNT_SUPPORT}>Служба поддержки</LinkButton>
         </S.Support>
 
-        <S.LogoutButton>
+        <S.LogoutButton onClick={() => authStore.signOut()}>
           <LogoutIcon />
           Выйти
         </S.LogoutButton>

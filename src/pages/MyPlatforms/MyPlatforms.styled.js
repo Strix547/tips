@@ -9,7 +9,7 @@ export const layoutStyles = css`
     ${ContentHead} {
       flex-direction: column;
       align-items: flex-start;
-      grid-gap: 20px;
+      gap: 20px;
     }
   }
 `

@@ -12,12 +12,15 @@ import { QrCodesPage } from './QrCodes'
 import { QrIndividualPaymentPage } from './QrIndividualPayment'
 import { QrEmployeePaymentPage } from './QrEmployeePayment'
 import { ThankYouPage } from './ThankYou'
-import { QrCreatePage } from './QrCreate'
+import { QrIndividualCreatePage } from './QrIndividualCreate'
+import { QrBusinessCreatePage } from './QrBusinessCreate'
 import { SupportPage as AccountSupportPage } from './Support'
 import { MyPlatformsPage } from './MyPlatforms'
 import { ForAgentsPage } from './ForAgents'
 import { PlatformEditCreatePage } from './PlatformEditCreate'
 import { RequisitesPage } from './Requisites'
+import { PersonalDataPage } from './PersonalData'
+import { QrIndividualEditPage } from './QrIndividualEdit'
 
 export {
   AgentsPage,
@@ -33,10 +36,13 @@ export {
   QrIndividualPaymentPage,
   QrEmployeePaymentPage,
   ThankYouPage,
-  QrCreatePage,
+  QrIndividualCreatePage,
+  QrBusinessCreatePage,
   AccountSupportPage,
   MyPlatformsPage,
   ForAgentsPage,
   PlatformEditCreatePage,
-  RequisitesPage
+  RequisitesPage,
+  PersonalDataPage,
+  QrIndividualEditPage
 }

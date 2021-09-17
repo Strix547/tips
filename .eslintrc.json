@@ -17,6 +17,7 @@
     "consistent-return": "off",
     "jsx-a11y/anchor-is-valid": "off",
     "arrow-body-style": "off",
-    "lines-between-class-members": "off"
+    "lines-between-class-members": "off",
+    "react-hooks/exhaustive-deps": "off"
   }
 }

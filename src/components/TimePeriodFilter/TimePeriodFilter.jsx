@@ -8,7 +8,9 @@ import * as S from './TimePeriodFilter.styled'
 
 export const TimePeriodFilter = () => {
   const useFormProps = useForm()
-  const [isDatePickerOpen, setDatePickerOpen] = useState(true)
+  const [isDatePickerModalOpen, setDatePickerModalOpen] = useState(false)
+  const [startDate, setStartDate] = useState(new Date())
+  const [endDate, setEndDate] = useState(null)
   const [period, setPeriod] = useState('month')
 
   const periods = [
@@ -21,12 +23,18 @@ export const TimePeriodFilter = () => {
   ]
 
   const periodRadios = periods.map(({ label, value }) => {
+    const onLabelClick = () => {
+      if (value === 'custom') {
+        setDatePickerModalOpen(true)
+      }
+    }
     return (
       <FormControlLabel
         key={value}
         value={value}
         label={<S.PeriodRadio active={period === value}>{label}</S.PeriodRadio>}
         control={<Radio />}
+        onClick={onLabelClick}
       />
     )
   })
@@ -39,6 +47,11 @@ export const TimePeriodFilter = () => {
 
   const onPeriodChange = (value) => {
     setPeriod(value)
+  }
+
+  const onDateChange = ([start, end]) => {
+    setStartDate(start)
+    setEndDate(end)
   }
 
   return (
@@ -56,7 +69,20 @@ export const TimePeriodFilter = () => {
           {periodMenuItems}
         </Select>
 
-        {/* <DatePicker isOpen={isDatePickerOpen} /> */}
+        <S.DatePickerModal
+          open={isDatePickerModalOpen}
+          onClose={() => setDatePickerModalOpen(false)}
+        >
+          <DatePicker
+            selected={startDate}
+            onChange={onDateChange}
+            startDate={startDate}
+            endDate={endDate}
+            monthsShown={2}
+            selectsRange
+            inline
+          />
+        </S.DatePickerModal>
       </FormProvider>
     </S.TimePeriodFilter>
   )

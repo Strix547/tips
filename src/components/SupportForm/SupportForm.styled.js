@@ -16,7 +16,7 @@ export const SupportForm = styled.form`
   position: relative;
   display: flex;
   flex-direction: column;
-  grid-gap: 20px;
+  gap: 20px;
   width: 770px;
   margin: 0 auto;
   padding: 30px 50px;
@@ -108,7 +108,7 @@ export const Faq = styled.div`
 export const ThemeRow = styled.div``
 
 export const ThemeRadioGroup = styled(RadioGroup)`
-  grid-gap: 10px;
+  gap: 10px;
   margin-top: 15px;
 `
 

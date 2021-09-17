@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import MuiTextField from '@material-ui/core/TextField'
 
 export const FormField = styled((props) => (
@@ -90,4 +90,16 @@ export const FormField = styled((props) => (
     padding-right: 20px;
     color: var(--color-gray-300);
   }
+
+  ${({ haveError }) =>
+    haveError &&
+    css`
+      .form-field-input-root {
+        border-color: var(--color-red-100);
+
+        input::placeholder {
+          color: var(--color-red-100);
+        }
+      }
+    `}
 `

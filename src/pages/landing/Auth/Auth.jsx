@@ -1,100 +1,59 @@
-import { useEffect, useState } from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
+import { useState, useEffect } from 'react'
 import { useMediaQuery } from 'react-responsive'
+import { observer } from 'mobx-react-lite'
+import Head from 'next/head'
 
 import { Logo } from 'common'
 import { Header } from 'layout'
-import { PhoneField, Button, Switch } from 'ui'
+import { PhoneStep, CodeStep } from './components'
 
-import { useStore } from 'stores'
+import { authStore } from 'store'
 
 import { MEDIA_TABLET } from 'styles/media'
 import * as S from './Auth.styled'
 
 import CommentRegulationIcon from '@public/img/landing/comment-regulation.svg'
 
-export const AuthPage = () => {
-  const { auth } = useStore()
-  const useFormProps = useForm()
+export const AuthPage = observer(() => {
   const isTablet = useMediaQuery({ maxWidth: MEDIA_TABLET })
 
-  const [isPhoneFilled, setPhoneFilled] = useState(false)
-  const [isCodeFilled, setCodeFilled] = useState(false)
-  const [isCodeSended, setCodeSended] = useState(false)
-  const [codeCountdown, setCodeCountdown] = useState(30)
-  const [allowSendCode, setAllowSendCode] = useState(false)
-
-  const phone = useFormProps.watch('phone')
+  const [step, setStep] = useState('phone')
+  const [phone, setPhone] = useState(null)
+  const [rememberUser, setRememberUser] = useState(false)
+  const [isCodeSendAllow, setCodeSendAllow] = useState(true)
 
   useEffect(() => {
-    if (phone?.length === 11) {
-      setPhoneFilled(true)
-    } else {
-      setPhoneFilled(false)
+    if (authStore.isCodeSended) {
+      setStep('code')
+      setCodeSendAllow(false)
     }
-  }, [phone])
+  }, [authStore.isCodeSended])
 
-  useEffect(() => {
-    if (!isCodeSended || allowSendCode) return
+  const onCodeSend = async ({ phone, remember }) => {
+    if (!isCodeSendAllow) return
 
-    const timer = setInterval(() => setCodeCountdown(codeCountdown - 1), 1000)
+    const phoneWithPlus = `+${phone}`
 
-    if (codeCountdown === 0) {
-      setAllowSendCode(true)
-      setCodeCountdown(30)
-    }
-
-    return () => clearInterval(timer)
-  }, [isCodeSended, allowSendCode, codeCountdown])
-
-  const onSendCode = () => {
-    auth.sendCode(`+${phone}`)
-    setCodeSended(true)
+    setPhone(phoneWithPlus)
+    setRememberUser(remember)
+    authStore.sendCode(phoneWithPlus)
   }
 
-  const onCodeChange = (value) => {
-    if (value.length !== 4) {
-      setCodeFilled(false)
-    }
+  const onCodeResend = (phone) => {
+    authStore.sendCode(phone)
+    setCodeSendAllow(false)
   }
 
-  const [one, two, three, four, five, six, seven, eight, nine, ten, eleven] = phone || []
-  const phoneLabel = `+${one} ${two}${three}${four} ${five}${six}${seven}-${eight}${nine}-${ten}${eleven}`
-
-  const phoneStep = (
-    <S.PhoneStep>
-      <FormProvider {...useFormProps}>
-        <PhoneField name="phone" country="ru" placeholder="+7 (___) ___-__-__" />
-
-        <Switch name="remember" label="Запомнить меня" />
-
-        <Button disabled={!isPhoneFilled} onClick={onSendCode}>
-          Продолжить
-        </Button>
-      </FormProvider>
-    </S.PhoneStep>
-  )
-
-  const codeStep = (
-    <S.CodeStep>
-      <FormProvider {...useFormProps}>
-        <S.SendText>
-          Отправили код подтверждения на номер <br /> {phoneLabel}
-        </S.SendText>
-
-        <S.Label>Пароль из смс</S.Label>
-
-        <S.CodeInput fields={4} onChange={onCodeChange} onComplete={() => setCodeFilled(true)} />
-
-        <S.CountdownText>Отправить код еще раз через {codeCountdown} сек.</S.CountdownText>
-
-        <Button disabled={!isCodeFilled}>Войти</Button>
-      </FormProvider>
-    </S.CodeStep>
-  )
+  const auth = ({ phone, code, remember }) => {
+    authStore.auth({ phone, code, remember })
+  }
 
   return (
     <>
+      <Head>
+        <title>Вход</title>
+      </Head>
+
       {isTablet && <Header />}
 
       <S.SignIn>
@@ -104,7 +63,19 @@ export const AuthPage = () => {
 
             <S.Heading level={1}>Вход в Tips.me</S.Heading>
 
-            {!isCodeSended ? phoneStep : codeStep}
+            {step === 'phone' ? (
+              <PhoneStep onCodeSend={onCodeSend} />
+            ) : (
+              <CodeStep
+                phone={phone}
+                isCodeSendAllow={isCodeSendAllow}
+                onCodeSendAllowChange={setCodeSendAllow}
+                onCodeResend={() => {
+                  onCodeResend(phone)
+                }}
+                onCodeConfirm={(code) => auth({ phone, code, remember: rememberUser })}
+              />
+            )}
           </S.LeftContent>
         </S.Left>
 
@@ -116,4 +87,4 @@ export const AuthPage = () => {
       </S.SignIn>
     </>
   )
-}
+})

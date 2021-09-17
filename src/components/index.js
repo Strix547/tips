@@ -1,37 +1,48 @@
 import { BarChart } from './BarChart'
 import { TipsTable } from './TipsTable'
 import { TimePeriodFilter } from './TimePeriodFilter'
-import { QrImage } from './QrImage'
-import { BusinessQrCard } from './BusinessQrCard'
-import { BusinessQrModal } from './BusinessQrModal'
-import { IndividualAvatar } from './IndividualAvatar'
-import { EmployeeAvatar } from './EmployeeAvatar'
-import { IndividualTipsPayment } from './IndividualTipsPayment'
 import { TipAmount } from './TipAmount'
-import { EmployeeTipsPayment } from './EmployeeTipsPayment'
-import { RecipientCardOptionsPanel } from './RecipientCardOptionsPanel'
 import { RecipientCardPreview } from './RecipientCardPreview'
 import { SupportForm } from './SupportForm'
-import { PlatformCard } from './PlatformCard'
 import { LineChart } from './LineChart'
 import { StatisticRow } from './StatisticRow'
+import { AccountIdentifyModal } from './AccountIdentifyModal'
+import { Notifications } from './Notifications'
+
+import { QrCard, QrModal, QrImage } from './Qr'
+
+import {
+  AvatarBusiness,
+  PaymentCardBusiness,
+  CardBusiness,
+  PaymentCardOptionsPanelBusiness
+} from './Business'
+
+import {
+  AvatarIndividual,
+  PaymentCardIndividual,
+  PaymentCardOptionsPanelIndividual
+} from './Individual'
 
 export {
   BarChart,
   TipsTable,
   TimePeriodFilter,
+  QrCard,
+  QrModal,
   QrImage,
-  BusinessQrCard,
-  BusinessQrModal,
-  IndividualAvatar,
-  EmployeeAvatar,
-  IndividualTipsPayment,
+  AvatarBusiness,
+  CardBusiness,
+  PaymentCardBusiness,
+  AvatarIndividual,
+  PaymentCardIndividual,
+  PaymentCardOptionsPanelBusiness,
+  PaymentCardOptionsPanelIndividual,
   TipAmount,
-  EmployeeTipsPayment,
-  RecipientCardOptionsPanel,
   RecipientCardPreview,
   SupportForm,
-  PlatformCard,
   LineChart,
-  StatisticRow
+  StatisticRow,
+  AccountIdentifyModal,
+  Notifications
 }

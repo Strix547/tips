@@ -1,0 +1,1 @@
+export { QrImage } from './Image'

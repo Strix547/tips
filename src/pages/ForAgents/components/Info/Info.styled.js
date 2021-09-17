@@ -7,7 +7,7 @@ export { Text }
 export const Info = styled(WhiteBox)`
   display: flex;
   flex-direction: column;
-  grid-gap: 30px;
+  gap: 30px;
   padding: 30px 40px;
 
   ${Text} {
@@ -42,7 +42,7 @@ export const CopyIcon = styled.div`
 
 export const Networks = styled.ul`
   display: flex;
-  grid-gap: 30px;
+  gap: 30px;
   margin-left: auto;
 
   li {

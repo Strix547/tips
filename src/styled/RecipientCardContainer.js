@@ -6,8 +6,9 @@ import { media } from 'styles/media'
 
 export const RecipientCardContainer = styled(WhiteBox)`
   display: flex;
-  justify-content: center;
-  padding: 50px 0;
+  flex-direction: column;
+  padding: 30px;
+  min-height: 100vh;
   box-sizing: border-box;
 
   ${media.createMedia(700)} {
@@ -16,6 +17,7 @@ export const RecipientCardContainer = styled(WhiteBox)`
 
   ${RecipientCard} {
     width: 600px;
+    margin: auto;
   }
 
   ${RecipientCardTop} {

@@ -8,7 +8,7 @@ import { Sidebar } from 'layout'
 import { Logo } from 'common'
 
 import { ROUTES } from 'core/routes'
-import { useStore } from 'stores'
+import { authStore, userStore } from 'store'
 
 import * as S from './Header.styled'
 
@@ -18,15 +18,9 @@ import MenuHamburger from '@public/icons/menu-hamburger.svg'
 import UserIcon from '@public/icons/user.svg'
 
 export const Header = observer(({ withSidebar }) => {
-  const {
-    auth: { isAuth }
-  } = useStore()
-
   const useFormProps = useForm()
   const [isMenuOpen, setMenuOpen] = useState(false)
-  const userFirstName = 'Александр'
-  const userLastName = 'Коновалов'
-  const userEmail = 'konovalovd@yandex.ru'
+  const { firstName, lastName, email } = userStore.personalData
 
   const nav = [
     { label: 'Получателям', link: ROUTES.RECIPIENTS },
@@ -82,7 +76,7 @@ export const Header = observer(({ withSidebar }) => {
               </S.LanguageSelect>
             </FormProvider>
 
-            {isAuth ? (
+            {authStore.isAuth ? (
               <S.User>
                 <S.UserAvatar>
                   <UserIcon />
@@ -90,9 +84,9 @@ export const Header = observer(({ withSidebar }) => {
 
                 <S.UserInfo>
                   <S.Text>
-                    <span>{userLastName}</span> <span>{userFirstName}</span>
+                    <span>{firstName}</span> <span>{lastName}</span>
                   </S.Text>
-                  <S.Text>{userEmail}</S.Text>
+                  <S.Text>{email}</S.Text>
                 </S.UserInfo>
               </S.User>
             ) : (

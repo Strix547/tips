@@ -1,3 +1,5 @@
+import Head from 'next/head'
+
 import { Header, Footer } from 'layout'
 import { PageBanner } from 'landing/components'
 import {
@@ -48,6 +50,10 @@ export const BusinessPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Бизнесу</title>
+      </Head>
+
       <Header />
 
       <main>

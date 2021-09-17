@@ -2,7 +2,10 @@ import styled from 'styled-components'
 
 import { WhiteBox, Text } from 'styled'
 import { StatisticRow } from 'components/StatisticRow/StatisticRow.styled'
+import { TimePeriodFilter } from 'components/TimePeriodFilter/TimePeriodFilter.styled'
+import { ExcelDownload } from 'common/ExcelDownload/ExcelDownload.styled'
 import { Table } from 'ui/Table/Table.styled'
+import { Select } from 'ui/Select/Select.styled'
 
 import { media } from 'styles/media'
 
@@ -26,10 +29,14 @@ export const Top = styled.div`
   justify-content: space-between;
   padding: 20px 30px 0 30px;
 
+  ${TimePeriodFilter} {
+    width: auto;
+  }
+
   ${media.createMedia(1420)} {
     flex-direction: column;
     align-items: flex-start;
-    grid-gap: 20px;
+    gap: 20px;
   }
 
   ${media.createMedia(920)} {
@@ -38,6 +45,18 @@ export const Top = styled.div`
 
   ${media.tablet} {
     padding: 20px 14px;
+  }
+
+  ${media.createMedia(600)} {
+    flex-direction: column;
+
+    ${ExcelDownload}, ${TimePeriodFilter} ${Select} {
+      width: 100%;
+    }
+
+    ${ExcelDownload} {
+      justify-content: center;
+    }
   }
 `
 
@@ -158,7 +177,7 @@ export const TableContainer = styled.div`
       position: static;
       flex-direction: column;
       align-items: flex-start;
-      grid-gap: 10px;
+      gap: 10px;
       width: 100%;
       height: auto;
       padding: 20px;
@@ -210,7 +229,7 @@ export const TipCardMain = styled.div`
 
 export const TipCardRow = styled.div`
   display: flex;
-  grid-gap: 20px;
+  gap: 20px;
 
   &:not(:last-child) {
     margin-bottom: 15px;

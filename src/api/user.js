@@ -8,19 +8,28 @@ export const changeUserLanguage = ({ userId, languageCode }) => {
   return API.post(`/user-language/${userId}/replace`, { languageCode })
 }
 
-export const getMyId = () => {
-  return API.get('/me')
+export const getMyId = async () => {
+  try {
+    const {
+      data: { userId }
+    } = await API.get('/me')
+    return userId
+  } catch (e) {
+    throw new Error('NOT_AUTH')
+  }
 }
 
-export const getUserRole = (userId) => {
-  return API.get('/user-roles/', { params: { userId } })
+export const getUserRole = async (userId) => {
+  const { data } = await API.get(`/user-roles/${userId}`)
+  return data[0]
 }
 
-export const getUserInfo = (userId) => {
-  return API.get('/personal-info', { params: { userId } })
+export const getUserInfo = async (userId) => {
+  const { data } = await API.get(`/personal-info/${userId}`)
+  return data
 }
 
-export const changeUserInfo = ({
+export const changeUserInfo = async ({
   userId,
   email,
   firstName,
@@ -28,19 +37,34 @@ export const changeUserInfo = ({
   birthDate,
   countryCode,
   city,
-  address
+  address,
+  postalCode,
+  policyAgreement
 }) => {
-  return API.post(`/personal-info/${userId}/change`, {
-    email,
-    firstName,
-    lastName,
-    dateOfBitrh: birthDate,
-    countryCode,
-    city,
-    address
-  })
+  try {
+    const data = await API.post(`/personal-info/${userId}/change`, {
+      email,
+      firstName,
+      lastName,
+      dateOfBirth: birthDate,
+      countryCode,
+      city,
+      address,
+      postalCode,
+      tosAccepted: policyAgreement
+    })
+
+    return data
+  } catch (e) {
+    console.log(e, Object.entries(e), e.response)
+  }
 }
 
 export const addUserRole = ({ userId, payer, recipient, agent, business }) => {
-  return API.post(`/user-preferred-account-types/${userId}`, { payer, recipient, agent, business })
+  return API.post(`/user-preferred-account-types/${userId}/create`, {
+    payer,
+    recipient,
+    agent,
+    business
+  })
 }

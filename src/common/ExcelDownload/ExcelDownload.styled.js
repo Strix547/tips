@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const ExcelDownload = styled.button`
   display: flex;
   align-items: center;
+  flex-shrink: 0;
   min-width: 210px;
   height: 56px;
   padding: 0 30px;

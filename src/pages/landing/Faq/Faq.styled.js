@@ -36,7 +36,7 @@ export const Main = styled.main`
 export const QaList = styled.ul`
   display: flex;
   flex-direction: column;
-  grid-gap: 10px;
+  gap: 10px;
 `
 
 export const QaAccordion = styled(Accordion)`

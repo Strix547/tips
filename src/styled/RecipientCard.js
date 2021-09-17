@@ -20,7 +20,7 @@ const RecipientCardTop = styled.div`
 const RecipientCardMain = styled.div`
   display: flex;
   flex-direction: column;
-  grid-gap: 20px;
+  gap: 20px;
   width: 290px;
   margin: 0 auto;
   padding: 30px;

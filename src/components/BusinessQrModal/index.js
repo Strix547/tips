@@ -1,1 +1,0 @@
-export { BusinessQrModal } from './BusinessQrModal'

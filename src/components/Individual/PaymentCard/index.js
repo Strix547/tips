@@ -1,0 +1,1 @@
+export { PaymentCardIndividual } from './PaymentCard'

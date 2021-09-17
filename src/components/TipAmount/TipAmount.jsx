@@ -4,12 +4,16 @@ import { Radio } from '@material-ui/core'
 
 import { FormField, FormControlLabel } from 'ui'
 
+import { localStore } from 'store'
+
 import * as S from './TipAmount.styled'
 
 export const TipAmount = ({ presets = [100, 149, 299], onChange }) => {
   const useFormProps = useForm()
+
   const [selectedPreset, setSelectedPreset] = useState(presets[0])
-  const currency = '₽'
+
+  const currencyLabel = localStore.currency.label
   const minPresetValue = Math.min(...presets)
   const maxPresetValue = Math.max(...presets)
 
@@ -25,7 +29,7 @@ export const TipAmount = ({ presets = [100, 149, 299], onChange }) => {
         value={value}
         label={
           <S.BaseAmountRadio active={selectedPreset === value}>
-            {value} {currency}
+            {value} {currencyLabel}
           </S.BaseAmountRadio>
         }
         control={<Radio />}
@@ -40,7 +44,7 @@ export const TipAmount = ({ presets = [100, 149, 299], onChange }) => {
           label="Сумма чаевых"
           name="amount"
           placeholder={`От ${minPresetValue} до ${maxPresetValue}`}
-          InputProps={{ endAdornment: currency }}
+          InputProps={{ endAdornment: currencyLabel }}
         />
 
         <S.BaseAmountRadioGroup

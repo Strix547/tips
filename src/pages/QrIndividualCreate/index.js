@@ -1,0 +1,1 @@
+export { QrIndividualCreatePage } from './QrIndividualCreate'

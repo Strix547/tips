@@ -1,1 +1,0 @@
-export { QrImage } from './QrImage'

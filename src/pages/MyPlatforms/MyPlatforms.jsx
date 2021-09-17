@@ -1,5 +1,7 @@
+import Head from 'next/head'
+
 import { AccountLayout } from 'layout'
-import { PlatformCard } from 'components'
+import { CardBusiness } from 'components'
 
 import * as S from './MyPlatforms.styled'
 
@@ -135,15 +137,21 @@ export const MyPlatformsPage = () => {
     }
   ]
 
-  const platformList = platforms.map((props) => <PlatformCard key={props.id} {...props} />)
+  const platformList = platforms.map((props) => <CardBusiness key={props.id} {...props} />)
 
   return (
-    <AccountLayout
-      title="Мои площадки"
-      button={{ label: 'Добавить площадку', onClick: addPlatform }}
-      styles={S.layoutStyles}
-    >
-      <S.Content>{platformList}</S.Content>
-    </AccountLayout>
+    <>
+      <Head>
+        <title>Мои площадки</title>
+      </Head>
+
+      <AccountLayout
+        title="Мои площадки"
+        button={{ label: 'Добавить площадку', onClick: addPlatform }}
+        styles={S.layoutStyles}
+      >
+        <S.Content>{platformList}</S.Content>
+      </AccountLayout>
+    </>
   )
 }

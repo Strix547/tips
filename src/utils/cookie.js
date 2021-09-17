@@ -1,5 +1,5 @@
-export const getCookie = (name) => {
-  const v = document.cookie.match(`(^|;) ?${name}=([^;]*)(;|$)`)
+export const getCookie = (name, source = document) => {
+  const v = source?.cookie?.match(`(^|;) ?${name}=([^;]*)(;|$)`)
   return v && v[2] !== 'null' ? v[2] : null
 }
 

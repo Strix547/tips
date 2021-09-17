@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
+import Head from 'next/head'
 
 import { Header, Footer } from 'layout'
 import { AccordionSummary, AccordionDetails } from 'ui'
@@ -115,6 +116,10 @@ export const FaqPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Часто задаваемые вопросы</title>
+      </Head>
+
       <Header />
 
       <S.Main>

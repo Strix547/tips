@@ -48,6 +48,7 @@ export const BoxList = styled.ul`
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 30px;
 
     ${Box} {
       &:nth-child(1),
@@ -79,7 +80,7 @@ export const BoxList = styled.ul`
   }
 
   ${media.createMedia(650)} {
-    grid-gap: 20px;
+    gap: 20px;
 
     ${Box} {
       &:nth-child(1) ${PointList}, &:nth-child(2) ${PointList} {

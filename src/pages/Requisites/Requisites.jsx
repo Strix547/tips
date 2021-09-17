@@ -1,5 +1,15 @@
+import Head from 'next/head'
+
 import { AccountLayout } from 'layout'
 
 export const RequisitesPage = () => {
-  return <AccountLayout title="Реквизиты" />
+  return (
+    <>
+      <Head>
+        <title>Мои реквизиты</title>
+      </Head>
+
+      <AccountLayout title="Реквизиты" />
+    </>
+  )
 }

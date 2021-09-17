@@ -10,7 +10,7 @@ export { Heading, Label }
 export const MainInfo = styled(WhiteBox)`
   display: flex;
   flex-direction: column;
-  grid-gap: 20px;
+  gap: 20px;
   padding: 30px 40px;
 
   ${media.createMedia(570)} {
@@ -21,7 +21,7 @@ export const MainInfo = styled(WhiteBox)`
 export const PlatformTypeRow = styled.div``
 
 export const PlatformTypeRadioGroup = styled(RadioGroup)`
-  grid-gap: 10px;
+  gap: 10px;
 `
 
 export const PlatformTypeRadio = styled.div`

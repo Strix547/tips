@@ -1,3 +1,3 @@
-import { RecipientCardContainer } from 'styled'
+import { RecipientCardContainer, Heading } from 'styled'
 
-export { RecipientCardContainer }
+export { RecipientCardContainer, Heading }

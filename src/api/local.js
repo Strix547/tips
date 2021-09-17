@@ -1,5 +1,16 @@
 import { API } from 'core/axios'
 
+const transformCountries = (countries) => {
+  return countries.map(({ localCountryName, countryCode }) => ({
+    name: localCountryName,
+    code: countryCode
+  }))
+}
+
+const transformCities = (cities) => {
+  return cities.map(({ cityName }) => cityName)
+}
+
 export const getSuggestedLocation = () => {
   return API.get('/suggested-location')
 }
@@ -12,12 +23,16 @@ export const getSuggestedLanguage = () => {
   return API.get('/suggested-language')
 }
 
-export const getCountyNames = ({ search, languageCode, limit = 10 }) => {
-  return API.get('/country-names', { params: { search, 'language-code': languageCode, limit } })
+export const getCountries = async ({ search, languageCode, limit = 10 }) => {
+  const { data } = await API.get('/country-names', {
+    params: { search, 'language-code': languageCode, limit }
+  })
+
+  return transformCountries(data)
 }
 
-export const getCityNames = ({ search, countryCode, languageCode, limit = 10 }) => {
-  return API.get('/city-names', {
+export const getCities = async ({ search, countryCode, languageCode, limit = 10 }) => {
+  const { data } = await API.get('/city-names', {
     params: {
       search,
       'country-code': countryCode,
@@ -25,4 +40,6 @@ export const getCityNames = ({ search, countryCode, languageCode, limit = 10 }) 
       limit
     }
   })
+
+  return transformCities(data)
 }

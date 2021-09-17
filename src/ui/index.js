@@ -16,6 +16,9 @@ import { ColorPickerField } from './ColorPickerField'
 import { Dropzone } from './Dropzone'
 import { Slider } from './Slider'
 import { DatePicker } from './DatePicker'
+import { Autocomplete } from './Autocomplete'
+import { Stepper, Step, StepLabel } from './Stepper'
+import { LocationSearch } from './LocationSearch'
 
 export {
   Button,
@@ -38,5 +41,10 @@ export {
   ColorPickerField,
   Dropzone,
   Slider,
-  DatePicker
+  DatePicker,
+  Autocomplete,
+  Stepper,
+  Step,
+  StepLabel,
+  LocationSearch
 }

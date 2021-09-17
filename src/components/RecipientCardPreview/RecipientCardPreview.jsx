@@ -1,22 +1,22 @@
-import { EmployeeAvatar, TipAmount } from 'components'
+import { observer } from 'mobx-react-lite'
+
+import { AvatarBusiness, AvatarIndividual, TipAmount } from 'components'
 import { ImpressionRow, RatingRow, FeedbackTextarea } from 'common'
+
+import { qrCodesStore, userStore } from 'store'
 
 import * as S from './RecipientCardPreview.styled'
 
 import avatar from '@public/img/placeholders/avatar.png'
 
-export const RecipientCardPreview = ({
-  tipAmountPresets,
-  haveRating,
-  haveReviews,
-  haveImpression,
-  companyLogo,
-  bgColor,
-  buttonColor
-}) => {
+export const RecipientCardPreview = observer(({ type }) => {
+  const { company, amountPresets, impressions, reviews, rating, bgColor, buttonColor } =
+    qrCodesStore.qrTemplate
+  const { firstName, lastName } = userStore.personalData
+
   const getColorDarker = (color) => {
     if (!color) return null
-    const { r, g, b } = color
+    const { r, g, b } = color.rgb
     return `rgba(${r}, ${g}, ${b}, 0.5)`
   }
 
@@ -29,20 +29,24 @@ export const RecipientCardPreview = ({
         </S.Top>
 
         <S.RecipientCardTop>
-          <EmployeeAvatar
-            avatar={avatar}
-            company={{ name: 'Фитнес Территория', logo: companyLogo?.src }}
-            firstName="Алексей"
-            lastName="Коновалов"
-          />
+          {type === 'individual' ? (
+            <AvatarIndividual avatar={avatar} firstName={firstName} lastName={lastName} />
+          ) : (
+            <AvatarBusiness
+              avatar={avatar}
+              company={{ name: company.name, logo: company.logo }}
+              firstName="Алексей"
+              lastName="Коновалов"
+            />
+          )}
         </S.RecipientCardTop>
 
         <S.RecipientCardMain>
-          <TipAmount presets={tipAmountPresets} />
+          <TipAmount presets={amountPresets} />
 
-          {haveImpression && <ImpressionRow />}
-          {haveRating && <RatingRow />}
-          {haveReviews && <FeedbackTextarea />}
+          {impressions && <ImpressionRow />}
+          {rating && <RatingRow />}
+          {reviews && <FeedbackTextarea />}
 
           <S.Button color={getColorDarker(buttonColor)}>Поблагодарить</S.Button>
 
@@ -51,4 +55,4 @@ export const RecipientCardPreview = ({
       </S.RecipientCard>
     </S.RecipientCardPreview>
   )
-}
+})

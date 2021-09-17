@@ -3,7 +3,12 @@ import { Controller, useFormContext } from 'react-hook-form'
 import * as S from './Checkbox.styled'
 
 export const Checkbox = ({ name, rules, label, defaultValue, ...props }) => {
-  const { control } = useFormContext()
+  const {
+    control,
+    formState: { errors }
+  } = useFormContext()
+
+  const haveError = Object.keys(errors).some((inputName) => inputName === name)
 
   return (
     <Controller
@@ -21,7 +26,7 @@ export const Checkbox = ({ name, rules, label, defaultValue, ...props }) => {
           />
         ) : (
           <>
-            <S.Checkbox {...props} value={value} onChange={onChange} />
+            <S.Checkbox {...props} value={value} onChange={onChange} haveError={haveError} />
           </>
         )
       }}

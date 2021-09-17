@@ -1,0 +1,1 @@
+export { AvatarIndividual } from './Avatar'

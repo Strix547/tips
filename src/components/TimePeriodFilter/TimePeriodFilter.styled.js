@@ -2,10 +2,38 @@ import styled, { css } from 'styled-components'
 
 import { RadioGroup } from 'ui'
 import { Select } from 'ui/Select/Select.styled'
+import { Modal } from 'ui/Modal/Modal.styled'
 
 import { media } from 'styles/media'
 
 const media920 = media.createMedia(920)
+
+export const TimePeriodFilter = styled.div`
+  width: 100%;
+
+  ${Select} {
+    display: none;
+    width: 250px;
+
+    .select-root {
+      border-radius: 46px;
+      background: #fff;
+    }
+
+    .menu-paper {
+      margin-top: 15px;
+      padding: 10px 0;
+      border-top: 1px solid var(--color-gray-400);
+      border-radius: 23px;
+    }
+  }
+
+  ${media920} {
+    ${Select} {
+      display: block;
+    }
+  }
+`
 
 export const PeriodRadioGroup = styled(RadioGroup)`
   padding: 8px 10px;
@@ -39,26 +67,8 @@ export const PeriodRadio = styled.div`
     `}
 `
 
-export const TimePeriodFilter = styled.div`
-  ${Select} {
-    display: none;
-
-    .select-root {
-      width: 250px;
-      border-radius: 46px;
-    }
-
-    .menu-paper {
-      margin-top: 15px;
-      padding: 10px 0;
-      border-top: 1px solid var(--color-gray-400);
-      border-radius: 23px;
-    }
-  }
-
-  ${media920} {
-    ${Select} {
-      display: block;
-    }
-  }
+export const DatePickerModal = styled(Modal)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `

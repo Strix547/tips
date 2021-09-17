@@ -1,3 +1,5 @@
+import Head from 'next/head'
+
 import { Header, Footer } from 'layout'
 import { PageBanner } from 'landing/components'
 import {
@@ -27,6 +29,10 @@ export const MainPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Главная</title>
+      </Head>
+
       <Header />
 
       <main>

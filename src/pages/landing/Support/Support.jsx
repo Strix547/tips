@@ -1,3 +1,5 @@
+import Head from 'next/head'
+
 import { Header, Footer } from 'layout'
 import { SupportForm } from 'components'
 
@@ -9,6 +11,10 @@ import LineSvg from '@public/img/landing/line.svg'
 export const SupportPage = () => {
   return (
     <>
+      <Head>
+        <title>Служба поддержки</title>
+      </Head>
+
       <Header />
 
       <S.Main>

@@ -1,1 +1,0 @@
-export { EmployeeTipsPayment } from './EmployeeTipsPayment'
