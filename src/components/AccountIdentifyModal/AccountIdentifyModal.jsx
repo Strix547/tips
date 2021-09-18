@@ -81,15 +81,13 @@ export const AccountIdentifyModal = ({ open }) => {
       }
 
       if (token) {
-        // dd-mm-yyyy
-        const [d, m, y] = birthDate.toLocaleDateString().split('.')
 
         userStore.identifyAccount({
           userId: userStore.id,
           email,
           firstName,
           lastName,
-          birthDate: `${y}-${m}-${d}`,
+          birthDate: birthDate.toISOString().split("T")[0],
           countryCode: localStore.selectedCountryCode,
           city,
           address,
