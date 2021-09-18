@@ -11,11 +11,11 @@ import avatar from '@public/img/placeholders/avatar.png'
 
 export const RecipientCardPreview = observer(({ type }) => {
   const { company, amountPresets, impressions, reviews, rating, bgColor, buttonColor } =
-    qrCodesStore.qrTemplate
+    qrCodesStore.qrCode
   const { firstName, lastName } = userStore.personalData
 
   const getColorDarker = (color) => {
-    if (!color) return null
+    if (!color || !color?.rgb) return null
     const { r, g, b } = color.rgb
     return `rgba(${r}, ${g}, ${b}, 0.5)`
   }

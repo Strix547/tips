@@ -6,7 +6,29 @@ import { createTooltip } from 'utils'
 import { MEDIA_TABLET } from 'styles/media'
 import * as S from './BarChart.styled'
 
-export const BarChart = ({ title }) => {
+export const BarChart = ({
+  title,
+  labels = [
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20',
+    '21',
+    '22',
+    '23',
+    '24',
+    '25',
+    '26',
+    '27',
+    '28',
+    '29',
+    '30',
+    '31'
+  ],
+  values = [590, 410, 580, 580, 590, 590, 420, 480, 490, 500, 539, 500, 420, 480, 510, 440, 510]
+}) => {
   const screenTablet = useMediaQuery({ maxWidth: MEDIA_TABLET })
 
   const createLinearGradient = (canvas) => {
@@ -51,31 +73,10 @@ export const BarChart = ({ title }) => {
     }
 
     return {
-      labels: getArrBaseOnWidth([
-        '15',
-        '16',
-        '17',
-        '18',
-        '19',
-        '20',
-        '21',
-        '22',
-        '23',
-        '24',
-        '25',
-        '26',
-        '27',
-        '28',
-        '29',
-        '30',
-        '31'
-      ]),
+      labels: getArrBaseOnWidth(labels),
       datasets: [
         {
-          data: getArrBaseOnWidth(
-            [590, 410, 580, 580, 590, 590, 420, 480, 490, 500, 539, 500, 420, 480, 510, 440, 510],
-            screenTablet
-          ),
+          data: getArrBaseOnWidth(values, screenTablet),
           backgroundColor: [createLinearGradient(canvas)],
           borderRadius: { topLeft: 5, topRight: 5 }
         }

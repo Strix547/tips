@@ -6,6 +6,7 @@ const transformQrData = ({
   name,
   personUserId,
   paymentPageId,
+  personPaymentPageTemplateId,
   presetPaymentSizes,
   smiles,
   backgroundHexColor,
@@ -14,12 +15,13 @@ const transformQrData = ({
 }) => {
   return {
     id: paymentPageId,
+    templateId: personPaymentPageTemplateId,
     userId: personUserId,
     name,
     amountPresets: presetPaymentSizes,
     impressions: smiles,
-    bgColor: backgroundHexColor,
-    buttonColor: buttonHexColor,
+    bgColor: { hex: backgroundHexColor },
+    buttonColor: { hex: buttonHexColor },
     img: qrImagePngRef
   }
 }

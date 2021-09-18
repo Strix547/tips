@@ -5,7 +5,7 @@ import * as localApi from 'api/local'
 export const localStore = makeAutoObservable({
   countries: [],
   cities: [],
-  selectedCountryCode: '',
+  selectedCountryCode: null,
   currency: { label: '₽', value: 'RUB' },
 
   setSelectedCountryCode: (code) => {

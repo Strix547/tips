@@ -60,6 +60,11 @@ export const Top = styled.div`
   }
 `
 
+export const TopLeft = styled.div`
+  display: flex;
+  gap: 10px;
+`
+
 export const TableContainer = styled.div`
   position: relative;
   width: calc(100% - 60px);
@@ -79,6 +84,7 @@ export const TableContainer = styled.div`
       top: auto;
       bottom: 0;
       border-top: 2px solid #e0e3e1;
+      border-bottom: none;
     }
   }
 

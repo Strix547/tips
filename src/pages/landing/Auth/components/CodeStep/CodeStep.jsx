@@ -60,7 +60,13 @@ export const CodeStep = ({
         [countdownRef, isCodeSendAllow]
       )}
 
-      <Button disabled={code?.length !== 4} onClick={() => onCodeConfirm(code)}>
+      <Button
+        type="button"
+        disabled={code?.length !== 4}
+        onClick={() => {
+          onCodeConfirm(code)
+        }}
+      >
         Войти
       </Button>
     </S.CodeStep>

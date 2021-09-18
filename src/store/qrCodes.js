@@ -3,23 +3,13 @@ import { toast } from 'react-toastify'
 import router from 'next/router'
 
 import { ROUTES } from 'core/routes'
+import { userStore } from 'store'
 import * as qrCodesApi from 'api/qrCodes'
 
 export const qrCodesStore = makeAutoObservable({
   qrCodes: [],
   isQrCodesLoading: false,
   qrCode: {
-    id: '',
-    userId: '',
-    amountPresets: [],
-    impressions: false,
-    image: '',
-    bgColor: '',
-    buttonColor: ''
-  },
-  isQrCodeLoading: false,
-  isQrCodeCreating: false,
-  qrTemplate: {
     name: '',
     company: { name: '', logo: '' },
     amountPresets: [],
@@ -30,14 +20,21 @@ export const qrCodesStore = makeAutoObservable({
     bgColor: '',
     buttonColor: ''
   },
+  isQrCodeLoading: false,
+  isQrCodeCreating: false,
 
-  setQrTemplate: ({ amountPresets, impressions, bgColor, buttonColor }) => {
-    qrCodesStore.qrTemplate = {
+  setQrCode: ({ amountPresets, impressions, bgColor, buttonColor }) => {
+    qrCodesStore.qrCode = {
       amountPresets,
       impressions,
       bgColor,
       buttonColor
     }
+  },
+
+  getQrCode: async (qrId) => {
+    const qr = await qrCodesApi.getQrCodeData(qrId)
+    qrCodesStore.qrCode = qr
   },
 
   getQrCodes: async (userId) => {
@@ -74,6 +71,9 @@ export const qrCodesStore = makeAutoObservable({
       bgColor,
       buttonColor
     })
+    const qrCodes = await qrCodesApi.getQrCodes(userStore.id)
+    qrCodesStore.qrCodes = qrCodes
+
     router.push(ROUTES.ACCOUNT_QR_CODES)
     toast.success('Qr successfully changed')
   },
@@ -81,6 +81,8 @@ export const qrCodesStore = makeAutoObservable({
   deleteQrCode: async (id) => {
     try {
       await qrCodesApi.removeQrCode(id)
+      const qrCodes = await qrCodesApi.getQrCodes(userStore.id)
+      qrCodesStore.qrCodes = qrCodes
       toast.success('Qr successfully deleted')
     } catch (e) {
       console.log('delete qr error', e)

@@ -16,7 +16,7 @@ import PenIcon from '@public/icons/pen.svg'
 import TrashIcon from '@public/icons/trash.svg'
 import ArrowRightIcon from '@public/icons/arrows/gray-right.svg'
 
-export const QrCard = ({ id, label, img, tag }) => {
+export const QrCard = ({ id, templateId, label, img, tag }) => {
   const router = useRouter()
 
   const [isQrModalOpen, setQrModalOpen] = useState(false)
@@ -29,12 +29,12 @@ export const QrCard = ({ id, label, img, tag }) => {
     setQrModalOpen(true)
   }
 
-  const onEdit = (id) => {
-    router.push(`${ROUTES.ACCOUNT_QR_CODES}/${id}/edit`)
+  const onEdit = (templateId) => {
+    router.push(`${ROUTES.ACCOUNT_QR_CODES}/${templateId}/edit`)
   }
 
-  const onDelete = (id) => {
-    qrCodesStore.deleteQrCode(id)
+  const onDelete = (templateId) => {
+    qrCodesStore.deleteQrCode(templateId)
   }
 
   const toQrCodePage = (id) => {
@@ -44,8 +44,8 @@ export const QrCard = ({ id, label, img, tag }) => {
   const actions = [
     { label: 'open chart', icon: <ChartIcon />, onClick: () => onChartOpen(id) },
     { label: 'share', icon: <ShareIcon />, onClick: () => onShare(id) },
-    { label: 'edit', icon: <PenIcon />, onClick: () => onEdit(id) },
-    { label: 'delete', icon: <TrashIcon />, onClick: () => onDelete(id) }
+    { label: 'edit', icon: <PenIcon />, onClick: () => onEdit(templateId) },
+    { label: 'delete', icon: <TrashIcon />, onClick: () => onDelete(templateId) }
   ]
 
   const actionButtons = actions.map(({ label, icon, onClick }) => (

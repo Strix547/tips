@@ -8,24 +8,14 @@ import { localStore, qrCodesStore } from 'store'
 import * as S from './PaymentCardOptionsPanel.styled'
 
 export const PaymentCardOptionsPanelIndividual = ({ action }) => {
-  const useFormProps = useForm({
-    defaultValues: {
-      name: '',
-      preset1: 100,
-      preset2: 149,
-      preset3: 299,
-      impressions: false,
-      bgColor: null,
-      buttonColor: null
-    }
-  })
+  const useFormProps = useForm()
 
   const { name, preset1, preset2, preset3, impressions, bgColor, buttonColor } =
     useFormProps.watch()
   const currencyLabel = localStore.currency.label
 
   useEffect(() => {
-    qrCodesStore.setQrTemplate({
+    qrCodesStore.setQrCode({
       name,
       amountPresets: [preset1, preset2, preset3],
       impressions,
@@ -64,6 +54,18 @@ export const PaymentCardOptionsPanelIndividual = ({ action }) => {
     />
   ))
 
+  const onActionClick = () => {
+    action.onClick({
+      name,
+      preset1,
+      preset2,
+      preset3,
+      impressions,
+      bgColor,
+      buttonColor
+    })
+  }
+
   return (
     <S.PaymentCardOptionsPanelIndividual>
       <FormProvider {...useFormProps}>
@@ -80,11 +82,11 @@ export const PaymentCardOptionsPanelIndividual = ({ action }) => {
           <Switch name="impressions" size="big" />
         </S.Options>
 
-        <ColorPickerField name="bgColor" label="Код цвета для подложки" />
+        <ColorPickerField name="bgColor" defaultValue="#fff" label="Код цвета для подложки" />
 
-        <ColorPickerField name="buttonColor" label="Код цвета для кнопки" />
+        <ColorPickerField name="buttonColor" defaultValue="#3bc76b" label="Код цвета для кнопки" />
 
-        <Button onClick={action.onClick}>{action.label}</Button>
+        <Button onClick={onActionClick}>{action.label}</Button>
       </FormProvider>
     </S.PaymentCardOptionsPanelIndividual>
   )

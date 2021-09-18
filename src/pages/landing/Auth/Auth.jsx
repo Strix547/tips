@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
-import { observer } from 'mobx-react-lite'
 import Head from 'next/head'
 
 import { Logo } from 'common'
@@ -14,20 +13,13 @@ import * as S from './Auth.styled'
 
 import CommentRegulationIcon from '@public/img/landing/comment-regulation.svg'
 
-export const AuthPage = observer(() => {
+export const AuthPage = () => {
   const isTablet = useMediaQuery({ maxWidth: MEDIA_TABLET })
 
   const [step, setStep] = useState('phone')
   const [phone, setPhone] = useState(null)
   const [rememberUser, setRememberUser] = useState(false)
   const [isCodeSendAllow, setCodeSendAllow] = useState(true)
-
-  useEffect(() => {
-    if (authStore.isCodeSended) {
-      setStep('code')
-      setCodeSendAllow(false)
-    }
-  }, [authStore.isCodeSended])
 
   const onCodeSend = async ({ phone, remember }) => {
     if (!isCodeSendAllow) return
@@ -36,7 +28,12 @@ export const AuthPage = observer(() => {
 
     setPhone(phoneWithPlus)
     setRememberUser(remember)
-    authStore.sendCode(phoneWithPlus)
+    const isCodeSended = await authStore.sendCode(phoneWithPlus)
+
+    if (isCodeSended) {
+      setStep('code')
+      setCodeSendAllow(false)
+    }
   }
 
   const onCodeResend = (phone) => {
@@ -44,8 +41,8 @@ export const AuthPage = observer(() => {
     setCodeSendAllow(false)
   }
 
-  const auth = ({ phone, code, remember }) => {
-    authStore.auth({ phone, code, remember })
+  const auth = async ({ phone, code, remember }) => {
+    await authStore.auth({ phone, code, remember })
   }
 
   return (
@@ -87,4 +84,4 @@ export const AuthPage = observer(() => {
       </S.SignIn>
     </>
   )
-})
+}

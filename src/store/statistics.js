@@ -14,7 +14,7 @@ export const statisticsStore = makeAutoObservable({
     periodFrom,
     periodTo
   }) => {
-    statisticsStore.incomeStatistics = await statisticsApi.getIncomeStatistics({
+    const incomeStatistics = await statisticsApi.getIncomeStatistics({
       userId,
       currency,
       format,
@@ -23,5 +23,9 @@ export const statisticsStore = makeAutoObservable({
       periodFrom,
       periodTo
     })
+
+    if (incomeStatistics) {
+      statisticsStore.incomeStatistics = incomeStatistics
+    }
   }
 })

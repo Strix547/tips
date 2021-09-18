@@ -3,7 +3,6 @@ import { observer } from 'mobx-react-lite'
 import { MuiThemeProvider } from '@material-ui/core'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
-import Script from 'next/script'
 import { useRouter } from 'next/router'
 
 import { AccountIdentifyModal, Notifications } from 'components'
@@ -22,7 +21,8 @@ const stripePromise = loadStripe(
 
 const App = ({ Component, pageProps }) => {
   const router = useRouter()
-  const { role } = userStore
+
+  const { isIdLoading, role } = userStore
 
   const currentPathname = router.pathname
   const isAuthRoute = ROUTES.AUTH === currentPathname
@@ -42,9 +42,6 @@ const App = ({ Component, pageProps }) => {
   })
 
   useEffect(async () => {
-    if (window === undefined || !router) return
-
-    // check is auth
     const id = await userStore.getMyId()
 
     if (id) {
@@ -53,28 +50,29 @@ const App = ({ Component, pageProps }) => {
     }
 
     if (id && isAuthRoute) {
-      router.push(ROUTES.ACCOUNT)
+      window.location.href = ROUTES.ACCOUNT
     }
 
     if (!id && isProtectedRoute) {
-      router.push(ROUTES.AUTH)
+      window.location.href = ROUTES.AUTH
     }
   }, [])
 
+  if (isIdLoading) return null
+
+  const getContent = (isIdLoading, role, isProtectedRoute, pageProps) => {
+    if (isIdLoading) return null
+    if (role === 'UNVERIFIED' && isProtectedRoute) return <AccountIdentifyModal open />
+    return <Component {...pageProps} />
+  }
+
   return (
     <>
-      <Script src="//localhost:8098" />
-
       <GlobalStyles />
 
       <MuiThemeProvider theme={theme}>
         <Elements stripe={stripePromise}>
-          {/* <Component {...pageProps} /> */}
-          {role === 'UNVERIFIED' && isProtectedRoute ? (
-            <AccountIdentifyModal open />
-          ) : (
-            <Component {...pageProps} />
-          )}
+          {getContent(isIdLoading, role, isProtectedRoute, pageProps)}
           <Notifications />
         </Elements>
       </MuiThemeProvider>

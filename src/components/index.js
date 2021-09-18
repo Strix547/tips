@@ -8,6 +8,7 @@ import { LineChart } from './LineChart'
 import { StatisticRow } from './StatisticRow'
 import { AccountIdentifyModal } from './AccountIdentifyModal'
 import { Notifications } from './Notifications'
+import { CurrencySelect } from './CurrencySelect'
 
 import { QrCard, QrModal, QrImage } from './Qr'
 
@@ -44,5 +45,6 @@ export {
   LineChart,
   StatisticRow,
   AccountIdentifyModal,
-  Notifications
+  Notifications,
+  CurrencySelect
 }

@@ -7,10 +7,10 @@ import * as S from './PhoneStep.styled'
 export const PhoneStep = ({ onCodeSend }) => {
   const useFormProps = useForm()
 
-  const phone = useFormProps.watch('phone')
+  const { phone, remember } = useFormProps.watch()
 
   return (
-    <S.PhoneStep onSubmit={useFormProps.handleSubmit(onCodeSend)}>
+    <S.PhoneStep>
       <FormProvider {...useFormProps}>
         <PhoneField
           name="phone"
@@ -24,7 +24,11 @@ export const PhoneStep = ({ onCodeSend }) => {
 
         <Switch name="remember" label="Запомнить меня" />
 
-        <Button type="submit" disabled={!phone || phone?.length < 11}>
+        <Button
+          type="submit"
+          disabled={!phone || phone?.length < 11}
+          onClick={() => onCodeSend({ phone, remember })}
+        >
           Продолжить
         </Button>
       </FormProvider>

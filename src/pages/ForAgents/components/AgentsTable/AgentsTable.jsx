@@ -1,3 +1,5 @@
+import { FormProvider, useForm } from 'react-hook-form'
+
 import { TimePeriodFilter, StatisticRow } from 'components'
 import { Table } from 'ui'
 
@@ -6,6 +8,7 @@ import { formatPrice } from 'utils'
 import * as S from './AgentsTable.styled'
 
 export const AgentsTable = () => {
+  const useFormProps = useForm()
   const currency = '₽'
 
   const columns = [
@@ -80,7 +83,9 @@ export const AgentsTable = () => {
   return (
     <S.AgentsTable>
       <S.Top>
-        <TimePeriodFilter />
+        <FormProvider {...useFormProps}>
+          <TimePeriodFilter {...useFormProps} />
+        </FormProvider>
       </S.Top>
 
       <S.TableContainer>

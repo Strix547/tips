@@ -7,7 +7,7 @@ import { Switch, Button, ColorPickerField, Dropzone } from 'ui'
 
 import { localStore } from 'store'
 
-import * as S from './RecipientCardOptionsPanel.styled'
+import * as S from './PaymentCardOptionsPanel.styled'
 
 import UploadIcon from '@public/icons/upload.svg'
 

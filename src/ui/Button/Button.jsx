@@ -1,6 +1,7 @@
 import * as S from './Button.styled'
 
 export const Button = ({
+  type,
   color,
   iconStart,
   iconEnd,
@@ -13,6 +14,7 @@ export const Button = ({
 }) => {
   return (
     <S.Button
+      type={type}
       variant={variant}
       color={color}
       size={size}

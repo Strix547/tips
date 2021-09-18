@@ -1,4 +1,7 @@
+import { useEffect } from 'react'
+import { observer } from 'mobx-react-lite'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 import { AccountLayout } from 'layout'
 import { PaymentCardOptionsPanelIndividual, RecipientCardPreview } from 'components'
@@ -7,19 +10,19 @@ import { qrCodesStore } from 'store'
 
 import * as S from './QrIndividualEdit.styled'
 
-export const QrIndividualEditPage = () => {
-  const onQrCodeEdit = ({
-    id,
-    name,
-    preset1,
-    preset2,
-    preset3,
-    impressions,
-    bgColor,
-    buttonColor
-  }) => {
+export const QrIndividualEditPage = observer(() => {
+  const router = useRouter()
+  const qrId = router.query.id
+
+  useEffect(() => {
+    if (qrId) {
+      qrCodesStore.getQrCode(qrId)
+    }
+  }, [qrId])
+
+  const onQrCodeEdit = ({ name, preset1, preset2, preset3, impressions, bgColor, buttonColor }) => {
     qrCodesStore.changeQrCode({
-      id,
+      id: qrId,
       name,
       amountPresets: [preset1, preset2, preset3],
       impressions,
@@ -39,9 +42,10 @@ export const QrIndividualEditPage = () => {
           <PaymentCardOptionsPanelIndividual
             action={{ label: 'Редактировать QR-код', onClick: onQrCodeEdit }}
           />
+
           <RecipientCardPreview type="individual" />
         </S.Content>
       </AccountLayout>
     </>
   )
-}
+})
