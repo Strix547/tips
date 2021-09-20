@@ -1,30 +1,27 @@
-import { observer } from 'mobx-react-lite'
-
 import { AvatarBusiness, AvatarIndividual, TipAmount } from 'components'
 import { ImpressionRow, RatingRow, FeedbackTextarea } from 'common'
-
-import { qrCodesStore, userStore } from 'store'
 
 import * as S from './RecipientCardPreview.styled'
 
 import avatar from '@public/img/placeholders/avatar.png'
 
-export const RecipientCardPreview = observer(({ type }) => {
-  const { company, amountPresets, impressions, reviews, rating, bgColor, buttonColor } =
-    qrCodesStore.qrCode
-  const { firstName, lastName } = userStore.personalData
-
-  const getColorDarker = (color) => {
-    if (!color || !color?.rgb) return null
-    const { r, g, b } = color.rgb
-    return `rgba(${r}, ${g}, ${b}, 0.5)`
-  }
-
+export const RecipientCardPreview = ({
+  type,
+  firstName,
+  lastName,
+  amountPresets,
+  impressions,
+  reviews,
+  rating,
+  bgColor,
+  buttonColor,
+  company
+}) => {
   return (
     <S.RecipientCardPreview>
       <S.RecipientCard>
         <S.Top>
-          <S.TopBackground color={getColorDarker(bgColor)} />
+          <S.TopBackground $color={bgColor} />
           <S.Text>Так выглядит ваша страница</S.Text>
         </S.Top>
 
@@ -35,8 +32,8 @@ export const RecipientCardPreview = observer(({ type }) => {
             <AvatarBusiness
               avatar={avatar}
               company={{ name: company.name, logo: company.logo }}
-              firstName="Алексей"
-              lastName="Коновалов"
+              firstName={firstName}
+              lastName={lastName}
             />
           )}
         </S.RecipientCardTop>
@@ -48,11 +45,11 @@ export const RecipientCardPreview = observer(({ type }) => {
           {rating && <RatingRow />}
           {reviews && <FeedbackTextarea />}
 
-          <S.Button color={getColorDarker(buttonColor)}>Поблагодарить</S.Button>
+          <S.Button $color={buttonColor}>Поблагодарить</S.Button>
 
           <S.Text>Tips.me - это сервис для перевод чаевых и донатов.</S.Text>
         </S.RecipientCardMain>
       </S.RecipientCard>
     </S.RecipientCardPreview>
   )
-})
+}

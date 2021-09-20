@@ -5,7 +5,7 @@ import * as S from './Select.styled'
 
 export { MenuItem }
 
-export const Select = ({ name, defaultValue, children }) => {
+export const Select = ({ name, defaultValue, onChange, children }) => {
   const { control } = useFormContext()
 
   return (
@@ -13,8 +13,17 @@ export const Select = ({ name, defaultValue, children }) => {
       control={control}
       name={name}
       defaultValue={defaultValue}
-      render={({ field: { value = '', onChange } }) => (
-        <S.Select value={value} onChange={onChange}>
+      render={({ field }) => (
+        <S.Select
+          value={field.value}
+          onChange={(e) => {
+            field.onChange(e)
+
+            if (onChange) {
+              onChange(e)
+            }
+          }}
+        >
           {children}
         </S.Select>
       )}

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { MuiThemeProvider } from '@material-ui/core'
 import { Elements } from '@stripe/react-stripe-js'
@@ -15,13 +15,10 @@ import { createTheme } from '@material-ui/core/styles'
 import { GlobalStyles } from 'styles/GlobalStyles'
 import 'styles/fonts.css'
 
-const stripePromise = loadStripe(
-  'pk_test_51JXcqEBmR4XWceWFiU56mb6ztWQMkIrdrJvl2CkW9WGcoHcbfkZCzieUTSl2UUvmRIf985mgIXjrKDy3oWv6FJta002OlQs1Y3'
-)
-
 const App = ({ Component, pageProps }) => {
   const router = useRouter()
-
+  const [stripePromise, setStripePromise] = useState(null)
+  console.log(2, stripePromise)
   const { isIdLoading, role } = userStore
 
   const currentPathname = router.pathname
@@ -44,6 +41,15 @@ const App = ({ Component, pageProps }) => {
   useEffect(async () => {
     const id = await userStore.getMyId()
 
+    try {
+      const stripePromise = await loadStripe(
+        'pk_test_51JXcqEBmR4XWceWFiU56mb6ztWQMkIrdrJvl2CkW9WGcoHcbfkZCzieUTSl2UUvmRIf985mgIXjrKDy3oWv6FJta002OlQs1Y3'
+      )
+      setStripePromise(stripePromise)
+    } catch ({ message }) {
+      console.log('stripe load error', message)
+    }
+
     if (id) {
       await userStore.getUserRole(id)
       await userStore.getPersonalData(id)
@@ -51,10 +57,6 @@ const App = ({ Component, pageProps }) => {
 
     if (id && isAuthRoute) {
       window.location.href = ROUTES.ACCOUNT
-    }
-
-    if (!id && isProtectedRoute) {
-      window.location.href = ROUTES.AUTH
     }
   }, [])
 

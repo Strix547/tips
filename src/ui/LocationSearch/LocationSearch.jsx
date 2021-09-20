@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react'
+import { useFormContext } from 'react-hook-form'
 import { toJS } from 'mobx'
 import { observer } from 'mobx-react-lite'
 import throttle from 'lodash.throttle'
@@ -9,7 +10,9 @@ import { Autocomplete } from 'ui'
 
 import * as S from './LocationSearch.styled'
 
-export const LocationSearch = observer(({ useFormProps }) => {
+export const LocationSearch = observer(() => {
+  const useFormProps = useFormContext()
+
   const [selectedCountry, setSelectedCountry] = useState(null)
   const [selectedCity, setSelectedCity] = useState(null)
 
@@ -28,6 +31,7 @@ export const LocationSearch = observer(({ useFormProps }) => {
   }
 
   const onCityChange = (_, newCity, reason) => {
+    console.log(useFormProps.watch(), reason, newCity, useFormProps.formState.errors)
     if (reason !== 'select-option') return
 
     setSelectedCity(newCity)
@@ -40,6 +44,8 @@ export const LocationSearch = observer(({ useFormProps }) => {
   }
 
   const onCountryChange = (_, newCountry, reason) => {
+    console.log(useFormProps.watch(), reason, newCountry, useFormProps.formState.errors)
+
     if (reason !== 'select-option') return
 
     localStore.setSelectedCountryCode(newCountry.code)

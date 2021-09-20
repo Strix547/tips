@@ -9,6 +9,7 @@ export const RecipientCardContainer = styled(WhiteBox)`
   flex-direction: column;
   padding: 30px;
   min-height: 100vh;
+  border-radius: 0;
   box-sizing: border-box;
 
   ${({ bgColor }) =>
@@ -18,7 +19,6 @@ export const RecipientCardContainer = styled(WhiteBox)`
     `}
 
   ${Heading} {
-    background: #fff;
     margin-bottom: 30px;
   }
 
@@ -39,7 +39,9 @@ export const RecipientCardContainer = styled(WhiteBox)`
     }
 
     ${RecipientCard} {
-      width: 100%;
+      width: calc(100% - 30px);
+      margin: auto 15px;
+      padding: 30px 0;
       border: none;
     }
 

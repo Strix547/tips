@@ -1,9 +1,19 @@
 import { API } from 'core/axios'
+import { toast } from 'react-toastify'
 
 export const addBankAccount = ({ userId, stripeToken }) => {
-  const { data } = API.post('/stripe-bank-account/add', {
-    ownerUserId: userId,
-    stripeBankAccountToken: stripeToken
-  })
-  return data?.bankAccountId
+  try {
+    const res = API.post('/stripe-bank-account/add', {
+      ownerUserId: userId,
+      stripeBankAccountToken: stripeToken
+    })
+
+    if (res.status === 403) {
+      throw new Error('403 Forbidden')
+    }
+
+    return res?.data?.bankAccountId
+  } catch ({ message }) {
+    toast.error(message)
+  }
 }

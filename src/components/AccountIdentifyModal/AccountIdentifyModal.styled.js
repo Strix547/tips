@@ -6,6 +6,8 @@ import { Button } from 'ui/Button/Button.styled'
 import { Stepper } from 'ui/Stepper/Stepper.styled'
 import { FormField } from 'ui/FormField/FormField.styled'
 
+import { media } from 'styles/media'
+
 export { Heading, Text, FormField, ErrorText }
 
 export const AccountIdentifyModal = styled(Modal)`
@@ -34,6 +36,19 @@ export const Content = styled.div`
   ${Stepper} {
     margin-top: 30px;
   }
+
+  ${media.createMedia(500)} {
+    width: 100%;
+    border-radius: 0;
+  }
+
+  @media (max-height: 835px) {
+    padding: 15px 0;
+
+    ${FormField} .form-field-input-root {
+      height: 36px;
+    }
+  }
 `
 
 export const FieldsLabel = styled(Text)`
@@ -53,6 +68,10 @@ export const StepNav = styled.div`
       margin-left: auto;
     }
   }
+
+  ${media.createMedia(500)} {
+    padding: 0 15px;
+  }
 `
 
 export const Step = styled.div`
@@ -61,5 +80,9 @@ export const Step = styled.div`
 
   ${ErrorText} {
     margin-top: 15px;
+  }
+
+  ${media.createMedia(500)} {
+    padding: 0 15px;
   }
 `

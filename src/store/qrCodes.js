@@ -35,6 +35,7 @@ export const qrCodesStore = makeAutoObservable({
   getQrCode: async (qrId) => {
     const qr = await qrCodesApi.getQrCodeData(qrId)
     qrCodesStore.qrCode = qr
+    return qr
   },
 
   getQrCodes: async (userId) => {
@@ -55,10 +56,11 @@ export const qrCodesStore = makeAutoObservable({
         bgColor,
         buttonColor
       })
+      qrCodesStore.getQrCodes(userStore.id)
       router.push(ROUTES.ACCOUNT_QR_CODES)
       toast.success('Qr successfully created')
-    } catch (e) {
-      toast.error(e.message)
+    } catch ({ message }) {
+      toast.error(message)
     }
   },
 
@@ -71,9 +73,7 @@ export const qrCodesStore = makeAutoObservable({
       bgColor,
       buttonColor
     })
-    const qrCodes = await qrCodesApi.getQrCodes(userStore.id)
-    qrCodesStore.qrCodes = qrCodes
-
+    qrCodesStore.getQrCodes(userStore.id)
     router.push(ROUTES.ACCOUNT_QR_CODES)
     toast.success('Qr successfully changed')
   },
@@ -81,11 +81,10 @@ export const qrCodesStore = makeAutoObservable({
   deleteQrCode: async (id) => {
     try {
       await qrCodesApi.removeQrCode(id)
-      const qrCodes = await qrCodesApi.getQrCodes(userStore.id)
-      qrCodesStore.qrCodes = qrCodes
+      qrCodesStore.getQrCodes(userStore.id)
       toast.success('Qr successfully deleted')
-    } catch (e) {
-      console.log('delete qr error', e)
+    } catch ({ message }) {
+      toast.error(message)
     }
   }
 })

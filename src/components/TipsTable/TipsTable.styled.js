@@ -33,12 +33,6 @@ export const Top = styled.div`
     width: auto;
   }
 
-  ${media.createMedia(1420)} {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-  }
-
   ${media.createMedia(920)} {
     flex-direction: row;
   }
@@ -47,22 +41,33 @@ export const Top = styled.div`
     padding: 20px 14px;
   }
 
-  ${media.createMedia(600)} {
-    flex-direction: column;
+  ${media.createMedia(750)} {
+    padding: 20px 0;
+  }
 
-    ${ExcelDownload}, ${TimePeriodFilter} ${Select} {
+  ${media.createMedia(670)} {
+    flex-wrap: wrap;
+    gap: 20px;
+
+    ${TimePeriodFilter}, ${TimePeriodFilter} ${Select}, ${ExcelDownload} {
       width: 100%;
     }
 
     ${ExcelDownload} {
       justify-content: center;
+      background: #fff;
     }
   }
 `
 
 export const TopLeft = styled.div`
   display: flex;
+  align-items: center;
   gap: 10px;
+
+  ${media.createMedia(670)} {
+    width: 100%;
+  }
 `
 
 export const TableContainer = styled.div`
@@ -106,7 +111,7 @@ export const TableContainer = styled.div`
   }
 
   ${media.createMedia(1360)} {
-    ${Table} {
+    /* ${Table} {
       .MuiDataGrid {
         &-row,
         &-columnHeaderWrapper {
@@ -132,7 +137,7 @@ export const TableContainer = styled.div`
           min-width: auto !important;
         }
       }
-    }
+    } */
   }
 
   ${media.createMedia(880)} {
@@ -252,4 +257,39 @@ export const TipCardRow = styled.div`
       color: var(--color-gray-300);
     }
   }
+`
+
+export const TableSkeleton = styled.div`
+  margin-top: 60px;
+
+  span {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 0;
+    gap: 10px;
+  }
+
+  ${media750} {
+    display: none;
+  }
+`
+
+export const TipCardSkeleton = styled.div`
+  display: none;
+  margin-top: 10px;
+
+  span {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  ${media750} {
+    display: block;
+  }
+`
+
+export const NoTipsText = styled(Text)`
+  text-align: center;
+  font-weight: 500;
 `

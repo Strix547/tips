@@ -5,6 +5,7 @@ import { FieldsLabel } from '../../AccountIdentifyModal.styled'
 export { FieldsLabel }
 
 export const PersonalDataStep = styled.form`
-  display: grid;
-  grid-gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `

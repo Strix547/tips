@@ -32,7 +32,7 @@ export const AccountIdentifyModal = ({ open }) => {
   const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return <PersonalDataStep useFormProps={useFormProps} />
+        return <PersonalDataStep />
       case 1:
         return <AccountTypeStep useFormProps={useFormProps} />
       case 2:
@@ -81,13 +81,12 @@ export const AccountIdentifyModal = ({ open }) => {
       }
 
       if (token) {
-
         userStore.identifyAccount({
           userId: userStore.id,
           email,
           firstName,
           lastName,
-          birthDate: birthDate.toISOString().split("T")[0],
+          birthDate: birthDate.toISOString().split('T')[0],
           countryCode: localStore.selectedCountryCode,
           city,
           address,
@@ -117,7 +116,7 @@ export const AccountIdentifyModal = ({ open }) => {
         <FormProvider {...useFormProps}>
           <S.Step>
             {getStepContent(step)}
-            <S.ErrorText>{stripeError}</S.ErrorText>
+            {step === 2 && stripeError && <S.ErrorText>{stripeError}</S.ErrorText>}
           </S.Step>
         </FormProvider>
 

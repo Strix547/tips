@@ -18,9 +18,6 @@ export const CodeStep = ({
 
   const codeCooldown = 59000
 
-  const [_, one, two, three, four, five, six, seven, eight, nine, ten, eleven] = phone || []
-  const phoneLabel = `+${one} ${two}${three}${four} ${five}${six}${seven}-${eight}${nine}-${ten}${eleven}`
-
   const onResendClick = () => {
     if (countdownRef?.current) {
       onCodeResend()
@@ -32,7 +29,7 @@ export const CodeStep = ({
   return (
     <S.CodeStep>
       <S.SendText>
-        Отправили код подтверждения на номер <br /> {phoneLabel}
+        Отправили код подтверждения на номер <br /> +{phone}
       </S.SendText>
 
       <S.Label>Пароль из смс</S.Label>
@@ -45,6 +42,7 @@ export const CodeStep = ({
             ref={countdownRef}
             date={Date.now() + codeCooldown}
             intervalDelay={1000}
+            autoFocus
             renderer={({ seconds }) =>
               isCodeSendAllow ? (
                 <S.SendCodeButton onClick={onResendClick}>Отправить код повторно</S.SendCodeButton>

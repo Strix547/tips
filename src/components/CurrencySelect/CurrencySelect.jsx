@@ -1,15 +1,11 @@
 import { MenuItem, Select } from 'ui'
 
+import { CURRENCIES } from 'core/constants'
+
 import * as S from './CurrencySelect.styled'
 
 export const CurrencySelect = () => {
-  const currencies = [
-    { label: 'USD', value: 'USD' },
-    { label: 'EUR', value: 'EUR' },
-    { label: 'GBR', value: 'GBR' }
-  ]
-
-  const periodMenuItems = currencies.map(({ label, value }) => (
+  const periodMenuItems = CURRENCIES.map(({ label, value }) => (
     <MenuItem key={label} value={value}>
       {label}
     </MenuItem>

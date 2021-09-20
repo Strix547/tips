@@ -1,32 +1,19 @@
-import { useEffect } from 'react'
-import { useForm, FormProvider, Controller } from 'react-hook-form'
+import { useFormContext, Controller } from 'react-hook-form'
 
 import { Switch, Button, ColorPickerField, FormField } from 'ui'
 
-import { localStore, qrCodesStore } from 'store'
+import { CURRENCIES } from 'core/constants'
 
 import * as S from './PaymentCardOptionsPanel.styled'
 
 export const PaymentCardOptionsPanelIndividual = ({ action }) => {
-  const useFormProps = useForm()
+  const { control } = useFormContext()
 
-  const { name, preset1, preset2, preset3, impressions, bgColor, buttonColor } =
-    useFormProps.watch()
-  const currencyLabel = localStore.currency.label
-
-  useEffect(() => {
-    qrCodesStore.setQrCode({
-      name,
-      amountPresets: [preset1, preset2, preset3],
-      impressions,
-      bgColor,
-      buttonColor
-    })
-  }, [name, preset1, preset2, preset3, impressions, bgColor, buttonColor])
+  const currencySymbol = CURRENCIES.find(({ value }) => value === 'EUR').symbol
 
   const tipAmountPresetFileds = ['preset1', 'preset2', 'preset3'].map((name) => (
     <Controller
-      control={useFormProps.control}
+      control={control}
       name={name}
       render={({ field }) => {
         const { value, onChange } = field
@@ -35,7 +22,7 @@ export const PaymentCardOptionsPanelIndividual = ({ action }) => {
           <S.FormField
             value={value}
             placeholder="Сумма"
-            InputProps={{ endAdornment: currencyLabel }}
+            InputProps={{ endAdornment: currencySymbol }}
             onChange={({ target: { value } }) => {
               const numReg = /^\d+$/
               const isNumber = numReg.test(value)
@@ -54,40 +41,26 @@ export const PaymentCardOptionsPanelIndividual = ({ action }) => {
     />
   ))
 
-  const onActionClick = () => {
-    action.onClick({
-      name,
-      preset1,
-      preset2,
-      preset3,
-      impressions,
-      bgColor,
-      buttonColor
-    })
-  }
-
   return (
     <S.PaymentCardOptionsPanelIndividual>
-      <FormProvider {...useFormProps}>
-        <FormField label="Название" name="name" placeholder="Введите название" required />
+      <FormField label="Название" name="name" placeholder="Введите название" required />
 
-        <S.AmountPresetsRow>
-          <S.Label>Предустановленные суммы чаевых</S.Label>
+      <S.AmountPresetsRow>
+        <S.Label>Предустановленные суммы чаевых</S.Label>
 
-          <S.AmountPresetsFields>{tipAmountPresetFileds}</S.AmountPresetsFields>
-        </S.AmountPresetsRow>
+        <S.AmountPresetsFields>{tipAmountPresetFileds}</S.AmountPresetsFields>
+      </S.AmountPresetsRow>
 
-        <S.Options>
-          <S.Label>Впечатления</S.Label>
-          <Switch name="impressions" size="big" />
-        </S.Options>
+      <S.Options>
+        <S.Label>Впечатления</S.Label>
+        <Switch name="impressions" size="big" />
+      </S.Options>
 
-        <ColorPickerField name="bgColor" defaultValue="#fff" label="Код цвета для подложки" />
+      <ColorPickerField name="bgColor" label="Код цвета для подложки" />
 
-        <ColorPickerField name="buttonColor" defaultValue="#3bc76b" label="Код цвета для кнопки" />
+      <ColorPickerField name="buttonColor" label="Код цвета для кнопки" />
 
-        <Button onClick={onActionClick}>{action.label}</Button>
-      </FormProvider>
+      <Button onClick={action.onClick}>{action.label}</Button>
     </S.PaymentCardOptionsPanelIndividual>
   )
 }

@@ -1,15 +1,27 @@
 import styled, { css } from 'styled-components'
 
-import { RadioGroup } from 'ui'
+import { RadioGroup } from 'ui/RadioGroup/RadioGroup.styled'
 import { Select } from 'ui/Select/Select.styled'
 import { Modal } from 'ui/Modal/Modal.styled'
 
 import { media } from 'styles/media'
 
-const media920 = media.createMedia(920)
+const media1500 = media.createMedia(1500)
 
 export const TimePeriodFilter = styled.div`
   width: 100%;
+
+  ${RadioGroup} {
+    padding: 8px 10px;
+    border: 1px solid var(--color-gray-200);
+    border-radius: 40px;
+    background: #fff;
+    box-sizing: border-box;
+
+    ${media1500} {
+      display: none !important;
+    }
+  }
 
   ${Select} {
     display: none;
@@ -28,22 +40,10 @@ export const TimePeriodFilter = styled.div`
     }
   }
 
-  ${media920} {
+  ${media1500} {
     ${Select} {
       display: block;
     }
-  }
-`
-
-export const PeriodRadioGroup = styled(RadioGroup)`
-  padding: 8px 10px;
-  border: 1px solid var(--color-gray-200);
-  border-radius: 40px;
-  background: #fff;
-  box-sizing: border-box;
-
-  ${media920} {
-    display: none !important;
   }
 `
 

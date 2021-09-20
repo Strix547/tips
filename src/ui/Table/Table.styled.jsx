@@ -12,7 +12,8 @@ export const Table = styled((props) => (
     components={{
       ColumnUnsortedIcon: SortIcon,
       ColumnSortedDescendingIcon: SortDescendingIcon,
-      ColumnSortedAscendingIcon: SortAscendingIcon
+      ColumnSortedAscendingIcon: SortAscendingIcon,
+      ...props.components
     }}
     autoHeight
     hideFooter
@@ -91,6 +92,14 @@ export const Table = styled((props) => (
         &:last-child .MuiDataGrid-cell {
           border-bottom: none;
         }
+      }
+
+      &-overlay {
+        background: #fff;
+        font-family: 'Formular';
+        font-size: var(--font-size-reg);
+        font-weight: 500;
+        color: var(--color-black-200);
       }
 
       &-columnSeparator {

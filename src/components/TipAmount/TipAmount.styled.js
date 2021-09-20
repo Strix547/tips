@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { RadioGroup } from 'ui'
+import { RadioGroup } from 'ui/RadioGroup/RadioGroup.styled'
 import { FormField } from 'ui/FormField/FormField.styled'
 
 export const TipAmount = styled.div`
@@ -9,19 +9,16 @@ export const TipAmount = styled.div`
       background: #fff;
     }
   }
-`
 
-export const BaseAmountRadioGroup = styled(RadioGroup)`
-  && {
+  ${RadioGroup} {
     display: grid;
-  }
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    margin-top: 20px;
 
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px;
-  margin-top: 20px;
-
-  .form-control-label {
-    width: 100%;
+    .form-control-label {
+      width: 100%;
+    }
   }
 `
 

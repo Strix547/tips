@@ -1,16 +1,22 @@
 import { useState } from 'react'
-import { FormProvider } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
+import { useMediaQuery } from 'react-responsive'
 import { Radio } from '@material-ui/core'
 
-import { FormControlLabel, MenuItem, Select, DatePicker } from 'ui'
+import { FormControlLabel, MenuItem, Select, DatePicker, RadioGroup } from 'ui'
 
 import * as S from './TimePeriodFilter.styled'
 
-export const TimePeriodFilter = ({ useFormProps }) => {
+export const TimePeriodFilter = () => {
+  const screenLess1500 = useMediaQuery({ maxWidth: 1500 })
+  const screenLess700 = useMediaQuery({ maxWidth: 700 })
+  const { watch } = useFormContext()
+
   const [isDatePickerModalOpen, setDatePickerModalOpen] = useState(false)
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(null)
-  const [period, setPeriod] = useState('MONTH')
+
+  const periodSelected = watch('period')
 
   const periods = [
     { label: 'За сегодня', value: 'TODAY' },
@@ -21,33 +27,10 @@ export const TimePeriodFilter = ({ useFormProps }) => {
     { label: 'За период', value: 'custom' }
   ]
 
-  const periodRadios = periods.map(({ label, value }) => {
-    const onLabelClick = () => {
-      if (value === 'custom') {
-        setDatePickerModalOpen(true)
-      }
+  const chooseCustomPeriod = (value) => {
+    if (value === 'custom') {
+      setDatePickerModalOpen(true)
     }
-
-    return (
-      <FormControlLabel
-        key={value}
-        value={value}
-        label={<S.PeriodRadio active={period === value}>{label}</S.PeriodRadio>}
-        control={<Radio />}
-        onClick={onLabelClick}
-      />
-    )
-  })
-
-  const periodMenuItems = periods.map(({ label, value }) => (
-    <MenuItem key={label} value={value}>
-      {label}
-    </MenuItem>
-  ))
-
-  const onPeriodChange = (value) => {
-    setPeriod(value)
-    useFormProps.setValue('period', value)
   }
 
   const onDateChange = ([start, end]) => {
@@ -55,17 +38,29 @@ export const TimePeriodFilter = ({ useFormProps }) => {
     setEndDate(end)
   }
 
+  const periodRadios = periods.map(({ label, value }) => (
+    <FormControlLabel
+      key={value}
+      value={value}
+      label={<S.PeriodRadio active={periodSelected === value}>{label}</S.PeriodRadio>}
+      control={<Radio />}
+      onClick={() => chooseCustomPeriod(value)}
+    />
+  ))
+
+  const periodMenuItems = periods.map(({ label, value }) => (
+    <MenuItem key={label} value={value} onClick={() => chooseCustomPeriod(value)}>
+      {label}
+    </MenuItem>
+  ))
+
   return (
     <S.TimePeriodFilter>
-      <S.PeriodRadioGroup
-        name="period"
-        value={period}
-        onChange={(_, value) => onPeriodChange(value)}
-      >
-        {periodRadios}
-      </S.PeriodRadioGroup>
-
-      <Select name="period">{periodMenuItems}</Select>
+      {!screenLess1500 ? (
+        <RadioGroup name="period">{periodRadios}</RadioGroup>
+      ) : (
+        <Select name="period">{periodMenuItems}</Select>
+      )}
 
       <S.DatePickerModal open={isDatePickerModalOpen} onClose={() => setDatePickerModalOpen(false)}>
         <DatePicker
@@ -73,7 +68,7 @@ export const TimePeriodFilter = ({ useFormProps }) => {
           onChange={onDateChange}
           startDate={startDate}
           endDate={endDate}
-          monthsShown={2}
+          monthsShown={!screenLess700 ? 2 : 1}
           selectsRange
           inline
         />

@@ -1,12 +1,9 @@
 import Link from 'next/link'
-import { Checkbox } from 'ui'
+import { Checkbox, FormField, LocationSearch } from 'ui'
 
 import * as S from './CreditCardStep.styled'
 
-export const CreditCardStep = () => {
-  // const stripe = useStripe()
-  // const elements = useElements()
-
+export const CreditCardStep = ({ useFormProps }) => {
   const ibanOptions = {
     supportedCountries: ['SEPA'],
     style: {
@@ -18,14 +15,18 @@ export const CreditCardStep = () => {
 
   return (
     <S.CreditCardStep>
-      <S.FieldsLabel>Введите данные вашей карты:</S.FieldsLabel>
+      <S.FieldsLabel>Заполните поля:</S.FieldsLabel>
 
-      <S.Iban
-        options={ibanOptions}
-        onChange={(e) => {
-          console.log(e, e.target, e.target.value)
-        }}
-      />
+      <LocationSearch useFormProps={useFormProps} />
+
+      <FormField name="address" label="Адрес" placeholder="Введите адрес" required />
+
+      <FormField name="postal" label="Индекс" placeholder="Введите почтовый индекс" required />
+
+      <S.IbanContainer>
+        <S.Label>IBAN</S.Label>
+        <S.Iban options={ibanOptions} />
+      </S.IbanContainer>
 
       <S.Agreement>
         <Checkbox rules={{ required: true }} name="agreement" />

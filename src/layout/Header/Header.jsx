@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { observer } from 'mobx-react-lite'
+import Skeleton from 'react-loading-skeleton'
 import Link from 'next/link'
 
 import { LinkButton, MenuItem, Drawer } from 'ui'
@@ -15,12 +16,13 @@ import * as S from './Header.styled'
 import FlagRu from '@public/icons/flags/ru.svg'
 import FlagUsa from '@public/icons/flags/usa.svg'
 import MenuHamburger from '@public/icons/menu-hamburger.svg'
-import UserIcon from '@public/icons/user.svg'
 
 export const Header = observer(({ withSidebar }) => {
   const useFormProps = useForm()
+
   const [isMenuOpen, setMenuOpen] = useState(false)
-  const { firstName, lastName, email } = userStore.personalData
+  const { personalData, isPersonalDataLoading } = userStore
+  const { firstName, lastName, email } = personalData
 
   const nav = [
     { label: 'Получателям', link: ROUTES.RECIPIENTS },
@@ -54,6 +56,20 @@ export const Header = observer(({ withSidebar }) => {
     </MenuItem>
   ))
 
+  const userInfo = !isPersonalDataLoading ? (
+    <>
+      <S.Text>
+        <span>{firstName}</span> <span>{lastName}</span>
+      </S.Text>
+      <S.Text>{email}</S.Text>
+    </>
+  ) : (
+    <>
+      <Skeleton width={170} style={{ marginBottom: 5 }} height={20} />
+      <Skeleton width={170} height={20} />
+    </>
+  )
+
   return (
     <S.Header>
       <S.Container>
@@ -77,18 +93,7 @@ export const Header = observer(({ withSidebar }) => {
             </FormProvider>
 
             {authStore.isAuth ? (
-              <S.User>
-                <S.UserAvatar>
-                  <UserIcon />
-                </S.UserAvatar>
-
-                <S.UserInfo>
-                  <S.Text>
-                    <span>{firstName}</span> <span>{lastName}</span>
-                  </S.Text>
-                  <S.Text>{email}</S.Text>
-                </S.UserInfo>
-              </S.User>
+              <S.User>{userInfo}</S.User>
             ) : (
               <LinkButton href={ROUTES.AUTH} size="inline">
                 Вход

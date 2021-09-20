@@ -22,7 +22,13 @@ export const DatePicker = ({ label, name, rules, required, defaultValue, ...prop
         <S.DatePicker haveError={haveError}>
           {label && <S.Label>{label}</S.Label>}
 
-          <Picker {...props} selected={value} onChange={onChange} onSelect={onChange} />
+          <Picker
+            {...props}
+            defaultValue={defaultValue}
+            selected={value}
+            onChange={onChange}
+            onSelect={onChange}
+          />
         </S.DatePicker>
       )}
     />

@@ -59,9 +59,9 @@ export const TopBackground = styled.div`
   height: 100%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  background: ${({ color = '#fff' }) => color};
+  background: ${({ $color = '#fff' }) => $color};
 `
 
 export const Button = styled(ButtonUI)`
-  background: ${({ color = 'var(--color-primary-200)' }) => color};
+  background: ${({ $color = 'var(--color-primary-200)' }) => $color};
 `

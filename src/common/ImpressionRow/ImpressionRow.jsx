@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
 import { Radio } from '@material-ui/core'
 import Image from 'next/image'
 
@@ -13,7 +13,9 @@ import smilingHeartEyesImg from '@public/img/emodji/smiling-heart-eyes.png'
 import smilingSunglassesImg from '@public/img/emodji/smiling-sunglasses.png'
 
 export const ImpressionRow = () => {
-  const [emodji, setEmodji] = useState(null)
+  const useFormProps = useForm()
+
+  const emodjiSelected = useFormProps.watch('emodji')
 
   const emodjies = [
     { value: 'slightly frowing', img: slightlyFrowningImg },
@@ -23,18 +25,13 @@ export const ImpressionRow = () => {
     { value: 'smiling with sunglasses', img: smilingSunglassesImg }
   ]
 
-  const onEmodjiChange = (value) => {
-    setEmodji(value)
-    // onChange(value)
-  }
-
   const emodjiRadios = emodjies.map(({ value, img }) => {
     return (
       <FormControlLabel
         key={value}
         value={value}
         label={
-          <S.EmodjiRadio active={emodji === value}>
+          <S.EmodjiRadio active={emodjiSelected === value}>
             <Image src={img} alt={value} />
           </S.EmodjiRadio>
         }
@@ -45,15 +42,11 @@ export const ImpressionRow = () => {
 
   return (
     <S.ImpressionRow>
-      <S.Text>Ваши впечатления</S.Text>
+      <FormProvider {...useFormProps}>
+        <S.Text>Ваши впечатления</S.Text>
 
-      <S.EmodjiRadioGroup
-        name="emodji"
-        value={emodji}
-        onChange={(_, value) => onEmodjiChange(value)}
-      >
-        {emodjiRadios}
-      </S.EmodjiRadioGroup>
+        <S.EmodjiRadioGroup name="emodji">{emodjiRadios}</S.EmodjiRadioGroup>
+      </FormProvider>
     </S.ImpressionRow>
   )
 }

@@ -8,6 +8,19 @@ export const Content = styled.div`
   display: flex;
   gap: 30px;
 
+  /* skeleton */
+  & > span {
+    width: 100%;
+
+    &:nth-of-type(2) {
+      max-width: 354px;
+    }
+
+    span {
+      width: 100% !important;
+    }
+  }
+
   ${PaymentCardOptionsPanelIndividual} {
     width: 720px;
   }

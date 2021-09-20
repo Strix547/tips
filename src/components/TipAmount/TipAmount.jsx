@@ -1,26 +1,20 @@
-import { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { Radio } from '@material-ui/core'
 
-import { FormField, FormControlLabel } from 'ui'
+import { FormField, RadioGroup, FormControlLabel } from 'ui'
 
 import { localStore } from 'store'
 
 import * as S from './TipAmount.styled'
 
-export const TipAmount = ({ presets = [100, 149, 299], onChange }) => {
+export const TipAmount = ({ presets = [100, 149, 299] }) => {
   const useFormProps = useForm()
 
-  const [selectedPreset, setSelectedPreset] = useState(presets[0])
+  const presetSelected = useFormProps.watch('preset')
 
   const currencyLabel = localStore.currency.label
   const minPresetValue = Math.min(...presets)
   const maxPresetValue = Math.max(...presets)
-
-  const onBaseAmountChange = (value) => {
-    setSelectedPreset(parseInt(value, 10))
-    // onChange(value)
-  }
 
   const baseAmountRadios = presets.map((value) => {
     return (
@@ -28,7 +22,7 @@ export const TipAmount = ({ presets = [100, 149, 299], onChange }) => {
         key={value}
         value={value}
         label={
-          <S.BaseAmountRadio active={selectedPreset === value}>
+          <S.BaseAmountRadio active={parseInt(presetSelected, 10) === value}>
             {value} {currencyLabel}
           </S.BaseAmountRadio>
         }
@@ -47,13 +41,7 @@ export const TipAmount = ({ presets = [100, 149, 299], onChange }) => {
           InputProps={{ endAdornment: currencyLabel }}
         />
 
-        <S.BaseAmountRadioGroup
-          name="emodji"
-          value={selectedPreset}
-          onChange={(_, value) => onBaseAmountChange(value)}
-        >
-          {baseAmountRadios}
-        </S.BaseAmountRadioGroup>
+        <RadioGroup name="preset">{baseAmountRadios}</RadioGroup>
       </FormProvider>
     </S.TipAmount>
   )

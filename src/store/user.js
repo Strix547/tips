@@ -10,6 +10,7 @@ import * as bankAccountApi from 'api/bankAccount'
 export const userStore = makeAutoObservable({
   id: null,
   isIdLoading: false,
+  isPersonalDataLoading: false,
   role: null,
   personalData: {
     firstName: '',
@@ -42,8 +43,10 @@ export const userStore = makeAutoObservable({
   },
 
   getPersonalData: async (userId) => {
+    userStore.isPersonalDataLoading = true
     const personalData = await userApi.getUserInfo(userId)
     userStore.personalData = personalData
+    userStore.isPersonalDataLoading = false
     return personalData
   },
 
@@ -72,12 +75,11 @@ export const userStore = makeAutoObservable({
         postalCode,
         policyAgreement
       })
-      userStore.personalData = newInfo
       router.push(ROUTES.ACCOUNT)
       toast.success('Personal data successfully changed ')
       return newInfo
-    } catch {
-      console.log('changePersonalData error')
+    } catch ({ message }) {
+      toast.error(message)
     }
   },
 
@@ -117,6 +119,6 @@ export const userStore = makeAutoObservable({
     })
     await userApi.addUserRole({ userId, payer, recipient, agent, business })
     await bankAccountApi.addBankAccount({ userId, stripeToken })
-    await userApi.getUserRole(userId)
+    await userStore.getUserRole(userId)
   }
 })

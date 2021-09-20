@@ -132,27 +132,7 @@ export const Right = styled.div`
 
 export const User = styled.div`
   display: flex;
-  margin-left: 30px;
-
-  ${media.createMedia(700)} {
-    margin-left: 20px;
-  }
-`
-
-export const UserAvatar = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  width: 44px;
-  height: 44px;
-  background: var(--color-gray-600);
-  border: 1px solid var(--color-gray-200);
-  border-radius: 50%;
-  box-sizing: border-box;
-`
-
-export const UserInfo = styled.div`
+  flex-direction: column;
   margin-left: 15px;
 
   ${Text} {
@@ -180,6 +160,8 @@ export const UserInfo = styled.div`
 `
 
 export const LanguageSelect = styled(Select)`
+  width: 80px;
+
   .icon {
     right: 0;
   }

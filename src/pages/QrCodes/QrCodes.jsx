@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
-import { toJS } from 'mobx'
+import Skeleton from 'react-loading-skeleton'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
@@ -15,7 +15,7 @@ import * as S from './QrCodes.styled'
 export const QrCodesPage = observer(() => {
   const router = useRouter()
   const userId = userStore.id
-  const { qrCodes } = qrCodesStore
+  const { qrCodes, isQrCodesLoading } = qrCodesStore
 
   useEffect(async () => {
     if (qrCodes.length !== 0) return
@@ -28,11 +28,9 @@ export const QrCodesPage = observer(() => {
     }
   }, [userId, qrCodes])
 
-  const onAddQrClick = () => {
+  const toQrCreatePage = () => {
     router.push(ROUTES.ACCOUNT_QR_INDIVIDUAL_CREATE)
   }
-
-  console.log(toJS(qrCodes))
 
   const qrCodeList = qrCodes.map(({ id, templateId, name, img }) => (
     <QrCard key={id} id={id} templateId={templateId} tag="li" label={name} img={img} />
@@ -44,8 +42,8 @@ export const QrCodesPage = observer(() => {
         <title>Мои QR</title>
       </Head>
 
-      <AccountLayout title="Мои QR" button={{ label: 'Добавить QR-код', onClick: onAddQrClick }}>
-        <S.PlatformQrGrid>{qrCodeList}</S.PlatformQrGrid>
+      <AccountLayout title="Мои QR" button={{ label: 'Добавить QR-код', onClick: toQrCreatePage }}>
+        <S.QrGrid>{!isQrCodesLoading ? qrCodeList : <Skeleton height={418} count={6} />}</S.QrGrid>
       </AccountLayout>
     </>
   )

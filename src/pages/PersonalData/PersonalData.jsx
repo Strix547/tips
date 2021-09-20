@@ -1,4 +1,6 @@
+import { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
+import Skeleton from 'react-loading-skeleton'
 import { observer } from 'mobx-react-lite'
 
 import { AccountLayout } from 'layout'
@@ -10,13 +12,33 @@ import * as S from './PersonalData.styled'
 
 export const PersonalDataPage = observer(() => {
   const useFormProps = useForm()
-  const userId = userStore.id
+  const { isPersonalDataLoading, id: userId } = userStore
+
+  useEffect(async () => {
+    if (userId) {
+      const { firstName, lastName, birthDate, email, address, postal } =
+        await userStore.getPersonalData(userId)
+
+      const fieldsTemplate = [
+        { label: 'firstName', value: firstName },
+        { label: 'lastName', value: lastName },
+        { label: 'birthDate', value: birthDate },
+        { label: 'email', value: email },
+        { label: 'address', value: address },
+        { label: 'postal', value: postal }
+      ]
+
+      fieldsTemplate.forEach(({ label, value }) => {
+        useFormProps.setValue(label, value)
+      })
+    }
+  }, [userId])
 
   const onEditData = () => {
     const { firstName, lastName, email, city, address, postal, birthDate } =
       useFormProps.getValues()
     const countryCode = localStore.selectedCountryCode
-    console.log(useFormProps.getValues())
+
     userStore.changePersonalData({
       userId,
       firstName,
@@ -33,29 +55,27 @@ export const PersonalDataPage = observer(() => {
   return (
     <AccountLayout title="Персональные данные">
       <S.Content>
-        <FormProvider {...useFormProps}>
-          <FormField name="firstName" label="Имя" placeholder="Введите имя" required />
+        {!isPersonalDataLoading ? (
+          <FormProvider {...useFormProps}>
+            <FormField name="firstName" label="Имя" placeholder="Введите имя" />
 
-          <FormField name="lastName" label="Фамилия" placeholder="Введите фамилию" required />
+            <FormField name="lastName" label="Фамилия" placeholder="Введите фамилию" />
 
-          <DatePicker name="birthDate" dateFormat="dd/MM/yyyy" label="Дата рождения" required />
+            <DatePicker name="birthDate" dateFormat="dd/MM/yyyy" label="Дата рождения" />
 
-          <FormField
-            type="email"
-            name="email"
-            label="E-mail"
-            placeholder="Введите e-mail"
-            required
-          />
+            <FormField type="email" name="email" label="E-mail" placeholder="Введите e-mail" />
 
-          <LocationSearch useFormProps={useFormProps} />
+            <LocationSearch useFormProps={useFormProps} />
 
-          <FormField name="address" label="Адрес" placeholder="Введите адрес" required />
+            <FormField name="address" label="Адрес" placeholder="Введите адрес" />
 
-          <FormField name="postal" label="Индекс" placeholder="Введите почтовый индекс" required />
+            <FormField name="postal" label="Индекс" placeholder="Введите почтовый индекс" />
 
-          <Button onClick={onEditData}>Сохранить</Button>
-        </FormProvider>
+            <Button onClick={onEditData}>Сохранить</Button>
+          </FormProvider>
+        ) : (
+          <Skeleton count={7} height={88} />
+        )}
       </S.Content>
     </AccountLayout>
   )

@@ -1,22 +1,20 @@
 import styled from 'styled-components'
 import { IbanElement } from '@stripe/react-stripe-js'
 
-import { Text } from 'styled'
+import { Text, Label } from 'styled'
 import { FieldsLabel } from '../../AccountIdentifyModal.styled'
 
-export { FieldsLabel, Text }
+export { FieldsLabel, Text, Label }
 
 export const CreditCardStep = styled.div`
-  input {
-    font-family: 'Formular' !important;
-    color: red !important;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `
 
 export const Agreement = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 10px;
 
   ${Text} {
     margin-left: 15px;
@@ -33,12 +31,17 @@ export const Agreement = styled.div`
   }
 `
 
+export const IbanContainer = styled.div``
+
 export const Iban = styled(IbanElement)`
-  margin-top: 20px;
   padding: 14px 20px;
   font-family: 'Formular';
   font-size: var(--font-size-md);
   border: 1px solid var(--color-gray-400);
   border-radius: 8px;
   box-sizing: border-box;
+
+  @media (max-height: 835px) {
+    padding: 9px 20px;
+  }
 `

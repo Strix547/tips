@@ -1,3 +1,5 @@
+import { FormProvider, useForm } from 'react-hook-form'
+import { observer } from 'mobx-react-lite'
 import Head from 'next/head'
 
 import { AccountLayout } from 'layout'
@@ -7,20 +9,25 @@ import { userStore, qrCodesStore } from 'store'
 
 import * as S from './QrIndividualCreate.styled'
 
-export const QrIndividualCreatePage = () => {
-  const userId = userStore.id
+export const QrIndividualCreatePage = observer(() => {
+  const useFormProps = useForm({
+    defaultValues: {
+      name: '',
+      preset1: 100,
+      preset2: 149,
+      preset3: 299,
+      impressions: false,
+      bgColor: { hex: '#fff' },
+      buttonColor: { hex: '#3bc76b' }
+    }
+  })
+  const { watch, getValues } = useFormProps
 
-  const onCreateQrCode = ({
-    name,
-    preset1,
-    preset2,
-    preset3,
-    impressions,
-    bgColor,
-    buttonColor
-  }) => {
+  const createQr = () => {
+    const { name, preset1, preset2, preset3, impressions, bgColor, buttonColor } = getValues()
+
     qrCodesStore.createQrCode({
-      userId,
+      userId: userStore.id,
       name,
       amountPresets: [preset1, preset2, preset3],
       impressions,
@@ -37,12 +44,23 @@ export const QrIndividualCreatePage = () => {
 
       <AccountLayout title="Создать QR-код">
         <S.Content>
-          <PaymentCardOptionsPanelIndividual
-            action={{ label: 'Создать QR-код', onClick: onCreateQrCode }}
+          <FormProvider {...useFormProps}>
+            <PaymentCardOptionsPanelIndividual
+              action={{ label: 'Создать QR-код', onClick: createQr }}
+            />
+          </FormProvider>
+
+          <RecipientCardPreview
+            type="individual"
+            firstName={userStore.personalData.firstName}
+            lastName={userStore.personalData.lastName}
+            amountPresets={[watch('preset1'), watch('preset2'), watch('preset3')]}
+            impressions={watch('impressions')}
+            bgColor={watch('bgColor')?.hex}
+            buttonColor={watch('buttonColor')?.hex}
           />
-          <RecipientCardPreview type="individual" />
         </S.Content>
       </AccountLayout>
     </>
   )
-}
+})

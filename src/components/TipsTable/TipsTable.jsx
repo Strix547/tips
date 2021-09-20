@@ -1,22 +1,25 @@
+import { useFormContext } from 'react-hook-form'
+import Skeleton from 'react-loading-skeleton'
 import { observer } from 'mobx-react-lite'
 import { toJS } from 'mobx'
-import { FormProvider } from 'react-hook-form'
 import Link from 'next/link'
 
 import { TimePeriodFilter, StatisticRow, CurrencySelect } from 'components'
 import { ExcelDownload } from 'common'
 import { Table } from 'ui'
 
-import { localStore } from 'store'
 import { ROUTES } from 'core/routes'
+import { CURRENCIES } from 'core/constants'
 import { formatPrice } from 'utils'
 
 import * as S from './TipsTable.styled'
 
-export const TipsTable = observer(({ useFormProps, data = [], onExcelDownload }) => {
-  const currencyLabel = localStore.currency.label
+export const TipsTable = observer(({ data = [], isDataLoading, onExcelDownload }) => {
+  const { watch } = useFormContext()
 
+  const currencySymbolSelected = CURRENCIES.find(({ value }) => watch('currency') === value).symbol
   const transformedData = toJS(data)
+  const haveTips = transformedData.length !== 0
 
   const columns = [
     {
@@ -59,15 +62,15 @@ export const TipsTable = observer(({ useFormProps, data = [], onExcelDownload })
     { label: 'Средний чек', value: tipsAverage }
   ]
 
-  const tipCardList = transformedData.map(
-    ({ qrId, qrName, dateTime, tipAmount, impression, type }) => {
+  const tipCardList = haveTips ? (
+    transformedData.map(({ qrId, qrName, dateTime, tipAmount, impression, type }) => {
       return (
         <S.TipCard key={qrId}>
           <S.TipCardTop>
             <S.Text>
               {dateTime?.toLocaleDateString()} {dateTime?.toLocaleTimeString().slice(0, 5)}
             </S.Text>
-            <S.Text>{formatPrice(tipAmount, currencyLabel)}</S.Text>
+            <S.Text>{formatPrice(tipAmount, currencySymbolSelected)}</S.Text>
           </S.TipCardTop>
 
           <S.TipCardMain>
@@ -85,7 +88,7 @@ export const TipsTable = observer(({ useFormProps, data = [], onExcelDownload })
 
             <S.TipCardRow>
               <S.Text>Размер чаевых</S.Text>
-              <S.Text>{formatPrice(tipAmount, currencyLabel)}</S.Text>
+              <S.Text>{formatPrice(tipAmount, currencySymbolSelected)}</S.Text>
             </S.TipCardRow>
 
             <S.TipCardRow>
@@ -95,29 +98,50 @@ export const TipsTable = observer(({ useFormProps, data = [], onExcelDownload })
           </S.TipCardMain>
         </S.TipCard>
       )
-    }
+    })
+  ) : (
+    <S.NoTipsText>No tips for this period</S.NoTipsText>
   )
+
+  const statisticRow = haveTips ? (
+    <StatisticRow
+      stats={statisticTotal}
+      isLoading={isDataLoading}
+      currency={currencySymbolSelected}
+    />
+  ) : null
 
   return (
     <S.TipsTable>
       <S.Top>
-        <FormProvider {...useFormProps}>
-          <S.TopLeft>
-            <TimePeriodFilter useFormProps={useFormProps} />
-            <CurrencySelect />
-          </S.TopLeft>
+        <S.TopLeft>
+          <TimePeriodFilter />
+          <CurrencySelect />
+        </S.TopLeft>
 
-          <ExcelDownload onClick={onExcelDownload} />
-        </FormProvider>
+        <ExcelDownload onClick={onExcelDownload} />
       </S.Top>
 
       <S.TableContainer>
-        <StatisticRow stats={statisticTotal} />
+        {statisticRow}
 
-        <Table columns={columns} rows={rows} />
-        <S.TipCardList>{tipCardList}</S.TipCardList>
+        {!isDataLoading ? (
+          <Table columns={columns} rows={rows} />
+        ) : (
+          <S.TableSkeleton>
+            <Skeleton count={5} height={60} />
+          </S.TableSkeleton>
+        )}
 
-        <StatisticRow stats={statisticTotal} />
+        {!isDataLoading ? (
+          <S.TipCardList>{tipCardList}</S.TipCardList>
+        ) : (
+          <S.TipCardSkeleton>
+            <Skeleton count={5} height={184} />
+          </S.TipCardSkeleton>
+        )}
+
+        {statisticRow}
       </S.TableContainer>
     </S.TipsTable>
   )

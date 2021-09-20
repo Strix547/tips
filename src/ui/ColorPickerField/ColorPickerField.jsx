@@ -3,11 +3,12 @@ import { Controller, useFormContext } from 'react-hook-form'
 
 import * as S from './ColorPickerField.styled'
 
-export const ColorPickerField = ({ name, rules, label, defaultValue = '#000', ...props }) => {
-  const { control } = useFormContext()
+export const ColorPickerField = ({ name, rules, label, ...props }) => {
+  const { control, watch } = useFormContext()
+
   const rootRef = useRef(null)
   const [isColorPickerOpen, setColorPickerOpen] = useState(false)
-  const [color, setColor] = useState(defaultValue)
+  const [color, setColor] = useState()
 
   const onOutsideClick = (event) => {
     if (!rootRef?.current?.contains(event.target)) {
@@ -22,6 +23,12 @@ export const ColorPickerField = ({ name, rules, label, defaultValue = '#000', ..
       document.removeEventListener('click', onOutsideClick, true)
     }
   }, [])
+
+  useEffect(() => {
+    if (!color && watch(name)?.hex) {
+      setColor(watch(name).hex)
+    }
+  }, [watch(name)])
 
   return (
     <Controller

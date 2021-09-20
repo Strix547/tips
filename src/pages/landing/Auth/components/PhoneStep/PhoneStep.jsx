@@ -4,31 +4,29 @@ import { PhoneField, Switch, Button } from 'ui'
 
 import * as S from './PhoneStep.styled'
 
-export const PhoneStep = ({ onCodeSend }) => {
+export const PhoneStep = ({ onPhoneSubmit }) => {
   const useFormProps = useForm()
+  const { watch, handleSubmit } = useFormProps
 
-  const { phone, remember } = useFormProps.watch()
+  const { phone } = watch()
+
+  const onSubmit = ({ phone, remember }) => {
+    onPhoneSubmit({ phone, remember })
+  }
 
   return (
-    <S.PhoneStep>
+    <S.PhoneStep onSubmit={handleSubmit(onSubmit)}>
       <FormProvider {...useFormProps}>
         <PhoneField
           name="phone"
           rules={{ required: true }}
           country="ru"
           placeholder="+7 (___) ___-__-__"
-          inputProps={{
-            autoFocus: true
-          }}
         />
 
         <Switch name="remember" label="Запомнить меня" />
 
-        <Button
-          type="submit"
-          disabled={!phone || phone?.length < 11}
-          onClick={() => onCodeSend({ phone, remember })}
-        >
+        <Button type="submit" disabled={!phone || phone?.length < 11}>
           Продолжить
         </Button>
       </FormProvider>

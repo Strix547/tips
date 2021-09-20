@@ -20,8 +20,8 @@ const transformQrData = ({
     name,
     amountPresets: presetPaymentSizes,
     impressions: smiles,
-    bgColor: { hex: backgroundHexColor },
-    buttonColor: { hex: buttonHexColor },
+    bgColor: backgroundHexColor,
+    buttonColor: buttonHexColor,
     img: qrImagePngRef
   }
 }

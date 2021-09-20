@@ -1,8 +1,8 @@
+import Skeleton from 'react-loading-skeleton'
+
 import * as S from './StatisticRow.styled'
 
-export const StatisticRow = ({ stats }) => {
-  const currency = '₽'
-
+export const StatisticRow = ({ stats, isLoading, currency }) => {
   return (
     <S.StatisticRow>
       {stats.map(({ label, value }) => (
@@ -10,7 +10,11 @@ export const StatisticRow = ({ stats }) => {
           <S.Label>{label}:</S.Label>
 
           <S.Value>
-            {value.toLocaleString()} {currency}
+            {!isLoading ? (
+              `${value.toLocaleString()} ${currency}`
+            ) : (
+              <Skeleton width={60} height={20} />
+            )}
           </S.Value>
         </li>
       ))}

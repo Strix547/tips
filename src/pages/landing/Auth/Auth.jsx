@@ -21,14 +21,12 @@ export const AuthPage = () => {
   const [rememberUser, setRememberUser] = useState(false)
   const [isCodeSendAllow, setCodeSendAllow] = useState(true)
 
-  const onCodeSend = async ({ phone, remember }) => {
+  const sendCode = async ({ phone, remember }) => {
     if (!isCodeSendAllow) return
 
-    const phoneWithPlus = `+${phone}`
-
-    setPhone(phoneWithPlus)
+    setPhone(phone)
     setRememberUser(remember)
-    const isCodeSended = await authStore.sendCode(phoneWithPlus)
+    const isCodeSended = await authStore.sendCode(phone)
 
     if (isCodeSended) {
       setStep('code')
@@ -41,7 +39,7 @@ export const AuthPage = () => {
     setCodeSendAllow(false)
   }
 
-  const auth = async ({ phone, code, remember }) => {
+  const onAuth = async ({ phone, code, remember }) => {
     await authStore.auth({ phone, code, remember })
   }
 
@@ -61,7 +59,7 @@ export const AuthPage = () => {
             <S.Heading level={1}>Вход в Tips.me</S.Heading>
 
             {step === 'phone' ? (
-              <PhoneStep onCodeSend={onCodeSend} />
+              <PhoneStep onPhoneSubmit={sendCode} />
             ) : (
               <CodeStep
                 phone={phone}
@@ -70,7 +68,7 @@ export const AuthPage = () => {
                 onCodeResend={() => {
                   onCodeResend(phone)
                 }}
-                onCodeConfirm={(code) => auth({ phone, code, remember: rememberUser })}
+                onCodeConfirm={(code) => onAuth({ phone, code, remember: rememberUser })}
               />
             )}
           </S.LeftContent>

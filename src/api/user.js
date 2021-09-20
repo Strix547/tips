@@ -26,7 +26,11 @@ export const getUserRole = async (userId) => {
 
 export const getUserInfo = async (userId) => {
   const { data } = await API.get(`/personal-info/${userId}`)
-  return data
+
+  return {
+    ...data,
+    birthDate: new Date(data.dateOfBirth)
+  }
 }
 
 export const changeUserInfo = async ({
@@ -42,7 +46,7 @@ export const changeUserInfo = async ({
   policyAgreement
 }) => {
   try {
-    const data = await API.post(`/personal-info/${userId}/change`, {
+    const res = await API.post(`/personal-info/${userId}/change`, {
       email,
       firstName,
       lastName,
@@ -54,9 +58,13 @@ export const changeUserInfo = async ({
       tosAccepted: policyAgreement
     })
 
-    return data
-  } catch (e) {
-    console.log(e, Object.entries(e), e.response)
+    if (res?.status === 500) {
+      throw new Error(res.status)
+    }
+
+    return res
+  } catch ({ message }) {
+    throw new Error(message)
   }
 }
 

@@ -1,5 +1,6 @@
 import { useMediaQuery } from 'react-responsive'
 import { Bar } from 'react-chartjs-2'
+import Skeleton from 'react-loading-skeleton'
 
 import { createTooltip } from 'utils'
 
@@ -27,7 +28,8 @@ export const BarChart = ({
     '30',
     '31'
   ],
-  values = [590, 410, 580, 580, 590, 590, 420, 480, 490, 500, 539, 500, 420, 480, 510, 440, 510]
+  values = [590, 410, 580, 580, 590, 590, 420, 480, 490, 500, 539, 500, 420, 480, 510, 440, 510],
+  isLoading
 }) => {
   const screenTablet = useMediaQuery({ maxWidth: MEDIA_TABLET })
 
@@ -138,24 +140,30 @@ export const BarChart = ({
     <S.BarChart>
       <S.Heading level={6}>{title}</S.Heading>
 
-      <S.BarContainer>
-        <Bar
-          data={getBarData}
-          options={{
-            plugins: {
-              legend: {
-                display: false
-              },
-              tooltip
-            },
-            scales,
-            responsive: true,
-            maintainAspectRatio: false
-          }}
-        />
-      </S.BarContainer>
+      {!isLoading ? (
+        <>
+          <S.BarContainer>
+            <Bar
+              data={getBarData}
+              options={{
+                plugins: {
+                  legend: {
+                    display: false
+                  },
+                  tooltip
+                },
+                scales,
+                responsive: true,
+                maintainAspectRatio: false
+              }}
+            />
+          </S.BarContainer>
 
-      <S.Month>Май</S.Month>
+          <S.Month>Май</S.Month>
+        </>
+      ) : (
+        <Skeleton height={250} />
+      )}
     </S.BarChart>
   )
 }

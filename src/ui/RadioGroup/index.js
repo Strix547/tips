@@ -1,1 +1,1 @@
-export { RadioGroup } from './RadioGroup.styled'
+export { RadioGroup } from './RadioGroup'

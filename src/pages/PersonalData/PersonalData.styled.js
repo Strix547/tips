@@ -7,4 +7,11 @@ export const Content = styled(WhiteBox)`
   flex-direction: column;
   gap: 20px;
   padding: 40px;
+
+  /* skeleton */
+  & > span {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 `

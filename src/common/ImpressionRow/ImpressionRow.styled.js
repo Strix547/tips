@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { Text } from 'styled'
-import { RadioGroup } from 'ui'
+import { RadioGroup } from 'ui/RadioGroup/RadioGroup.styled'
 
 export { Text }
 

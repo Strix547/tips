@@ -13,6 +13,10 @@ export const BarChart = styled(WhiteBox)`
   padding: 30px;
   box-sizing: border-box;
 
+  ${Heading} {
+    margin-bottom: 30px;
+  }
+
   ${media.tablet} {
     padding: 30px 20px 20px;
   }
@@ -26,7 +30,6 @@ export const BarChart = styled(WhiteBox)`
 
 export const BarContainer = styled.div`
   height: 250px;
-  margin-top: 30px;
 `
 
 export const Month = styled.p`
@@ -39,8 +42,5 @@ export const Month = styled.p`
 
   ${media.tablet} {
     left: 20px;
-  }
-
-  ${media.createMedia(470)} {
   }
 `

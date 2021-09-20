@@ -1,3 +1,3 @@
 import styled from 'styled-components'
 
-export const PhoneStep = styled.div``
+export const PhoneStep = styled.form``
