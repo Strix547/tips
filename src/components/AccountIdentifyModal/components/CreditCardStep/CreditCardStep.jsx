@@ -1,4 +1,3 @@
-import { Elements } from '@stripe/react-stripe-js'
 import Link from 'next/link'
 
 import { Checkbox, FormField, LocationSearch } from 'ui'

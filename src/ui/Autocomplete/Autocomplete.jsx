@@ -6,15 +6,7 @@ import ArrowIcon from '@public/icons/arrows/gray-rounded-down.svg'
 
 import * as S from './Autocomplete.styled'
 
-export const Autocomplete = ({
-  label,
-  name,
-  rules,
-  onChange,
-  required,
-  defaultValue,
-  ...props
-}) => {
+export const Autocomplete = ({ label, name, rules, onChange, required, ...props }) => {
   const {
     control,
     formState: { errors }
@@ -27,19 +19,21 @@ export const Autocomplete = ({
         control={control}
         name={name}
         rules={required ? { ...rules, required: { value: true, message: 'required' } } : rules}
-        defaultValue={defaultValue}
-        render={({ fieldState: { value } }) => {
-          // const { error } = renderProps.fieldState
-
+        render={({ field }) => {
           return (
             <>
               {label && <S.Label>{label}</S.Label>}
 
               <MuiAutocomplete
                 {...props}
-                value={value}
-                defaultValue={defaultValue}
-                onChange={onChange}
+                value={field.value}
+                onChange={(e, value, reason, details) => {
+                  if (onChange) {
+                    onChange(e, value, reason, details)
+                  }
+
+                  field.onChange(value)
+                }}
                 classes={{
                   root: 'autocomplete',
                   inputRoot: 'autocomplete-input-root',
@@ -54,8 +48,6 @@ export const Autocomplete = ({
                 PaperComponent={S.Paper}
                 PopperComponent={S.Popper}
               />
-
-              {/* <S.ErrorText>{error?.message}</S.ErrorText> */}
             </>
           )
         }}

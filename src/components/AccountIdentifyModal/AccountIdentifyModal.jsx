@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { useStripe, useElements, IbanElement } from '@stripe/react-stripe-js'
 import { observer } from 'mobx-react-lite'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -19,9 +19,6 @@ export const AccountIdentifyModal = observer(({ stripePromise, open }) => {
     }
   })
 
-  console.log('values', useFormProps.watch())
-  console.log('errors', useFormProps.formState.errors)
-
   const [step, setStep] = useState(0)
   const [stripeError, setStripeError] = useState()
 
@@ -34,6 +31,11 @@ export const AccountIdentifyModal = observer(({ stripePromise, open }) => {
     </Step>
   ))
 
+  const crediteCardStepMemo = useMemo(
+    () => <CreditCardStep stripePromise={stripePromise} useFormProps={useFormProps} />,
+    [stripePromise, useFormProps]
+  )
+
   const getStepContent = (step) => {
     switch (step) {
       case 0:
@@ -41,7 +43,7 @@ export const AccountIdentifyModal = observer(({ stripePromise, open }) => {
       case 1:
         return <AccountTypeStep useFormProps={useFormProps} />
       case 2:
-        return <CreditCardStep stripePromise={stripePromise} useFormProps={useFormProps} />
+        return crediteCardStepMemo
     }
   }
 

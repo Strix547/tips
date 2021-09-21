@@ -40,12 +40,18 @@ export const Content = styled(WhiteBox)`
 
   ${media.createMedia(500)} {
     width: 100%;
+    box-shadow: none;
+    border: none;
     border-radius: 0;
   }
 
   @media (max-height: 835px) {
     padding: 15px 0;
+    width: 100vw;
     height: 100vh;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
     overflow-y: scroll;
 
     ${FormField} .form-field-input-root {

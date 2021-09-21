@@ -4,6 +4,7 @@ import { MuiThemeProvider } from '@material-ui/core'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 import { AccountIdentifyModal, Notifications } from 'components'
 
@@ -68,6 +69,13 @@ const App = ({ Component, pageProps }) => {
 
   return (
     <>
+      <Head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
+      </Head>
+
       <GlobalStyles />
 
       <MuiThemeProvider theme={theme}>

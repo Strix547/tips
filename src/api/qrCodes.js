@@ -9,8 +9,6 @@ const transformQrData = ({
   personPaymentPageTemplateId,
   presetPaymentSizes,
   smiles,
-  backgroundHexColor,
-  buttonHexColor,
   qrImagePngRef
 }) => {
   return {
@@ -20,8 +18,6 @@ const transformQrData = ({
     name,
     amountPresets: presetPaymentSizes,
     impressions: smiles,
-    bgColor: backgroundHexColor,
-    buttonColor: buttonHexColor,
     img: qrImagePngRef
   }
 }
@@ -47,20 +43,11 @@ export const getQrCodeData = async (id) => {
   return transformQrData(data)
 }
 
-export const changeQrCode = async ({
-  id,
-  name,
-  amountPresets,
-  impressions,
-  bgColor,
-  buttonColor
-}) => {
+export const changeQrCode = async ({ id, name, amountPresets, impressions }) => {
   return API.post(`${root}/${id}/change`, {
     name,
     presetPaymentSizes: amountPresets,
-    smiles: impressions,
-    backgroundHexColor: bgColor,
-    buttonHexColor: buttonColor
+    smiles: impressions
   })
 }
 

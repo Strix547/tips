@@ -18,23 +18,25 @@ export const QrCodesPage = observer(() => {
   const { qrCodes, isQrCodesLoading } = qrCodesStore
 
   useEffect(async () => {
-    if (qrCodes.length !== 0) return
-
     if (!userId) {
       const userId = await userStore.getMyId()
       qrCodesStore.getQrCodes(userId)
     } else {
       qrCodesStore.getQrCodes(userId)
     }
-  }, [userId, qrCodes])
+  }, [userId])
 
   const toQrCreatePage = () => {
     router.push(ROUTES.ACCOUNT_QR_INDIVIDUAL_CREATE)
   }
 
-  const qrCodeList = qrCodes.map(({ id, templateId, name, img }) => (
-    <QrCard key={id} id={id} templateId={templateId} tag="li" label={name} img={img} />
-  ))
+  const qrCodeList = qrCodes.length ? (
+    qrCodes.map(({ id, templateId, name, img }) => (
+      <QrCard key={id} id={id} templateId={templateId} tag="li" label={name} img={img} />
+    ))
+  ) : (
+    <S.NoQrCodesText>No qr codes</S.NoQrCodesText>
+  )
 
   return (
     <>
@@ -43,7 +45,13 @@ export const QrCodesPage = observer(() => {
       </Head>
 
       <AccountLayout title="Мои QR" button={{ label: 'Добавить QR-код', onClick: toQrCreatePage }}>
-        <S.QrGrid>{!isQrCodesLoading ? qrCodeList : <Skeleton height={418} count={6} />}</S.QrGrid>
+        {!isQrCodesLoading ? (
+          <S.QrGrid>{qrCodeList}</S.QrGrid>
+        ) : (
+          <S.QrGridSkeleton>
+            <Skeleton height={418} count={3} />
+          </S.QrGridSkeleton>
+        )}
       </AccountLayout>
     </>
   )

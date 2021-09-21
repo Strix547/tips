@@ -16,23 +16,19 @@ export const QrIndividualCreatePage = observer(() => {
       preset1: 100,
       preset2: 149,
       preset3: 299,
-      impressions: false,
-      bgColor: { hex: '#fff' },
-      buttonColor: { hex: '#3bc76b' }
+      impressions: false
     }
   })
   const { watch, getValues } = useFormProps
 
   const createQr = () => {
-    const { name, preset1, preset2, preset3, impressions, bgColor, buttonColor } = getValues()
+    const { name, preset1, preset2, preset3, impressions } = getValues()
 
     qrCodesStore.createQrCode({
       userId: userStore.id,
       name,
       amountPresets: [preset1, preset2, preset3],
-      impressions,
-      bgColor: bgColor.hex,
-      buttonColor: buttonColor.hex
+      impressions
     })
   }
 
@@ -56,8 +52,6 @@ export const QrIndividualCreatePage = observer(() => {
             lastName={userStore.personalData.lastName}
             amountPresets={[watch('preset1'), watch('preset2'), watch('preset3')]}
             impressions={watch('impressions')}
-            bgColor={watch('bgColor')?.hex}
-            buttonColor={watch('buttonColor')?.hex}
           />
         </S.Content>
       </AccountLayout>

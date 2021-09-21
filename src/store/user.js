@@ -76,6 +76,7 @@ export const userStore = makeAutoObservable({
         postalCode,
         policyAgreement
       })
+      userStore.getPersonalData(userId)
       router.push(ROUTES.ACCOUNT)
       toast.success('Personal data successfully changed ')
       return newInfo

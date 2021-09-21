@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import Skeleton from 'react-loading-skeleton'
 import { observer } from 'mobx-react-lite'
+import Head from 'next/head'
 
 import { AccountLayout } from 'layout'
 import { FormField, LocationSearch, DatePicker, Button } from 'ui'
@@ -39,53 +40,55 @@ export const PersonalDataPage = observer(() => {
   }, [userId])
 
   const onEditData = () => {
-    const { firstName, lastName, email, city, address, postal, birthDate } =
-      useFormProps.getValues()
-    const countryCode = localStore.selectedCountryCode
+    const { firstName, lastName, email, address, postal, birthDate } = useFormProps.getValues()
 
     userStore.changePersonalData({
       userId,
       firstName,
       lastName,
       email,
-      city,
-      countryCode,
       address,
-      postal,
+      postalCode: postal,
       birthDate: birthDate?.toISOString()?.split('T')[0]
     })
   }
 
   return (
-    <AccountLayout title="Персональные данные">
-      <S.Content>
-        {!isPersonalDataLoading ? (
-          <FormProvider {...useFormProps}>
-            <FormField name="firstName" label="Имя" placeholder="Введите имя" />
+    <>
+      <Head>
+        <title>Персональные данные</title>
+      </Head>
 
-            <FormField name="lastName" label="Фамилия" placeholder="Введите фамилию" />
+      <AccountLayout title="Персональные данные">
+        <S.Content>
+          {!isPersonalDataLoading ? (
+            <FormProvider {...useFormProps}>
+              <FormField name="firstName" label="Имя" placeholder="Введите имя" />
 
-            <DatePicker
-              name="birthDate"
-              dateFormat="dd/MM/yyyy"
-              maxDate={eighteenYearsAgo}
-              label="Дата рождения"
-            />
+              <FormField name="lastName" label="Фамилия" placeholder="Введите фамилию" />
 
-            <FormField type="email" name="email" label="E-mail" placeholder="Введите e-mail" />
+              <DatePicker
+                name="birthDate"
+                dateFormat="dd/MM/yyyy"
+                maxDate={eighteenYearsAgo}
+                label="Дата рождения"
+              />
 
-            <LocationSearch useFormProps={useFormProps} />
+              <FormField type="email" name="email" label="E-mail" placeholder="Введите e-mail" />
 
-            <FormField name="address" label="Адрес" placeholder="Введите адрес" />
+              {/* <LocationSearch useFormProps={useFormProps} /> */}
 
-            <FormField name="postal" label="Индекс" placeholder="Введите почтовый индекс" />
+              <FormField name="address" label="Адрес" placeholder="Введите адрес" />
 
-            <Button onClick={onEditData}>Сохранить</Button>
-          </FormProvider>
-        ) : (
-          <Skeleton count={7} height={88} />
-        )}
-      </S.Content>
-    </AccountLayout>
+              <FormField name="postal" label="Индекс" placeholder="Введите почтовый индекс" />
+
+              <Button onClick={onEditData}>Сохранить</Button>
+            </FormProvider>
+          ) : (
+            <Skeleton count={7} height={88} />
+          )}
+        </S.Content>
+      </AccountLayout>
+    </>
   )
 })

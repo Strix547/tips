@@ -1,6 +1,6 @@
 import { useFormContext, Controller } from 'react-hook-form'
 
-import { Switch, Button, ColorPickerField, FormField } from 'ui'
+import { Switch, Button, FormField } from 'ui'
 
 import { CURRENCIES } from 'core/constants'
 
@@ -56,9 +56,9 @@ export const PaymentCardOptionsPanelIndividual = ({ action }) => {
         <Switch name="impressions" size="big" />
       </S.Options>
 
-      <ColorPickerField name="bgColor" label="Код цвета для подложки" />
+      {/* <ColorPickerField name="bgColor" label="Код цвета для подложки" />
 
-      <ColorPickerField name="buttonColor" label="Код цвета для кнопки" />
+      <ColorPickerField name="buttonColor" label="Код цвета для кнопки" /> */}
 
       <Button onClick={action.onClick}>{action.label}</Button>
     </S.PaymentCardOptionsPanelIndividual>

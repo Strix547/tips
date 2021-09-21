@@ -11,8 +11,7 @@ import * as S from './PaymentCard.styled'
 import avatar from '@public/img/placeholders/avatar.png'
 
 export const PaymentCardIndividual = observer(() => {
-  const { firstName, lastName, amountPresets, impressions, buttonColor } =
-    paymentStore.individualData
+  const { firstName, lastName, amountPresets, impressions } = paymentStore.individualData
 
   return (
     <S.RecipientCard>
@@ -25,7 +24,7 @@ export const PaymentCardIndividual = observer(() => {
 
         {impressions && <ImpressionRow />}
 
-        <Button color={buttonColor}>Заплатить</Button>
+        <Button>Заплатить</Button>
 
         <S.Text>Tips.me - это сервис для перевод чаевых и донатов.</S.Text>
       </S.RecipientCardMain>

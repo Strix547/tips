@@ -15,7 +15,6 @@ export const Autocomplete = styled.div`
       .autocomplete-input:first-child,
       input {
         height: 40px;
-        caret-color: transparent;
       }
     }
   }
@@ -30,6 +29,7 @@ export const Autocomplete = styled.div`
   .autocomplete-focused .form-field-input-root {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    cursor: '';
   }
 
   .autocomplete-end-adornment {

@@ -12,9 +12,8 @@ import * as S from './LocationSearch.styled'
 
 export const LocationSearch = observer(() => {
   const useFormProps = useFormContext()
-
-  const [selectedCountry, setSelectedCountry] = useState(null)
-  const [selectedCity, setSelectedCity] = useState(null)
+  const [countryInput, setCountryInput] = useState('')
+  const [cityInput, setCityInput] = useState('')
 
   const getCountriesThrottle = useCallback(
     throttle((searchText) => localStore.getCountries(searchText), 500),
@@ -26,28 +25,32 @@ export const LocationSearch = observer(() => {
     [localStore]
   )
 
-  const onCityInputChange = ({ target }) => {
-    getCitiesThrottle(target.value)
+  const onCityInputChange = (_, value) => {
+    setCityInput(value)
+
+    if (value) {
+      getCitiesThrottle(value)
+    }
   }
 
-  const onCityChange = (_, newCity, reason) => {
+  const onCityChange = (_, __, reason) => {
     if (reason !== 'select-option') return
 
-    setSelectedCity(newCity)
-    useFormProps.setValue('city', newCity)
     useFormProps.clearErrors('city')
   }
 
-  const onCountryInputChange = ({ target }) => {
-    getCountriesThrottle(target.value)
+  const onCountryInputChange = (_, value) => {
+    setCountryInput(value)
+
+    if (value) {
+      getCountriesThrottle(value)
+    }
   }
 
   const onCountryChange = (_, newCountry, reason) => {
     if (reason !== 'select-option') return
 
     localStore.setSelectedCountryCode(newCountry.code)
-    setSelectedCountry(toJS(newCountry.name))
-    useFormProps.setValue('country', toJS(newCountry.name))
     useFormProps.clearErrors('country')
   }
 
@@ -56,27 +59,25 @@ export const LocationSearch = observer(() => {
       <Autocomplete
         name="country"
         label="Страна"
-        value={selectedCountry}
         options={localStore.countries}
         required
         getOptionLabel={({ name }) => name}
-        noOptionsText="Страны не найдены"
+        noOptionsText={countryInput.length ? 'Страны не найдены' : 'Введите название страны'}
         onInputChange={onCountryInputChange}
         onChange={onCountryChange}
-        renderInput={(props) => <S.FormField placeholder="Введите название страны" {...props} />}
+        renderInput={(props) => <S.FormField {...props} placeholder="Введите название страны" />}
       />
 
-      {selectedCountry && (
+      {localStore.selectedCountryCode && (
         <Autocomplete
           name="city"
           label="Город"
-          value={selectedCity}
           options={localStore.cities}
-          noOptionsText="Города не найдены"
+          noOptionsText={cityInput.length ? 'Города не найдены' : 'Введите название города'}
           required
           onInputChange={onCityInputChange}
           onChange={onCityChange}
-          renderInput={(props) => <S.FormField placeholder="Введите название города" {...props} />}
+          renderInput={(props) => <S.FormField {...props} placeholder="Введите название города" />}
         />
       )}
     </>

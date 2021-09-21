@@ -11,7 +11,7 @@ import * as S from './QrIndividualPayment.styled'
 
 export const QrIndividualPaymentPage = observer(() => {
   const router = useRouter()
-  const { firstName, lastName, bgColor } = paymentStore.individualData
+  const { firstName, lastName } = paymentStore.individualData
 
   const qrId = router.query.id
 
@@ -29,7 +29,7 @@ export const QrIndividualPaymentPage = observer(() => {
         </title>
       </Head>
 
-      <S.RecipientCardContainer bgColor={bgColor}>
+      <S.RecipientCardContainer>
         <S.Heading level={5}>QR {qrId}</S.Heading>
 
         <PaymentCardIndividual />

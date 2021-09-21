@@ -45,16 +45,14 @@ export const qrCodesStore = makeAutoObservable({
     qrCodesStore.isQrCodesLoading = false
   },
 
-  createQrCode: async ({ userId, name, amountPresets, impressions, bgColor, buttonColor }) => {
+  createQrCode: async ({ userId, name, amountPresets, impressions }) => {
     try {
       const qrId = await qrCodesApi.createQrCodeId(userId)
       await qrCodesApi.changeQrCode({
         id: qrId,
         name,
         amountPresets,
-        impressions,
-        bgColor,
-        buttonColor
+        impressions
       })
       qrCodesStore.getQrCodes(userStore.id)
       router.push(ROUTES.ACCOUNT_QR_CODES)
@@ -64,14 +62,12 @@ export const qrCodesStore = makeAutoObservable({
     }
   },
 
-  changeQrCode: async ({ id, name, amountPresets, impressions, bgColor, buttonColor }) => {
+  changeQrCode: async ({ id, name, amountPresets, impressions }) => {
     await qrCodesApi.changeQrCode({
       id,
       name,
       amountPresets,
-      impressions,
-      bgColor,
-      buttonColor
+      impressions
     })
     qrCodesStore.getQrCodes(userStore.id)
     router.push(ROUTES.ACCOUNT_QR_CODES)

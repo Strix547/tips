@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { WhiteBox } from 'styled'
 import { QrImage } from 'components/Qr/Image/Image.styled'
 
+import { media } from 'styles/media'
+
 export const QrCard = styled(WhiteBox)`
   padding: 20px 30px;
   box-sizing: border-box;
@@ -55,6 +57,12 @@ export const AppleWallet = styled.div`
     font-size: var(--font-size-sm);
     color: var(--color-black-200);
     background: var(--color-gray-700);
+  }
+
+  ${media.mobile} {
+    button {
+      padding: 0 20px;
+    }
   }
 `
 
