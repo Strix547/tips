@@ -56,14 +56,14 @@ const App = ({ Component, pageProps }) => {
   if (isIdLoading) return null
 
   const getContent = (isIdLoading, role, isProtectedRoute, pageProps) => {
-    return (
-      <Elements stripe={stripePromise}>
-        <AccountIdentifyModal open stripePromise={stripePromise} />
-      </Elements>
-    )
-    // if (isIdLoading) return null
-    // if (role === 'UNVERIFIED' && isProtectedRoute) return <AccountIdentifyModal open />
-    // return <Component {...pageProps} />
+    if (isIdLoading) return null
+    if (role === 'UNVERIFIED' && isProtectedRoute)
+      return (
+        <Elements stripe={stripePromise}>
+          <AccountIdentifyModal open stripePromise={stripePromise} />
+        </Elements>
+      )
+    return <Component {...pageProps} />
   }
 
   return (
