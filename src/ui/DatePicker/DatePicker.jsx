@@ -4,7 +4,16 @@ import 'react-datepicker/dist/react-datepicker.css'
 
 import * as S from './DatePicker.styled'
 
-export const DatePicker = ({ label, name, rules, required, defaultValue, ...props }) => {
+export const DatePicker = ({
+  label,
+  name,
+  rules,
+  required,
+  onChange,
+  onSelect,
+  defaultValue,
+  ...props
+}) => {
   const {
     control,
     formState: { errors }
@@ -18,16 +27,22 @@ export const DatePicker = ({ label, name, rules, required, defaultValue, ...prop
       name={name}
       rules={required ? { ...rules, required: { value: true, message: 'required' } } : rules}
       defaultValue={defaultValue}
-      render={({ field: { value, onChange } }) => (
+      render={({ field }) => (
         <S.DatePicker haveError={haveError}>
           {label && <S.Label>{label}</S.Label>}
 
           <Picker
             {...props}
             defaultValue={defaultValue}
-            selected={value}
-            onChange={onChange}
-            onSelect={onChange}
+            selected={field.value}
+            onChange={(value) => {
+              if (onChange) {
+                onChange(value)
+              }
+
+              field.onChange(value)
+            }}
+            onSelect={field.onChange}
           />
         </S.DatePicker>
       )}

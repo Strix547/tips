@@ -11,10 +11,6 @@ export const authStore = makeAutoObservable({
   isAuth: false,
   isCodeSending: false,
 
-  setAuth: (value) => {
-    authStore.isAuth = value
-  },
-
   sendCode: async (phone) => {
     try {
       authStore.isCodeSending = true

@@ -10,7 +10,7 @@ import * as S from './TimePeriodFilter.styled'
 export const TimePeriodFilter = () => {
   const screenLess1500 = useMediaQuery({ maxWidth: 1500 })
   const screenLess700 = useMediaQuery({ maxWidth: 700 })
-  const { watch } = useFormContext()
+  const { watch, setValue } = useFormContext()
 
   const [isDatePickerModalOpen, setDatePickerModalOpen] = useState(false)
   const [startDate, setStartDate] = useState(new Date())
@@ -33,9 +33,20 @@ export const TimePeriodFilter = () => {
     }
   }
 
-  const onDateChange = ([start, end]) => {
-    setStartDate(start)
-    setEndDate(end)
+  const onDateChange = ([startDate, endDate]) => {
+    setStartDate(startDate)
+    setEndDate(endDate)
+  }
+
+  const onDatePickerModalClose = (startDate, endDate) => {
+    if (startDate && endDate) {
+      setValue('periodFrom', startDate.toISOString().split('T')[0])
+      setValue('periodTo', endDate.toISOString().split('T')[0])
+    }
+
+    setStartDate(new Date())
+    setEndDate(null)
+    setDatePickerModalOpen(false)
   }
 
   const periodRadios = periods.map(({ label, value }) => (
@@ -62,7 +73,10 @@ export const TimePeriodFilter = () => {
         <Select name="period">{periodMenuItems}</Select>
       )}
 
-      <S.DatePickerModal open={isDatePickerModalOpen} onClose={() => setDatePickerModalOpen(false)}>
+      <S.DatePickerModal
+        open={isDatePickerModalOpen}
+        onClose={() => onDatePickerModalClose(startDate, endDate)}
+      >
         <DatePicker
           selected={startDate}
           onChange={onDateChange}

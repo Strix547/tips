@@ -132,9 +132,28 @@ export const Right = styled.div`
 
 export const User = styled.div`
   display: flex;
-  flex-direction: column;
-  margin-left: 15px;
+  margin-left: 30px;
+  ${media.createMedia(700)} {
+    margin-left: 20px;
+  }
+`
 
+export const UserAvatar = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  background: var(--color-gray-600);
+  border: 1px solid var(--color-gray-200);
+  border-radius: 50%;
+  box-sizing: border-box;
+  cursor: pointer;
+`
+
+export const UserInfo = styled.div`
+  margin-left: 15px;
   ${Text} {
     /* fullName */
     &:first-child {
@@ -145,7 +164,6 @@ export const User = styled.div`
       white-space: nowrap;
       overflow: hidden;
     }
-
     /* email */
     &:last-child {
       font-size: var(--font-size-sm);
@@ -153,7 +171,6 @@ export const User = styled.div`
       line-height: 20px;
     }
   }
-
   ${media.createMedia(540)} {
     display: none;
   }

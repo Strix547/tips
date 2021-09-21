@@ -13,11 +13,10 @@ export const ROUTES = {
   ACCOUNT: '/account',
   FOR_AGENTS: '/account/for-agents',
   ACCOUNT_QR_CODES: '/account/qr-codes',
-  ACCOUNT_QR_CODE: '/account/qr-codes/id',
+  QR_CODE: '/qr-codes/id',
   ACCOUNT_QR_CODE_EDIT: '/account/qr-codes/id/edit',
   ACCOUNT_QR_INDIVIDUAL_CREATE: '/account/qr-codes/individual/create',
   ACCOUNT_QR_BUSINESS_CREATE: '/account/qr-codes/business/create',
-  ACCOUNT_QR_CHANGE: '/account/qr-codes/change',
   ACCOUNT_REQUISITES: '/account/requisites',
   ACCOUNT_PLATFORMS: '/account/platforms',
   ACCOUNT_EMPLOYEES: '/account/employees',
@@ -31,12 +30,13 @@ export const ROUTES = {
 export const PROTECTED_ROUTES = [
   ROUTES.ACCOUNT,
   ROUTES.FOR_AGENTS,
-  ROUTES.ACCOUNT_QR_CODES,
-  ROUTES.ACCOUNT_QR_CREATE,
   ROUTES.ACCOUNT_REQUISITES,
   ROUTES.ACCOUNT_PLATFORMS,
   ROUTES.ACCOUNT_EMPLOYEES,
   ROUTES.ACCOUNT_REVIEWS,
   ROUTES.ACCOUNT_PERSONAL_DATA,
-  ROUTES.ACCOUNT_SUPPORT
+  ROUTES.ACCOUNT_SUPPORT,
+  ROUTES.ACCOUNT_QR_CODE_EDIT,
+  ROUTES.ACCOUNT_QR_INDIVIDUAL_CREATE,
+  ROUTES.ACCOUNT_QR_BUSINESS_CREATE
 ]

@@ -38,7 +38,7 @@ export const QrCard = ({ id, templateId, label, img, tag }) => {
   }
 
   const toQrCodePage = (id) => {
-    router.push(`${ROUTES.ACCOUNT_QR_CODES}/${id}`)
+    router.push(`/qr-codes/${id}`)
   }
 
   const actions = [

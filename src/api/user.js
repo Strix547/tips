@@ -10,12 +10,15 @@ export const changeUserLanguage = ({ userId, languageCode }) => {
 
 export const getMyId = async () => {
   try {
-    const {
-      data: { userId }
-    } = await API.get('/me')
-    return userId
-  } catch (e) {
-    console.log('not auth')
+    const { status, data } = await API.get('/me')
+
+    if (status === 401) {
+      throw new Error('not auth')
+    }
+
+    return data.userId
+  } catch ({ message }) {
+    throw new Error(message)
   }
 }
 

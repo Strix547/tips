@@ -28,8 +28,8 @@ export const getIncomeStatistics = async ({
       format,
       'zone-offset': zoneOffset,
       period,
-      periodFrom,
-      periodTo
+      'period-from': periodFrom,
+      'period-to': periodTo
     },
     responseType: isXlsxFormat ? 'blob' : 'json',
     transformResponse: [(data) => data]

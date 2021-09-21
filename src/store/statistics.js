@@ -15,6 +15,20 @@ export const statisticsStore = makeAutoObservable({
     periodFrom,
     periodTo
   }) => {
+    if (format === 'XLSX') {
+      statisticsApi.getIncomeStatistics({
+        userId,
+        currency,
+        format,
+        period,
+        zoneOffset,
+        periodFrom,
+        periodTo
+      })
+
+      return
+    }
+
     statisticsStore.isIncomeStatisticsLoading = true
     const incomeStatistics = await statisticsApi.getIncomeStatistics({
       userId,
@@ -25,10 +39,7 @@ export const statisticsStore = makeAutoObservable({
       periodFrom,
       periodTo
     })
+    statisticsStore.incomeStatistics = incomeStatistics
     statisticsStore.isIncomeStatisticsLoading = false
-
-    if (incomeStatistics) {
-      statisticsStore.incomeStatistics = incomeStatistics
-    }
   }
 })

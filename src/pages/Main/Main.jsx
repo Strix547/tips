@@ -25,6 +25,8 @@ export const UserMainPage = observer(() => {
 
   const currencySelected = useFormProps.watch('currency')
   const periodSelected = useFormProps.watch('period')
+  const periodFromSelected = useFormProps.watch('periodFrom')
+  const periodToSelected = useFormProps.watch('periodTo')
 
   useEffect(() => {
     if (userId && periodSelected !== 'custom') {
@@ -36,7 +38,18 @@ export const UserMainPage = observer(() => {
         currency: currencySelected
       })
     }
-  }, [userId, currencySelected, periodSelected])
+
+    if (periodFromSelected && periodToSelected) {
+      statisticsStore.getIncomeStatistics({
+        userId,
+        format: 'JSON',
+        periodFrom: periodFromSelected,
+        periodTo: periodToSelected,
+        zoneOffset: getTimeZoneOffset(),
+        currency: currencySelected
+      })
+    }
+  }, [userId, currencySelected, periodSelected, periodFromSelected, periodToSelected])
 
   const toQrCodesPage = () => {
     router.push(ROUTES.ACCOUNT_QR_INDIVIDUAL_CREATE)
@@ -46,6 +59,7 @@ export const UserMainPage = observer(() => {
     statisticsStore.getIncomeStatistics({
       userId,
       format: 'XLSX',
+      period: periodSelected,
       zoneOffset: getTimeZoneOffset(),
       currency: useFormProps.getValues('currency')
     })

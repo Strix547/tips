@@ -30,8 +30,8 @@ export const userStore = makeAutoObservable({
       userStore.id = id
       authStore.isAuth = true
       return id
-    } catch (e) {
-      console.log('not auth')
+    } catch ({ message }) {
+      console.log(message)
     } finally {
       userStore.isIdLoading = false
     }

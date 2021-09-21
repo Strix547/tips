@@ -17,6 +17,7 @@ export const AccountIdentifyModal = styled(Modal)`
 
   /* overlay */
   & > div:first-child {
+    background-color: var(--color-gray-300) !important;
     cursor: default;
   }
 `
