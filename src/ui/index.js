@@ -19,6 +19,7 @@ import { DatePicker } from './DatePicker'
 import { Autocomplete } from './Autocomplete'
 import { Stepper, Step, StepLabel } from './Stepper'
 import { LocationSearch } from './LocationSearch'
+import { CircularProgress } from './CircularProgress'
 
 export {
   Button,
@@ -46,5 +47,6 @@ export {
   Stepper,
   Step,
   StepLabel,
-  LocationSearch
+  LocationSearch,
+  CircularProgress
 }

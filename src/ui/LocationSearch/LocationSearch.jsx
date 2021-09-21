@@ -31,7 +31,6 @@ export const LocationSearch = observer(() => {
   }
 
   const onCityChange = (_, newCity, reason) => {
-    console.log(useFormProps.watch(), reason, newCity, useFormProps.formState.errors)
     if (reason !== 'select-option') return
 
     setSelectedCity(newCity)
@@ -44,8 +43,6 @@ export const LocationSearch = observer(() => {
   }
 
   const onCountryChange = (_, newCountry, reason) => {
-    console.log(useFormProps.watch(), reason, newCountry, useFormProps.formState.errors)
-
     if (reason !== 'select-option') return
 
     localStore.setSelectedCountryCode(newCountry.code)

@@ -11,6 +11,7 @@ export const userStore = makeAutoObservable({
   id: null,
   isIdLoading: false,
   isPersonalDataLoading: false,
+  isIdentifyProcessing: false,
   role: null,
   personalData: {
     firstName: '',
@@ -105,20 +106,29 @@ export const userStore = makeAutoObservable({
     business,
     stripeToken
   }) => {
-    await userApi.changeUserInfo({
-      userId,
-      email,
-      firstName,
-      lastName,
-      birthDate,
-      countryCode,
-      city,
-      address,
-      postalCode,
-      policyAgreement
-    })
-    await userApi.addUserRole({ userId, payer, recipient, agent, business })
-    await bankAccountApi.addBankAccount({ userId, stripeToken })
-    await userStore.getUserRole(userId)
+    userStore.isIdentifyProcessing = true
+
+    try {
+      await userApi.changeUserInfo({
+        userId,
+        email,
+        firstName,
+        lastName,
+        birthDate,
+        countryCode,
+        city,
+        address,
+        postalCode,
+        policyAgreement
+      })
+      await userApi.addUserRole({ userId, payer, recipient, agent, business })
+      await bankAccountApi.addBankAccount({ userId, stripeToken })
+      await userStore.getUserRole(userId)
+    } catch ({ message }) {
+      router.push(ROUTES.AUTH)
+      toast.error(message)
+    } finally {
+      userStore.isIdentifyProcessing = false
+    }
   }
 })

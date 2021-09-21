@@ -1,5 +1,4 @@
 import { observer } from 'mobx-react-lite'
-import { toJS } from 'mobx'
 
 import { AvatarIndividual, TipAmount } from 'components'
 import { ImpressionRow } from 'common'
@@ -14,8 +13,6 @@ import avatar from '@public/img/placeholders/avatar.png'
 export const PaymentCardIndividual = observer(() => {
   const { firstName, lastName, amountPresets, impressions, buttonColor } =
     paymentStore.individualData
-
-  console.log(toJS(paymentStore.individualData))
 
   return (
     <S.RecipientCard>

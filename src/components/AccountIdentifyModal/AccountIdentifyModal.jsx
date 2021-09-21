@@ -1,15 +1,16 @@
 import { useState } from 'react'
 import { useStripe, useElements, IbanElement } from '@stripe/react-stripe-js'
+import { observer } from 'mobx-react-lite'
 import { FormProvider, useForm } from 'react-hook-form'
 
 import { PersonalDataStep, AccountTypeStep, CreditCardStep } from './components'
-import { Button, Stepper, Step, StepLabel } from 'ui'
+import { Button, Stepper, Step, StepLabel, CircularProgress } from 'ui'
 
 import { userStore, localStore } from 'store'
 
 import * as S from './AccountIdentifyModal.styled'
 
-export const AccountIdentifyModal = ({ open }) => {
+export const AccountIdentifyModal = observer(({ stripePromise, open }) => {
   const stripe = useStripe()
   const stripeElements = useElements()
   const useFormProps = useForm({
@@ -21,6 +22,7 @@ export const AccountIdentifyModal = ({ open }) => {
   const [step, setStep] = useState(0)
   const [stripeError, setStripeError] = useState()
 
+  const { isIdentifyProcessing } = userStore
   const steps = ['Шаг 1', 'Шаг 2', 'Шаг 3']
 
   const stepList = steps.map((label, idx) => (
@@ -36,12 +38,9 @@ export const AccountIdentifyModal = ({ open }) => {
       case 1:
         return <AccountTypeStep useFormProps={useFormProps} />
       case 2:
-        return <CreditCardStep />
+        return <CreditCardStep stripePromise={stripePromise} useFormProps={useFormProps} />
     }
   }
-
-  console.log('values', useFormProps.getValues())
-  console.log('errors', useFormProps.formState.errors)
 
   const onPrevStep = () => {
     if (!step !== 0) setStep(step - 1)
@@ -99,6 +98,8 @@ export const AccountIdentifyModal = ({ open }) => {
           stripeToken: token.id
         })
       }
+
+      return
     }
 
     setStep(step + 1)
@@ -108,31 +109,35 @@ export const AccountIdentifyModal = ({ open }) => {
 
   return (
     <S.AccountIdentifyModal open={open}>
-      <S.Content>
-        <S.Heading level={6}>Идентификация аккаунта</S.Heading>
+      {!isIdentifyProcessing ? (
+        <S.Content>
+          <S.Heading level={6}>Идентификация аккаунта</S.Heading>
 
-        <Stepper activeStep={step}>{stepList}</Stepper>
+          <Stepper activeStep={step}>{stepList}</Stepper>
 
-        <FormProvider {...useFormProps}>
-          <S.Step>
-            {getStepContent(step)}
-            {step === 2 && stripeError && <S.ErrorText>{stripeError}</S.ErrorText>}
-          </S.Step>
-        </FormProvider>
+          <FormProvider {...useFormProps}>
+            <S.Step>
+              {getStepContent(step)}
+              {step === 2 && stripeError && <S.ErrorText>{stripeError}</S.ErrorText>}
+            </S.Step>
+          </FormProvider>
 
-        <S.StepNav>
-          {step !== 0 && <Button onClick={onPrevStep}>Назад</Button>}
-          {step !== 3 && (
-            <Button
-              type="submit"
-              disabled={isStripeNotLoaded}
-              onClick={useFormProps.handleSubmit(onStepSubmit)}
-            >
-              {step !== 2 ? 'Далее' : 'Войти'}
-            </Button>
-          )}
-        </S.StepNav>
-      </S.Content>
+          <S.StepNav>
+            {step !== 0 && <Button onClick={onPrevStep}>Назад</Button>}
+            {step !== 3 && (
+              <Button
+                type="submit"
+                disabled={isStripeNotLoaded}
+                onClick={useFormProps.handleSubmit(onStepSubmit)}
+              >
+                {step !== 2 ? 'Далее' : 'Войти'}
+              </Button>
+            )}
+          </S.StepNav>
+        </S.Content>
+      ) : (
+        <CircularProgress size={80} />
+      )}
     </S.AccountIdentifyModal>
   )
-}
+})

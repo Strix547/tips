@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { MuiThemeProvider } from '@material-ui/core'
-import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
+import { Elements } from '@stripe/react-stripe-js'
 import { useRouter } from 'next/router'
 
 import { AccountIdentifyModal, Notifications } from 'components'
@@ -15,10 +15,12 @@ import { createTheme } from '@material-ui/core/styles'
 import { GlobalStyles } from 'styles/GlobalStyles'
 import 'styles/fonts.css'
 
+const stripePromise = loadStripe(
+  'pk_test_51JXcqEBmR4XWceWFiU56mb6ztWQMkIrdrJvl2CkW9WGcoHcbfkZCzieUTSl2UUvmRIf985mgIXjrKDy3oWv6FJta002OlQs1Y3'
+)
+
 const App = ({ Component, pageProps }) => {
   const router = useRouter()
-  const [stripePromise, setStripePromise] = useState(null)
-  console.log(2, stripePromise)
   const { isIdLoading, role } = userStore
 
   const currentPathname = router.pathname
@@ -41,15 +43,6 @@ const App = ({ Component, pageProps }) => {
   useEffect(async () => {
     const id = await userStore.getMyId()
 
-    try {
-      const stripePromise = await loadStripe(
-        'pk_test_51JXcqEBmR4XWceWFiU56mb6ztWQMkIrdrJvl2CkW9WGcoHcbfkZCzieUTSl2UUvmRIf985mgIXjrKDy3oWv6FJta002OlQs1Y3'
-      )
-      setStripePromise(stripePromise)
-    } catch ({ message }) {
-      console.log('stripe load error', message)
-    }
-
     if (id) {
       await userStore.getUserRole(id)
       await userStore.getPersonalData(id)
@@ -63,9 +56,14 @@ const App = ({ Component, pageProps }) => {
   if (isIdLoading) return null
 
   const getContent = (isIdLoading, role, isProtectedRoute, pageProps) => {
-    if (isIdLoading) return null
-    if (role === 'UNVERIFIED' && isProtectedRoute) return <AccountIdentifyModal open />
-    return <Component {...pageProps} />
+    return (
+      <Elements stripe={stripePromise}>
+        <AccountIdentifyModal open stripePromise={stripePromise} />
+      </Elements>
+    )
+    // if (isIdLoading) return null
+    // if (role === 'UNVERIFIED' && isProtectedRoute) return <AccountIdentifyModal open />
+    // return <Component {...pageProps} />
   }
 
   return (
@@ -73,10 +71,8 @@ const App = ({ Component, pageProps }) => {
       <GlobalStyles />
 
       <MuiThemeProvider theme={theme}>
-        <Elements stripe={stripePromise}>
-          {getContent(isIdLoading, role, isProtectedRoute, pageProps)}
-          <Notifications />
-        </Elements>
+        {getContent(isIdLoading, role, isProtectedRoute, pageProps)}
+        <Notifications />
       </MuiThemeProvider>
     </>
   )

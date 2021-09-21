@@ -44,9 +44,11 @@ export const Content = styled.div`
 
   @media (max-height: 835px) {
     padding: 15px 0;
+    height: 100vh;
+    overflow-y: scroll;
 
     ${FormField} .form-field-input-root {
-      height: 36px;
+      height: 46px;
     }
   }
 `

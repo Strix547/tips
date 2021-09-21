@@ -15,7 +15,7 @@ export const getMyId = async () => {
     } = await API.get('/me')
     return userId
   } catch (e) {
-    throw new Error('NOT_AUTH')
+    console.log('not auth')
   }
 }
 
@@ -46,7 +46,7 @@ export const changeUserInfo = async ({
   policyAgreement
 }) => {
   try {
-    const res = await API.post(`/personal-info/${userId}/change`, {
+    const { status, data } = await API.post(`/personal-info/${userId}/change`, {
       email,
       firstName,
       lastName,
@@ -58,11 +58,14 @@ export const changeUserInfo = async ({
       tosAccepted: policyAgreement
     })
 
-    if (res?.status === 500) {
-      throw new Error(res.status)
+    if (status === 500) {
+      throw new Error(status)
     }
 
-    return res
+    if (data?.code === 'VALIDATION_ERROR') {
+      const [field, error] = Object.entries(data.details.validationErrors)[0]
+      throw new Error(`${field} ${error}`)
+    }
   } catch ({ message }) {
     throw new Error(message)
   }

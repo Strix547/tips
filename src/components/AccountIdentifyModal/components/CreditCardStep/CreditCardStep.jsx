@@ -1,9 +1,11 @@
+import { Elements } from '@stripe/react-stripe-js'
 import Link from 'next/link'
+
 import { Checkbox, FormField, LocationSearch } from 'ui'
 
 import * as S from './CreditCardStep.styled'
 
-export const CreditCardStep = ({ useFormProps }) => {
+export const CreditCardStep = ({ stripePromise, useFormProps }) => {
   const ibanOptions = {
     supportedCountries: ['SEPA'],
     style: {
@@ -23,10 +25,12 @@ export const CreditCardStep = ({ useFormProps }) => {
 
       <FormField name="postal" label="Индекс" placeholder="Введите почтовый индекс" required />
 
-      <S.IbanContainer>
-        <S.Label>IBAN</S.Label>
-        <S.Iban options={ibanOptions} />
-      </S.IbanContainer>
+      {stripePromise && (
+        <S.IbanContainer>
+          <S.Label>IBAN</S.Label>
+          <S.Iban options={ibanOptions} />
+        </S.IbanContainer>
+      )}
 
       <S.Agreement>
         <Checkbox rules={{ required: true }} name="agreement" />

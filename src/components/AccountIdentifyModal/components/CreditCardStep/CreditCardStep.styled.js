@@ -42,6 +42,6 @@ export const Iban = styled(IbanElement)`
   box-sizing: border-box;
 
   @media (max-height: 835px) {
-    padding: 9px 20px;
+    padding: 14px 20px;
   }
 `
