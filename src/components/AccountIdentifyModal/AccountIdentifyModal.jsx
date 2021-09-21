@@ -19,6 +19,9 @@ export const AccountIdentifyModal = observer(({ stripePromise, open }) => {
     }
   })
 
+  console.log('values', useFormProps.watch())
+  console.log('errors', useFormProps.formState.errors)
+
   const [step, setStep] = useState(0)
   const [stripeError, setStripeError] = useState()
 

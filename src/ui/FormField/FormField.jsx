@@ -2,7 +2,7 @@ import { Controller, useFormContext } from 'react-hook-form'
 
 import * as S from './FormField.styled'
 
-export const FormField = ({ name, rules, required, defaultValue, InputProps, ...props }) => {
+export const FormField = ({ name, rules, required, type, defaultValue, InputProps, ...props }) => {
   const {
     control,
     formState: { errors }
@@ -22,6 +22,7 @@ export const FormField = ({ name, rules, required, defaultValue, InputProps, ...
         return (
           <S.FormField
             {...props}
+            type={type}
             haveError={haveError}
             InputProps={{
               inputProps: { maxLength: 255 },

@@ -125,7 +125,6 @@ export const userStore = makeAutoObservable({
       await bankAccountApi.addBankAccount({ userId, stripeToken })
       await userStore.getUserRole(userId)
     } catch ({ message }) {
-      router.push(ROUTES.AUTH)
       toast.error(message)
     } finally {
       userStore.isIdentifyProcessing = false

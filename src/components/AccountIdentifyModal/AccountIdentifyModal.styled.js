@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { Heading, Text, ErrorText } from 'styled'
+import { Heading, Text, ErrorText, WhiteBox } from 'styled'
 import { Modal } from 'ui/Modal/Modal.styled'
 import { Button } from 'ui/Button/Button.styled'
 import { Stepper } from 'ui/Stepper/Stepper.styled'
@@ -17,18 +17,18 @@ export const AccountIdentifyModal = styled(Modal)`
 
   /* overlay */
   & > div:first-child {
-    background-color: var(--color-gray-300) !important;
+    background-color: #fff !important;
     cursor: default;
   }
 `
 
-export const Content = styled.div`
+export const Content = styled(WhiteBox)`
   width: 500px;
   padding: 25px 0;
-  background: #ffffff;
-  border-radius: 10px;
   outline: none;
   box-sizing: border-box;
+  box-shadow: 0px 5px 20px rgba(49, 52, 61, 0.05);
+  border: 1px solid var(--color-gray-200);
 
   ${Heading} {
     text-align: center;

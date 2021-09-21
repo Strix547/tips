@@ -63,7 +63,7 @@ export const LocationSearch = observer(() => {
         noOptionsText="Страны не найдены"
         onInputChange={onCountryInputChange}
         onChange={onCountryChange}
-        renderInput={(props) => <S.FormField placeholder="Выберите страну" {...props} />}
+        renderInput={(props) => <S.FormField placeholder="Введите название страны" {...props} />}
       />
 
       {selectedCountry && (
@@ -76,7 +76,7 @@ export const LocationSearch = observer(() => {
           required
           onInputChange={onCityInputChange}
           onChange={onCityChange}
-          renderInput={(props) => <S.FormField placeholder="Выберите город" {...props} />}
+          renderInput={(props) => <S.FormField placeholder="Введите название города" {...props} />}
         />
       )}
     </>
