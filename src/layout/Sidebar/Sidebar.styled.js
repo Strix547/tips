@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { Button } from 'ui/Button/Button.styled'
 
@@ -110,6 +110,36 @@ export const NavItem = styled.li`
     margin-right: 15px;
     transition: 0.3s;
   }
+
+  ${({ active }) =>
+    active &&
+    css`
+      background: #e2f7e9;
+
+      a {
+        color: var(--color-primary-200);
+      }
+
+      svg {
+        fill: var(--color-primary-200);
+      }
+
+      &:nth-child(2) {
+        a svg path:nth-child(n + 5) {
+          fill: var(--color-primary-200);
+          stroke: var(--color-primary-200);
+          transition: 0.3s;
+        }
+      }
+
+      &:nth-child(6),
+      &:nth-child(7),
+      &:nth-child(8) {
+        a {
+          background: #fef5f5;
+        }
+      }
+    `}
 `
 
 export const Support = styled.div`

@@ -265,3 +265,13 @@ export const Header = styled.header`
   position: relative;
   z-index: 1400;
 `
+
+export const NavItem = styled.li`
+  ${({ active }) =>
+    active &&
+    css`
+      a {
+        color: var(--color-primary-200);
+      }
+    `}
+`

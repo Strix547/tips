@@ -26,6 +26,7 @@ export const Header = observer(({ withSidebar }) => {
   const [isMenuOpen, setMenuOpen] = useState(false)
   const { personalData, isPersonalDataLoading } = userStore
   const { firstName, lastName, email } = personalData
+  const currentPathname = router.pathname
 
   const nav = [
     { label: 'Получателям', link: ROUTES.RECIPIENTS },
@@ -49,11 +50,11 @@ export const Header = observer(({ withSidebar }) => {
   }
 
   const navList = nav.map(({ label, link }) => (
-    <li key={link}>
+    <S.NavItem key={link} active={currentPathname === link}>
       <Link href={link}>
         <a>{label}</a>
       </Link>
-    </li>
+    </S.NavItem>
   ))
 
   const languageList = languages.map(({ label, value, icon }) => (

@@ -48,7 +48,12 @@ export const authStore = makeAutoObservable({
   signOut: async () => {
     await authApi.signOut()
     // reset cookie
-    await userApi.getMyId()
+    try {
+      await userApi.getMyId()
+    } catch (e) {
+      console.log('')
+    }
+
     router.push('/')
     authStore.isAuth = false
     userStore.id = null

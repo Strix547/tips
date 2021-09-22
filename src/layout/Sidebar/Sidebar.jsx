@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import { Logo } from 'common'
 import { LinkButton } from 'ui'
@@ -22,6 +23,8 @@ import LogoutIcon from '@public/icons/logout.svg'
 import UserWithLaptopSvg from '@public/icons/user-with-laptop.svg'
 
 export const Sidebar = () => {
+  const { pathname } = useRouter()
+
   const nav = [
     { label: 'Главная', link: ROUTES.ACCOUNT, icon: <PieChartIcon /> },
     { label: 'Мои QR', link: ROUTES.ACCOUNT_QR_CODES, icon: <QrScanIcon /> },
@@ -39,7 +42,7 @@ export const Sidebar = () => {
   ]
 
   const navList = nav.map(({ label, link, icon }) => (
-    <S.NavItem key={label}>
+    <S.NavItem key={label} active={pathname === link}>
       <Link href={link}>
         <a>
           {icon} {label}

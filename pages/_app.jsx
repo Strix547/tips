@@ -22,7 +22,7 @@ const stripePromise = loadStripe(
 
 const App = ({ Component, pageProps }) => {
   const router = useRouter()
-  const { isIdLoading, role } = userStore
+  const { isIdLoading, role, id } = userStore
 
   const currentPathname = router.pathname
   const isAuthRoute = currentPathname === ROUTES.AUTH
@@ -51,6 +51,11 @@ const App = ({ Component, pageProps }) => {
 
     if (id && isAuthRoute) {
       window.location.href = ROUTES.ACCOUNT
+      return
+    }
+
+    if (!id && isProtectedRoute && currentPathname !== ROUTES.AUTH) {
+      window.location.href = ROUTES.AUTH
     }
   }, [])
 
@@ -59,6 +64,7 @@ const App = ({ Component, pageProps }) => {
 
     if (role === 'UNVERIFIED' && isProtectedRoute && currentPathname !== ROUTES.ACCOUNT_IDENTIFY) {
       router.push(ROUTES.ACCOUNT_IDENTIFY)
+      return
     }
 
     return <Component {...pageProps} stripePromise={stripePromise} />

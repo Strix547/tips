@@ -108,6 +108,10 @@ export const Faq = styled.div`
 export const ThemeRow = styled.div``
 
 export const ThemeRadioGroup = styled(RadioGroup)`
+  && {
+    display: flex;
+  }
+
   gap: 10px;
   margin-top: 15px;
 `

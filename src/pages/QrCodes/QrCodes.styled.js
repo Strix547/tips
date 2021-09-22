@@ -11,7 +11,6 @@ export const QrGrid = styled.ul`
 export const NoQrCodesText = styled(Text)`
   margin-top: 15px;
   font-size: var(--font-size-md);
-  text-align: center;
 `
 
 export const QrGridSkeleton = styled.div`
