@@ -10,8 +10,9 @@ export const DatePicker = ({
   rules,
   required,
   onChange,
-  onSelect,
   defaultValue,
+  placeholderText,
+  maxDate,
   ...props
 }) => {
   const {
@@ -33,6 +34,8 @@ export const DatePicker = ({
 
           <Picker
             {...props}
+            placeholderText={placeholderText}
+            maxDate={maxDate}
             defaultValue={defaultValue}
             selected={field.value}
             onChange={(value) => {

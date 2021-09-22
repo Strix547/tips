@@ -1,1 +1,0 @@
-export { AccountIdentifyModal } from './AccountIdentifyModal'

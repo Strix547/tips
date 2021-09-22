@@ -3,6 +3,10 @@ import { FormField, DatePicker } from 'ui'
 import * as S from './PersonalDataStep.styled'
 
 export const PersonalDataStep = () => {
+  const eighteenYearsAgo = new Date(
+    new Date().setTime(new Date().valueOf() - 18 * 365 * 24 * 60 * 60 * 1000)
+  )
+
   return (
     <S.PersonalDataStep>
       <S.FieldsLabel>Персональные данные:</S.FieldsLabel>
@@ -11,7 +15,14 @@ export const PersonalDataStep = () => {
 
       <FormField name="lastName" label="Фамилия" placeholder="Введите фамилию" required />
 
-      <DatePicker name="birthDate" dateFormat="dd/MM/yyyy" label="Дата рождения" required />
+      <DatePicker
+        name="birthDate"
+        dateFormat="dd/MM/yyyy"
+        placeholderText="dd/mm/yyyy"
+        maxDate={eighteenYearsAgo}
+        label="Дата рождения"
+        required
+      />
 
       <FormField
         rules={{

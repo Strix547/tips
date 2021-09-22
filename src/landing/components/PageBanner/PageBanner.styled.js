@@ -97,7 +97,7 @@ export const FeatureList = styled.ul`
 
 export const ActionRow = styled.div`
   display: flex;
-  column-gap: 20px;
+  gap: 20px;
   margin-top: 30px;
 
   ${Button}:first-child {

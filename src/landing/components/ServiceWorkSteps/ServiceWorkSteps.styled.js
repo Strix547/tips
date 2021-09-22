@@ -2,8 +2,6 @@ import styled from 'styled-components'
 
 import { Text } from 'styled'
 
-import { media } from 'styles/media'
-
 export { Text }
 
 export const ServiceWorkSteps = styled.ul`

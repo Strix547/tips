@@ -1,24 +1,30 @@
 import { useState, useMemo } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
+import { useMediaQuery } from 'react-responsive'
 import { useStripe, useElements, IbanElement } from '@stripe/react-stripe-js'
 import { observer } from 'mobx-react-lite'
-import { FormProvider, useForm } from 'react-hook-form'
+import Head from 'next/head'
 
 import { PersonalDataStep, AccountTypeStep, CreditCardStep } from './components'
 import { Button, Stepper, Step, StepLabel, CircularProgress } from 'ui'
 
 import { userStore, localStore } from 'store'
 
-import * as S from './AccountIdentifyModal.styled'
+import { MEDIA_TABLET } from 'styles/media'
+import * as S from './IdentifyAccount.styled'
 
-export const AccountIdentifyModal = observer(({ stripePromise, open }) => {
+import CommentRegulationIcon from '@public/img/landing/comment-regulation.svg'
+
+export const IdentifyAccountPage = observer(({ stripePromise }) => {
   const stripe = useStripe()
   const stripeElements = useElements()
   const useFormProps = useForm({
     defaultValues: {
-      birthDate: new Date()
+      birthDate: null
     }
   })
 
+  const isTablet = useMediaQuery({ maxWidth: MEDIA_TABLET })
   const [step, setStep] = useState(0)
   const [stripeError, setStripeError] = useState()
 
@@ -113,36 +119,52 @@ export const AccountIdentifyModal = observer(({ stripePromise, open }) => {
   const isStripeNotLoaded = (!stripe || !stripeElements) && step === 3
 
   return (
-    <S.AccountIdentifyModal open={open}>
-      {!isIdentifyProcessing ? (
-        <S.Content>
-          <S.Heading level={6}>Идентификация аккаунта</S.Heading>
+    <>
+      <Head>
+        <title>Идентификация аккаунта</title>
+      </Head>
 
-          <Stepper activeStep={step}>{stepList}</Stepper>
+      <S.IdentifyAccountPage>
+        <S.Left>
+          {!isIdentifyProcessing ? (
+            <S.Content>
+              <S.Heading level={6}>Идентификация аккаунта</S.Heading>
 
-          <FormProvider {...useFormProps}>
-            <S.Step>
-              {getStepContent(step)}
-              {step === 2 && stripeError && <S.ErrorText>{stripeError}</S.ErrorText>}
-            </S.Step>
-          </FormProvider>
+              <Stepper activeStep={step}>{stepList}</Stepper>
 
-          <S.StepNav>
-            {step !== 0 && <Button onClick={onPrevStep}>Назад</Button>}
-            {step !== 3 && (
-              <Button
-                type="submit"
-                disabled={isStripeNotLoaded}
-                onClick={useFormProps.handleSubmit(onStepSubmit)}
-              >
-                {step !== 2 ? 'Далее' : 'Войти'}
-              </Button>
-            )}
-          </S.StepNav>
-        </S.Content>
-      ) : (
-        <CircularProgress size={80} />
-      )}
-    </S.AccountIdentifyModal>
+              <FormProvider {...useFormProps}>
+                <S.Step>
+                  {getStepContent(step)}
+                  {step === 2 && stripeError && <S.ErrorText>{stripeError}</S.ErrorText>}
+                </S.Step>
+              </FormProvider>
+
+              <S.StepNav>
+                {step !== 0 && <Button onClick={onPrevStep}>Назад</Button>}
+                {step !== 3 && (
+                  <Button
+                    type="submit"
+                    disabled={isStripeNotLoaded}
+                    onClick={useFormProps.handleSubmit(onStepSubmit)}
+                  >
+                    {step !== 2 ? 'Далее' : 'Войти'}
+                  </Button>
+                )}
+              </S.StepNav>
+            </S.Content>
+          ) : (
+            <S.Progress>
+              <CircularProgress size={80} />
+            </S.Progress>
+          )}
+        </S.Left>
+
+        {!isTablet && (
+          <S.Right>
+            <CommentRegulationIcon />
+          </S.Right>
+        )}
+      </S.IdentifyAccountPage>
+    </>
   )
 })

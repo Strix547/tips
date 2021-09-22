@@ -5,9 +5,9 @@ import { observer } from 'mobx-react-lite'
 import Head from 'next/head'
 
 import { AccountLayout } from 'layout'
-import { FormField, LocationSearch, DatePicker, Button } from 'ui'
+import { FormField, DatePicker, Button } from 'ui'
 
-import { userStore, localStore } from 'store'
+import { userStore } from 'store'
 
 import * as S from './PersonalData.styled'
 
@@ -15,9 +15,6 @@ export const PersonalDataPage = observer(() => {
   const useFormProps = useForm()
 
   const { isPersonalDataLoading, id: userId } = userStore
-  const eighteenYearsAgo = new Date(
-    new Date().setTime(new Date().valueOf() - 18 * 365 * 24 * 60 * 60 * 1000)
-  )
 
   useEffect(async () => {
     if (userId) {
@@ -67,16 +64,9 @@ export const PersonalDataPage = observer(() => {
 
               <FormField name="lastName" label="Фамилия" placeholder="Введите фамилию" />
 
-              <DatePicker
-                name="birthDate"
-                dateFormat="dd/MM/yyyy"
-                maxDate={eighteenYearsAgo}
-                label="Дата рождения"
-              />
+              <DatePicker name="birthDate" dateFormat="dd/MM/yyyy" label="Дата рождения" />
 
               <FormField type="email" name="email" label="E-mail" placeholder="Введите e-mail" />
-
-              {/* <LocationSearch useFormProps={useFormProps} /> */}
 
               <FormField name="address" label="Адрес" placeholder="Введите адрес" />
 

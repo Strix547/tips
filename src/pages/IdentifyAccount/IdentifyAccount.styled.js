@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 import { Heading, Text, ErrorText, WhiteBox } from 'styled'
-import { Modal } from 'ui/Modal/Modal.styled'
 import { Button } from 'ui/Button/Button.styled'
 import { Stepper } from 'ui/Stepper/Stepper.styled'
 import { FormField } from 'ui/FormField/FormField.styled'
@@ -10,25 +9,41 @@ import { media } from 'styles/media'
 
 export { Heading, Text, FormField, ErrorText }
 
-export const AccountIdentifyModal = styled(Modal)`
+export const IdentifyAccountPage = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 100vh;
 
-  /* overlay */
-  & > div:first-child {
-    background-color: #fff !important;
-    cursor: default;
+  @media (max-height: 835px) {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    overflow-y: scroll;
   }
 `
 
-export const Content = styled(WhiteBox)`
-  width: 500px;
-  padding: 25px 0;
+export const Left = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  padding: 120px 0 50px;
+  box-sizing: border-box;
+
+  ${media.tablet} {
+    align-items: center;
+    width: 100%;
+    padding: 0;
+  }
+
+  @media (max-height: 835px) {
+    align-items: flex-start;
+  }
+`
+
+export const Content = styled.div`
+  width: 100%;
   outline: none;
   box-sizing: border-box;
-  box-shadow: 0px 5px 20px rgba(49, 52, 61, 0.05);
-  border: 1px solid var(--color-gray-200);
 
   ${Heading} {
     text-align: center;
@@ -46,17 +61,7 @@ export const Content = styled(WhiteBox)`
   }
 
   @media (max-height: 835px) {
-    padding: 15px 0;
-    width: 100vw;
-    height: 100vh;
-    border-radius: 0;
-    box-shadow: none;
-    border: none;
-    overflow-y: scroll;
-
-    ${FormField} .form-field-input-root {
-      height: 46px;
-    }
+    padding: 50px 0 100px;
   }
 `
 
@@ -94,4 +99,21 @@ export const Step = styled.div`
   ${media.createMedia(500)} {
     padding: 0 15px;
   }
+`
+
+export const Right = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  background: var(--color-gray-600);
+
+  ${media.tablet} {
+    display: none;
+  }
+`
+
+export const Progress = styled.div`
+  margin: auto;
 `

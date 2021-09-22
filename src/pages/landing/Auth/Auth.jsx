@@ -51,7 +51,7 @@ export const AuthPage = () => {
 
       {isTablet && <Header />}
 
-      <S.SignIn>
+      <S.AuthPage>
         <S.Left>
           <S.LeftContent>
             {!isTablet && <Logo />}
@@ -79,7 +79,7 @@ export const AuthPage = () => {
             <CommentRegulationIcon />
           </S.Right>
         )}
-      </S.SignIn>
+      </S.AuthPage>
     </>
   )
 }

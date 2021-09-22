@@ -13,7 +13,7 @@ export const PaymentCardOptionsPanelBusiness = styled(WhiteBox)`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  grid-gap: 20px;
+  gap: 20px;
   padding: 30px 40px;
 
   ${media700} {
@@ -27,7 +27,7 @@ export const AmountPresetsRow = styled.div`
 
 export const AmountPresetsFields = styled.div`
   display: flex;
-  grid-gap: 10px;
+  gap: 10px;
 
   ${FormField} {
     input::-webkit-inner-spin-button,

@@ -21,6 +21,7 @@ export const ROUTES = {
   ACCOUNT_PLATFORMS: '/account/platforms',
   ACCOUNT_EMPLOYEES: '/account/employees',
   ACCOUNT_REVIEWS: '/account/reviews',
+  ACCOUNT_IDENTIFY: '/account/identify',
   ACCOUNT_PERSONAL_DATA: '/account/personal-data',
   ACCOUNT_SUPPORT: '/account/support',
   THANK_YOU: '/thank-you',
@@ -38,5 +39,6 @@ export const PROTECTED_ROUTES = [
   ROUTES.ACCOUNT_SUPPORT,
   ROUTES.ACCOUNT_QR_CODE_EDIT,
   ROUTES.ACCOUNT_QR_INDIVIDUAL_CREATE,
-  ROUTES.ACCOUNT_QR_BUSINESS_CREATE
+  ROUTES.ACCOUNT_QR_BUSINESS_CREATE,
+  ROUTES.ACCOUNT_IDENTIFY
 ]

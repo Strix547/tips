@@ -11,7 +11,7 @@ const media530 = media.createMedia(530)
 
 export { Heading, Text }
 
-export const SignIn = styled.div`
+export const AuthPage = styled.div`
   display: flex;
   height: 100vh;
 

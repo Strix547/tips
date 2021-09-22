@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { FieldsLabel } from '../../AccountIdentifyModal.styled'
+import { FieldsLabel } from '../../IdentifyAccount.styled'
 
 export { FieldsLabel }
 

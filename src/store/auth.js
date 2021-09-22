@@ -28,10 +28,16 @@ export const authStore = makeAutoObservable({
     try {
       await authApi.confirmCode({ phone, code, remember })
       const userId = await userStore.getMyId()
+      const userRole = await userStore.getUserRole(userId)
+      await userStore.getPersonalData(userId)
       authStore.isAuth = true
-      router.push(ROUTES.ACCOUNT)
-      userStore.getUserRole(userId)
-      userStore.getPersonalData(userId)
+
+      if (userRole === 'UNVERIFIED') {
+        router.push(ROUTES.ACCOUNT_IDENTIFY)
+      } else {
+        router.push(ROUTES.ACCOUNT)
+      }
+
       return true
     } catch ({ message }) {
       toast.error(message)

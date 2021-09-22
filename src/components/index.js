@@ -6,7 +6,6 @@ import { RecipientCardPreview } from './RecipientCardPreview'
 import { SupportForm } from './SupportForm'
 import { LineChart } from './LineChart'
 import { StatisticRow } from './StatisticRow'
-import { AccountIdentifyModal } from './AccountIdentifyModal'
 import { Notifications } from './Notifications'
 import { CurrencySelect } from './CurrencySelect'
 
@@ -44,7 +43,6 @@ export {
   SupportForm,
   LineChart,
   StatisticRow,
-  AccountIdentifyModal,
   Notifications,
   CurrencySelect
 }

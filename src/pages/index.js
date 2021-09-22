@@ -21,6 +21,7 @@ import { PlatformEditCreatePage } from './PlatformEditCreate'
 import { RequisitesPage } from './Requisites'
 import { PersonalDataPage } from './PersonalData'
 import { QrIndividualEditPage } from './QrIndividualEdit'
+import { IdentifyAccountPage } from './IdentifyAccount'
 
 export {
   AgentsPage,
@@ -44,5 +45,6 @@ export {
   PlatformEditCreatePage,
   RequisitesPage,
   PersonalDataPage,
-  QrIndividualEditPage
+  QrIndividualEditPage,
+  IdentifyAccountPage
 }

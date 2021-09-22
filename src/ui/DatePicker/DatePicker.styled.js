@@ -267,8 +267,11 @@ export const DatePicker = styled.div`
       .react-datepicker {
         &__input-container {
           input {
-            color: var(--color-red-100);
             border-color: var(--color-red-100);
+
+            &::placeholder {
+              color: var(--color-red-100);
+            }
           }
         }
       }

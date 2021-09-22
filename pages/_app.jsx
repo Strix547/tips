@@ -6,7 +6,7 @@ import { Elements } from '@stripe/react-stripe-js'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
-import { AccountIdentifyModal, Notifications } from 'components'
+import { Notifications } from 'components'
 
 import { userStore } from 'store'
 import { ROUTES, PROTECTED_ROUTES } from 'core/routes'
@@ -25,7 +25,7 @@ const App = ({ Component, pageProps }) => {
   const { isIdLoading, role } = userStore
 
   const currentPathname = router.pathname
-  const isAuthRoute = ROUTES.AUTH === currentPathname
+  const isAuthRoute = currentPathname === ROUTES.AUTH
   const isProtectedRoute = PROTECTED_ROUTES.includes(currentPathname)
 
   const theme = createTheme({
@@ -54,17 +54,14 @@ const App = ({ Component, pageProps }) => {
     }
   }, [])
 
-  if (isIdLoading) return null
-
   const getContent = (isIdLoading, role, isProtectedRoute, pageProps) => {
     if (isIdLoading) return null
-    if (role === 'UNVERIFIED' && isProtectedRoute)
-      return (
-        <Elements stripe={stripePromise}>
-          <AccountIdentifyModal open stripePromise={stripePromise} />
-        </Elements>
-      )
-    return <Component {...pageProps} />
+
+    if (role === 'UNVERIFIED' && isProtectedRoute && currentPathname !== ROUTES.ACCOUNT_IDENTIFY) {
+      router.push(ROUTES.ACCOUNT_IDENTIFY)
+    }
+
+    return <Component {...pageProps} stripePromise={stripePromise} />
   }
 
   return (
@@ -79,8 +76,10 @@ const App = ({ Component, pageProps }) => {
       <GlobalStyles />
 
       <MuiThemeProvider theme={theme}>
-        {getContent(isIdLoading, role, isProtectedRoute, pageProps)}
-        <Notifications />
+        <Elements stripe={stripePromise}>
+          {getContent(isIdLoading, role, isProtectedRoute, pageProps)}
+          <Notifications />
+        </Elements>
       </MuiThemeProvider>
     </>
   )

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import { ErrorText } from 'styled'
 import { CheckboxRow } from 'ui/Checkbox/Checkbox.styled'
-import { FieldsLabel } from '../../AccountIdentifyModal.styled'
+import { FieldsLabel } from '../../IdentifyAccount.styled'
 
 export { FieldsLabel, ErrorText }
 

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { IbanElement } from '@stripe/react-stripe-js'
 
 import { Text, Label } from 'styled'
-import { FieldsLabel } from '../../AccountIdentifyModal.styled'
+import { FieldsLabel } from '../../IdentifyAccount.styled'
 
 export { FieldsLabel, Text, Label }
 
