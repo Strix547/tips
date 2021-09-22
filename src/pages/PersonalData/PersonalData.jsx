@@ -46,7 +46,7 @@ export const PersonalDataPage = observer(() => {
       email,
       address,
       postalCode: postal,
-      birthDate: birthDate?.toISOString()?.split('T')[0]
+      birthDate: new Date(birthDate.replaceAll('/', '.')).toISOString().split('T')[0] || undefined
     })
   }
 
@@ -64,7 +64,17 @@ export const PersonalDataPage = observer(() => {
 
               <FormField name="lastName" label="Фамилия" placeholder="Введите фамилию" />
 
-              <DatePicker name="birthDate" dateFormat="dd/MM/yyyy" label="Дата рождения" />
+              <FormField
+                rules={{
+                  validate: (value) => value.indexOf('_') === -1
+                }}
+                name="birthDate"
+                label="Дата рождения"
+                placeholder="dd/mm/yyyy"
+                MaskProps={{ mask: '99/99/9999' }}
+              />
+
+              {/* <DatePicker name="birthDate" dateFormat="dd/MM/yyyy" label="Дата рождения" /> */}
 
               <FormField type="email" name="email" label="E-mail" placeholder="Введите e-mail" />
 

@@ -7,7 +7,7 @@ export const AccountTypeStep = ({ useFormProps }) => {
     <S.AccountTypeStep>
       <S.FieldsLabel>Выберите ваш тип:</S.FieldsLabel>
 
-      <Checkbox name="payer" label="Плательщик" />
+      <Checkbox name="payer" label="Плательщик" checked />
       <Checkbox name="recipient" label="Получатель" />
       <Checkbox name="agent" label="Агент" />
       <Checkbox name="business" label="Бизнес" />

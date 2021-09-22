@@ -26,7 +26,7 @@ export const Footer = () => {
   const useFormProps = useForm()
 
   const navFirstColumn = [
-    { label: 'О «Tips.me»‎', link: ROUTES.ABOUT_US },
+    { label: 'О «Tips.me»‎', link: '/' },
     { label: 'Реквизиты и информация', link: ROUTES.CREDENTIALS },
     { label: 'Публичная оферта', link: ROUTES.PUBLIC_OFFER },
     { label: 'Положение о конфиденциальности', link: ROUTES.PRIVACY_POLICY }
@@ -79,10 +79,13 @@ export const Footer = () => {
         <S.Top>
           <S.Contacts>
             <Logo />
+
             <address>
               Ulica Stupavska 1345/108, <br /> Malacky city 90101
             </address>
+
             <S.PhoneLink href="tel:+4903083798689">+49 030 83798689</S.PhoneLink>
+
             <S.EmailLink href="mailto:support@tipsme.com">support@tipsme.com</S.EmailLink>
           </S.Contacts>
 

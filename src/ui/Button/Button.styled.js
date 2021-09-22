@@ -8,6 +8,11 @@ const getVariantStyles = (varaint) => {
         color: var(--color-primary-200);
         border: 2px solid var(--color-primary-200);
         background: #fff;
+
+        &:hover {
+          background: var(--color-primary-200);
+          color: #fff;
+        }
       `
   }
 }
@@ -35,6 +40,7 @@ export const Button = styled.button`
   background: ${({ color }) => color || 'var(--color-primary-200)'};
   border-radius: 40px;
   border: none;
+  transition: 0.3s;
   cursor: pointer;
   box-sizing: border-box;
 
@@ -44,6 +50,11 @@ export const Button = styled.button`
 
   svg:last-child {
     margin-left: 15px;
+  }
+
+  &:hover {
+    background: var(--color-primary-600);
+    transition: 0.3s;
   }
 
   ${({ variant }) => getVariantStyles(variant)}

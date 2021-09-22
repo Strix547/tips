@@ -24,7 +24,7 @@ export const sendCode = async (phone) => {
 
 export const confirmCode = async ({ phone, code, remember }) => {
   try {
-    const data = await API.post(
+    const res = await API.post(
       `${root}/sign-in/phone/confirm-code`,
       {
         phone: `+${phone}`,
@@ -32,7 +32,12 @@ export const confirmCode = async ({ phone, code, remember }) => {
       },
       { params: { 'remember-me': remember } }
     )
-    return data
+
+    if (res?.status === 401) {
+      throw new Error('wrong code')
+    }
+
+    return res
   } catch ({ message }) {
     throw new Error(message)
   }

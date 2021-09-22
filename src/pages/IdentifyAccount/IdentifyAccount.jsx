@@ -96,7 +96,7 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
           email,
           firstName,
           lastName,
-          birthDate: birthDate.toISOString().split('T')[0],
+          birthDate: new Date(birthDate.replaceAll('/', '.')).toISOString().split('T')[0],
           countryCode: localStore.selectedCountryCode,
           city,
           address,

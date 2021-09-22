@@ -39,6 +39,10 @@ export const LeftTop = styled.div`
     font-weight: 500;
     color: var(--color-primary-200);
 
+    &:hover {
+      text-decoration: underline;
+    }
+
     svg {
       margin-top: 2px;
       margin-left: 14px;

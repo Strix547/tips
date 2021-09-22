@@ -1,8 +1,18 @@
 import { Controller, useFormContext } from 'react-hook-form'
+import InputMask from 'react-input-mask'
 
 import * as S from './FormField.styled'
 
-export const FormField = ({ name, rules, required, type, defaultValue, InputProps, ...props }) => {
+export const FormField = ({
+  name,
+  rules,
+  required,
+  type,
+  defaultValue,
+  InputProps,
+  MaskProps,
+  ...props
+}) => {
   const {
     control,
     formState: { errors }
@@ -19,19 +29,23 @@ export const FormField = ({ name, rules, required, type, defaultValue, InputProp
       render={({ field }) => {
         const { ref, value, onChange } = field
 
-        return (
-          <S.FormField
-            {...props}
-            type={type}
-            haveError={haveError}
-            InputProps={{
-              inputProps: { maxLength: 255 },
-              inputRef: ref,
-              ...InputProps
-            }}
-            value={value}
-            onChange={onChange}
-          />
+        const baseProps = {
+          ...props,
+          type,
+          haveError,
+          InputProps: {
+            inputProps: { maxLength: 255 },
+            inputRef: ref,
+            ...InputProps
+          }
+        }
+
+        return !MaskProps?.mask ? (
+          <S.FormField {...baseProps} value={value} onChange={onChange} />
+        ) : (
+          <InputMask {...MaskProps} value={value} onChange={onChange}>
+            {() => <S.FormField {...baseProps} />}
+          </InputMask>
         )
       }}
     />

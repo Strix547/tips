@@ -15,14 +15,24 @@ export const PersonalDataStep = () => {
 
       <FormField name="lastName" label="Фамилия" placeholder="Введите фамилию" required />
 
-      <DatePicker
+      <FormField
+        rules={{
+          validate: (value) => value.indexOf('_') === -1
+        }}
+        name="birthDate"
+        label="Дата рождения"
+        placeholder="dd/mm/yyyy"
+        MaskProps={{ mask: '99/99/9999' }}
+      />
+
+      {/* <DatePicker
         name="birthDate"
         dateFormat="dd/MM/yyyy"
         placeholderText="dd/mm/yyyy"
         maxDate={eighteenYearsAgo}
         label="Дата рождения"
         required
-      />
+      /> */}
 
       <FormField
         rules={{

@@ -7,6 +7,7 @@ export const variables = css`
     --color-primary-300: #479b4e;
     --color-primary-400: #3fa949;
     --color-primary-500: #ecfaf1;
+    --color-primary-600: #62d289;
 
     --color-black-100: #101011;
     --color-black-200: #313436;

@@ -87,6 +87,15 @@ export const NavList = styled.ul`
     &:not(:last-child) {
       margin-bottom: 15px;
     }
+
+    a {
+      transition: 0.3s;
+
+      &:hover {
+        color: var(--color-primary-200);
+        transition: 0.3s;
+      }
+    }
   }
 
   ${media740} {
@@ -150,6 +159,7 @@ export const Consultation = styled.div`
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.04);
   border-radius: 10px;
   box-sizing: border-box;
+  cursor: pointer;
 
   svg {
     flex-shrink: 0;
@@ -199,6 +209,11 @@ export const SubscriptionForm = styled.form`
     padding: 0;
     height: 40px;
     border-radius: 50%;
+
+    span {
+      display: flex;
+      align-items: center;
+    }
 
     svg {
       margin: 0;
