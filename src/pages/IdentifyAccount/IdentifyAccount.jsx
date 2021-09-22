@@ -20,12 +20,13 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
   const stripeElements = useElements()
   const useFormProps = useForm({
     defaultValues: {
-      birthDate: null
+      birthDate: null,
+      payer: true
     }
   })
 
   const isTablet = useMediaQuery({ maxWidth: MEDIA_TABLET })
-  const [step, setStep] = useState(0)
+  const [step, setStep] = useState(1)
   const [stripeError, setStripeError] = useState()
 
   const { isIdentifyProcessing } = userStore
