@@ -26,7 +26,7 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
   })
 
   const isTablet = useMediaQuery({ maxWidth: MEDIA_TABLET })
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(0)
   const [stripeError, setStripeError] = useState()
 
   const { isIdentifyProcessing } = userStore
