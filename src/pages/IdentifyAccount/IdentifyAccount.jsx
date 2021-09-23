@@ -20,8 +20,7 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
   const stripeElements = useElements()
   const useFormProps = useForm({
     defaultValues: {
-      birthDate: null,
-      payer: true
+      birthDate: null
     }
   })
 
@@ -97,7 +96,7 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
           email,
           firstName,
           lastName,
-          birthDate: new Date(birthDate.replaceAll('/', '.')).toISOString().split('T')[0],
+          birthDate: new Date(birthDate).toISOString().split('T')[0],
           countryCode: localStore.selectedCountryCode,
           city,
           address,

@@ -65,5 +65,11 @@ export const Button = styled.button`
       color: var(--color-gray-500);
       background: var(--color-gray-700);
       cursor: default;
+
+      &:hover {
+        color: var(--color-gray-500);
+        background: var(--color-gray-700);
+        cursor: default;
+      }
     `}
 `

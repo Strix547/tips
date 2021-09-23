@@ -46,7 +46,7 @@ export const PersonalDataPage = observer(() => {
       email,
       address,
       postalCode: postal,
-      birthDate: new Date(birthDate.replaceAll('/', '.')).toISOString().split('T')[0] || undefined
+      birthDate: new Date(birthDate).toISOString().split('T')[0] || undefined
     })
   }
 
