@@ -1,9 +1,18 @@
 import { API } from 'core/axios'
 
-const transformIncomeStatistics = ({ localDateTime, paymentPageId, qrName, sum, smile, type }) => {
+const transformIncomeStatistics = ({
+  localDateTime,
+  paymentId,
+  paymentPageId,
+  qrName,
+  sum,
+  smile,
+  type
+}) => {
   return {
-    qrId: paymentPageId,
+    id: paymentId,
     qrName,
+    paymentPageId,
     dateTime: new Date(localDateTime),
     tipAmount: sum,
     impression: smile,
@@ -22,7 +31,7 @@ export const getIncomeStatistics = async ({
 }) => {
   const isXlsxFormat = format === 'XLSX'
 
-  const { data } = await API.get(`/personal-income-statistics/${userId}`, {
+  const { statusText, data } = await API.get(`/personal-income-statistics/${userId}`, {
     params: {
       currency,
       format,
@@ -46,5 +55,10 @@ export const getIncomeStatistics = async ({
     return
   }
 
-  return JSON.parse(data).result.map((item) => transformIncomeStatistics(item))
+  const { table, diagram } = JSON.parse(data).result
+
+  return {
+    table: table.map((item) => transformIncomeStatistics(item)),
+    diagram: diagram.map(({ localDate, sum }) => ({ date: new Date(localDate), tipAmount: sum }))
+  }
 }

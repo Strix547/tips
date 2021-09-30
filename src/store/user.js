@@ -2,6 +2,7 @@ import { makeAutoObservable } from 'mobx'
 import { toast } from 'react-toastify'
 import router from 'next/router'
 
+import { CURRENCIES } from 'core/constants'
 import { ROUTES } from 'core/routes'
 import { authStore } from 'store'
 import * as userApi from 'api/user'
@@ -20,7 +21,8 @@ export const userStore = makeAutoObservable({
     dateOfBirth: '',
     countryCode: '',
     city: '',
-    address: ''
+    address: '',
+    currency: ''
   },
 
   getMyId: async () => {
@@ -46,7 +48,15 @@ export const userStore = makeAutoObservable({
   getPersonalData: async (userId) => {
     userStore.isPersonalDataLoading = true
     const personalData = await userApi.getUserInfo(userId)
-    userStore.personalData = personalData
+
+    userStore.personalData = {
+      ...personalData,
+      currency: {
+        label: CURRENCIES.find(({ value }) => personalData.currency === value).symbol,
+        value: personalData.currency
+      }
+    }
+
     userStore.isPersonalDataLoading = false
     return personalData
   },
@@ -61,9 +71,18 @@ export const userStore = makeAutoObservable({
     city,
     address,
     postalCode,
-    policyAgreement
+    policyAgreement,
+    avatar
   }) => {
     try {
+      const getAvatarFileId = async (avatar) => {
+        const formData = new FormData()
+        formData.append('file', avatar)
+        const data = await userApi.uploadFile(formData)
+        console.log(data)
+        return data
+      }
+
       const newInfo = await userApi.changeUserInfo({
         userId,
         email,
@@ -74,11 +93,12 @@ export const userStore = makeAutoObservable({
         city,
         address,
         postalCode,
-        policyAgreement
+        policyAgreement,
+        avatar: avatar && (await getAvatarFileId(avatar))
       })
       userStore.getPersonalData(userId)
       router.push(ROUTES.ACCOUNT)
-      toast.success('Personal data successfully changed ')
+      toast.success('Personal data successfully changed')
       return newInfo
     } catch ({ message }) {
       toast.error(message)

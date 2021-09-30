@@ -16,10 +16,9 @@ export const SupportForm = styled.form`
   position: relative;
   display: flex;
   flex-direction: column;
-  ${gapPolyfill(20)}
   width: 770px;
   margin: 0 auto;
-  padding: calc(30px - 10px) calc(50px - 10px);
+  padding: 30px 50px;
   background: #fff;
   border: 1px solid #f7f9fb;
   box-shadow: 0px 10px 40px rgba(54, 54, 65, 0.1);
@@ -27,12 +26,20 @@ export const SupportForm = styled.form`
   z-index: 10;
   box-sizing: border-box;
 
+  & > *:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
   ${FormField} {
     margin-top: 10px;
   }
 
   ${Dropzone} {
-    height: 60px;
+    min-height: 60px;
+
+    svg {
+      flex-shrink: 0;
+    }
   }
 
   ${Button} {
@@ -112,7 +119,6 @@ export const ThemeRow = styled.div`
     }
 
     ${gapPolyfill(10)}
-    margin-top: calc(15px - 5px);
   }
 `
 
@@ -168,3 +174,11 @@ export const Textarea = styled.textarea`
 `
 
 export const Files = styled.div``
+
+export const LoadingContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 440px;
+`

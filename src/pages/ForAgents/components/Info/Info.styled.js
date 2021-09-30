@@ -1,14 +1,17 @@
 import styled from 'styled-components'
 
-import { WhiteBox, Text, gapPolyfill } from 'styled'
+import { WhiteBox, Text } from 'styled'
 
 export { Text }
 
 export const Info = styled(WhiteBox)`
   display: flex;
   flex-direction: column;
-  ${gapPolyfill(30)}
-  padding: calc(30px - 15px) calc(40px - 15px);
+  padding: 30px 40px;
+
+  & > *:not(:last-child) {
+    margin-bottom: 20px;
+  }
 
   ${Text} {
     color: var(--color-black-200);
@@ -42,8 +45,11 @@ export const CopyIcon = styled.div`
 
 export const Networks = styled.ul`
   display: flex;
-  ${gapPolyfill(30)}
   margin-left: auto;
+
+  & > *:not(:last-child) {
+    margin-right: 30px;
+  }
 
   li {
     a {

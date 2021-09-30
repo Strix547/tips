@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 import { Text } from './Text'
-import { gapPolyfill } from './gapPolyfill'
 import { Button } from 'ui/Button/Button.styled'
 
 export const RecipientCard = styled.div`
@@ -21,10 +20,13 @@ export const RecipientCardTop = styled.div`
 export const RecipientCardMain = styled.div`
   display: flex;
   flex-direction: column;
-  ${gapPolyfill(20)}
   width: 290px;
   margin: 0 auto;
-  padding: calc(30px - 10px);
+  padding: 30px;
+
+  & > *:not(:last-child) {
+    margin-bottom: 20px;
+  }
 
   ${Button} {
     margin-top: 10px;

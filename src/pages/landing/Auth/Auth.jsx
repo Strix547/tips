@@ -20,10 +20,12 @@ export const AuthPage = observer(() => {
   const [rememberUser, setRememberUser] = useState(false)
   const [isCodeSendAllow, setCodeSendAllow] = useState(true)
 
+  const { phone } = authStore.authData
+
   const sendCode = async ({ phone, remember }) => {
     if (!isCodeSendAllow) return
 
-    authStore.setPhone(phone)
+    authStore.setAuthData({ phone })
     setRememberUser(remember)
     const isCodeSended = await authStore.sendCode(phone)
 
@@ -60,15 +62,13 @@ export const AuthPage = observer(() => {
               <PhoneStep onPhoneSubmit={sendCode} />
             ) : (
               <CodeStep
-                phone={authStore.phone}
+                phone={phone}
                 isCodeSendAllow={isCodeSendAllow}
                 onCodeSendAllowChange={setCodeSendAllow}
                 onCodeResend={() => {
-                  onCodeResend(authStore.phone)
+                  onCodeResend(phone)
                 }}
-                onCodeConfirm={(code) =>
-                  onAuth({ phone: authStore.phone, code, remember: rememberUser })
-                }
+                onCodeConfirm={(code) => onAuth({ phone, code, remember: rememberUser })}
               />
             )}
           </S.LeftContent>

@@ -5,7 +5,12 @@ import 'react-phone-input-2/lib/style.css'
 import * as S from './PhoneField.styled'
 
 export const PhoneField = ({ name, rules, value, placeholder, country, ...props }) => {
-  const { control } = useFormContext()
+  const {
+    control,
+    formState: { errors }
+  } = useFormContext()
+
+  const haveError = Object.keys(errors).some((inputName) => inputName === name)
 
   return (
     <Controller
@@ -14,8 +19,9 @@ export const PhoneField = ({ name, rules, value, placeholder, country, ...props 
       rules={rules}
       render={({ field }) => {
         return (
-          <S.PhoneField>
+          <S.PhoneField haveError={haveError}>
             <S.Text>Номер телефона</S.Text>
+
             <PhoneInputLib
               {...field}
               {...props}

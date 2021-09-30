@@ -1,4 +1,5 @@
 import { API } from 'core/axios'
+import { handleResponse } from 'utils'
 
 export const getUserLanguage = (userId) => {
   return API.get('/user-language', { params: { userId } })
@@ -46,32 +47,29 @@ export const changeUserInfo = async ({
   city,
   address,
   postalCode,
-  policyAgreement
+  policyAgreement,
+  avatarFileId
 }) => {
   try {
-    const { status, data } = await API.post(
-      `/personal-info/${userId}/change`,
-      {
-        email,
-        firstName,
-        lastName,
-        dateOfBirth: birthDate,
-        countryCode,
-        city,
-        address,
-        postalCode,
-        tosAccepted: policyAgreement
-      },
-      { transformResponse: [(data) => data] }
-    )
-    console.log(54534, data)
-    if (status === 500) {
-      throw new Error(status)
-    }
+    const response = await API.post(`/personal-info/${userId}/change`, {
+      email,
+      firstName,
+      lastName,
+      dateOfBirth: birthDate,
+      countryCode,
+      city,
+      address,
+      postalCode,
+      avatarFileId,
+      tosAccepted: policyAgreement
+    })
 
-    if (data?.error.code === 'POSTAL_CODE_INVALID') {
-      throw new Error('Invalid postal code')
-    }
+    const codeLabels = [
+      { code: 'POSTAL_CODE_INVALID', label: 'Invalid postal code' },
+      { code: 'COUNTRY_NOT_SUPPORTED', label: 'Country not supported' }
+    ]
+
+    return handleResponse(response, codeLabels)
   } catch ({ message }) {
     throw new Error(message)
   }
@@ -90,5 +88,6 @@ export const uploadFile = async (formData) => {
   const { data } = await API.post('/upload-file', formData, {
     headers: { 'Content-Type': 'multipart/form-data' }
   })
+
   return data
 }

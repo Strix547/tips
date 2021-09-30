@@ -4,7 +4,7 @@ import { Radio } from '@material-ui/core'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 
-import { FormField, Button, FormControlLabel, RadioGroup, Dropzone } from 'ui'
+import { FormField, Button, FormControlLabel, RadioGroup, Dropzone, CircularProgress } from 'ui'
 
 import { ROUTES } from 'core/routes'
 import { supportStore } from 'store'
@@ -73,45 +73,53 @@ export const SupportForm = observer(() => {
         </S.Text>
       </S.Faq>
 
-      <FormProvider {...useFormProps}>
-        <S.ThemeRow>
-          <S.Label>Выберите тему письма</S.Label>
+      {!supportStore.isMessageSending ? (
+        <FormProvider {...useFormProps}>
+          <S.ThemeRow>
+            <S.Label>Выберите тему письма</S.Label>
 
-          <RadioGroup name="letterTheme">{letterThemeRadios}</RadioGroup>
-        </S.ThemeRow>
+            <RadioGroup name="letterTheme">{letterThemeRadios}</RadioGroup>
+          </S.ThemeRow>
 
-        {letterTheme === 'other' && <FormField name="theme" placeholder="Введите название темы" />}
-
-        <Controller
-          control={control}
-          name="message"
-          render={({ field: { value, onChange } }) => (
-            <S.Textarea value={value} onChange={onChange} placeholder="Введите сообщение" />
+          {letterTheme === 'other' && (
+            <FormField name="theme" placeholder="Введите название темы" />
           )}
-        />
 
-        <Dropzone
-          maxFiles={3}
-          accept={[
-            'image/jpeg',
-            'image/png',
-            'application/vnd.ms-excel',
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-            'application/docx',
-            'application/pdf',
-            'application/msword',
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-          ]}
-          onFileChange={(file) =>
-            files.length === 3 ? setFiles([...files.slice(1), file]) : setFiles([...files, file])
-          }
-        >
-          <ClipIcon />
-          <S.Text>{!files.length ? 'Загрузите файл' : getFileNamesString(files)}</S.Text>
-        </Dropzone>
+          <Controller
+            control={control}
+            name="message"
+            render={({ field: { value, onChange } }) => (
+              <S.Textarea value={value} onChange={onChange} placeholder="Введите сообщение" />
+            )}
+          />
 
-        <Button type="submit">Отправить сообщение</Button>
-      </FormProvider>
+          <Dropzone
+            maxFiles={3}
+            accept={[
+              'image/jpeg',
+              'image/png',
+              'application/vnd.ms-excel',
+              'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+              'application/docx',
+              'application/pdf',
+              'application/msword',
+              'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+            ]}
+            onFileChange={(file) =>
+              files.length === 3 ? setFiles([...files.slice(1), file]) : setFiles([...files, file])
+            }
+          >
+            <ClipIcon />
+            <S.Text>{!files.length ? 'Загрузите файл' : getFileNamesString(files)}</S.Text>
+          </Dropzone>
+
+          <Button type="submit">Отправить сообщение</Button>
+        </FormProvider>
+      ) : (
+        <S.LoadingContainer>
+          <CircularProgress size={80} />
+        </S.LoadingContainer>
+      )}
     </S.SupportForm>
   )
 })

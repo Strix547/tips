@@ -196,6 +196,12 @@ export const LanguageSelect = styled(Select)`
     padding: 0;
     padding-right: 0;
     border: none;
+
+    & > svg {
+      width: 100%;
+      border-radius: 4px;
+      border: 1px solid var(--color-gray-200);
+    }
   }
 
   .menu-paper {
@@ -209,7 +215,8 @@ export const LanguageSelect = styled(Select)`
 
     svg {
       width: 24.77px;
-      height: 13.03px;
+      border-radius: 4px;
+      border: 1px solid var(--color-gray-200);
     }
   }
 

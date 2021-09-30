@@ -1,20 +1,23 @@
 import styled, { css } from 'styled-components'
 
-import { Label, gapPolyfill } from 'styled'
+import { Label } from 'styled'
 
 export { Label }
 
 export const DatePicker = styled.div`
   .react-datepicker {
     display: flex;
-    ${gapPolyfill(40)}
-    padding: calc(20px - 20px);
+    padding: 20px;
     background: #ffffff;
     border: 1px solid #e8e8f6;
     box-shadow: 0px 10px 30px rgba(42, 55, 66, 0.15);
     border-radius: 10px;
     font-family: 'Formular';
     box-sizing: border-box;
+
+    & > *:not(:last-child) {
+      margin-right: 40px;
+    }
 
     &__input-container {
       input {
@@ -97,9 +100,12 @@ export const DatePicker = styled.div`
 
     &__day-names {
       display: flex;
-      ${gapPolyfill(12)}
-      margin-top: calc(35px - 6px);
+      margin-top: 35px;
       margin-bottom: 0;
+
+      & > *:not(:last-child) {
+        margin-right: 12px;
+      }
     }
 
     &__day-name {

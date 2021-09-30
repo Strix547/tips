@@ -15,41 +15,48 @@ export const UserMainPage = observer(() => {
   const router = useRouter()
   const useFormProps = useForm({
     defaultValues: {
-      currency: 'USD',
       period: 'MONTH'
     }
   })
 
-  const userId = userStore.id
+  const {
+    id: userId,
+    personalData: { currency }
+  } = userStore
   const { incomeStatistics, isIncomeStatisticsLoading } = statisticsStore
 
-  const currencySelected = useFormProps.watch('currency')
   const periodSelected = useFormProps.watch('period')
   const periodFromSelected = useFormProps.watch('periodFrom')
   const periodToSelected = useFormProps.watch('periodTo')
 
+  const diagramDays = incomeStatistics.diagram.map(({ date }) => date?.getDate())
+  const diagramAmounts = incomeStatistics.diagram.map(({ tipAmount }) => tipAmount)
+
   useEffect(() => {
-    if (userId && periodSelected !== 'custom') {
+    if (!userId && !currency) return
+
+    const commonData = {
+      userId,
+      format: 'JSON',
+      zoneOffset: getTimeZoneOffset(),
+      currency
+    }
+
+    if (periodSelected !== 'custom') {
       statisticsStore.getIncomeStatistics({
-        userId,
-        format: 'JSON',
-        period: periodSelected,
-        zoneOffset: getTimeZoneOffset(),
-        currency: currencySelected
+        ...commonData,
+        period: periodSelected
       })
     }
 
     if (periodFromSelected && periodToSelected) {
       statisticsStore.getIncomeStatistics({
-        userId,
-        format: 'JSON',
+        ...commonData,
         periodFrom: periodFromSelected,
-        periodTo: periodToSelected,
-        zoneOffset: getTimeZoneOffset(),
-        currency: currencySelected
+        periodTo: periodToSelected
       })
     }
-  }, [userId, currencySelected, periodSelected, periodFromSelected, periodToSelected])
+  }, [userId, periodSelected, periodFromSelected, periodToSelected])
 
   const toQrCodesPage = () => {
     router.push(ROUTES.ACCOUNT_QR_INDIVIDUAL_CREATE)
@@ -65,9 +72,6 @@ export const UserMainPage = observer(() => {
     })
   }
 
-  const days = incomeStatistics.map(({ dateTime }) => dateTime.getDate())
-  const amounts = incomeStatistics.map(({ tipAmount }) => tipAmount)
-
   return (
     <>
       <Head>
@@ -79,17 +83,17 @@ export const UserMainPage = observer(() => {
           () => (
             <BarChart
               title="Статистика входящих оплат"
-              labels={days}
-              values={amounts}
+              labels={diagramDays}
+              values={diagramAmounts}
               isLoading={isIncomeStatisticsLoading}
             />
           ),
-          [days, amounts]
+          [diagramDays, diagramAmounts]
         )}
 
         <FormProvider {...useFormProps}>
           <TipsTable
-            data={incomeStatistics}
+            data={incomeStatistics.table}
             isDataLoading={isIncomeStatisticsLoading}
             onExcelDownload={() => downloadExcelFile(userId)}
           />

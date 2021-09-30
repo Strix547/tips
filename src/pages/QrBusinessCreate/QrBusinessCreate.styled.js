@@ -7,7 +7,7 @@ import { media } from 'styles/media'
 
 export const Content = styled.div`
   display: flex;
-  ${gapPolyfill(30)}
+  /* ${gapPolyfill(30)} */
 
   ${PaymentCardOptionsPanelBusiness} {
     width: 720px;
@@ -15,7 +15,7 @@ export const Content = styled.div`
 
   ${media.createMedia(1000)} {
     flex-wrap: wrap;
-    ${gapPolyfill(20)}
+    /* ${gapPolyfill(20)} */
 
     ${PaymentCardOptionsPanelBusiness} {
       width: 100%;

@@ -3,7 +3,10 @@ import { makeAutoObservable } from 'mobx'
 import * as statisticsApi from 'api/statistics'
 
 export const statisticsStore = makeAutoObservable({
-  incomeStatistics: [],
+  incomeStatistics: {
+    table: [],
+    diagram: []
+  },
   isIncomeStatisticsLoading: false,
 
   getIncomeStatistics: async ({

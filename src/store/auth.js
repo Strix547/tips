@@ -11,15 +11,14 @@ export const authStore = makeAutoObservable({
   isAuth: false,
   isCodeSending: false,
   step: 'phone',
-  firstName: '',
-  phone: '',
-
-  setPhone: (phone) => {
-    authStore.phone = phone
+  authData: {
+    firstName: '',
+    email: '',
+    phone: ''
   },
 
-  setFirstName: (firstName) => {
-    authStore.firstName = firstName
+  setAuthData: ({ firstName, email, phone }) => {
+    authStore.authData = { firstName, email, phone }
   },
 
   setStep: (step) => {

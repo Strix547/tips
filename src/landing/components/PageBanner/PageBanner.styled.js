@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { Heading, Text, Wrapper, gapPolyfill } from 'styled'
+import { Heading, Text, Wrapper } from 'styled'
 import { Button } from 'ui/Button/Button.styled'
 import { media } from 'styles/media'
 
@@ -97,8 +97,11 @@ export const FeatureList = styled.ul`
 
 export const ActionRow = styled.div`
   display: flex;
-  ${gapPolyfill(20)}
-  margin-top: calc(20px - 10px);
+  margin-top: 20px;
+
+  & > *:not(:last-child) {
+    margin-right: 20px;
+  }
 
   ${Button}:first-child {
     box-shadow: 0px 15px 30px rgba(84, 167, 92, 0.15);
@@ -106,6 +109,11 @@ export const ActionRow = styled.div`
 
   ${media630} {
     flex-direction: column;
+
+    & > *:not(:last-child) {
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
 
     ${Button} {
       width: 260px;

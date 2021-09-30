@@ -1,9 +1,10 @@
 import styled from 'styled-components'
 
-import { gapPolyfill } from 'styled'
-
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  ${gapPolyfill(20)}
+
+  & > *:not(:last-child) {
+    margin-bottom: 20px;
+  }
 `

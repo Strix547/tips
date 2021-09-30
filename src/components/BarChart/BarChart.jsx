@@ -159,7 +159,7 @@ export const BarChart = ({
             />
           </S.BarContainer>
 
-          <S.Month>Май</S.Month>
+          {/* <S.Month>Май</S.Month> */}
         </>
       ) : (
         <Skeleton height={250} />

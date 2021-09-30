@@ -11,19 +11,16 @@ import { authStore } from 'store'
 import * as S from './ConnectForm.styled'
 
 import GreenDotesSvg from '@public/img/landing/green-dotes.svg'
-import LineSvg from '@public/img/landing/line.svg'
 
 export const ConnectFormSection = () => {
   const router = useRouter()
   const useFormProps = useForm()
-  const { watch, handleSubmit } = useFormProps
+  const { handleSubmit } = useFormProps
 
-  const phone = watch('phone')
-
-  const onSubmit = ({ firstName, phone }) => {
-    authStore.sendCode(phone)
-    authStore.setPhone(phone)
-    authStore.setFirstName(firstName)
+  const toCodeStepWithAuthData = async ({ firstName, email, phone }) => {
+    await authStore.sendCode(phone)
+    authStore.setAuthData({ firstName, email, phone })
+    authStore.setStep('code')
     router.push(ROUTES.AUTH)
   }
 
@@ -36,12 +33,20 @@ export const ConnectFormSection = () => {
         </S.Subtitle>
 
         <S.FormContainer>
-          <S.Form onSubmit={handleSubmit(onSubmit)}>
+          <S.Form onSubmit={handleSubmit(toCodeStepWithAuthData)}>
             <FormProvider {...useFormProps}>
               <FormField name="firstName" label="Имя" placeholder="Введите Ваше имя" required />
 
+              <FormField
+                type="email"
+                name="email"
+                label="E-mail"
+                placeholder="Введите e-mail"
+                required
+              />
+
               <PhoneField
-                rules={{ required: true }}
+                rules={{ required: true, minLength: 11 }}
                 name="phone"
                 country="ru"
                 placeholder="+7 (___) ___-__-__"
@@ -58,9 +63,8 @@ export const ConnectFormSection = () => {
                 label="Согласен на маркетинговую рассылку"
                 required
               />
-              <Button type="submit" disabled={!phone || phone?.length < 11}>
-                Подключить заведение
-              </Button>
+
+              <Button type="submit">Подключить заведение</Button>
             </FormProvider>
           </S.Form>
 
@@ -77,7 +81,6 @@ export const ConnectFormSection = () => {
 
         <S.Background>
           <GreenDotesSvg />
-          <LineSvg />
           <GreenDotesSvg />
         </S.Background>
       </S.Content>

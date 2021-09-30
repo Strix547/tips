@@ -20,7 +20,8 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
   const stripeElements = useElements()
   const useFormProps = useForm({
     defaultValues: {
-      firstName: authStore.firstName,
+      firstName: authStore.authData.firstName,
+      email: authStore.authData.email,
       birthDate: null
     }
   })

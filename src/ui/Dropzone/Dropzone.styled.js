@@ -8,7 +8,7 @@ export const Dropzone = styled.div`
   justify-content: center;
   width: 100%;
   min-height: 80px;
-  padding: 10px 0;
+  padding: 10px;
   border: 1px dashed var(--color-gray-400);
   border-radius: 6px;
   cursor: pointer;

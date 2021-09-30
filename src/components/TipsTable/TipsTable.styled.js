@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { WhiteBox, Text, gapPolyfill } from 'styled'
+import { WhiteBox, Text } from 'styled'
 import { StatisticRow } from 'components/StatisticRow/StatisticRow.styled'
 import { TimePeriodFilter } from 'components/TimePeriodFilter/TimePeriodFilter.styled'
 import { ExcelDownload } from 'common/ExcelDownload/ExcelDownload.styled'
@@ -47,8 +47,11 @@ export const Top = styled.div`
 
   ${media.createMedia(670)} {
     flex-wrap: wrap;
-    ${gapPolyfill(20)}
-    padding: calc(20px - 10px) 0;
+    padding: 20px 0;
+
+    & > *:not(:last-child) {
+      margin-bottom: 20px;
+    }
 
     ${TimePeriodFilter}, ${TimePeriodFilter} ${Select}, ${ExcelDownload} {
       width: 100%;
@@ -62,10 +65,6 @@ export const Top = styled.div`
 `
 
 export const TopLeft = styled.div`
-  display: flex;
-  align-items: center;
-  ${gapPolyfill(10)}
-
   ${media.createMedia(670)} {
     width: 100%;
   }
@@ -109,36 +108,6 @@ export const TableContainer = styled.div`
         }
       }
     }
-  }
-
-  ${media.createMedia(1360)} {
-    /* ${Table} {
-      .MuiDataGrid {
-        &-row,
-        &-columnHeaderWrapper {
-          width: 100% !important;
-          display: grid !important;
-          grid-template-columns: 95px 110px 150px 1fr 1fr 135px !important;
-        }
-
-        &-dataContainer {
-          min-width: calc(100% - 60px) !important;
-        }
-
-        &-renderingZone,
-        &-columnHeaderWrapper {
-          width: 100% !important;
-          min-width: auto !important;
-        }
-
-        &-cell,
-        &-columnHeader {
-          max-width: 100% !important;
-          width: auto !important;
-          min-width: auto !important;
-        }
-      }
-    } */
   }
 
   ${media.createMedia(880)} {
@@ -189,13 +158,16 @@ export const TableContainer = styled.div`
       position: static;
       flex-direction: column;
       align-items: flex-start;
-      ${gapPolyfill(10)}
       width: 100%;
       height: auto;
       padding: calc(20px - 5px);
       background: #ffffff;
       border-radius: 10px;
       border: none;
+
+      & > *:not(:last-child) {
+        margin-bottom: 10px;
+      }
 
       &:last-child {
         margin-top: calc(10px - 5px);
@@ -241,10 +213,9 @@ export const TipCardMain = styled.div`
 
 export const TipCardRow = styled.div`
   display: flex;
-  ${gapPolyfill(20)}
 
   &:not(:last-child) {
-    margin-bottom: calc(15px - 10px);
+    margin-bottom: 15px;
   }
 
   ${Text} {
@@ -266,8 +237,11 @@ export const TableSkeleton = styled.div`
   span {
     display: flex;
     flex-direction: column;
-    padding: calc(5px - 5px) 0;
-    ${gapPolyfill(10)}
+    padding: 5px 0;
+
+    & > *:not(:last-child) {
+      margin-bottom: 10px;
+    }
   }
 
   ${media750} {
@@ -282,7 +256,10 @@ export const TipCardSkeleton = styled.div`
   span {
     display: flex;
     flex-direction: column;
-    ${gapPolyfill(10)}
+
+    & > *:not(:last-child) {
+      margin-bottom: 10px;
+    }
   }
 
   ${media750} {

@@ -11,6 +11,10 @@ export const Content = styled.div`
   ${SupportForm} {
     align-items: center;
     width: 100%;
+    padding: 30px 30px 40px;
+    box-shadow: 0px 5px 20px rgba(49, 52, 61, 0.05);
+    border-radius: 10px;
+    border: none;
 
     & > * {
       width: 1000px;
@@ -41,6 +45,8 @@ export const Content = styled.div`
 
   ${media.createMedia(1000)} {
     ${SupportForm} {
+      padding: 30px 50px;
+
       ${ThemeRow} {
         width: 100%;
       }
@@ -52,6 +58,12 @@ export const Content = styled.div`
       ${FormField}, ${Textarea}, ${Dropzone}, ${Button} {
         width: 100%;
       }
+    }
+  }
+
+  ${media.createMedia(600)} {
+    ${SupportForm} {
+      padding: 20px;
     }
   }
 `

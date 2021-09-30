@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 
-import { gapPolyfill } from 'styled'
 import { Box, Top, Content, PointList, ImgContainer } from '../Box/Box.styled'
 import { media } from 'styles/media'
 
@@ -76,7 +75,10 @@ export const BoxList = styled.ul`
     display: flex;
     flex-direction: column;
     align-items: center;
-    ${gapPolyfill(30)}
+
+    & > *:not(:last-child) {
+      margin-bottom: 30px;
+    }
 
     ${Box} {
       &:nth-child(1),
@@ -120,7 +122,9 @@ export const BoxList = styled.ul`
   }
 
   ${media.createMedia(650)} {
-    ${gapPolyfill(20)}
+    & > *:not(:last-child) {
+      margin-bottom: 20px;
+    }
 
     ${Box} {
       &:nth-child(1) ${PointList}, &:nth-child(2) ${PointList} {

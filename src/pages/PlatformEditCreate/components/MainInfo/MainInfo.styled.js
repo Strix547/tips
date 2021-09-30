@@ -10,11 +10,14 @@ export { Heading, Label }
 export const MainInfo = styled(WhiteBox)`
   display: flex;
   flex-direction: column;
-  ${gapPolyfill(20)}
-  padding: calc(30px - 10px) calc(40px - 10px);
+  padding: 30px 40px;
+
+  & > *:not(:last-child) {
+    margin-bottom: 20px;
+  }
 
   ${media.createMedia(570)} {
-    padding: calc(20px - 10px);
+    padding: 20px;
   }
 `
 

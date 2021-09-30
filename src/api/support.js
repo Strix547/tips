@@ -8,7 +8,7 @@ export const sendMessageToSupport = async ({ theme, message, fileIds }) => {
       fileIds
     })
 
-    if (statusText !== 'ok') {
+    if (statusText !== 'OK') {
       throw new Error(status)
     }
 

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { Text } from 'styled'
 
@@ -65,4 +65,16 @@ export const PhoneField = styled.div`
       }
     }
   }
+
+  ${({ haveError }) =>
+    haveError &&
+    css`
+      .react-tel-input .form-control {
+        border-color: var(--color-red-100);
+
+        &::placeholder {
+          color: var(--color-red-100);
+        }
+      }
+    `}
 `

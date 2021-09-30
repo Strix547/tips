@@ -48,11 +48,11 @@ export const QrCard = ({ id, templateId, label, img, tag }) => {
     { label: 'delete', icon: <TrashIcon />, onClick: () => onDelete(templateId) }
   ]
 
-  const actionButtons = actions.map(({ label, icon, onClick }) => (
+  const createActionButton = ({ label, icon, onClick }) => (
     <button key={label} type="button" aria-label={label} onClick={onClick}>
       {icon}
     </button>
-  ))
+  )
 
   return (
     <S.QrCard as={tag}>
@@ -67,7 +67,17 @@ export const QrCard = ({ id, templateId, label, img, tag }) => {
         <Button iconStart={<WalletIcon />}>Добавить в Apple Wallet</Button>
       </S.AppleWallet>
 
-      <S.ActionRow>{actionButtons}</S.ActionRow>
+      <S.ActionRow>
+        <S.ActionRowCol>
+          {createActionButton(actions[0])}
+          {createActionButton(actions[1])}
+        </S.ActionRowCol>
+
+        <S.ActionRowCol>
+          {createActionButton(actions[2])}
+          {createActionButton(actions[3])}
+        </S.ActionRowCol>
+      </S.ActionRow>
 
       <QrModal
         open={isQrModalOpen}

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { WhiteBox, Label, Text, gapPolyfill } from 'styled'
+import { WhiteBox, Label, Text } from 'styled'
 import { FormField } from 'ui/FormField/FormField.styled'
 
 import { media } from 'styles/media'
@@ -13,8 +13,11 @@ export const PaymentCardOptionsPanelIndividual = styled(WhiteBox)`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  ${gapPolyfill(20)}
-  padding: calc(30px - 10px) calc(40px - 10px);
+  padding: 20px 30px;
+
+  & > *:not(:last-child) {
+    margin-bottom: 20px;
+  }
 
   ${media700} {
     padding: 30px 20px;
@@ -26,8 +29,9 @@ export const AmountPresetsRow = styled.div`
 `
 
 export const AmountPresetsFields = styled.div`
-  display: flex;
-  ${gapPolyfill(10)}
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
 
   ${FormField} {
     input::-webkit-inner-spin-button,
@@ -38,7 +42,7 @@ export const AmountPresetsFields = styled.div`
   }
 
   ${media700} {
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
 `
 

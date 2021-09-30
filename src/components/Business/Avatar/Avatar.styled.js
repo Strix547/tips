@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { Text, gapPolyfill } from 'styled'
+import { Text } from 'styled'
 
 export { Text }
 
@@ -8,7 +8,7 @@ export const AvatarBusiness = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  ${gapPolyfill(20)}
+  /* ${gapPolyfill(20)} */
 `
 
 export const CompanyLogo = styled.div`
