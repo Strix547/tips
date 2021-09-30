@@ -22,7 +22,7 @@ export const userStore = makeAutoObservable({
     countryCode: '',
     city: '',
     address: '',
-    currency: ''
+    currency: { label: '', value: '' }
   },
 
   getMyId: async () => {
@@ -78,9 +78,8 @@ export const userStore = makeAutoObservable({
       const getAvatarFileId = async (avatar) => {
         const formData = new FormData()
         formData.append('file', avatar)
-        const data = await userApi.uploadFile(formData)
-        console.log(data)
-        return data
+        const { fileId } = await userApi.uploadFile(formData)
+        return fileId
       }
 
       const newInfo = await userApi.changeUserInfo({
@@ -94,7 +93,7 @@ export const userStore = makeAutoObservable({
         address,
         postalCode,
         policyAgreement,
-        avatar: avatar && (await getAvatarFileId(avatar))
+        avatarFileId: avatar && (await getAvatarFileId(avatar))
       })
       userStore.getPersonalData(userId)
       router.push(ROUTES.ACCOUNT)

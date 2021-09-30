@@ -3,6 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { observer } from 'mobx-react-lite'
 import Skeleton from 'react-loading-skeleton'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 
 import { LinkButton, MenuItem, Drawer } from 'ui'
@@ -25,7 +26,7 @@ export const Header = observer(({ withSidebar }) => {
 
   const [isMenuOpen, setMenuOpen] = useState(false)
   const { personalData, isPersonalDataLoading } = userStore
-  const { firstName, lastName } = personalData
+  const { firstName, lastName, avatar } = personalData
   const currentPathname = router.pathname
 
   const nav = [
@@ -68,7 +69,7 @@ export const Header = observer(({ withSidebar }) => {
     !isPersonalDataLoading && authStore.isAuth ? (
       <S.User onClick={toAccountPage}>
         <S.UserAvatar>
-          <UserIcon />
+          {avatar ? <Image src={avatar} width={44} height={44} alt="avatar" /> : <UserIcon />}
         </S.UserAvatar>
 
         <S.UserInfo>

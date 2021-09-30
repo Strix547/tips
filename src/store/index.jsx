@@ -5,6 +5,7 @@ import { qrCodesStore } from './qrCodes'
 import { paymentStore } from './payment'
 import { statisticsStore } from './statistics'
 import { supportStore } from './support'
+import { bankAccountStore } from './bankAccount'
 
 export {
   authStore,
@@ -13,5 +14,6 @@ export {
   qrCodesStore,
   paymentStore,
   statisticsStore,
-  supportStore
+  supportStore,
+  bankAccountStore
 }

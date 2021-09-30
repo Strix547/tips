@@ -33,7 +33,8 @@ export const getUserInfo = async (userId) => {
 
   return {
     ...data,
-    birthDate: new Date(data.dateOfBirth)
+    birthDate: new Date(data.dateOfBirth),
+    avatar: `http://tips.tmweb.ru${data.avatarFileUrl}`
   }
 }
 

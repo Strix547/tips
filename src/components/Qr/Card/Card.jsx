@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { observer } from 'mobx-react-lite'
 
 import { QrImage, QrModal } from 'components'
+import { DeleteConfirmModal } from '../DeleteConfirmModal'
 import { Button } from 'ui'
 
-import { qrCodesStore } from 'store'
+import { qrCodesStore, userStore, statisticsStore } from 'store'
 import { ROUTES } from 'core/routes'
+import { getTimeZoneOffset } from 'utils'
 
 import * as S from './Card.styled'
 
@@ -16,13 +19,14 @@ import PenIcon from '@public/icons/pen.svg'
 import TrashIcon from '@public/icons/trash.svg'
 import ArrowRightIcon from '@public/icons/arrows/gray-right.svg'
 
-export const QrCard = ({ id, templateId, label, img, tag }) => {
+export const QrCard = observer(({ id, templateId, label, img, tag }) => {
   const router = useRouter()
 
   const [isQrModalOpen, setQrModalOpen] = useState(false)
+  const [isConfirmDeleteModalOpen, setConfirmDeleteModalOpen] = useState(false)
 
   const onChartOpen = () => {
-    router.push(`${ROUTES.ACCOUNT_QR_CODES}/${id}/statistics`)
+    router.push(`${ROUTES.ACCOUNT}/${id}`)
   }
 
   const onShare = () => {
@@ -33,9 +37,11 @@ export const QrCard = ({ id, templateId, label, img, tag }) => {
     router.push(`${ROUTES.ACCOUNT_QR_CODES}/${templateId}/edit`)
   }
 
-  const onDelete = (templateId) => {
-    qrCodesStore.deleteQrCode(templateId)
+  const onDelete = () => {
+    setConfirmDeleteModalOpen(true)
   }
+
+  const onConfirmDelete = (templateId) => [qrCodesStore.deleteQrCode(templateId)]
 
   const toQrCodePage = (id) => {
     router.push(`/qr-codes/${id}`)
@@ -88,6 +94,16 @@ export const QrCard = ({ id, templateId, label, img, tag }) => {
           setQrModalOpen(false)
         }}
       />
+
+      <DeleteConfirmModal
+        open={isConfirmDeleteModalOpen}
+        onClose={() => {
+          setConfirmDeleteModalOpen(false)
+        }}
+        onConfirm={() => {
+          onConfirmDelete(templateId)
+        }}
+      />
     </S.QrCard>
   )
-}
+})

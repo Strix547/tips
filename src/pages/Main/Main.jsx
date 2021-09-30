@@ -19,11 +19,9 @@ export const UserMainPage = observer(() => {
     }
   })
 
-  const {
-    id: userId,
-    personalData: { currency }
-  } = userStore
+  const { id: userId } = userStore
   const { incomeStatistics, isIncomeStatisticsLoading } = statisticsStore
+  const currency = userStore.personalData.currency.value
 
   const periodSelected = useFormProps.watch('period')
   const periodFromSelected = useFormProps.watch('periodFrom')
@@ -36,25 +34,45 @@ export const UserMainPage = observer(() => {
     if (!userId && !currency) return
 
     const commonData = {
-      userId,
       format: 'JSON',
       zoneOffset: getTimeZoneOffset(),
       currency
     }
 
-    if (periodSelected !== 'custom') {
-      statisticsStore.getIncomeStatistics({
-        ...commonData,
-        period: periodSelected
-      })
-    }
+    if (router.query.id) {
+      if (periodSelected !== 'custom') {
+        statisticsStore.getQrIncomeStatistics({
+          ...commonData,
+          qrId: router.query.id,
+          period: periodSelected
+        })
+      }
 
-    if (periodFromSelected && periodToSelected) {
-      statisticsStore.getIncomeStatistics({
-        ...commonData,
-        periodFrom: periodFromSelected,
-        periodTo: periodToSelected
-      })
+      if (periodFromSelected && periodToSelected) {
+        statisticsStore.getQrIncomeStatistics({
+          ...commonData,
+          qrId: router.query.id,
+          periodFrom: periodFromSelected,
+          periodTo: periodToSelected
+        })
+      }
+    } else {
+      if (periodSelected !== 'custom') {
+        statisticsStore.getUserIncomeStatistics({
+          ...commonData,
+          userId,
+          period: periodSelected
+        })
+      }
+
+      if (periodFromSelected && periodToSelected) {
+        statisticsStore.getUserIncomeStatistics({
+          ...commonData,
+          userId,
+          periodFrom: periodFromSelected,
+          periodTo: periodToSelected
+        })
+      }
     }
   }, [userId, periodSelected, periodFromSelected, periodToSelected])
 
@@ -63,7 +81,7 @@ export const UserMainPage = observer(() => {
   }
 
   const downloadExcelFile = (userId) => {
-    statisticsStore.getIncomeStatistics({
+    statisticsStore.getUserIncomeStatistics({
       userId,
       format: 'XLSX',
       period: periodSelected,

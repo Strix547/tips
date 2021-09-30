@@ -43,10 +43,9 @@ export const Avatar = styled.div`
   border: 1px solid var(--color-gray-200);
   border-radius: 50%;
   box-sizing: border-box;
-  cursor: pointer;
 `
 
-export const AvatarUploadLabel = styled.div`
+export const AvatarUploadLabel = styled.label`
   margin-left: 10px;
   cursor: pointer;
 

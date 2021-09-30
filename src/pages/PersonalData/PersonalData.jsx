@@ -17,7 +17,7 @@ import UserIcon from '@public/icons/user.svg'
 export const PersonalDataPage = observer(() => {
   const { isPersonalDataLoading, id: userId, personalData } = userStore
   const [avatar, setAvatar] = useState(null)
-
+  const [avatarPreview, setAvatarPreview] = useState(null)
   const useFormProps = useForm()
 
   useEffect(() => {
@@ -45,7 +45,14 @@ export const PersonalDataPage = observer(() => {
     }
   }, [isPersonalDataLoading, personalData])
 
-  const uploadAvatar = () => {}
+  const uploadAvatar = (file) => {
+    setAvatar(file)
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.addEventListener('load', () => {
+      setAvatarPreview({ src: reader.result, name: file.name })
+    })
+  }
 
   const onEditData = () => {
     const { firstName, lastName, email, address, postal, birthDate } = useFormProps.getValues()
@@ -57,7 +64,8 @@ export const PersonalDataPage = observer(() => {
       email,
       address,
       postalCode: postal,
-      birthDate: new Date(birthDate).toISOString().split('T')[0] || undefined
+      birthDate: new Date(birthDate).toISOString().split('T')[0] || undefined,
+      avatar
     })
   }
 
@@ -97,8 +105,14 @@ export const PersonalDataPage = observer(() => {
                 <S.Label>Аватар</S.Label>
 
                 <S.AvatarRow>
-                  {personalData.avatar ? (
-                    <Image src={personalData.avatar} />
+                  {avatarPreview || personalData.avatar ? (
+                    <Image
+                      src={avatarPreview?.src || personalData.avatar}
+                      width={44}
+                      height={44}
+                      alt="avatar"
+                      unoptimized
+                    />
                   ) : (
                     <S.Avatar>
                       <UserIcon />
@@ -109,11 +123,10 @@ export const PersonalDataPage = observer(() => {
                     Загрузить
                     <input
                       id="avatar"
+                      name="avatar"
                       type="file"
-                      onChange={({ target }) => {
-                        console.log(target, target.files[0])
-                        setAvatar(target.files[0])
-                      }}
+                      accept="image/*"
+                      onChange={({ target }) => uploadAvatar(target.files[0])}
                     />
                   </S.AvatarUploadLabel>
                 </S.AvatarRow>

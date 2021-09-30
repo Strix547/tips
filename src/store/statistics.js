@@ -1,5 +1,7 @@
 import { makeAutoObservable } from 'mobx'
+import router from 'next/router'
 
+import { ROUTES } from 'core/routes'
 import * as statisticsApi from 'api/statistics'
 
 export const statisticsStore = makeAutoObservable({
@@ -9,7 +11,7 @@ export const statisticsStore = makeAutoObservable({
   },
   isIncomeStatisticsLoading: false,
 
-  getIncomeStatistics: async ({
+  getUserIncomeStatistics: async ({
     userId,
     currency,
     format,
@@ -19,7 +21,7 @@ export const statisticsStore = makeAutoObservable({
     periodTo
   }) => {
     if (format === 'XLSX') {
-      statisticsApi.getIncomeStatistics({
+      statisticsApi.getUserIncomeStatistics({
         userId,
         currency,
         format,
@@ -33,8 +35,45 @@ export const statisticsStore = makeAutoObservable({
     }
 
     statisticsStore.isIncomeStatisticsLoading = true
-    const incomeStatistics = await statisticsApi.getIncomeStatistics({
+    const incomeStatistics = await statisticsApi.getUserIncomeStatistics({
       userId,
+      currency,
+      format,
+      period,
+      zoneOffset,
+      periodFrom,
+      periodTo
+    })
+    statisticsStore.incomeStatistics = incomeStatistics
+    statisticsStore.isIncomeStatisticsLoading = false
+  },
+
+  getQrIncomeStatistics: async ({
+    qrId,
+    currency,
+    format,
+    zoneOffset,
+    period,
+    periodFrom,
+    periodTo
+  }) => {
+    if (format === 'XLSX') {
+      statisticsApi.getQrIncomeStatistics({
+        qrId,
+        currency,
+        format,
+        period,
+        zoneOffset,
+        periodFrom,
+        periodTo
+      })
+
+      return
+    }
+
+    statisticsStore.isIncomeStatisticsLoading = true
+    const incomeStatistics = await statisticsApi.getQrIncomeStatistics({
+      qrId,
       currency,
       format,
       period,

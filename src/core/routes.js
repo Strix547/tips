@@ -25,8 +25,8 @@ export const ROUTES = {
   ACCOUNT_IDENTIFY: '/account/identify',
   ACCOUNT_PERSONAL_DATA: '/account/personal-data',
   ACCOUNT_SUPPORT: '/account/support',
-  THANK_YOU: '/thank-you',
-  LOYALTY: '/loyalty'
+  ACCOUNT_LOYALTY: '/account/loyalty',
+  THANK_YOU: '/thank-you'
 }
 
 export const PROTECTED_ROUTES = [

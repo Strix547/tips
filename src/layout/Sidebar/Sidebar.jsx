@@ -38,7 +38,7 @@ export const Sidebar = () => {
       icon: <UserGroupIcon />
     },
     { label: 'Мои отзывы', link: ROUTES.ACCOUNT_REVIEWS, icon: <StarIcon fill="#777D82" /> },
-    { label: 'Программа лояльности', link: ROUTES.LOYALTY, icon: <TagIcon /> }
+    { label: 'Программа лояльности', link: ROUTES.ACCOUNT_LOYALTY, icon: <TagIcon /> }
   ]
 
   const navList = nav.map(({ label, link, icon }) => (

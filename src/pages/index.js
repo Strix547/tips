@@ -26,6 +26,7 @@ import { RequisitesPage } from './Requisites'
 import { PersonalDataPage } from './PersonalData'
 import { QrIndividualEditPage } from './QrIndividualEdit'
 import { IdentifyAccountPage } from './IdentifyAccount'
+import { LoyaltyPage } from './Loyalty'
 
 export {
   AgentsPage,
@@ -54,5 +55,6 @@ export {
   AboutUsPage,
   CredentialsPage,
   PublicOfferPage,
-  PrivacyPolicyPage
+  PrivacyPolicyPage,
+  LoyaltyPage
 }

@@ -62,6 +62,17 @@ export const Main = styled.div`
   & > ${Button} {
     width: 100%;
     margin-top: 30px;
+
+    svg {
+      transition: 0.3s;
+    }
+
+    &:hover {
+      svg {
+        fill: #fff;
+        transition: 0.3s;
+      }
+    }
   }
 
   ${media620} {
@@ -154,34 +165,15 @@ export const Networks = styled.div`
   margin-top: 15px;
 
   button {
-    display: flex;
-    align-items: center;
-    height: 60px;
-    padding: 0 10px;
-    font-family: 'Formular';
-    font-size: var(--font-size-reg);
-    font-weight: 500;
-    background: var(--color-gray-100);
-    border-radius: 30px;
+    height: 40px;
+    padding: 0;
     border: none;
+    outline: none;
+    background: transparent;
     cursor: pointer;
-
-    svg {
-      margin-right: 15px;
-    }
   }
 
   ${media620} {
     margin-top: 20px;
-
-    button {
-      span {
-        display: none;
-      }
-
-      svg {
-        margin-right: 0;
-      }
-    }
   }
 `

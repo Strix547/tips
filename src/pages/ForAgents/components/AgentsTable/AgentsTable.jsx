@@ -1,14 +1,20 @@
 import { FormProvider, useForm } from 'react-hook-form'
+import { observer } from 'mobx-react-lite'
 
 import { TimePeriodFilter, StatisticRow } from 'components'
 import { Table } from 'ui'
 
+import { userStore } from 'store'
 import { formatPrice } from 'utils'
 
 import * as S from './AgentsTable.styled'
 
-export const AgentsTable = () => {
-  const useFormProps = useForm()
+export const AgentsTable = observer(() => {
+  const useFormProps = useForm({
+    defaultValues: {
+      period: 'MONTH'
+    }
+  })
   const currency = '₽'
 
   const columns = [
@@ -84,14 +90,18 @@ export const AgentsTable = () => {
     <S.AgentsTable>
       <S.Top>
         <FormProvider {...useFormProps}>
-          <TimePeriodFilter {...useFormProps} />
+          <TimePeriodFilter />
         </FormProvider>
       </S.Top>
 
       <S.TableContainer>
         <Table columns={columns} rows={rows} />
-        <StatisticRow stats={[{ label: 'Итого заработано', value: 34600 }]} />
+
+        <StatisticRow
+          stats={[{ label: 'Итого заработано', value: 34600 }]}
+          currency={userStore.personalData.currency.label}
+        />
       </S.TableContainer>
     </S.AgentsTable>
   )
-}
+})

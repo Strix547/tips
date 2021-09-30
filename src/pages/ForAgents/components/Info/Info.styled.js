@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
 import { WhiteBox, Text } from 'styled'
+import { media } from 'styles/media'
+
+const media1070 = media.createMedia(1070)
+const media720 = media.createMedia(720)
 
 export { Text }
 
@@ -17,6 +21,10 @@ export const Info = styled(WhiteBox)`
     color: var(--color-black-200);
     line-height: 22px;
   }
+
+  ${media720} {
+    padding: 20px;
+  }
 `
 
 export const LinksBlock = styled.div`
@@ -27,13 +35,13 @@ export const LinksBlock = styled.div`
   background: var(--color-gray-100);
   border-radius: 10px;
 
-  & > ${Text} {
-    color: var(--color-black-200);
+  ${media1070} {
+    height: auto;
+    padding: 20px;
   }
 
-  & > a {
-    margin-left: 30px;
-    color: var(--color-blue-100);
+  ${media720} {
+    flex-direction: column;
   }
 `
 
@@ -41,6 +49,10 @@ export const CopyIcon = styled.div`
   position: relative;
   margin-left: 10px;
   cursor: pointer;
+
+  ${media720} {
+    margin-left: 0;
+  }
 `
 
 export const Networks = styled.ul`
@@ -55,5 +67,47 @@ export const Networks = styled.ul`
     a {
       display: inline-block;
     }
+  }
+
+  ${media720} {
+    margin-top: 30px;
+    margin-left: 0;
+  }
+`
+
+export const LinksBlockLeft = styled.div`
+  display: flex;
+  align-items: center;
+
+  ${Text} {
+    color: var(--color-black-200);
+  }
+
+  a {
+    margin-left: 30px;
+    color: var(--color-blue-100);
+    overflow-wrap: anywhere;
+  }
+
+  ${media1070} {
+    align-items: flex-start;
+    flex-wrap: wrap;
+
+    ${Text} {
+      width: 100%;
+    }
+
+    a {
+      margin-top: 10px;
+      margin-left: 0;
+    }
+
+    svg {
+      margin-top: 5px;
+    }
+  }
+
+  ${media720} {
+    flex-direction: column;
   }
 `

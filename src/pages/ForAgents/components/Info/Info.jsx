@@ -58,17 +58,19 @@ export const Info = () => {
       </S.Text>
 
       <S.LinksBlock>
-        <S.Text>HASH с идентификатором агента:</S.Text>
+        <S.LinksBlockLeft>
+          <S.Text>HASH с идентификатором агента:</S.Text>
 
-        <Link href={link}>
-          <a>{link}</a>
-        </Link>
+          <Link href={link}>
+            <a>{link}</a>
+          </Link>
 
-        <Tooltip open={copyTooltipOpen} title="Скопировано">
-          <S.CopyIcon>
-            <CopyIcon onClick={copyLinkToClipboard} />
-          </S.CopyIcon>
-        </Tooltip>
+          <Tooltip open={copyTooltipOpen} title="Скопировано">
+            <S.CopyIcon>
+              <CopyIcon onClick={copyLinkToClipboard} />
+            </S.CopyIcon>
+          </Tooltip>
+        </S.LinksBlockLeft>
 
         <S.Networks>{networkList}</S.Networks>
       </S.LinksBlock>
