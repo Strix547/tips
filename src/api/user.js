@@ -34,7 +34,7 @@ export const getUserInfo = async (userId) => {
   return {
     ...data,
     birthDate: new Date(data.dateOfBirth),
-    avatar: `http://tips.tmweb.ru${data.avatarFileUrl}`
+    avatar: data.avatarFileUrl && `${window.location.origin}${data.avatarFileUrl}`
   }
 }
 

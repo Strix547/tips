@@ -48,11 +48,11 @@ export const userStore = makeAutoObservable({
   getPersonalData: async (userId) => {
     userStore.isPersonalDataLoading = true
     const personalData = await userApi.getUserInfo(userId)
-
+    console.log(personalData.currency)
     userStore.personalData = {
       ...personalData,
       currency: {
-        label: CURRENCIES.find(({ value }) => personalData.currency === value).symbol,
+        label: CURRENCIES.find(({ value }) => personalData.currency === value)?.symbol,
         value: personalData.currency
       }
     }

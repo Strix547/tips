@@ -33,7 +33,7 @@ export const PersonalDataPage = observer(() => {
       const fieldsTemplate = [
         { label: 'firstName', value: firstName },
         { label: 'lastName', value: lastName },
-        { label: 'birthDate', value: new Date(birthDate) },
+        { label: 'birthDate', value: new Date(birthDate).toLocaleDateString() },
         { label: 'email', value: email },
         { label: 'address', value: address },
         { label: 'postal', value: postal }
