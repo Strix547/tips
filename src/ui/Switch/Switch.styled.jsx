@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { Switch as MuiSwitch } from '@material-ui/core'
+import { Switch as MuiSwitch, FormControlLabel as MuiFormControlLabel } from '@material-ui/core'
 
 const getSizeStyles = (size) => {
   switch (size) {
@@ -91,6 +91,57 @@ export const Switch = styled(({ size, ...props }) => (
       }
     }
   }
+`
+
+export const FormControlLabel = styled(({ size, ...props }) => (
+  <MuiFormControlLabel
+    {...props}
+    classes={{
+      root: 'form-control-label',
+      label: 'form-control-label-label',
+      labelPlacementStart: 'form-control-label-placement-start'
+    }}
+  />
+))`
+  &.form-control-label {
+    margin-left: 0;
+
+    .form-control-label-label {
+      margin-left: 10px;
+    }
+  }
+
+  .form-control-label-label {
+    font-family: 'Formular';
+    color: var(--color-black-200);
+  }
+
+  &.form-control-label-placement-start {
+    margin-left: 0;
+
+    .form-control-label-label {
+      margin-right: 10px;
+    }
+  }
+
+  ${({ size }) => {
+    if (size === 'big') {
+      return css`
+        .form-control-label .form-control-label-label {
+          margin-left: 30px;
+        }
+
+        .form-control-label-label {
+          font-weight: 500;
+        }
+
+        &.form-control-label-placement-start .form-control-label-label {
+          margin-left: 0;
+          margin-right: 30px;
+        }
+      `
+    }
+  }}
 `
 
 export const SwitchField = styled.div``

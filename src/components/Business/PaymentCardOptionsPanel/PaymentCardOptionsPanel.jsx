@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useForm, FormProvider, Controller } from 'react-hook-form'
+import { observer } from 'mobx-react-lite'
 
 import Image from 'next/image'
 
@@ -11,7 +12,7 @@ import * as S from './PaymentCardOptionsPanel.styled'
 
 import UploadIcon from '@public/icons/upload.svg'
 
-export const PaymentCardOptionsPanelBusiness = () => {
+export const PaymentCardOptionsPanelBusiness = observer(() => {
   const useFormProps = useForm({
     defaultValues: {
       preset1: 100,
@@ -25,7 +26,7 @@ export const PaymentCardOptionsPanelBusiness = () => {
     }
   })
 
-  const currencyLabel = localStore.currency.label
+  const currency = localStore.currency.label
   const [companyLogo, setCompanyLogo] = useState(null)
 
   const onCreateQr = () => {}
@@ -41,7 +42,7 @@ export const PaymentCardOptionsPanelBusiness = () => {
           <S.FormField
             value={value}
             placeholder="Сумма"
-            InputProps={{ endAdornment: currencyLabel }}
+            InputProps={{ endAdornment: currency }}
             onChange={({ target: { value } }) => {
               const numReg = /^\d+$/
               const isNumber = numReg.test(value)
@@ -108,4 +109,4 @@ export const PaymentCardOptionsPanelBusiness = () => {
       </FormProvider>
     </S.PaymentCardOptionsPanelBusiness>
   )
-}
+})

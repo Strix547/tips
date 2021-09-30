@@ -26,7 +26,7 @@ export const Footer = () => {
   const useFormProps = useForm()
 
   const navFirstColumn = [
-    { label: 'О «Tips.me»‎', link: '/' },
+    { label: 'О «Tips.me»‎', link: ROUTES.ABOUT_US },
     { label: 'Реквизиты и информация', link: ROUTES.CREDENTIALS },
     { label: 'Публичная оферта', link: ROUTES.PUBLIC_OFFER },
     { label: 'Положение о конфиденциальности', link: ROUTES.PRIVACY_POLICY }

@@ -14,9 +14,8 @@ export const PageBanner = ({ title, subtitle, features = [], actions, img }) => 
 
   const bannerImgProps = {
     alt: 'dashboard',
-    layout: 'fixed',
     priority: true,
-    unoptimized: true
+    quality: 100
   }
 
   return (
@@ -34,11 +33,11 @@ export const PageBanner = ({ title, subtitle, features = [], actions, img }) => 
 
         <S.ImgContainer>
           <S.Img>
-            <Image {...bannerImgProps} src={img.desktop} unoptimized />
+            <Image {...bannerImgProps} src={img.desktop} layout="responsive" />
           </S.Img>
 
           <S.ImgMobile>
-            <Image {...bannerImgProps} src={img.mobile} unoptimized />
+            <Image {...bannerImgProps} src={img.mobile} layout="intrinsic" />
           </S.ImgMobile>
         </S.ImgContainer>
       </S.Wrapper>

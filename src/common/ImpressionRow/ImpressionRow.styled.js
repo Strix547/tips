@@ -11,13 +11,15 @@ export const ImpressionRow = styled.div`
     font-weight: 500;
     color: var(--color-black-200);
   }
+
+  ${RadioGroup} {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
 `
 
-export const EmodjiRadioGroup = styled(RadioGroup)`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-`
+export const EmodjiRadioGroup = styled(RadioGroup)``
 
 export const EmodjiRadio = styled.div`
   display: flex;

@@ -5,6 +5,7 @@ const root = '/payment-page'
 const transformPaymetData = ({
   type,
   paymentPageId,
+  name,
   presetPaymentSizes,
   firstName,
   lastName,
@@ -15,6 +16,7 @@ const transformPaymetData = ({
   return {
     type,
     pageId: paymentPageId,
+    name,
     firstName,
     lastName,
     amountPresets: presetPaymentSizes,

@@ -1,8 +1,8 @@
 import { Controller, useFormContext } from 'react-hook-form'
-import { FormControlLabel } from 'ui'
+
 import * as S from './Switch.styled'
 
-export const Switch = ({ name, label, rules, value, size }) => {
+export const Switch = ({ name, label, labelPlacement, rules, size }) => {
   const { control } = useFormContext()
 
   return (
@@ -10,13 +10,20 @@ export const Switch = ({ name, label, rules, value, size }) => {
       control={control}
       name={name}
       rules={rules}
-      render={({ field }) => {
+      render={({ field: { value, onChange } }) => {
+        const switchCheckbox = <S.Switch checked={value} onChange={onChange} size={size} />
+
         return (
           <S.SwitchField>
             {label ? (
-              <FormControlLabel label={label} control={<S.Switch {...field} value={value} />} />
+              <S.FormControlLabel
+                label={label}
+                labelPlacement={labelPlacement}
+                control={switchCheckbox}
+                size={size}
+              />
             ) : (
-              <S.Switch {...field} value={value} size={size} />
+              switchCheckbox
             )}
           </S.SwitchField>
         )

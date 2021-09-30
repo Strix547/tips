@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { Accordion } from 'ui'
-import { Wrapper, Heading, Text } from 'styled'
+import { Wrapper, Heading, Text, gapPolyfill } from 'styled'
 
 import { media } from 'styles/media'
 
@@ -36,7 +36,7 @@ export const Main = styled.main`
 export const QaList = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  ${gapPolyfill(10)}
 `
 
 export const QaAccordion = styled(Accordion)`

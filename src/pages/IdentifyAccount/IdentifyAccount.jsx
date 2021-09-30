@@ -8,7 +8,7 @@ import Head from 'next/head'
 import { PersonalDataStep, AccountTypeStep, CreditCardStep } from './components'
 import { Button, Stepper, Step, StepLabel, CircularProgress } from 'ui'
 
-import { userStore, localStore } from 'store'
+import { userStore, localStore, authStore } from 'store'
 
 import { MEDIA_TABLET } from 'styles/media'
 import * as S from './IdentifyAccount.styled'
@@ -20,6 +20,7 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
   const stripeElements = useElements()
   const useFormProps = useForm({
     defaultValues: {
+      firstName: authStore.firstName,
       birthDate: null
     }
   })

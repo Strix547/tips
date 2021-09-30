@@ -97,7 +97,8 @@ export const FeatureList = styled.ul`
 
 export const ImgContainer = styled.div`
   position: relative;
-  box-shadow: 0px 5px 30px rgba(157, 157, 159, 0.3);
+  width: 524px;
+  /* box-shadow: 0px 5px 30px rgba(157, 157, 159, 0.3); */
 
   img {
     position: relative;
@@ -106,6 +107,10 @@ export const ImgContainer = styled.div`
 
   ${media1110} {
     margin-top: 75px;
+  }
+
+  ${media.createMedia(554)} {
+    width: 100%;
   }
 
   ${media.createMedia(500)} {

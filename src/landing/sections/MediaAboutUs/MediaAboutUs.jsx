@@ -15,11 +15,12 @@ export const MediaAboutUsSection = () => {
     modules: [Autoplay],
     slidesPerView: 'auto',
     spaceBetween: 30,
-    autoplay: { delay: 0, disableOnInteraction: false },
+    autoplay: { delay: 5000, disableOnInteraction: false },
     speed: 8000,
     centeredSlides: true,
-    allowTouchMove: false,
+    allowTouchMove: true,
     freeMode: true,
+    grabCursor: true,
     loop: true
   }
 

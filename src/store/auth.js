@@ -10,11 +10,27 @@ import * as userApi from 'api/user'
 export const authStore = makeAutoObservable({
   isAuth: false,
   isCodeSending: false,
+  step: 'phone',
+  firstName: '',
+  phone: '',
+
+  setPhone: (phone) => {
+    authStore.phone = phone
+  },
+
+  setFirstName: (firstName) => {
+    authStore.firstName = firstName
+  },
+
+  setStep: (step) => {
+    authStore.step = step
+  },
 
   sendCode: async (phone) => {
     try {
       authStore.isCodeSending = true
       await authApi.sendCode(phone)
+      authStore.step = 'code'
       return true
     } catch ({ message }) {
       toast.error(message)
@@ -47,6 +63,11 @@ export const authStore = makeAutoObservable({
 
   signOut: async () => {
     await authApi.signOut()
+    authStore.isAuth = false
+    userStore.id = null
+    userStore.role = null
+    userStore.personalData = {}
+
     // reset cookie
     try {
       await userApi.getMyId()
@@ -55,9 +76,5 @@ export const authStore = makeAutoObservable({
     }
 
     router.push('/')
-    authStore.isAuth = false
-    userStore.id = null
-    userStore.role = null
-    userStore.personalData = {}
   }
 })

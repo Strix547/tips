@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
+import { observer } from 'mobx-react-lite'
 import Head from 'next/head'
 
 import { Logo } from 'common'
@@ -13,23 +14,20 @@ import * as S from './Auth.styled'
 
 import CommentRegulationIcon from '@public/img/landing/comment-regulation.svg'
 
-export const AuthPage = () => {
+export const AuthPage = observer(() => {
   const isTablet = useMediaQuery({ maxWidth: MEDIA_TABLET })
 
-  const [step, setStep] = useState('phone')
-  const [phone, setPhone] = useState(null)
   const [rememberUser, setRememberUser] = useState(false)
   const [isCodeSendAllow, setCodeSendAllow] = useState(true)
 
   const sendCode = async ({ phone, remember }) => {
     if (!isCodeSendAllow) return
 
-    setPhone(phone)
+    authStore.setPhone(phone)
     setRememberUser(remember)
     const isCodeSended = await authStore.sendCode(phone)
 
     if (isCodeSended) {
-      setStep('code')
       setCodeSendAllow(false)
     }
   }
@@ -58,17 +56,19 @@ export const AuthPage = () => {
 
             <S.Heading level={1}>Вход в Tips.me</S.Heading>
 
-            {step === 'phone' ? (
+            {authStore.step === 'phone' ? (
               <PhoneStep onPhoneSubmit={sendCode} />
             ) : (
               <CodeStep
-                phone={phone}
+                phone={authStore.phone}
                 isCodeSendAllow={isCodeSendAllow}
                 onCodeSendAllowChange={setCodeSendAllow}
                 onCodeResend={() => {
-                  onCodeResend(phone)
+                  onCodeResend(authStore.phone)
                 }}
-                onCodeConfirm={(code) => onAuth({ phone, code, remember: rememberUser })}
+                onCodeConfirm={(code) =>
+                  onAuth({ phone: authStore.phone, code, remember: rememberUser })
+                }
               />
             )}
           </S.LeftContent>
@@ -82,4 +82,4 @@ export const AuthPage = () => {
       </S.AuthPage>
     </>
   )
-}
+})

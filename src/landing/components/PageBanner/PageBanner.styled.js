@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { Heading, Text, Wrapper } from 'styled'
+import { Heading, Text, Wrapper, gapPolyfill } from 'styled'
 import { Button } from 'ui/Button/Button.styled'
 import { media } from 'styles/media'
 
@@ -29,7 +29,7 @@ export const PageBanner = styled.section`
     }
   }
 
-  ${media630} {
+  ${media.tablet} {
     height: auto;
     padding-bottom: 30px;
   }
@@ -97,8 +97,8 @@ export const FeatureList = styled.ul`
 
 export const ActionRow = styled.div`
   display: flex;
-  gap: 20px;
-  margin-top: 30px;
+  ${gapPolyfill(20)}
+  margin-top: calc(20px - 10px);
 
   ${Button}:first-child {
     box-shadow: 0px 15px 30px rgba(84, 167, 92, 0.15);
@@ -106,14 +106,9 @@ export const ActionRow = styled.div`
 
   ${media630} {
     flex-direction: column;
-    margin-top: 20px;
 
     ${Button} {
       width: 260px;
-
-      &:last-child:not(:first-child) {
-        margin-top: 20px;
-      }
     }
   }
 `
@@ -125,7 +120,7 @@ export const ImgContainer = styled.div`
   width: 100vw;
   height: 100%;
 
-  ${media630} {
+  ${media.tablet} {
     position: static;
     margin-top: 30px;
   }
@@ -133,6 +128,7 @@ export const ImgContainer = styled.div`
 
 export const Img = styled.div`
   position: absolute;
+  width: 1015px;
   left: 482px;
   z-index: 10;
 
@@ -143,21 +139,17 @@ export const Img = styled.div`
   }
 
   ${media.tablet} {
-    left: -80px;
-    transform: none;
-  }
-
-  ${media630} {
     display: none;
   }
 `
 
 export const ImgMobile = styled.div`
   display: none;
+  justify-content: center;
+  width: 355px;
 
-  ${media630} {
+  ${media.tablet} {
     display: flex;
-    justify-content: center;
   }
 
   ${media.mobile} {

@@ -1,20 +1,28 @@
 import { useState } from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
+import { FormProvider, useForm, Controller } from 'react-hook-form'
 import { Radio } from '@material-ui/core'
+import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 
-import { FormField, Button, FormControlLabel, Dropzone } from 'ui'
+import { FormField, Button, FormControlLabel, RadioGroup, Dropzone } from 'ui'
 
 import { ROUTES } from 'core/routes'
+import { supportStore } from 'store'
 
 import * as S from './SupportForm.styled'
 
 import ClipIcon from '@public/icons/clip.svg'
 
-export const SupportForm = () => {
-  const useFormProps = useForm()
-  const [letterTheme, setLetterTheme] = useState('complaint')
-  const [file, setFile] = useState(null)
+export const SupportForm = observer(() => {
+  const useFormProps = useForm({
+    defaultValues: {
+      letterTheme: 'complaint'
+    }
+  })
+  const { watch, handleSubmit, control, reset, setValue } = useFormProps
+
+  const [files, setFiles] = useState([])
+  const letterTheme = watch('letterTheme')
 
   const letterThemes = [
     { label: 'Жалоба', value: 'complaint' },
@@ -26,8 +34,20 @@ export const SupportForm = () => {
     { label: 'Другое', value: 'other' }
   ]
 
-  const onLetterThemeChange = (value) => {
-    setLetterTheme(value)
+  const getFileNamesString = (files) => {
+    return files.map(({ name }) => <span key={name}>{name}</span>)
+  }
+
+  const onFormSubmit = ({ letterTheme, theme, message }) => {
+    supportStore.sendMessageToSupport({
+      theme: letterTheme === 'other' ? theme : letterTheme,
+      message,
+      files
+    })
+
+    reset()
+    setValue('message', '')
+    setFiles([])
   }
 
   const letterThemeRadios = letterThemes.map(({ label, value }) => {
@@ -42,7 +62,7 @@ export const SupportForm = () => {
   })
 
   return (
-    <S.SupportForm>
+    <S.SupportForm onSubmit={handleSubmit(onFormSubmit)}>
       <S.Faq>
         <S.Text>Часто задаваемые вопросы</S.Text>
         <S.Text>
@@ -53,30 +73,45 @@ export const SupportForm = () => {
         </S.Text>
       </S.Faq>
 
-      <S.ThemeRow>
-        <S.Label>Выберите тему письма</S.Label>
-
-        <S.ThemeRadioGroup
-          name="letterTheme"
-          value={letterTheme}
-          onChange={(_, value) => onLetterThemeChange(value)}
-        >
-          {letterThemeRadios}
-        </S.ThemeRadioGroup>
-      </S.ThemeRow>
-
       <FormProvider {...useFormProps}>
-        <FormField name="theme" placeholder="Введите название темы" />
+        <S.ThemeRow>
+          <S.Label>Выберите тему письма</S.Label>
 
-        <S.Textarea name="message" placeholder="Введите сообщение" />
+          <RadioGroup name="letterTheme">{letterThemeRadios}</RadioGroup>
+        </S.ThemeRow>
 
-        <Dropzone multiple={false} onFileChange={setFile}>
+        {letterTheme === 'other' && <FormField name="theme" placeholder="Введите название темы" />}
+
+        <Controller
+          control={control}
+          name="message"
+          render={({ field: { value, onChange } }) => (
+            <S.Textarea value={value} onChange={onChange} placeholder="Введите сообщение" />
+          )}
+        />
+
+        <Dropzone
+          maxFiles={3}
+          accept={[
+            'image/jpeg',
+            'image/png',
+            'application/vnd.ms-excel',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'application/docx',
+            'application/pdf',
+            'application/msword',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+          ]}
+          onFileChange={(file) =>
+            files.length === 3 ? setFiles([...files.slice(1), file]) : setFiles([...files, file])
+          }
+        >
           <ClipIcon />
-          <S.Text>{!file ? 'Загрузите файл' : file.name}</S.Text>
+          <S.Text>{!files.length ? 'Загрузите файл' : getFileNamesString(files)}</S.Text>
         </Dropzone>
 
-        <Button>Отправить сообщение</Button>
+        <Button type="submit">Отправить сообщение</Button>
       </FormProvider>
     </S.SupportForm>
   )
-}
+})

@@ -6,6 +6,7 @@ import { Label } from './Label'
 import { RecipientCard, RecipientCardTop, RecipientCardMain } from './RecipientCard'
 import { RecipientCardContainer } from './RecipientCardContainer'
 import { ErrorText } from './ErrorText'
+import { gapPolyfill } from './gapPolyfill'
 
 export {
   Wrapper,
@@ -17,5 +18,6 @@ export {
   RecipientCardTop,
   RecipientCardMain,
   RecipientCardContainer,
-  ErrorText
+  ErrorText,
+  gapPolyfill
 }

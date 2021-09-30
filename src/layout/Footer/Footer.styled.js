@@ -15,6 +15,7 @@ const media500 = media.createMedia(500)
 export { Wrapper, Text }
 
 export const Footer = styled.footer`
+  margin-top: auto;
   background: var(--color-gray-600);
 `
 

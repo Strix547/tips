@@ -1,12 +1,13 @@
 import styled from 'styled-components'
 
+import { gapPolyfill } from 'styled'
 import { PaymentCardOptionsPanelBusiness } from 'components/Business/PaymentCardOptionsPanel/PaymentCardOptionsPanel.styled'
 
 import { media } from 'styles/media'
 
 export const Content = styled.div`
   display: flex;
-  gap: 30px;
+  ${gapPolyfill(30)}
 
   ${PaymentCardOptionsPanelBusiness} {
     width: 720px;
@@ -14,7 +15,7 @@ export const Content = styled.div`
 
   ${media.createMedia(1000)} {
     flex-wrap: wrap;
-    gap: 20px;
+    ${gapPolyfill(20)}
 
     ${PaymentCardOptionsPanelBusiness} {
       width: 100%;

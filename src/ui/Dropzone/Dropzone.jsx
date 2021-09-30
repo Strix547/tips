@@ -3,12 +3,14 @@ import { useDropzone } from 'react-dropzone'
 
 import * as S from './Dropzone.styled'
 
-export const Dropzone = ({ children, accept, onFileChange, ...props }) => {
-  const onDrop = useCallback(
+export const Dropzone = ({ children, onFileChange, ...props }) => {
+  const onDropAccepted = useCallback(
     ([file]) => {
-      const notImage = file.type.includes('image')
+      console.log(file)
+      if (!file) return
+      const notImage = !file?.type?.includes('image')
 
-      if (notImage) return file
+      if (notImage) return onFileChange(file)
 
       const reader = new FileReader()
       reader.readAsDataURL(file)
@@ -19,13 +21,13 @@ export const Dropzone = ({ children, accept, onFileChange, ...props }) => {
     [onFileChange]
   )
 
-  const { getRootProps, getInputProps, isDragAccept } = useDropzone({
+  const { getRootProps, getInputProps, isDragAccept, isDragReject } = useDropzone({
     ...props,
-    onDrop
+    onDropAccepted
   })
 
   return (
-    <S.Dropzone {...getRootProps()} borderGreen={isDragAccept}>
+    <S.Dropzone {...getRootProps()} isDragAccept={isDragAccept} isDragReject={isDragReject}>
       <input {...getInputProps()} />
       {children}
     </S.Dropzone>

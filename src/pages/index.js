@@ -6,6 +6,10 @@ import { PayersPage } from './landing/Payers'
 import { RecipientsPage } from './landing/Recipients'
 import { AuthPage } from './landing/Auth'
 import { SupportPage } from './landing/Support'
+import { AboutUsPage } from './landing/AboutUs'
+import { CredentialsPage } from './landing/Credentials'
+import { PublicOfferPage } from './landing/PublicOffer'
+import { PrivacyPolicyPage } from './landing/PrivacyPolicy'
 
 import { UserMainPage } from './Main'
 import { QrCodesPage } from './QrCodes'
@@ -46,5 +50,9 @@ export {
   RequisitesPage,
   PersonalDataPage,
   QrIndividualEditPage,
-  IdentifyAccountPage
+  IdentifyAccountPage,
+  AboutUsPage,
+  CredentialsPage,
+  PublicOfferPage,
+  PrivacyPolicyPage
 }

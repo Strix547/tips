@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { WhiteBox } from 'styled'
+import { WhiteBox, gapPolyfill } from 'styled'
 import { QrImage } from 'components/Qr/Image/Image.styled'
 
 import { media } from 'styles/media'
@@ -68,8 +68,8 @@ export const AppleWallet = styled.div`
 
 export const ActionRow = styled.div`
   display: flex;
-  gap: 20px;
-  margin-top: 20px;
+  ${gapPolyfill(20)}
+  margin-top: calc(30px - 10px);
 
   button {
     width: 24px;

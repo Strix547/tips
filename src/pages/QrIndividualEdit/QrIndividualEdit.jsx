@@ -14,7 +14,13 @@ import * as S from './QrIndividualEdit.styled'
 
 export const QrIndividualEditPage = observer(() => {
   const router = useRouter()
-  const useFormProps = useForm()
+
+  const useFormProps = useForm({
+    defaultValues: {
+      impressions: qrCodesStore.qrCode.impressions
+    }
+  })
+
   const { watch, setValue, getValues } = useFormProps
 
   const qrId = router.query.id
@@ -22,17 +28,14 @@ export const QrIndividualEditPage = observer(() => {
 
   useEffect(async () => {
     if (qrId) {
-      const { name, amountPresets, impressions, bgColor, buttonColor } =
-        await qrCodesStore.getQrCode(qrId)
+      const { name, amountPresets, impressions } = await qrCodesStore.getQrCode(qrId)
 
       const fieldsTemplate = [
         { label: 'name', value: name },
         { label: 'preset1', value: amountPresets[0] },
         { label: 'preset2', value: amountPresets[1] },
         { label: 'preset3', value: amountPresets[2] },
-        { label: 'impressions', value: impressions },
-        { label: 'bgColor', value: { hex: bgColor } },
-        { label: 'buttonColor', value: { hex: buttonColor } }
+        { label: 'impressions', value: impressions }
       ]
 
       fieldsTemplate.forEach(({ label, value }) => {

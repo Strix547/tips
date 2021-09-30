@@ -1,9 +1,10 @@
 import styled from 'styled-components'
 
-import { Text } from 'styled'
+import { Text } from './Text'
+import { gapPolyfill } from './gapPolyfill'
 import { Button } from 'ui/Button/Button.styled'
 
-const RecipientCard = styled.div`
+export const RecipientCard = styled.div`
   display: flex;
   flex-direction: column;
   background: #fff;
@@ -12,18 +13,18 @@ const RecipientCard = styled.div`
   box-sizing: border-box;
 `
 
-const RecipientCardTop = styled.div`
+export const RecipientCardTop = styled.div`
   padding: 30px;
   border-bottom: 1px solid var(--color-gray-200);
 `
 
-const RecipientCardMain = styled.div`
+export const RecipientCardMain = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  ${gapPolyfill(20)}
   width: 290px;
   margin: 0 auto;
-  padding: 30px;
+  padding: calc(30px - 10px);
 
   ${Button} {
     margin-top: 10px;
@@ -38,5 +39,3 @@ const RecipientCardMain = styled.div`
     text-align: center;
   }
 `
-
-export { RecipientCard, RecipientCardTop, RecipientCardMain }

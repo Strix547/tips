@@ -12,19 +12,40 @@ import { userStore } from 'store'
 import * as S from './PersonalData.styled'
 
 export const PersonalDataPage = observer(() => {
+  const { isPersonalDataLoading, id: userId, personalData } = userStore
+
   const useFormProps = useForm()
 
-  const { isPersonalDataLoading, id: userId } = userStore
-
   useEffect(async () => {
-    if (userId) {
-      const { firstName, lastName, birthDate, email, address, postal } =
-        await userStore.getPersonalData(userId)
+    if (!userId) return
+
+    const { firstName, lastName, birthDate, email, address, postal } =
+      await userStore.getPersonalData(userId)
+
+    // if (isPersonalDataLoading) {
+    //   const fieldsTemplate = [
+    //     { label: 'firstName', value: firstName },
+    //     { label: 'lastName', value: lastName },
+    //     { label: 'birthDate', value: birthDate },
+    //     { label: 'email', value: email },
+    //     { label: 'address', value: address },
+    //     { label: 'postal', value: postal }
+    //   ]
+
+    //   fieldsTemplate.forEach(({ label, value }) => {
+    //     useFormProps.setValue(label, value)
+    //   })
+    // }
+  }, [userId])
+
+  useEffect(() => {
+    if (!isPersonalDataLoading) {
+      const { firstName, lastName, birthDate, email, address, postal } = personalData
 
       const fieldsTemplate = [
         { label: 'firstName', value: firstName },
         { label: 'lastName', value: lastName },
-        { label: 'birthDate', value: birthDate },
+        { label: 'birthDate', value: new Date(birthDate) },
         { label: 'email', value: email },
         { label: 'address', value: address },
         { label: 'postal', value: postal }
@@ -34,7 +55,7 @@ export const PersonalDataPage = observer(() => {
         useFormProps.setValue(label, value)
       })
     }
-  }, [userId])
+  }, [isPersonalDataLoading, personalData])
 
   const onEditData = () => {
     const { firstName, lastName, email, address, postal, birthDate } = useFormProps.getValues()
@@ -66,7 +87,7 @@ export const PersonalDataPage = observer(() => {
 
               <FormField
                 rules={{
-                  validate: (value) => value.indexOf('_') === -1
+                  validate: (value) => value?.indexOf('_') === -1
                 }}
                 name="birthDate"
                 label="Дата рождения"

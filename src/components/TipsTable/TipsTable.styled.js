@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { WhiteBox, Text } from 'styled'
+import { WhiteBox, Text, gapPolyfill } from 'styled'
 import { StatisticRow } from 'components/StatisticRow/StatisticRow.styled'
 import { TimePeriodFilter } from 'components/TimePeriodFilter/TimePeriodFilter.styled'
 import { ExcelDownload } from 'common/ExcelDownload/ExcelDownload.styled'
@@ -47,7 +47,8 @@ export const Top = styled.div`
 
   ${media.createMedia(670)} {
     flex-wrap: wrap;
-    gap: 20px;
+    ${gapPolyfill(20)}
+    padding: calc(20px - 10px) 0;
 
     ${TimePeriodFilter}, ${TimePeriodFilter} ${Select}, ${ExcelDownload} {
       width: 100%;
@@ -63,7 +64,7 @@ export const Top = styled.div`
 export const TopLeft = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  ${gapPolyfill(10)}
 
   ${media.createMedia(670)} {
     width: 100%;
@@ -188,16 +189,16 @@ export const TableContainer = styled.div`
       position: static;
       flex-direction: column;
       align-items: flex-start;
-      gap: 10px;
+      ${gapPolyfill(10)}
       width: 100%;
       height: auto;
-      padding: 20px;
+      padding: calc(20px - 5px);
       background: #ffffff;
       border-radius: 10px;
       border: none;
 
       &:last-child {
-        margin-top: 10px;
+        margin-top: calc(10px - 5px);
         border-top: none;
       }
     }
@@ -240,10 +241,10 @@ export const TipCardMain = styled.div`
 
 export const TipCardRow = styled.div`
   display: flex;
-  gap: 20px;
+  ${gapPolyfill(20)}
 
   &:not(:last-child) {
-    margin-bottom: 15px;
+    margin-bottom: calc(15px - 10px);
   }
 
   ${Text} {
@@ -265,8 +266,8 @@ export const TableSkeleton = styled.div`
   span {
     display: flex;
     flex-direction: column;
-    padding: 5px 0;
-    gap: 10px;
+    padding: calc(5px - 5px) 0;
+    ${gapPolyfill(10)}
   }
 
   ${media750} {
@@ -281,7 +282,7 @@ export const TipCardSkeleton = styled.div`
   span {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    ${gapPolyfill(10)}
   }
 
   ${media750} {

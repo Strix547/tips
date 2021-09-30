@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { IbanElement } from '@stripe/react-stripe-js'
 
-import { Text, Label } from 'styled'
+import { Text, Label, gapPolyfill } from 'styled'
 import { FieldsLabel } from '../../IdentifyAccount.styled'
 
 export { FieldsLabel, Text, Label }
@@ -9,7 +9,7 @@ export { FieldsLabel, Text, Label }
 export const CreditCardStep = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  ${gapPolyfill(10)}
 `
 
 export const Agreement = styled.div`

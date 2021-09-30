@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components'
 
 import { Wrapper, Text } from 'styled'
-import { Logo } from 'common/Logo/Logo.styled'
 import { Button } from 'ui/Button/Button.styled'
 import { Select } from 'ui/Select/Select.styled'
 
@@ -133,9 +132,17 @@ export const Right = styled.div`
 export const User = styled.div`
   display: flex;
   margin-left: 30px;
+  cursor: pointer;
+
   ${media.createMedia(700)} {
     margin-left: 20px;
   }
+`
+
+export const UserSkeleton = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
 `
 
 export const UserAvatar = styled.div`
@@ -199,6 +206,11 @@ export const LanguageSelect = styled(Select)`
     box-sizing: border-box;
     box-shadow: 0px 20px 40px rgba(34, 45, 61, 0.08);
     border-radius: 10px;
+
+    svg {
+      width: 24.77px;
+      height: 13.03px;
+    }
   }
 
   .select-root p,

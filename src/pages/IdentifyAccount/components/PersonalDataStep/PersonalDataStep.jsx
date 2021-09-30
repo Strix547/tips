@@ -17,7 +17,7 @@ export const PersonalDataStep = () => {
 
       <FormField
         rules={{
-          validate: (value) => value.indexOf('_') === -1
+          validate: (value) => value?.indexOf('_') === -1
         }}
         name="birthDate"
         label="Дата рождения"

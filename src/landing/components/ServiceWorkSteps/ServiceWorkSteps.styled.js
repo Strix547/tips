@@ -87,3 +87,7 @@ export const Slider = styled.div`
     align-items: center;
   }
 `
+
+export const Img = styled.div`
+  width: 226px;
+`

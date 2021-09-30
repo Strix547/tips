@@ -125,6 +125,7 @@ export const userStore = makeAutoObservable({
       await userApi.addUserRole({ userId, payer, recipient, agent, business })
       await bankAccountApi.addBankAccount({ userId, stripeToken })
       await userStore.getUserRole(userId)
+      await userStore.getPersonalData(userId)
       router.push(ROUTES.ACCOUNT)
     } catch ({ message }) {
       toast.error(message)

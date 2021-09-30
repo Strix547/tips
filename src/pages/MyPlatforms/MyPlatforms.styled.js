@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 
+import { gapPolyfill } from 'styled'
 import { ContentHead } from 'layout/Account/Account.styled'
 
 import { media } from 'styles/media'
@@ -9,7 +10,7 @@ export const layoutStyles = css`
     ${ContentHead} {
       flex-direction: column;
       align-items: flex-start;
-      gap: 20px;
+      ${gapPolyfill(20)}
     }
   }
 `

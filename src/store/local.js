@@ -6,7 +6,7 @@ export const localStore = makeAutoObservable({
   countries: [],
   cities: [],
   selectedCountryCode: null,
-  currency: { label: '₽', value: 'RUB' },
+  currency: { label: '€', value: 'EUR' },
 
   setSelectedCountryCode: (code) => {
     localStore.selectedCountryCode = code

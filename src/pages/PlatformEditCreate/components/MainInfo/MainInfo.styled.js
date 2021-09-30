@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { WhiteBox, Heading, Label } from 'styled'
+import { WhiteBox, Heading, Label, gapPolyfill } from 'styled'
 import { RadioGroup } from 'ui/RadioGroup/RadioGroup.styled'
 
 import { media } from 'styles/media'
@@ -10,18 +10,18 @@ export { Heading, Label }
 export const MainInfo = styled(WhiteBox)`
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 30px 40px;
+  ${gapPolyfill(20)}
+  padding: calc(30px - 10px) calc(40px - 10px);
 
   ${media.createMedia(570)} {
-    padding: 20px;
+    padding: calc(20px - 10px);
   }
 `
 
 export const PlatformTypeRow = styled.div``
 
 export const PlatformTypeRadioGroup = styled(RadioGroup)`
-  gap: 10px;
+  ${gapPolyfill(10)}
 `
 
 export const PlatformTypeRadio = styled.div`

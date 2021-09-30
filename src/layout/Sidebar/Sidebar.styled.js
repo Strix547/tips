@@ -114,8 +114,6 @@ export const NavItem = styled.li`
   ${({ active }) =>
     active &&
     css`
-      background: #e2f7e9;
-
       a {
         color: var(--color-primary-200);
       }

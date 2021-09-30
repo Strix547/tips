@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { Text, Label } from 'styled'
+import { Text, Label, gapPolyfill } from 'styled'
 import { Button } from 'ui/Button/Button.styled'
 import { FormField } from 'ui/FormField/FormField.styled'
 import { RadioGroup } from 'ui/RadioGroup/RadioGroup.styled'
@@ -16,10 +16,10 @@ export const SupportForm = styled.form`
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  ${gapPolyfill(20)}
   width: 770px;
   margin: 0 auto;
-  padding: 30px 50px;
+  padding: calc(30px - 10px) calc(50px - 10px);
   background: #fff;
   border: 1px solid #f7f9fb;
   box-shadow: 0px 10px 40px rgba(54, 54, 65, 0.1);
@@ -105,15 +105,15 @@ export const Faq = styled.div`
   }
 `
 
-export const ThemeRow = styled.div``
+export const ThemeRow = styled.div`
+  ${RadioGroup} {
+    && {
+      display: flex;
+    }
 
-export const ThemeRadioGroup = styled(RadioGroup)`
-  && {
-    display: flex;
+    ${gapPolyfill(10)}
+    margin-top: calc(15px - 5px);
   }
-
-  gap: 10px;
-  margin-top: 15px;
 `
 
 export const ThemeRadio = styled.div`

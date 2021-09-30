@@ -1,15 +1,16 @@
 import { useFormContext, Controller } from 'react-hook-form'
+import { observer } from 'mobx-react-lite'
 
 import { Switch, Button, FormField } from 'ui'
 
-import { CURRENCIES } from 'core/constants'
+import { localStore } from 'store'
 
 import * as S from './PaymentCardOptionsPanel.styled'
 
-export const PaymentCardOptionsPanelIndividual = ({ action }) => {
+export const PaymentCardOptionsPanelIndividual = observer(({ action }) => {
   const { control } = useFormContext()
 
-  const currencySymbol = CURRENCIES.find(({ value }) => value === 'EUR').symbol
+  const currency = localStore.currency.label
 
   const tipAmountPresetFileds = ['preset1', 'preset2', 'preset3'].map((name) => (
     <Controller
@@ -20,9 +21,10 @@ export const PaymentCardOptionsPanelIndividual = ({ action }) => {
 
         return (
           <S.FormField
+            key={name}
             value={value}
             placeholder="Сумма"
-            InputProps={{ endAdornment: currencySymbol }}
+            InputProps={{ endAdornment: currency }}
             onChange={({ target: { value } }) => {
               const numReg = /^\d+$/
               const isNumber = numReg.test(value)
@@ -43,7 +45,7 @@ export const PaymentCardOptionsPanelIndividual = ({ action }) => {
 
   return (
     <S.PaymentCardOptionsPanelIndividual>
-      <FormField label="Название" name="name" placeholder="Введите название" required />
+      <FormField name="name" label="Название" placeholder="Введите название" required />
 
       <S.AmountPresetsRow>
         <S.Label>Предустановленные суммы чаевых</S.Label>
@@ -52,8 +54,7 @@ export const PaymentCardOptionsPanelIndividual = ({ action }) => {
       </S.AmountPresetsRow>
 
       <S.Options>
-        <S.Label>Впечатления</S.Label>
-        <Switch name="impressions" size="big" />
+        <Switch name="impressions" label="Впечатления" labelPlacement="start" size="big" />
       </S.Options>
 
       {/* <ColorPickerField name="bgColor" label="Код цвета для подложки" />
@@ -63,4 +64,4 @@ export const PaymentCardOptionsPanelIndividual = ({ action }) => {
       <Button onClick={action.onClick}>{action.label}</Button>
     </S.PaymentCardOptionsPanelIndividual>
   )
-}
+})

@@ -49,25 +49,28 @@ export const changeUserInfo = async ({
   policyAgreement
 }) => {
   try {
-    const { status, data } = await API.post(`/personal-info/${userId}/change`, {
-      email,
-      firstName,
-      lastName,
-      dateOfBirth: birthDate,
-      countryCode,
-      city,
-      address,
-      postalCode,
-      tosAccepted: policyAgreement
-    })
-
+    const { status, data } = await API.post(
+      `/personal-info/${userId}/change`,
+      {
+        email,
+        firstName,
+        lastName,
+        dateOfBirth: birthDate,
+        countryCode,
+        city,
+        address,
+        postalCode,
+        tosAccepted: policyAgreement
+      },
+      { transformResponse: [(data) => data] }
+    )
+    console.log(54534, data)
     if (status === 500) {
       throw new Error(status)
     }
 
-    if (data?.code === 'VALIDATION_ERROR') {
-      const [field, error] = Object.entries(data.details.validationErrors)[0]
-      throw new Error(`${field} ${error}`)
+    if (data?.error.code === 'POSTAL_CODE_INVALID') {
+      throw new Error('Invalid postal code')
     }
   } catch ({ message }) {
     throw new Error(message)
@@ -81,4 +84,11 @@ export const addUserRole = ({ userId, payer, recipient, agent, business }) => {
     agent,
     business
   })
+}
+
+export const uploadFile = async (formData) => {
+  const { data } = await API.post('/upload-file', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  })
+  return data
 }

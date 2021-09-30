@@ -117,6 +117,8 @@ export const Percentage = styled.div`
 `
 
 export const Img = styled.div`
+  width: 436px;
+
   ${media1030} {
     position: absolute;
     width: 436px;

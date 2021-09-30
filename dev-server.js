@@ -13,7 +13,7 @@ app.prepare().then(() => {
   server.use(
     '/api',
     createProxyMiddleware({
-      target: 'http://tips.tmweb.ru',
+      target: 'http://tips.tmweb.ru:8088',
       changeOrigin: true
     })
   )

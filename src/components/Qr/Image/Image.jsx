@@ -10,7 +10,7 @@ export const QrImage = ({ src }) => {
         alt="qr code"
         width={150}
         height={150}
-        unoptimized
+        quality={100}
       />
     </S.QrImage>
   )

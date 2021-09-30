@@ -24,7 +24,7 @@ export const TariffsSection = () => (
       </S.Card>
 
       <S.Img>
-        <Image src={backgroundImg} alt="фон" unoptimized />
+        <Image src={backgroundImg} alt="фон" quality={100} />
       </S.Img>
     </S.Content>
   </Section>

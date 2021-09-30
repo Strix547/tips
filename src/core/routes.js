@@ -16,6 +16,7 @@ export const ROUTES = {
   QR_CODE: '/qr-codes/id',
   ACCOUNT_QR_CODE_EDIT: '/account/qr-codes/id/edit',
   ACCOUNT_QR_INDIVIDUAL_CREATE: '/account/qr-codes/individual/create',
+  ACCOUNT_QR_EDIT: '/account/qr-codes/:id/edit',
   ACCOUNT_QR_BUSINESS_CREATE: '/account/qr-codes/business/create',
   ACCOUNT_REQUISITES: '/account/requisites',
   ACCOUNT_PLATFORMS: '/account/platforms',
@@ -40,5 +41,6 @@ export const PROTECTED_ROUTES = [
   ROUTES.ACCOUNT_QR_CODE_EDIT,
   ROUTES.ACCOUNT_QR_INDIVIDUAL_CREATE,
   ROUTES.ACCOUNT_QR_BUSINESS_CREATE,
-  ROUTES.ACCOUNT_IDENTIFY
+  ROUTES.ACCOUNT_IDENTIFY,
+  ROUTES.ACCOUNT_QR_EDIT
 ]

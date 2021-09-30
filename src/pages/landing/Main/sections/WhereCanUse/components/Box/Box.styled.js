@@ -156,7 +156,7 @@ export const Box = styled.li`
   }
 
   ${media.createMedia(700)} {
-    width: 100%;
+    width: calc(100% - 30px);
 
     &:nth-child(3) {
       ${ImgContainer} {

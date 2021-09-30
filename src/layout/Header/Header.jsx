@@ -25,7 +25,7 @@ export const Header = observer(({ withSidebar }) => {
 
   const [isMenuOpen, setMenuOpen] = useState(false)
   const { personalData, isPersonalDataLoading } = userStore
-  const { firstName, lastName, email } = personalData
+  const { firstName, lastName } = personalData
   const currentPathname = router.pathname
 
   const nav = [
@@ -64,25 +64,26 @@ export const Header = observer(({ withSidebar }) => {
     </MenuItem>
   ))
 
-  const userInfo = !isPersonalDataLoading ? (
-    <>
-      <S.UserAvatar onClick={toAccountPage}>
-        <UserIcon />
-      </S.UserAvatar>
+  const user =
+    !isPersonalDataLoading && authStore.isAuth ? (
+      <S.User onClick={toAccountPage}>
+        <S.UserAvatar>
+          <UserIcon />
+        </S.UserAvatar>
 
-      <S.UserInfo>
-        <S.Text>
-          <span>{firstName}</span> <span>{lastName}</span>
-        </S.Text>
-        <S.Text>{email}</S.Text>
-      </S.UserInfo>
-    </>
-  ) : (
-    <>
-      <Skeleton width={170} style={{ marginBottom: 5 }} height={20} />
-      <Skeleton width={170} height={20} />
-    </>
-  )
+        <S.UserInfo>
+          <S.Text>
+            <span>{firstName}</span> <span>{lastName}</span>
+          </S.Text>
+          <S.Text>Личный кабинет</S.Text>
+        </S.UserInfo>
+      </S.User>
+    ) : (
+      <S.UserSkeleton>
+        <Skeleton style={{ marginBottom: 5 }} width={170} height={20} />
+        <Skeleton width={170} height={20} />
+      </S.UserSkeleton>
+    )
 
   return (
     <S.Header>
@@ -107,7 +108,7 @@ export const Header = observer(({ withSidebar }) => {
             </FormProvider>
 
             {authStore.isAuth ? (
-              <S.User>{userInfo}</S.User>
+              user
             ) : (
               <LinkButton href={ROUTES.AUTH} size="inline">
                 Вход

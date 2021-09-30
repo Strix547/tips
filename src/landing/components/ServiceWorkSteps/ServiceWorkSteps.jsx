@@ -61,7 +61,10 @@ export const ServiceWorkSteps = () => {
 
   const stepListSlides = steps.map(({ title, img }, idx) => (
     <SwiperSlide key={title}>
-      <Image src={img} alt={title} layout="fixed" unoptimized />
+      <S.Img>
+        <Image src={img} alt={title} quality={100} />
+      </S.Img>
+
       <S.Text>{title}</S.Text>
       <S.Counter>{idx + 1}</S.Counter>
     </SwiperSlide>

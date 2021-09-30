@@ -15,12 +15,12 @@ export const Box = ({ title, subtitle, points = [], preview }) => {
   const previewImages = preview.map(({ label, desktop, mobile }) => (
     <S.ImgContainer key={label}>
       <S.Img>
-        <Image src={desktop} alt={label} unoptimized />
+        <Image src={desktop} alt={label} quality={100} />
       </S.Img>
 
       {mobile !== null && (
         <S.ImgMobile>
-          <Image src={mobile || desktop} alt={label} unoptimized />
+          <Image src={mobile || desktop} alt={label} quality={100} />
         </S.ImgMobile>
       )}
     </S.ImgContainer>

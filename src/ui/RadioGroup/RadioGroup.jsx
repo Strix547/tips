@@ -13,7 +13,6 @@ export const RadioGroup = ({ name, defaultValue, onChange, children }) => {
       render={({ field }) => {
         return (
           <S.RadioGroup
-            value={field.value}
             onChange={(e) => {
               if (onChange) {
                 onChange(e)

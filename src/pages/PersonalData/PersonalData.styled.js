@@ -1,17 +1,17 @@
 import styled from 'styled-components'
 
-import { WhiteBox } from 'styled'
+import { WhiteBox, gapPolyfill } from 'styled'
 
 export const Content = styled(WhiteBox)`
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 40px;
+  ${gapPolyfill(20)}
+  padding: calc(40px - 10px);
 
   /* skeleton */
   & > span {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    ${gapPolyfill(20)}
   }
 `

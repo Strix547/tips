@@ -4,5 +4,14 @@ import { localStore } from './local'
 import { qrCodesStore } from './qrCodes'
 import { paymentStore } from './payment'
 import { statisticsStore } from './statistics'
+import { supportStore } from './support'
 
-export { authStore, userStore, localStore, qrCodesStore, paymentStore, statisticsStore }
+export {
+  authStore,
+  userStore,
+  localStore,
+  qrCodesStore,
+  paymentStore,
+  statisticsStore,
+  supportStore
+}

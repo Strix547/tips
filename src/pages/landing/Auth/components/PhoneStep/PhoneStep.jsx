@@ -8,7 +8,7 @@ export const PhoneStep = ({ onPhoneSubmit }) => {
   const useFormProps = useForm()
   const { watch, handleSubmit } = useFormProps
 
-  const { phone } = watch()
+  const phone = watch('phone')
 
   const onSubmit = ({ phone, remember }) => {
     onPhoneSubmit({ phone, remember })
