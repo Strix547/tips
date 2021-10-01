@@ -6,7 +6,7 @@ export const AvatarIndividual = ({ avatar, firstName, lastName }) => {
   return (
     <S.AvatarIndividual>
       <S.Avatar>
-        <Image src={avatar} alt={`фото ${firstName} ${lastName}`} />
+        <Image src={avatar} width={90} height={90} alt={`фото ${firstName} ${lastName}`} />
       </S.Avatar>
 
       <S.Text>

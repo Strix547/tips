@@ -53,14 +53,8 @@ export const Background = styled.div`
       left: -173px;
     }
 
-    /* line */
-    &:nth-child(2) {
-      top: 110px;
-      left: -709px;
-    }
-
     /* green dotes right */
-    &:nth-child(3) {
+    &:nth-child(2) {
       right: -180px;
       bottom: 144px;
     }
@@ -72,7 +66,7 @@ export const Background = styled.div`
         left: -112px;
       }
 
-      &:nth-child(3) {
+      &:nth-child(2) {
         right: -112px;
       }
     }

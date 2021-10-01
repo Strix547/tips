@@ -30,6 +30,11 @@ export const AvatarField = styled.div``
 export const AvatarRow = styled.div`
   display: flex;
   align-items: center;
+
+  img {
+    border-radius: 10px;
+    overflow: hidden;
+  }
 `
 
 export const Avatar = styled.div`

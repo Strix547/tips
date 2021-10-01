@@ -1,55 +1,63 @@
+import { observer } from 'mobx-react-lite'
+
 import { AvatarBusiness, AvatarIndividual, TipAmount } from 'components'
 import { ImpressionRow, RatingRow, FeedbackTextarea } from 'common'
+
+import { userStore } from 'store'
 
 import * as S from './RecipientCardPreview.styled'
 
 import avatar from '@public/img/placeholders/avatar.png'
 
-export const RecipientCardPreview = ({
-  type,
-  firstName,
-  lastName,
-  amountPresets,
-  impressions,
-  reviews,
-  rating,
-  bgColor,
-  buttonColor,
-  company
-}) => {
-  return (
-    <S.RecipientCardPreview>
-      <S.RecipientCard>
-        <S.Top>
-          <S.TopBackground $color={bgColor} />
-          <S.Text>Так выглядит ваша страница</S.Text>
-        </S.Top>
+export const RecipientCardPreview = observer(
+  ({
+    type,
+    firstName,
+    lastName,
+    amountPresets,
+    impressions,
+    reviews,
+    rating,
+    bgColor,
+    buttonColor,
+    company
+  }) => {
+    const avatarPreview = userStore.personalData.avatar || avatar
 
-        <S.RecipientCardTop>
-          {type === 'individual' ? (
-            <AvatarIndividual avatar={avatar} firstName={firstName} lastName={lastName} />
-          ) : (
-            <AvatarBusiness
-              avatar={avatar}
-              company={{ name: company.name, logo: company.logo }}
-              firstName={firstName}
-              lastName={lastName}
-            />
-          )}
-        </S.RecipientCardTop>
+    return (
+      <S.RecipientCardPreview>
+        <S.RecipientCard>
+          <S.Top>
+            <S.TopBackground $color={bgColor} />
+            <S.Text>Так выглядит ваша страница</S.Text>
+          </S.Top>
 
-        <S.RecipientCardMain>
-          <TipAmount presets={amountPresets} />
+          <S.RecipientCardTop>
+            {type === 'individual' ? (
+              <AvatarIndividual avatar={avatarPreview} firstName={firstName} lastName={lastName} />
+            ) : (
+              <AvatarBusiness
+                avatar={avatar}
+                company={{ name: company.name, logo: company.logo }}
+                firstName={firstName}
+                lastName={lastName}
+              />
+            )}
+          </S.RecipientCardTop>
 
-          {impressions && <ImpressionRow />}
-          {rating && <RatingRow />}
-          {reviews && <FeedbackTextarea />}
+          <S.RecipientCardMain>
+            <TipAmount presets={amountPresets} />
 
-          <S.Button $color={buttonColor}>Поблагодарить</S.Button>
+            {impressions && <ImpressionRow />}
+            {rating && <RatingRow />}
+            {reviews && <FeedbackTextarea />}
 
-          <S.Text>Tips.me - это сервис для перевод чаевых и донатов.</S.Text>
-        </S.RecipientCardMain>
-      </S.RecipientCard>
-    </S.RecipientCardPreview>
-  )
-}
+            <S.Button $color={buttonColor}>Поблагодарить</S.Button>
+
+            <S.Text>Tips.me - это сервис для перевод чаевых и донатов.</S.Text>
+          </S.RecipientCardMain>
+        </S.RecipientCard>
+      </S.RecipientCardPreview>
+    )
+  }
+)

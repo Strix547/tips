@@ -86,6 +86,7 @@ export const RequisitesPage = observer(({ stripePromise }) => {
         <S.Content>
           <S.ContentContainer>
             <S.Label>Мои IBAN номера:</S.Label>
+
             <FormProvider {...useFormProps}>
               <Select name="iban" defaultValue={selectedBankAccountId}>
                 {bankAccountMenuItems}

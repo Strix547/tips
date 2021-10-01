@@ -198,8 +198,8 @@ export const LanguageSelect = styled(Select)`
     border: none;
 
     & > svg {
-      width: 100%;
-      border-radius: 4px;
+      width: 20px;
+      border-radius: 50%;
       border: 1px solid var(--color-gray-200);
     }
   }
@@ -214,8 +214,8 @@ export const LanguageSelect = styled(Select)`
     border-radius: 10px;
 
     svg {
-      width: 24.77px;
-      border-radius: 4px;
+      width: 20px;
+      border-radius: 50%;
       border: 1px solid var(--color-gray-200);
     }
   }
@@ -293,4 +293,9 @@ export const NavItem = styled.li`
         color: var(--color-primary-200);
       }
     `}
+`
+
+export const UserAvatarImg = styled.div`
+  border-radius: 10px;
+  overflow: hidden;
 `

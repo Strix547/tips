@@ -4,10 +4,18 @@ import { Radio } from '@material-ui/core'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 
-import { FormField, Button, FormControlLabel, RadioGroup, Dropzone, CircularProgress } from 'ui'
+import {
+  FormField,
+  Button,
+  FormControlLabel,
+  RadioGroup,
+  Dropzone,
+  CircularProgress,
+  PhoneField
+} from 'ui'
 
 import { ROUTES } from 'core/routes'
-import { supportStore } from 'store'
+import { userStore, supportStore } from 'store'
 
 import * as S from './SupportForm.styled'
 
@@ -50,6 +58,21 @@ export const SupportForm = observer(() => {
     setFiles([])
   }
 
+  const guestFields = (
+    <>
+      <FormField name="firstName" label="Имя" placeholder="Введите Ваше имя" required />
+
+      <PhoneField
+        rules={{ required: true, minLength: 11 }}
+        name="phone"
+        country="ru"
+        placeholder="+7 (___) ___-__-__"
+      />
+
+      <FormField type="email" name="email" label="E-mail" placeholder="Введите e-mail" required />
+    </>
+  )
+
   const letterThemeRadios = letterThemes.map(({ label, value }) => {
     return (
       <FormControlLabel
@@ -75,6 +98,8 @@ export const SupportForm = observer(() => {
 
       {!supportStore.isMessageSending ? (
         <FormProvider {...useFormProps}>
+          {!userStore.id ? guestFields : null}
+
           <S.ThemeRow>
             <S.Label>Выберите тему письма</S.Label>
 

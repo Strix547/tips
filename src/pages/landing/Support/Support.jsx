@@ -25,7 +25,6 @@ export const SupportPage = () => {
 
           <S.Background>
             <GreenDotesSvg />
-            <LineSvg />
             <GreenDotesSvg />
           </S.Background>
         </S.Wrapper>

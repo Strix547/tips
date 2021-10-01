@@ -69,7 +69,13 @@ export const Header = observer(({ withSidebar }) => {
     !isPersonalDataLoading && authStore.isAuth ? (
       <S.User onClick={toAccountPage}>
         <S.UserAvatar>
-          {avatar ? <Image src={avatar} width={44} height={44} alt="avatar" /> : <UserIcon />}
+          {avatar ? (
+            <S.UserAvatarImg>
+              <Image src={avatar} width={44} height={44} alt="avatar" />
+            </S.UserAvatarImg>
+          ) : (
+            <UserIcon />
+          )}
         </S.UserAvatar>
 
         <S.UserInfo>

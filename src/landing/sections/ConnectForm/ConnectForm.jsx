@@ -37,19 +37,19 @@ export const ConnectFormSection = () => {
             <FormProvider {...useFormProps}>
               <FormField name="firstName" label="Имя" placeholder="Введите Ваше имя" required />
 
+              <PhoneField
+                rules={{ required: true, minLength: 11 }}
+                name="phone"
+                country="ru"
+                placeholder="+7 (___) ___-__-__"
+              />
+
               <FormField
                 type="email"
                 name="email"
                 label="E-mail"
                 placeholder="Введите e-mail"
                 required
-              />
-
-              <PhoneField
-                rules={{ required: true, minLength: 11 }}
-                name="phone"
-                country="ru"
-                placeholder="+7 (___) ___-__-__"
               />
 
               <Checkbox

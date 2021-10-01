@@ -108,8 +108,8 @@ export const PersonalDataPage = observer(() => {
                   {avatarPreview || personalData.avatar ? (
                     <Image
                       src={avatarPreview?.src || personalData.avatar}
-                      width={44}
-                      height={44}
+                      width={90}
+                      height={90}
                       alt="avatar"
                       unoptimized
                     />
