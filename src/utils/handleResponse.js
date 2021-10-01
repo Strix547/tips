@@ -1,5 +1,6 @@
-export const handleResponse = ({ ok, status, statusText, data }, errorCodeLabels) => {
-  if (ok) return data
+export const handleResponse = ({ status, statusText, data }, errorCodeLabels) => {
+  const codes = [200, 201, 202, 203, 204, 205, 206, 207, 208, 226]
+  if (codes.includes(status)) return data
 
   const errorCode = data?.code
   const haveErrorLabel = errorCodeLabels.some((error) => error.code === errorCode)

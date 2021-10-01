@@ -28,7 +28,10 @@ API.interceptors.request.use((req) => {
 })
 
 API.interceptors.response.use(
-  (res) => res,
+  (res) => {
+    console.log(res)
+    return res
+  },
   ({ response }) => {
     console.log('ress', response, response?.dta)
     const isProtectedRoute = PROTECTED_ROUTES.includes(router.pathname)
