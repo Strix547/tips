@@ -20,6 +20,7 @@ export const AvatarIndividual = styled.div`
 `
 
 export const Avatar = styled.div`
+  height: 90px;
   border-radius: 10px;
   overflow: hidden;
 `

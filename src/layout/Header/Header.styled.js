@@ -157,6 +157,12 @@ export const UserAvatar = styled.div`
   border-radius: 50%;
   box-sizing: border-box;
   cursor: pointer;
+
+  ${({ noBorder }) =>
+    noBorder &&
+    css`
+      border: none;
+    `}
 `
 
 export const UserInfo = styled.div`
@@ -297,5 +303,6 @@ export const NavItem = styled.li`
 
 export const UserAvatarImg = styled.div`
   border-radius: 10px;
+  height: 100%;
   overflow: hidden;
 `

@@ -8,10 +8,8 @@ import { paymentStore } from 'store'
 
 import * as S from './PaymentCard.styled'
 
-import avatar from '@public/img/placeholders/avatar.png'
-
 export const PaymentCardIndividual = observer(() => {
-  const { firstName, lastName, amountPresets, impressions } = paymentStore.individualData
+  const { firstName, avatar, lastName, amountPresets, impressions } = paymentStore.individualData
 
   return (
     <S.RecipientCard>

@@ -106,6 +106,11 @@ export const TableContainer = styled.div`
         &:nth-child(4) {
           font-weight: 500;
         }
+
+        &:nth-child(4) {
+          font-size: 24px;
+          line-height: 60px;
+        }
       }
     }
   }

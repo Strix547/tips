@@ -5,6 +5,7 @@ import * as paymentApi from 'api/payment'
 export const paymentStore = makeAutoObservable({
   individualData: {
     name: '',
+    avatar: '',
     firstName: '',
     lastName: '',
     amountPresets: [],

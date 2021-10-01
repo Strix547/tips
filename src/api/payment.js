@@ -4,6 +4,7 @@ const root = '/payment-page'
 
 const transformPaymetData = ({
   type,
+  avatarFileUrl,
   paymentPageId,
   name,
   presetPaymentSizes,
@@ -16,6 +17,7 @@ const transformPaymetData = ({
   return {
     type,
     pageId: paymentPageId,
+    avatar: avatarFileUrl && `${window.location.origin}${avatarFileUrl}`,
     name,
     firstName,
     lastName,

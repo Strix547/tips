@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { observer } from 'mobx-react-lite'
 import { Radio } from '@material-ui/core'
@@ -10,7 +11,13 @@ import * as S from './TipAmount.styled'
 
 export const TipAmount = observer(({ presets = [100, 149, 299] }) => {
   const useFormProps = useForm()
-  const { watch } = useFormProps
+  const { watch, setValue } = useFormProps
+
+  useEffect(() => {
+    if (watch('preset')) {
+      setValue('amount', watch('preset'))
+    }
+  }, [watch('preset')])
 
   const currency = localStore.currency.label
   const minPresetValue = Math.min(...presets)
@@ -22,7 +29,12 @@ export const TipAmount = observer(({ presets = [100, 149, 299] }) => {
         key={value}
         value={value}
         label={
-          <S.BaseAmountRadio active={parseInt(watch('preset'), 10) === value}>
+          <S.BaseAmountRadio
+            active={parseInt(watch('preset'), 10) === value}
+            onClick={() => {
+              setValue('amount', value)
+            }}
+          >
             {value} {currency}
           </S.BaseAmountRadio>
         }

@@ -45,6 +45,7 @@ export const QrModal = ({ id, open, onClose, label, img }) => {
   ))
 
   const copyLinkToClipboard = () => {
+    const link = `${window.location.origin}/qr-codes/${id}`
     navigator.clipboard.writeText(link)
     setCopyTooltipOpen(true)
   }
