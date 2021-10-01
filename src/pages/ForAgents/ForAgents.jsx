@@ -25,8 +25,16 @@ export const ForAgentsPage = () => {
         <S.Content>
           <Info />
           <TotalEarned amount={178480} />
-          <BarChart title="Количество зарегистрированных реферальных пользователей" />
-          <LineChart title="Чаевые заработанные реферальными пользователями" />
+          <BarChart
+            labels={[]}
+            values={[]}
+            title="Количество зарегистрированных реферальных пользователей"
+          />
+          <LineChart
+            labels={[]}
+            values={[]}
+            title="Чаевые заработанные реферальными пользователями"
+          />
           <AgentsTable />
         </S.Content>
       </AccountLayout>

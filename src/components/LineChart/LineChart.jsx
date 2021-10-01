@@ -4,7 +4,11 @@ import { createTooltip } from 'utils'
 
 import * as S from './LineChart.styled'
 
-export const LineChart = ({ title }) => {
+export const LineChart = ({
+  labels = ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
+  values = [0, 400, 200, 300, 700, 300, 200, 800, 200, 100, 400, 200],
+  title
+}) => {
   const getLineData = (canvas) => {
     const ctx = canvas.getContext('2d')
     const gradient = ctx.createLinearGradient(0, 0, 0, 320)
@@ -12,10 +16,10 @@ export const LineChart = ({ title }) => {
     gradient.addColorStop(1, 'rgba(57, 158, 41, 0)')
 
     return {
-      labels: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
+      labels,
       datasets: [
         {
-          data: [0, 400, 200, 300, 700, 300, 200, 800, 200, 100, 400, 200],
+          data: values,
           backgroundColor: gradient,
           borderColor: '#3bc76b',
           pointRadius: 8,

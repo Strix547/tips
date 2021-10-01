@@ -15,7 +15,7 @@ import {
 } from 'ui'
 
 import { ROUTES } from 'core/routes'
-import { userStore, supportStore } from 'store'
+import { userStore, authStore, supportStore } from 'store'
 
 import * as S from './SupportForm.styled'
 
@@ -46,12 +46,17 @@ export const SupportForm = observer(() => {
     return files.map(({ name }) => <span key={name}>{name}</span>)
   }
 
-  const onFormSubmit = ({ letterTheme, theme, message }) => {
-    supportStore.sendMessageToSupport({
+  const onFormSubmit = async ({ firstName, phone, email, letterTheme, theme, message }) => {
+    await supportStore.sendMessageToSupport({
+      firstName,
+      phone,
+      email,
       theme: letterTheme === 'other' ? theme : letterTheme,
       message,
       files
     })
+    console.log(1, { firstName, phone, email })
+    authStore.setAuthData({ firstName, phone, email })
 
     reset()
     setValue('message', '')

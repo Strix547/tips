@@ -4,7 +4,7 @@ import 'react-phone-input-2/lib/style.css'
 
 import * as S from './PhoneField.styled'
 
-export const PhoneField = ({ name, rules, value, placeholder, country, ...props }) => {
+export const PhoneField = ({ name, rules, placeholder, country, ...props }) => {
   const {
     control,
     formState: { errors }
@@ -27,7 +27,6 @@ export const PhoneField = ({ name, rules, value, placeholder, country, ...props 
               {...props}
               mask={{ ru: '7(...) ...-..-..' }}
               country={country}
-              value={value}
               placeholder={placeholder}
             />
           </S.PhoneField>

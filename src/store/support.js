@@ -7,12 +7,12 @@ import * as userApi from 'api/user'
 export const supportStore = makeAutoObservable({
   isMessageSending: false,
 
-  sendMessageToSupport: async ({ theme, message, files }) => {
+  sendMessageToSupport: async ({ firstName, phone, email, theme, message, files }) => {
     try {
       supportStore.isMessageSending = true
 
       if (!files.length) {
-        await supportApi.sendMessageToSupport({ theme, message })
+        await supportApi.sendMessageToSupport({ firstName, phone, email, theme, message })
       } else {
         const filePromises = files.map((file) => {
           const formData = new FormData()
@@ -23,6 +23,9 @@ export const supportStore = makeAutoObservable({
         const fileIds = await Promise.all(filePromises)
 
         await supportApi.sendMessageToSupport({
+          firstName,
+          phone,
+          email,
           theme,
           message,
           fileIds: fileIds.map(({ fileId }) => fileId)

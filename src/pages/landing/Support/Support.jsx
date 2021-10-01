@@ -6,7 +6,6 @@ import { SupportForm } from 'components'
 import * as S from './Support.styled'
 
 import GreenDotesSvg from '@public/img/landing/green-dotes.svg'
-import LineSvg from '@public/img/landing/line.svg'
 
 export const SupportPage = () => {
   return (

@@ -1,8 +1,18 @@
 import { API } from 'core/axios'
 
-export const sendMessageToSupport = async ({ theme, message, fileIds }) => {
+export const sendMessageToSupport = async ({
+  firstName,
+  phone,
+  email,
+  theme,
+  message,
+  fileIds
+}) => {
   try {
     const { statusText, status, data } = await API.post(`/send-support-service-message`, {
+      firstName,
+      phone,
+      email,
       letterSubject: theme,
       message,
       fileIds

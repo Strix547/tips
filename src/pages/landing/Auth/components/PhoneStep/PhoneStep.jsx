@@ -4,8 +4,13 @@ import { PhoneField, Switch, Button } from 'ui'
 
 import * as S from './PhoneStep.styled'
 
-export const PhoneStep = ({ onPhoneSubmit }) => {
-  const useFormProps = useForm()
+export const PhoneStep = ({ defaultPhone, onPhoneSubmit }) => {
+  const useFormProps = useForm({
+    defaultValues: {
+      phone: defaultPhone
+    }
+  })
+
   const { watch, handleSubmit } = useFormProps
 
   const phone = watch('phone')

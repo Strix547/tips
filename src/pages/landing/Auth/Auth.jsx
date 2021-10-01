@@ -59,7 +59,7 @@ export const AuthPage = observer(() => {
             <S.Heading level={1}>Вход в Tips.me</S.Heading>
 
             {authStore.step === 'phone' ? (
-              <PhoneStep onPhoneSubmit={sendCode} />
+              <PhoneStep defaultPhone={phone} onPhoneSubmit={sendCode} />
             ) : (
               <CodeStep
                 phone={phone}
