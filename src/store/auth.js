@@ -63,6 +63,7 @@ export const authStore = makeAutoObservable({
   signOut: async () => {
     await authApi.signOut()
     authStore.isAuth = false
+    authStore.step = 'phone'
     userStore.id = null
     userStore.role = null
     userStore.personalData = {
