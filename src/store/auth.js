@@ -65,7 +65,16 @@ export const authStore = makeAutoObservable({
     authStore.isAuth = false
     userStore.id = null
     userStore.role = null
-    userStore.personalData = {}
+    userStore.personalData = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      dateOfBirth: '',
+      countryCode: '',
+      city: '',
+      address: '',
+      currency: { label: '', value: '' }
+    }
 
     // reset cookie
     try {

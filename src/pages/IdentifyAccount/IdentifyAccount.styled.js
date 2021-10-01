@@ -66,7 +66,6 @@ export const Content = styled.div`
 `
 
 export const FieldsLabel = styled(Text)`
-  margin-bottom: 10px;
   font-weight: 700;
 `
 

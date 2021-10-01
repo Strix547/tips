@@ -11,4 +11,8 @@ export const PersonalDataStep = styled.form`
   & > *:not(:last-child) {
     margin-bottom: 10px;
   }
+
+  ${FieldsLabel} {
+    margin-bottom: 20px;
+  }
 `

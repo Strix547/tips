@@ -48,7 +48,6 @@ export const userStore = makeAutoObservable({
   getPersonalData: async (userId) => {
     userStore.isPersonalDataLoading = true
     const personalData = await userApi.getUserInfo(userId)
-    console.log(personalData.currency)
     userStore.personalData = {
       ...personalData,
       currency: {

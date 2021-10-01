@@ -1,5 +1,5 @@
-export const handleResponse = ({ status, statusText, data }, errorCodeLabels) => {
-  if (statusText === 'OK') return data
+export const handleResponse = ({ ok, status, statusText, data }, errorCodeLabels) => {
+  if (ok) return data
 
   const errorCode = data?.code
   const haveErrorLabel = errorCodeLabels.some((error) => error.code === errorCode)

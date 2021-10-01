@@ -13,6 +13,10 @@ export const CreditCardStep = styled.div`
   & > *:not(:last-child) {
     margin-bottom: 10px;
   }
+
+  ${FieldsLabel} {
+    margin-bottom: 20px;
+  }
 `
 
 export const Agreement = styled.div`
