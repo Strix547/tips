@@ -8,13 +8,17 @@ import { paymentStore } from 'store'
 
 import * as S from './PaymentCard.styled'
 
+import avatar from '@public/img/placeholders/avatar.png'
+
 export const PaymentCardIndividual = observer(() => {
-  const { firstName, avatar, lastName, amountPresets, impressions } = paymentStore.individualData
+  const { firstName, lastName, amountPresets, impressions } = paymentStore.individualData
+
+  const avatarPreview = paymentStore.individualData.avatar || avatar
 
   return (
     <S.RecipientCard>
       <S.RecipientCardTop>
-        <AvatarIndividual avatar={avatar} firstName={firstName} lastName={lastName} />
+        <AvatarIndividual avatar={avatarPreview} firstName={firstName} lastName={lastName} />
       </S.RecipientCardTop>
 
       <S.RecipientCardMain>
