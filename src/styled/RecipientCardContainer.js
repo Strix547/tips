@@ -40,8 +40,8 @@ export const RecipientCardContainer = styled(WhiteBox)`
 
     ${RecipientCard} {
       width: calc(100% - 30px);
-      margin: auto 15px;
-      padding: 30px 0;
+      margin: 0 15px;
+      padding: 0;
       border: none;
     }
 

@@ -24,7 +24,7 @@ export const ForAgentsPage = () => {
       <AccountLayout title="Агентам" button={{ label: 'Добавить QR-код', onClick: toQrCreatePage }}>
         <S.Content>
           <Info />
-          <TotalEarned amount={178480} />
+          <TotalEarned amount={0} />
           <BarChart
             labels={[]}
             values={[]}

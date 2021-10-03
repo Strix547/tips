@@ -25,8 +25,8 @@ export const QrCard = observer(({ id, templateId, label, img, tag }) => {
   const [isQrModalOpen, setQrModalOpen] = useState(false)
   const [isConfirmDeleteModalOpen, setConfirmDeleteModalOpen] = useState(false)
 
-  const onChartOpen = () => {
-    router.push(`${ROUTES.ACCOUNT}/${id}`)
+  const toQrStatisticsPage = () => {
+    router.push(`${ROUTES.ACCOUNT}/qr-codes/${id}/statistics`)
   }
 
   const onShare = () => {
@@ -48,7 +48,7 @@ export const QrCard = observer(({ id, templateId, label, img, tag }) => {
   }
 
   const actions = [
-    { label: 'open chart', icon: <ChartIcon />, onClick: () => onChartOpen(id) },
+    { label: 'open chart', icon: <ChartIcon />, onClick: () => toQrStatisticsPage(id) },
     { label: 'share', icon: <ShareIcon />, onClick: () => onShare(id) },
     { label: 'edit', icon: <PenIcon />, onClick: () => onEdit(templateId) },
     { label: 'delete', icon: <TrashIcon />, onClick: () => onDelete(templateId) }

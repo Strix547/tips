@@ -40,7 +40,7 @@ export const AccountLayout = styled.div`
 
   ${HeaderWrapper} {
     max-width: 100%;
-    padding: 0 30px;
+    padding: 0 20px;
     margin: 0;
     box-sizing: border-box;
   }
@@ -55,7 +55,7 @@ export const AccountLayout = styled.div`
 
   ${media.tablet} {
     ${HeaderWrapper} {
-      padding: 0 20px;
+      padding: 0 15px;
     }
   }
 
@@ -68,7 +68,7 @@ export const Content = styled.main`
   grid-area: content;
   width: calc(100vw - 340px);
   min-height: calc(100vh - 70px - 100px);
-  padding: 40px 30px 60px;
+  padding: 40px 20px 60px;
   background: #f9fafc;
 
   ${media1280} {
@@ -78,7 +78,7 @@ export const Content = styled.main`
   }
 
   ${media.tablet} {
-    padding: 30px 20px 45px;
+    padding: 30px 15px 45px;
   }
 
   ${media.mobile} {

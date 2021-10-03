@@ -1,17 +1,16 @@
 import { useEffect, useMemo } from 'react'
-import { useForm, FormProvider } from 'react-hook-form'
 import { observer } from 'mobx-react-lite'
-import Head from 'next/head'
+import { FormProvider, useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 import { AccountLayout } from 'layout'
 import { BarChart, TipsTable } from 'components'
 
 import { userStore, statisticsStore } from 'store'
-import { ROUTES } from 'core/routes'
 import { getTimeZoneOffset } from 'utils'
 
-export const UserMainPage = observer(() => {
+export const QrStatisticsPage = observer(() => {
   const router = useRouter()
   const useFormProps = useForm({
     defaultValues: {
@@ -19,7 +18,7 @@ export const UserMainPage = observer(() => {
     }
   })
 
-  const { id: userId } = userStore
+  const qrId = router?.query?.id
   const { incomeStatistics, isIncomeStatisticsLoading } = statisticsStore
   const currency = userStore.personalData.currency.value
 
@@ -31,7 +30,7 @@ export const UserMainPage = observer(() => {
   const diagramAmounts = incomeStatistics.diagram.map(({ tipAmount }) => tipAmount)
 
   useEffect(() => {
-    if (!userId && !currency) return
+    if (!currency && !qrId) return
 
     const commonData = {
       format: 'JSON',
@@ -40,30 +39,26 @@ export const UserMainPage = observer(() => {
     }
 
     if (periodSelected !== 'custom') {
-      statisticsStore.getUserIncomeStatistics({
+      statisticsStore.getQrIncomeStatistics({
         ...commonData,
-        userId,
+        qrId,
         period: periodSelected
       })
     }
 
     if (periodFromSelected && periodToSelected) {
-      statisticsStore.getUserIncomeStatistics({
+      statisticsStore.getQrIncomeStatistics({
         ...commonData,
-        userId,
+        qrId,
         periodFrom: periodFromSelected,
         periodTo: periodToSelected
       })
     }
-  }, [userId, periodSelected, periodFromSelected, periodToSelected])
+  }, [qrId, periodSelected, periodFromSelected, periodToSelected])
 
-  const toQrCodesPage = () => {
-    router.push(ROUTES.ACCOUNT_QR_INDIVIDUAL_CREATE)
-  }
-
-  const downloadExcelFile = (userId) => {
-    statisticsStore.getUserIncomeStatistics({
-      userId,
+  const downloadExcelFile = (qrId) => {
+    statisticsStore.getQrIncomeStatistics({
+      qrId,
       format: 'XLSX',
       period: periodSelected,
       zoneOffset: getTimeZoneOffset(),
@@ -74,10 +69,10 @@ export const UserMainPage = observer(() => {
   return (
     <>
       <Head>
-        <title>Главная</title>
+        <title>Статистика qr кода</title>
       </Head>
 
-      <AccountLayout title="Главная" button={{ label: 'Создать QR-код', onClick: toQrCodesPage }}>
+      <AccountLayout title="Статистика qr кода">
         {useMemo(
           () => (
             <BarChart
@@ -94,7 +89,7 @@ export const UserMainPage = observer(() => {
           <TipsTable
             data={incomeStatistics.table}
             isDataLoading={isIncomeStatisticsLoading}
-            onExcelDownload={() => downloadExcelFile(userId)}
+            onExcelDownload={() => downloadExcelFile(qrId)}
           />
         </FormProvider>
       </AccountLayout>

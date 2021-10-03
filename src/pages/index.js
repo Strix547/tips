@@ -27,6 +27,7 @@ import { PersonalDataPage } from './PersonalData'
 import { QrIndividualEditPage } from './QrIndividualEdit'
 import { IdentifyAccountPage } from './IdentifyAccount'
 import { LoyaltyPage } from './Loyalty'
+import { QrStatisticsPage } from './QrStatistics'
 
 export {
   AgentsPage,
@@ -56,5 +57,6 @@ export {
   CredentialsPage,
   PublicOfferPage,
   PrivacyPolicyPage,
-  LoyaltyPage
+  LoyaltyPage,
+  QrStatisticsPage
 }

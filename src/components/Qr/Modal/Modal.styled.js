@@ -165,12 +165,18 @@ export const Networks = styled.div`
   margin-top: 15px;
 
   button {
+    width: 40px;
     height: 40px;
     padding: 0;
     border: none;
     outline: none;
     background: transparent;
     cursor: pointer;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   ${media620} {

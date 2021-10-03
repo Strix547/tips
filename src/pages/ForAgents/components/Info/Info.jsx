@@ -8,6 +8,8 @@ import CopyIcon from '@public/icons/copy.svg'
 import VkIcon from '@public/icons/networks/vk-big.svg'
 import FacebookIcon from '@public/icons/networks/facebook-big.svg'
 import InstagramIcon from '@public/icons/networks/instagram-big.svg'
+import TelegramIcon from '@public/icons/networks/telegram-big.svg'
+import WhatsAppIcon from '@public/icons/networks/whats-app-big.svg'
 
 export const Info = () => {
   const [copyTooltipOpen, setCopyTooltipOpen] = useState(false)
@@ -30,9 +32,11 @@ export const Info = () => {
   }
 
   const networks = [
-    { label: 'vk', link: '/', icon: <VkIcon /> },
-    { label: 'facebook', link: '/', icon: <FacebookIcon /> },
-    { label: 'instagram', link: '/', icon: <InstagramIcon /> }
+    { label: 'Vkontakte', link: '/', icon: <VkIcon /> },
+    { label: 'Facebook', link: '/', icon: <FacebookIcon /> },
+    { label: 'Instagram', link: '/', icon: <InstagramIcon /> },
+    { label: 'telegram', link: '/', icon: <TelegramIcon /> },
+    { label: 'whatsapp', link: '/', icon: <WhatsAppIcon /> }
   ]
 
   const networkList = networks.map(({ label, link, icon }) => (
@@ -61,15 +65,17 @@ export const Info = () => {
         <S.LinksBlockLeft>
           <S.Text>HASH с идентификатором агента:</S.Text>
 
-          <Link href={link}>
-            <a>{link}</a>
-          </Link>
+          <S.LinkContainer>
+            <Link href={link}>
+              <a>{link}</a>
+            </Link>
 
-          <Tooltip open={copyTooltipOpen} title="Скопировано">
-            <S.CopyIcon>
-              <CopyIcon onClick={copyLinkToClipboard} />
-            </S.CopyIcon>
-          </Tooltip>
+            <Tooltip open={copyTooltipOpen} title="Скопировано">
+              <S.CopyIcon>
+                <CopyIcon onClick={copyLinkToClipboard} />
+              </S.CopyIcon>
+            </Tooltip>
+          </S.LinkContainer>
         </S.LinksBlockLeft>
 
         <S.Networks>{networkList}</S.Networks>

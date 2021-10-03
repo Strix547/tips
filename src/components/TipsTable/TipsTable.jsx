@@ -17,6 +17,8 @@ export const TipsTable = observer(({ data = [], isDataLoading, onExcelDownload }
   const transformedData = toJS(data)
   const haveTips = transformedData.length !== 0
 
+  const currencyLabel = userStore.personalData.currency.label
+
   const columns = [
     {
       headerName: 'Дата и время',
@@ -44,7 +46,7 @@ export const TipsTable = observer(({ data = [], isDataLoading, onExcelDownload }
     id,
     dateTime: `${dateTime?.toLocaleDateString()} ${dateTime?.toLocaleTimeString().slice(0, 5)}`,
     qrName,
-    tipAmount,
+    tipAmount: `${tipAmount} ${currencyLabel}`,
     impression
   }))
 
@@ -66,7 +68,7 @@ export const TipsTable = observer(({ data = [], isDataLoading, onExcelDownload }
             <S.Text>
               {dateTime?.toLocaleDateString()} {dateTime?.toLocaleTimeString().slice(0, 5)}
             </S.Text>
-            <S.Text>{formatPrice(tipAmount, userStore.personalData.currency.label)}</S.Text>
+            <S.Text>{formatPrice(tipAmount, currencyLabel)}</S.Text>
           </S.TipCardTop>
 
           <S.TipCardMain>
@@ -84,7 +86,7 @@ export const TipsTable = observer(({ data = [], isDataLoading, onExcelDownload }
 
             <S.TipCardRow>
               <S.Text>Размер чаевых</S.Text>
-              <S.Text>{formatPrice(tipAmount, userStore.personalData.currency.label)}</S.Text>
+              <S.Text>{formatPrice(tipAmount, currencyLabel)}</S.Text>
             </S.TipCardRow>
 
             <S.TipCardRow>
@@ -100,11 +102,7 @@ export const TipsTable = observer(({ data = [], isDataLoading, onExcelDownload }
   )
 
   const statisticRow = haveTips ? (
-    <StatisticRow
-      stats={statisticTotal}
-      isLoading={isDataLoading}
-      currency={userStore.personalData.currency.label}
-    />
+    <StatisticRow stats={statisticTotal} isLoading={isDataLoading} currency={currencyLabel} />
   ) : null
 
   return (

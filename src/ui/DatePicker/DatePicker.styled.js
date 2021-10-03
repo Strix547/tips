@@ -15,10 +15,6 @@ export const DatePicker = styled.div`
     font-family: 'Formular';
     box-sizing: border-box;
 
-    & > *:not(:last-child) {
-      margin-right: 40px;
-    }
-
     &__input-container {
       input {
         width: 100%;
@@ -122,9 +118,10 @@ export const DatePicker = styled.div`
       display: grid;
       grid-gap: 12px;
       margin: 15px 0 0 0;
-    }
 
-    &__week {
+      &-container:not(:last-child) {
+        margin-right: 40px;
+      }
     }
 
     &__day {

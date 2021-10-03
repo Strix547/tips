@@ -1,10 +1,8 @@
-import { useMediaQuery } from 'react-responsive'
 import { Bar } from 'react-chartjs-2'
 import Skeleton from 'react-loading-skeleton'
 
 import { createTooltip } from 'utils'
 
-import { MEDIA_TABLET } from 'styles/media'
 import * as S from './BarChart.styled'
 
 export const BarChart = ({
@@ -31,8 +29,6 @@ export const BarChart = ({
   values = [590, 410, 580, 580, 590, 590, 420, 480, 490, 500, 539, 500, 420, 480, 510, 440, 510],
   isLoading
 }) => {
-  const screenTablet = useMediaQuery({ maxWidth: MEDIA_TABLET })
-
   const createLinearGradient = (canvas) => {
     const ctx = canvas.getContext('2d')
     const w = canvas.width
@@ -60,25 +56,11 @@ export const BarChart = ({
   }
 
   const getBarData = (canvas) => {
-    const getArrBaseOnWidth = (arr) => {
-      const windowWidth = window.outerWidth
-
-      if (windowWidth <= 470) {
-        return arr.slice(0, 5)
-      }
-
-      if (windowWidth <= MEDIA_TABLET) {
-        return arr.slice(0, 10)
-      }
-
-      return arr.slice(0, 17)
-    }
-
     return {
-      labels: getArrBaseOnWidth(labels),
+      labels,
       datasets: [
         {
-          data: getArrBaseOnWidth(values, screenTablet),
+          data: values,
           backgroundColor: [createLinearGradient(canvas)],
           borderRadius: { topLeft: 5, topRight: 5 }
         }

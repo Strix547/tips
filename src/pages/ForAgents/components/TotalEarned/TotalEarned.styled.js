@@ -21,6 +21,7 @@ export const Amount = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-grow: 1;
   height: 60px;
   padding: 0 20px;
   margin-left: 30px;
