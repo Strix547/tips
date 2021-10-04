@@ -9,7 +9,7 @@ export const sendMessageToSupport = async ({
   fileIds
 }) => {
   try {
-    const { statusText, status, data } = await API.post(`/send-support-service-message`, {
+    const { data } = await API.post(`/send-support-service-message`, {
       firstName,
       phone,
       email,
@@ -17,10 +17,6 @@ export const sendMessageToSupport = async ({
       message,
       fileIds
     })
-
-    if (statusText !== 'OK') {
-      throw new Error(status)
-    }
 
     return data
   } catch ({ message }) {
