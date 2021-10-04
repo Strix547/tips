@@ -19,6 +19,8 @@ export const BarChart = styled(WhiteBox)`
 
   ${media.tablet} {
     padding: 30px 20px 20px;
+    height: auto;
+    min-height: 350px;
   }
 
   ${media.mobile} {

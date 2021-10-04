@@ -98,7 +98,7 @@ export const AgentsTable = observer(() => {
         <Table columns={[columns]} rows={[]} />
 
         <StatisticRow
-          stats={[{ label: 'Итого заработано', value: 34600 }]}
+          stats={[{ label: 'Итого заработано', value: 0 }]}
           currency={userStore.personalData.currency.label}
         />
       </S.TableContainer>

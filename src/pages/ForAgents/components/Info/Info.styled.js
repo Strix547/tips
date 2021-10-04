@@ -63,6 +63,7 @@ export const LinkContainer = styled.div`
   a {
     color: var(--color-blue-100);
     overflow-wrap: anywhere;
+    word-break: break-all;
   }
 
   ${media1500} {
