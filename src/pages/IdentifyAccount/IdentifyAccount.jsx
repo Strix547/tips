@@ -9,6 +9,7 @@ import { PersonalDataStep, AccountTypeStep, CreditCardStep } from './components'
 import { Button, Stepper, Step, StepLabel, CircularProgress } from 'ui'
 
 import { userStore, localStore, authStore } from 'store'
+import { transformDateToIso } from 'utils'
 
 import { MEDIA_TABLET } from 'styles/media'
 import * as S from './IdentifyAccount.styled'
@@ -98,7 +99,7 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
           email,
           firstName,
           lastName,
-          birthDate: new Date(birthDate).toISOString().split('T')[0],
+          birthDate: transformDateToIso(birthDate),
           countryCode: localStore.selectedCountryCode,
           city,
           address,

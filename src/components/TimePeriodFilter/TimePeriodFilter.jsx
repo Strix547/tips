@@ -4,6 +4,7 @@ import { useMediaQuery } from 'react-responsive'
 import { Radio } from '@material-ui/core'
 
 import { FormControlLabel, MenuItem, Select, DatePicker, RadioGroup } from 'ui'
+import { transformDateToIso } from 'utils'
 
 import * as S from './TimePeriodFilter.styled'
 
@@ -40,8 +41,8 @@ export const TimePeriodFilter = () => {
 
   const onDatePickerModalClose = (startDate, endDate) => {
     if (startDate && endDate) {
-      setValue('periodFrom', startDate.toISOString().split('T')[0])
-      setValue('periodTo', endDate.toISOString().split('T')[0])
+      setValue('periodFrom', transformDateToIso(startDate))
+      setValue('periodTo', transformDateToIso(endDate))
     }
 
     setStartDate(new Date())

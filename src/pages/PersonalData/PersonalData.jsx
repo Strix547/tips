@@ -9,6 +9,7 @@ import { AccountLayout } from 'layout'
 import { FormField, DatePicker, Button } from 'ui'
 
 import { userStore } from 'store'
+import { transformDateToIso } from 'utils'
 
 import * as S from './PersonalData.styled'
 
@@ -33,7 +34,7 @@ export const PersonalDataPage = observer(() => {
       const fieldsTemplate = [
         { label: 'firstName', value: firstName },
         { label: 'lastName', value: lastName },
-        { label: 'birthDate', value: new Date(birthDate).toLocaleDateString() },
+        { label: 'birthDate', value: transformDateToIso(birthDate) },
         { label: 'email', value: email },
         { label: 'address', value: address },
         { label: 'postal', value: postal }
@@ -64,7 +65,7 @@ export const PersonalDataPage = observer(() => {
       email,
       address,
       postalCode: postal,
-      birthDate: new Date("1991-04-28"),
+      birthDate: transformDateToIso(birthDate),
       avatar
     })
   }
