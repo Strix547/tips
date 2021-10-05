@@ -4,6 +4,7 @@ import { getCookie, setCookie, deleteCookie } from './cookie'
 import { getTimeZoneOffset } from './getTimeZoneOffset'
 import { handleResponse } from './handleResponse'
 import { transformDateToIso } from './transformDateToIso'
+import { transformDateFromIso } from './transformDateFromIso'
 
 export {
   formatPrice,
@@ -13,5 +14,6 @@ export {
   deleteCookie,
   getTimeZoneOffset,
   handleResponse,
-  transformDateToIso
+  transformDateToIso,
+  transformDateFromIso
 }

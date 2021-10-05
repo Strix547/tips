@@ -1,11 +1,30 @@
-import { FormField, DatePicker } from 'ui'
+import { FormField } from 'ui'
 
 import * as S from './PersonalDataStep.styled'
 
 export const PersonalDataStep = () => {
-  const eighteenYearsAgo = new Date(
-    new Date().setTime(new Date().valueOf() - 18 * 365 * 24 * 60 * 60 * 1000)
-  )
+  const dateHaventPlaceholderSymbols = (date) => {
+    const haventPlaceholderSymbol = date?.indexOf('_') === -1
+
+    return haventPlaceholderSymbol
+  }
+
+  const dateMoreThanEighteen = (value) => {
+    const haventPlaceholderSymbol = value?.indexOf('_') === -1
+
+    if (!haventPlaceholderSymbol) {
+      return false
+    }
+
+    const [d, m, y] = value.split('/')
+    const date = new Date(parseInt(y, 10), parseInt(m - 1, 10), parseInt(d, 10))
+    const eighteenYearsAgo = new Date(
+      new Date().setTime(new Date().valueOf() - 18 * 365 * 24 * 60 * 60 * 1000)
+    )
+    const valueMoreThanEighteen = date.getTime() < eighteenYearsAgo.getTime()
+
+    return valueMoreThanEighteen
+  }
 
   return (
     <S.PersonalDataStep>
@@ -17,7 +36,11 @@ export const PersonalDataStep = () => {
 
       <FormField
         rules={{
-          validate: (value) => value?.indexOf('_') === -1
+          validate: {
+            required: (date) => dateHaventPlaceholderSymbols(date) || 'required',
+            moreThanEighteen: (date) =>
+              dateMoreThanEighteen(date) || 'You must be at least 18 years old'
+          }
         }}
         name="birthDate"
         label="Дата рождения"

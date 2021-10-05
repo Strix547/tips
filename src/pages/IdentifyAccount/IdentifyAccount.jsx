@@ -119,6 +119,7 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
     setStep(step + 1)
   }
 
+  const birthdateError = useFormProps.formState.errors?.birthDate
   const isStripeNotLoaded = (!stripe || !stripeElements) && step === 3
 
   return (
@@ -139,6 +140,9 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
                 <S.Step>
                   {getStepContent(step)}
                   {step === 2 && stripeError && <S.ErrorText>{stripeError}</S.ErrorText>}
+                  {birthdateError?.type === 'moreThanEighteen' && (
+                    <S.ErrorText>{birthdateError?.message}</S.ErrorText>
+                  )}
                 </S.Step>
               </FormProvider>
 

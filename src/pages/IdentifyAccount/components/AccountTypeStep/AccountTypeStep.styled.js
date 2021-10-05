@@ -19,4 +19,8 @@ export const AccountTypeStep = styled.div`
       margin-bottom: 15px;
     }
   }
+
+  ${FieldsLabel} {
+    margin-bottom: 20px;
+  }
 `

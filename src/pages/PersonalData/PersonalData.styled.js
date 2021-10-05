@@ -1,9 +1,8 @@
 import styled from 'styled-components'
 
-import { WhiteBox, Label } from 'styled'
-import { Button } from 'ui/Button/Button.styled'
+import { WhiteBox, Label, ErrorText } from 'styled'
 
-export { Label }
+export { Label, ErrorText }
 
 export const Content = styled(WhiteBox)`
   display: flex;
