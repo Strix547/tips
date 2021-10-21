@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import { observer } from 'mobx-react-lite'
 import Head from 'next/head'
@@ -21,6 +21,29 @@ export const AuthPage = observer(() => {
   const [isCodeSendAllow, setCodeSendAllow] = useState(true)
 
   const { phone } = authStore.authData
+  const phoneDefault = authStore.authData.phone
+
+  const setAuthDataFromLocalStorage = () => {
+    const phone = localStorage.getItem('phone')
+    const firstName = localStorage.getItem('firstName')
+    const email = localStorage.getItem('email')
+
+    if (phone) {
+      authStore.setAuthData({ ...authStore.authData, phone })
+    }
+    if (firstName) {
+      authStore.setAuthData({ ...authStore.authData, firstName })
+    }
+    if (email) {
+      authStore.setAuthData({ ...authStore.authData, email })
+    }
+  }
+
+  useEffect(() => {
+    if (!localStorage) return
+
+    setAuthDataFromLocalStorage()
+  }, [authStore])
 
   const sendCode = async ({ phone, remember }) => {
     if (!isCodeSendAllow) return
@@ -59,7 +82,7 @@ export const AuthPage = observer(() => {
             <S.Heading level={1}>Вход в Tips.me</S.Heading>
 
             {authStore.step === 'phone' ? (
-              <PhoneStep defaultPhone={phone} onPhoneSubmit={sendCode} />
+              <PhoneStep defaultPhone={phoneDefault} onPhoneSubmit={sendCode} />
             ) : (
               <CodeStep
                 phone={phone}

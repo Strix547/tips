@@ -40,10 +40,10 @@ export const Switch = styled(({ size, ...props }) => (
 ))`
   && {
     width: 40px;
-    height: 22px;
+    height: 24px;
     padding: 0;
+    padding-bottom: 2px;
     margin-right: 10px;
-    overflow: visible;
 
     ${({ size }) => getSizeStyles(size)}
   }
@@ -51,8 +51,8 @@ export const Switch = styled(({ size, ...props }) => (
   .switch-base {
     width: 100%;
     height: 100%;
-    overflow: visible;
-    padding: 1px 0;
+    overflow-y: visible;
+    padding: 0;
     transform: translateX(-8px);
 
     &:hover {

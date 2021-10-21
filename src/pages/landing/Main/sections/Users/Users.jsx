@@ -1,7 +1,7 @@
 import { Section } from 'landing/components'
 import { RowSection } from './components'
 
-import { ROUTES } from 'core/routes'
+import { ROUTE_NAMES } from 'core/routes'
 
 import businessDashboard from '@public/img/landing/business-dashboard.png'
 import recipientDashboard from '@public/img/landing/recipient-dashboard.png'
@@ -14,7 +14,7 @@ export const UsersSection = () => {
     {
       title: 'Бизнесу',
       subtitle: 'Мотивируйте сотрудников и повышайте лояльность гостей',
-      pageLink: ROUTES.BUSINESS,
+      pageLink: ROUTE_NAMES.BUSINESS,
       features: [
         'Бесплатно для бизнеса',
         'Дополнительный заработок для',
@@ -27,7 +27,7 @@ export const UsersSection = () => {
     {
       title: 'Работникам сферы услуг',
       subtitle: 'Принимайте безналичные чаевые по QR-коду или ссылке',
-      pageLink: ROUTES.RECIPIENTS,
+      pageLink: ROUTE_NAMES.RECIPIENTS,
       features: [
         'Не облагаются налогом',
         'Моментальное зачисление на банковскую карту',
@@ -39,7 +39,7 @@ export const UsersSection = () => {
     {
       title: 'Блогерам, артистам и музыкантам',
       subtitle: 'Принимайте донаты и адресные пожертвования на сайте, в блоге и соцсетях',
-      pageLink: ROUTES.RECIPIENTS,
+      pageLink: ROUTE_NAMES.RECIPIENTS,
       features: [
         'Множество опций по настройке персональной страницы оплаты',
         'Моментальное зачисление на банковскую карту',
@@ -51,7 +51,7 @@ export const UsersSection = () => {
     {
       title: 'Агентам',
       subtitle: 'Приглашайте людей и получайте от их чеков проценты',
-      pageLink: ROUTES.AGENTS,
+      pageLink: ROUTE_NAMES.AGENTS,
       features: [
         'Не облагаются налогом',
         'Моментальное зачисление на банковскую карту',
@@ -63,7 +63,7 @@ export const UsersSection = () => {
     {
       title: 'Плательщикам',
       subtitle: 'Участвуйте в нашей программе лояльности',
-      pageLink: ROUTES.PAYERS,
+      pageLink: ROUTE_NAMES.PAYERS,
       features: [
         'Бесплатно для бизнеса',
         'Дополнительный заработок для',

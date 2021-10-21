@@ -1,19 +1,21 @@
-import { formatPrice } from './formatPrice'
-import { createTooltip } from './createTooltip'
+import { getPriceLabel } from './getPriceLabel'
+import { createChartTooltip } from './createChartTooltip'
 import { getCookie, setCookie, deleteCookie } from './cookie'
 import { getTimeZoneOffset } from './getTimeZoneOffset'
 import { handleResponse } from './handleResponse'
+import { transformDateLabelToIso } from './transformDateLabelToIso'
+import { transformDateToLabel } from './transformDateToLabel'
 import { transformDateToIso } from './transformDateToIso'
-import { transformDateFromIso } from './transformDateFromIso'
 
 export {
-  formatPrice,
-  createTooltip,
+  getPriceLabel,
+  createChartTooltip,
   getCookie,
   setCookie,
   deleteCookie,
   getTimeZoneOffset,
   handleResponse,
-  transformDateToIso,
-  transformDateFromIso
+  transformDateLabelToIso,
+  transformDateToLabel,
+  transformDateToIso
 }

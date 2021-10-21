@@ -1,1 +1,0 @@
-export { QrIndividualEditPage } from './QrIndividualEdit'

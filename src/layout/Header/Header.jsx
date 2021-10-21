@@ -10,7 +10,7 @@ import { LinkButton, MenuItem, Drawer } from 'ui'
 import { Sidebar } from 'layout'
 import { Logo } from 'common'
 
-import { ROUTES } from 'core/routes'
+import { ROUTE_NAMES } from 'core/routes'
 import { authStore, userStore } from 'store'
 
 import * as S from './Header.styled'
@@ -30,11 +30,11 @@ export const Header = observer(({ withSidebar }) => {
   const currentPathname = router.pathname
 
   const nav = [
-    { label: 'Получателям', link: ROUTES.RECIPIENTS },
-    { label: 'Бизнесу', link: ROUTES.BUSINESS },
-    { label: 'Плательщикам', link: ROUTES.PAYERS },
-    { label: 'Агентам', link: ROUTES.AGENTS },
-    { label: 'Поддержка', link: ROUTES.SUPPORT }
+    { label: 'Получателям', link: ROUTE_NAMES.RECIPIENTS },
+    { label: 'Бизнесу', link: ROUTE_NAMES.BUSINESS },
+    { label: 'Плательщикам', link: ROUTE_NAMES.PAYERS },
+    { label: 'Агентам', link: ROUTE_NAMES.AGENTS },
+    { label: 'Поддержка', link: ROUTE_NAMES.SUPPORT }
   ]
 
   const languages = [
@@ -47,7 +47,7 @@ export const Header = observer(({ withSidebar }) => {
   }
 
   const toAccountPage = () => {
-    router.push(ROUTES.ACCOUNT)
+    router.push(ROUTE_NAMES.ACCOUNT)
   }
 
   const navList = nav.map(({ label, link }) => (
@@ -117,7 +117,7 @@ export const Header = observer(({ withSidebar }) => {
             {authStore.isAuth ? (
               user
             ) : (
-              <LinkButton href={ROUTES.AUTH} size="inline">
+              <LinkButton href={ROUTE_NAMES.AUTH} size="inline">
                 Вход
               </LinkButton>
             )}

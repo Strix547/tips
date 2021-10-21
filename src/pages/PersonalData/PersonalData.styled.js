@@ -1,13 +1,14 @@
 import styled from 'styled-components'
 
 import { WhiteBox, Label, ErrorText } from 'styled'
+import { media } from 'styles/media'
 
 export { Label, ErrorText }
 
 export const Content = styled(WhiteBox)`
   display: flex;
   flex-direction: column;
-  padding: calc(40px - 10px);
+  padding: 40px;
 
   & > *:not(:last-child) {
     margin-bottom: 20px;
@@ -21,6 +22,10 @@ export const Content = styled(WhiteBox)`
     & > *:not(:last-child) {
       margin-bottom: 20px;
     }
+  }
+
+  ${media.createMedia(500)} {
+    padding: 20px;
   }
 `
 

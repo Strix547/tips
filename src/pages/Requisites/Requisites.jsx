@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useStripe, useElements, IbanElement } from '@stripe/react-stripe-js'
 import Head from 'next/head'
 
 import { AccountLayout } from 'layout'
-import { Button, MenuItem, Select } from 'ui'
+import { Button, BankAccountSelect } from 'ui'
 
 import { userStore, bankAccountStore } from 'store'
 
@@ -14,12 +14,10 @@ import * as S from './Requisites.styled'
 export const RequisitesPage = observer(({ stripePromise }) => {
   const stripe = useStripe()
   const stripeElements = useElements()
+  const useFormProps = useForm()
 
   const [stripeError, setStripeError] = useState('')
   const [isIbanVisible, setIbanVisible] = useState(false)
-  const userId = userStore.id
-  const { selectedBankAccountId, bankAccounts } = bankAccountStore
-  const useFormProps = useForm()
 
   const ibanOptions = {
     supportedCountries: ['SEPA'],
@@ -29,18 +27,6 @@ export const RequisitesPage = observer(({ stripePromise }) => {
       }
     }
   }
-
-  useEffect(() => {
-    if (!userId) return
-
-    bankAccountStore.getBankAccounts(userId)
-  }, [userId])
-
-  useEffect(() => {
-    if (selectedBankAccountId) {
-      useFormProps.setValue('iban', selectedBankAccountId)
-    }
-  }, [selectedBankAccountId])
 
   const onAddIban = async () => {
     const ibanElement = stripeElements.getElement(IbanElement)
@@ -60,22 +46,6 @@ export const RequisitesPage = observer(({ stripePromise }) => {
     bankAccountStore.addBankAccount({ userId: userStore.id, stripeTokenId: token.id })
   }
 
-  const onSelectIban = async (bankAccountId) => {
-    await bankAccountStore.selectBankAccount({ userId, bankAccountId })
-  }
-
-  const bankAccountMenuItems = bankAccounts.map(({ bankAccountId, last4Digits }) => {
-    return (
-      <MenuItem
-        key={bankAccountId}
-        value={bankAccountId}
-        onClick={() => onSelectIban(bankAccountId)}
-      >
-        * {last4Digits}
-      </MenuItem>
-    )
-  })
-
   return (
     <>
       <Head>
@@ -85,12 +55,8 @@ export const RequisitesPage = observer(({ stripePromise }) => {
       <AccountLayout title="Реквизиты">
         <S.Content>
           <S.ContentContainer>
-            <S.Label>Мои IBAN номера:</S.Label>
-
             <FormProvider {...useFormProps}>
-              <Select name="iban" defaultValue={selectedBankAccountId}>
-                {bankAccountMenuItems}
-              </Select>
+              <BankAccountSelect />
             </FormProvider>
 
             {stripePromise && isIbanVisible && (
@@ -101,15 +67,12 @@ export const RequisitesPage = observer(({ stripePromise }) => {
               </S.IbanContainer>
             )}
 
-            {!isIbanVisible ? (
-              <Button variant="bordered" onClick={() => setIbanVisible(true)}>
-                Добавить IBAN
-              </Button>
-            ) : (
-              <Button variant="bordered" onClick={onAddIban}>
-                Добавить IBAN
-              </Button>
-            )}
+            <Button
+              variant="bordered"
+              onClick={() => (!isIbanVisible ? setIbanVisible(true) : onAddIban)}
+            >
+              Добавить IBAN
+            </Button>
           </S.ContentContainer>
         </S.Content>
       </AccountLayout>

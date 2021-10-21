@@ -5,11 +5,11 @@ import { useStripe, useElements, IbanElement } from '@stripe/react-stripe-js'
 import { observer } from 'mobx-react-lite'
 import Head from 'next/head'
 
-import { PersonalDataStep, AccountTypeStep, CreditCardStep } from './components'
+import { PersonalDataStep, AccountTypeStep, LocationStep } from './steps'
 import { Button, Stepper, Step, StepLabel, CircularProgress } from 'ui'
 
 import { userStore, localStore, authStore } from 'store'
-import { transformDateToIso } from 'utils'
+import { transformDateLabelToIso } from 'utils'
 
 import { MEDIA_TABLET } from 'styles/media'
 import * as S from './IdentifyAccount.styled'
@@ -19,10 +19,15 @@ import CommentRegulationIcon from '@public/img/landing/comment-regulation.svg'
 export const IdentifyAccountPage = observer(({ stripePromise }) => {
   const stripe = useStripe()
   const stripeElements = useElements()
+
+  const firstNameDefault =
+    authStore.authData.firstName === 'undefined' ? '' : authStore.authData.firstName
+  const emailDefault = authStore.authData.email === 'undefined' ? '' : authStore.authData.email
+
   const useFormProps = useForm({
     defaultValues: {
-      firstName: authStore.authData.firstName,
-      email: authStore.authData.email,
+      firstName: firstNameDefault,
+      email: emailDefault,
       birthDate: null
     }
   })
@@ -41,7 +46,7 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
   ))
 
   const crediteCardStepMemo = useMemo(
-    () => <CreditCardStep stripePromise={stripePromise} useFormProps={useFormProps} />,
+    () => <LocationStep stripePromise={stripePromise} />,
     [stripePromise, useFormProps]
   )
 
@@ -50,7 +55,7 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
       case 0:
         return <PersonalDataStep />
       case 1:
-        return <AccountTypeStep useFormProps={useFormProps} />
+        return <AccountTypeStep />
       case 2:
         return crediteCardStepMemo
     }
@@ -99,7 +104,7 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
           email,
           firstName,
           lastName,
-          birthDate: transformDateToIso(birthDate),
+          birthDate: transformDateLabelToIso(birthDate),
           countryCode: localStore.selectedCountryCode,
           city,
           address,
@@ -139,7 +144,9 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
               <FormProvider {...useFormProps}>
                 <S.Step>
                   {getStepContent(step)}
+
                   {step === 2 && stripeError && <S.ErrorText>{stripeError}</S.ErrorText>}
+
                   {birthdateError?.type === 'moreThanEighteen' && (
                     <S.ErrorText>{birthdateError?.message}</S.ErrorText>
                   )}

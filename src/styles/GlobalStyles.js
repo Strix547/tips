@@ -23,4 +23,8 @@ export const GlobalStyles = createGlobalStyle`
     color: var(--color-black-100);
     text-decoration: none;
   }
+
+  .employee-tooltip-popper {
+    margin-top: -40px;
+  }
 `

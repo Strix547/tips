@@ -2,9 +2,12 @@ import { makeAutoObservable } from 'mobx'
 import { toast } from 'react-toastify'
 import router from 'next/router'
 
-import { ROUTES } from 'core/routes'
+import { ROUTE_NAMES } from 'core/routes'
 import { userStore } from 'store'
+
 import * as qrCodesApi from 'api/qrCodes'
+import * as platformsApi from 'api/platforms'
+import * as userApi from 'api/user'
 
 export const qrCodesStore = makeAutoObservable({
   qrCodes: [],
@@ -13,74 +16,159 @@ export const qrCodesStore = makeAutoObservable({
     name: '',
     company: { name: '', logo: '' },
     amountPresets: [],
-    impressions: false,
+    impression: false,
     rating: false,
     reviews: false,
     image: '',
     bgColor: '',
-    buttonColor: ''
+    btnColor: ''
   },
   isQrCodeLoading: false,
   isQrCodeCreating: false,
 
-  setQrCode: ({ amountPresets, impressions, bgColor, buttonColor }) => {
+  setQrCode: ({ amountPresets, impression, bgColor, buttonColor }) => {
     qrCodesStore.qrCode = {
       amountPresets,
-      impressions,
+      impression,
       bgColor,
       buttonColor
     }
   },
 
-  getQrCode: async (qrId) => {
-    const qr = await qrCodesApi.getQrCodeData(qrId)
+  getIndividualQrCode: async (qrId) => {
+    qrCodesStore.isQrCodeLoading = true
+
+    const qr = await qrCodesApi.getIndividualQrCode(qrId)
     qrCodesStore.qrCode = qr
+
+    qrCodesStore.isQrCodeLoading = false
     return qr
   },
 
-  getQrCodes: async (userId) => {
+  getPlatformQrCode: async (platformId) => {
+    qrCodesStore.isQrCodeLoading = true
+
+    const qr = await platformsApi.getPlatformQrCode(platformId)
+    qrCodesStore.qrCode = qr
+
+    qrCodesStore.isQrCodeLoading = false
+    return qr
+  },
+
+  getIndividualQrCodes: async (userId) => {
     qrCodesStore.isQrCodesLoading = true
-    const qrCodes = await qrCodesApi.getQrCodes(userId)
+    const qrCodes = await qrCodesApi.getIndividualQrCodes(userId)
     qrCodesStore.qrCodes = qrCodes
     qrCodesStore.isQrCodesLoading = false
   },
 
-  createQrCode: async ({ userId, name, amountPresets, impressions }) => {
+  getPlatformQrCodes: async (userId) => {
+    qrCodesStore.isQrCodesLoading = true
+    const qrCodes = await qrCodesApi.getPlatformQrCodes(userId)
+    qrCodesStore.qrCodes = qrCodes
+    qrCodesStore.isQrCodesLoading = false
+  },
+
+  createIndividualQrCode: async ({ userId, name, amountPresets, impression }) => {
     try {
-      const qrId = await qrCodesApi.createQrCodeId(userId)
-      await qrCodesApi.changeQrCode({
+      const qrId = await qrCodesApi.createIndividualQrCode(userId)
+      await qrCodesApi.changeIndividualQrCode({
         id: qrId,
         name,
         amountPresets,
-        impressions
+        impression
       })
-      qrCodesStore.getQrCodes(userStore.id)
-      router.push(ROUTES.ACCOUNT_QR_CODES)
-      toast.success('Qr successfully created')
+
+      qrCodesStore.getIndividualQrCodes(userStore.id)
+      router.push(ROUTE_NAMES.ACCOUNT_QR_CODES)
+      toast.success('QR successfully created')
     } catch ({ message }) {
       toast.error(message)
     }
   },
 
-  changeQrCode: async ({ id, name, amountPresets, impressions }) => {
-    await qrCodesApi.changeQrCode({
+  changeIndividualQrCode: async ({ id, name, amountPresets, impression }) => {
+    await qrCodesApi.changeIndividualQrCode({
       id,
       name,
       amountPresets,
-      impressions
+      impression
     })
-    qrCodesStore.getQrCodes(userStore.id)
-    router.push(ROUTES.ACCOUNT_QR_CODES)
-    toast.success('Qr successfully changed')
+    qrCodesStore.getIndividualQrCodes(userStore.id)
+    router.push(ROUTE_NAMES.ACCOUNT_QR_CODES)
+    toast.success('QR successfully changed')
+  },
+
+  changePlatformQrCode: async ({
+    platformId,
+    amountPresets,
+    reviews,
+    impression,
+    rating,
+    bgColor,
+    btnColor,
+    logo
+  }) => {
+    const getCompanyLogoFileId = async (logo) => {
+      const formData = new FormData()
+      formData.append('file', logo)
+      const { fileId } = await userApi.uploadFile(formData)
+      return fileId
+    }
+
+    try {
+      await platformsApi.changePlatformQrCode({
+        platformId,
+        presetPaymentSizes: amountPresets,
+        reviews,
+        smiles: impression,
+        rating,
+        logoFileId: logo && (await getCompanyLogoFileId(logo)),
+        backgroundHexColor: bgColor,
+        buttonHexColor: btnColor
+      })
+      router.push(ROUTE_NAMES.ACCOUNT_PLATFORMS)
+      toast.success('QR code successfully changed')
+    } catch ({ message }) {
+      toast.error('Failed to change QR code')
+    }
   },
 
   deleteQrCode: async (id) => {
     try {
       await qrCodesApi.removeQrCode(id)
-      qrCodesStore.getQrCodes(userStore.id)
-      toast.success('Qr successfully deleted')
+      qrCodesStore.getIndividualQrCodes(userStore.id)
+      toast.success('QR successfully deleted')
     } catch ({ message }) {
       toast.error(message)
+    }
+  },
+
+  createPlatform: async ({
+    platformId,
+    amountPresets,
+    reviews,
+    impression,
+    rating,
+    bgColor,
+    buttonColor,
+    logoFileId
+  }) => {
+    try {
+      await platformsApi.changeBusinessQrCode({
+        platformId,
+        presetPaymentSizes: amountPresets,
+        reviews,
+        smiles: impression,
+        rating,
+        logoFileId,
+        backgroundHexColor: bgColor,
+        buttonHexColor: buttonColor
+      })
+      router.push(ROUTE_NAMES.ACCOUNT_PLATFORMS)
+      toast.success('QR code successfully created')
+    } catch ({ message }) {
+      toast.error('Failed to create QR code')
     }
   }
 })

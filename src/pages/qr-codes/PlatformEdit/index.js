@@ -1,0 +1,1 @@
+export { QrPlatformEditPage } from './PlatformEdit'

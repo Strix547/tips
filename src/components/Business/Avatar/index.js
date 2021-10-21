@@ -1,1 +1,0 @@
-export { AvatarBusiness } from './Avatar'

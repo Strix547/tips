@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx'
 import { toast } from 'react-toastify'
 import router from 'next/router'
 
-import { ROUTES } from 'core/routes'
+import { ROUTE_NAMES } from 'core/routes'
 import { userStore } from 'store'
 import * as authApi from 'api/auth'
 import * as userApi from 'api/user'
@@ -18,6 +18,10 @@ export const authStore = makeAutoObservable({
   },
 
   setAuthData: ({ firstName, email, phone }) => {
+    localStorage.setItem('firstName', firstName)
+    localStorage.setItem('email', email)
+    localStorage.setItem('phone', phone)
+
     authStore.authData = { firstName, email, phone }
   },
 
@@ -48,9 +52,9 @@ export const authStore = makeAutoObservable({
       authStore.isAuth = true
 
       if (userRole === 'UNVERIFIED') {
-        router.push(ROUTES.ACCOUNT_IDENTIFY)
+        router.push(ROUTE_NAMES.ACCOUNT_IDENTIFY)
       } else {
-        router.push(ROUTES.ACCOUNT)
+        router.push(ROUTE_NAMES.ACCOUNT)
       }
 
       return true
@@ -62,8 +66,10 @@ export const authStore = makeAutoObservable({
 
   signOut: async () => {
     await authApi.signOut()
+
     authStore.isAuth = false
     authStore.step = 'phone'
+
     userStore.id = null
     userStore.role = null
     userStore.personalData = {
@@ -77,13 +83,8 @@ export const authStore = makeAutoObservable({
       currency: { label: '', value: '' }
     }
 
-    // reset cookie
-    try {
-      await userApi.getMyId()
-    } catch (e) {
-      console.log('')
-    }
+    await userApi.getMyId()
 
-    router.push('/')
+    router.push(ROUTE_NAMES.RECIPIENTS)
   }
 })

@@ -1,0 +1,1 @@
+export { PlatformSearch } from './PlatformSearch'

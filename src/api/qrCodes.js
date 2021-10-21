@@ -1,6 +1,8 @@
 import { API } from 'core/axios'
 
-const root = '/person-payment-page-template'
+import { handleResponse } from 'utils'
+
+const individualRoot = '/person-payment-page-template'
 
 const transformQrData = ({
   name,
@@ -17,40 +19,50 @@ const transformQrData = ({
     userId: personUserId,
     name,
     amountPresets: presetPaymentSizes,
-    impressions: smiles,
+    impression: smiles,
     img: qrImagePngRef
   }
 }
 
-export const getQrCodes = async (userId) => {
-  const { data } = await API.get(`${root}`, { params: { 'person-user-id': userId } })
+export const getIndividualQrCodes = async (userId) => {
+  const { data } = await API.get(`${individualRoot}`, { params: { 'person-user-id': userId } })
   return data.map((qr) => transformQrData(qr))
 }
 
-export const createQrCodeId = async (userId) => {
-  try {
-    const { data } = await API.post(`${root}/create`, { personUserId: userId })
-    return data.personPaymentPageTemplateId
-  } catch ({ response }) {
-    if (response.code === 'LIMIT_OF_PERSON_PAYMENT_PAGE_TEMPLATES') {
-      throw new Error('Max number of qr-codes')
-    }
-  }
+export const getPlatformQrCodes = async (userId) => {
+  const { data } = await API.get('/person-business-payment-page', {
+    params: { 'person-user-id': userId }
+  })
+  return data.map((qr) => transformQrData(qr))
 }
 
-export const getQrCodeData = async (id) => {
-  const { data } = await API.get(`${root}/${id}`)
+export const createIndividualQrCode = async (userId) => {
+  const res = await API.post(`${individualRoot}/create`, { personUserId: userId })
+
+  const errorCodes = [
+    { label: 'Max number of qr-codes', code: 'LIMIT_OF_PERSON_PAYMENT_PAGE_TEMPLATES' },
+    {
+      label: 'Need connect at least one bank account',
+      code: 'AT_LEAST_ONE_BANK_ACCOUNT_MUST_EXISTS'
+    }
+  ]
+
+  return handleResponse(res, errorCodes)?.personPaymentPageTemplateId
+}
+
+export const getIndividualQrCode = async (id) => {
+  const { data } = await API.get(`${individualRoot}/${id}`)
   return transformQrData(data)
 }
 
-export const changeQrCode = async ({ id, name, amountPresets, impressions }) => {
-  return API.post(`${root}/${id}/change`, {
+export const changeIndividualQrCode = async ({ id, name, amountPresets, impression }) => {
+  return API.post(`${individualRoot}/${id}/change`, {
     name,
     presetPaymentSizes: amountPresets,
-    smiles: impressions
+    smiles: impression
   })
 }
 
 export const removeQrCode = async (id) => {
-  return API.post(`${root}/${id}/remove`)
+  return API.post(`${individualRoot}/${id}/remove`)
 }

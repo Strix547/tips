@@ -1,7 +1,7 @@
 import axios from 'axios'
 import router from 'next/router'
 
-import { ROUTES, PROTECTED_ROUTES } from 'core/routes'
+import { ROUTE_NAMES, ROUTES } from 'core/routes'
 import { getCookie } from 'utils'
 
 const API_BASE = '/api/v1'
@@ -32,10 +32,10 @@ API.interceptors.response.use(
     return res
   },
   ({ response }) => {
-    const isProtectedRoute = PROTECTED_ROUTES.includes(router.pathname)
+    const isProtectedRoute = ROUTES.find(({ path }) => router.pathname === path)?.isProtected
 
     if (response?.status === 401 && isProtectedRoute) {
-      router.push(ROUTES.AUTH)
+      router.push(ROUTE_NAMES.AUTH)
     }
 
     return response

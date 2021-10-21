@@ -1,1 +1,0 @@
-export { QrIndividualPaymentPage } from './QrIndividualPayment'

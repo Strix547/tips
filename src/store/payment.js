@@ -3,19 +3,54 @@ import { makeAutoObservable } from 'mobx'
 import * as paymentApi from 'api/payment'
 
 export const paymentStore = makeAutoObservable({
-  individualData: {
+  paymentData: {
     name: '',
     avatar: '',
     firstName: '',
     lastName: '',
     amountPresets: [],
-    impressions: false,
-    bgColor: '',
-    buttonColor: ''
+    impression: false
   },
+  isPaymentDataLoading: false,
 
   getIndividualPaymentData: async (qrId) => {
+    paymentStore.isPaymentDataLoading = true
+
     const paymentData = await paymentApi.getIndividualPaymentData(qrId)
-    paymentStore.individualData = paymentData
+    paymentStore.paymentData = paymentData
+
+    paymentStore.isPaymentDataLoading = false
+  },
+
+  getPlatformPaymentData: async (plaftormId) => {
+    paymentStore.isPaymentDataLoading = true
+
+    const paymentData = await paymentApi.getPlatformPaymentData(plaftormId)
+    paymentStore.paymentData = paymentData
+
+    paymentStore.isPaymentDataLoading = false
+  },
+
+  payTipsIndividual: async ({ qrId, userId, tipAmount, impression }) => {
+    const payUrl = await paymentApi.payTipsIndividual({
+      paymentPageId: qrId,
+      userId,
+      sum: tipAmount,
+      smile: impression
+    })
+
+    window.location.replace(payUrl)
+  },
+
+  payTipsPlatform: async ({ qrId, tipAmount, impression, comment, rating }) => {
+    const payUrl = await paymentApi.payTipsPlatform({
+      paymentPageId: qrId,
+      sum: tipAmount,
+      smile: impression,
+      reviews: comment,
+      rating
+    })
+
+    window.location.replace(payUrl)
   }
 })

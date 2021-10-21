@@ -1,4 +1,4 @@
-export const ROUTES = {
+export const ROUTE_NAMES = {
   RECIPIENTS: '/recipients',
   BUSINESS: '/business',
   PAYERS: '/payers',
@@ -10,39 +10,77 @@ export const ROUTES = {
   PRIVACY_POLICY: '/privacy-policy',
   PUBLIC_OFFER: '/public-offer',
   FAQ: '/faq',
+
   ACCOUNT: '/account',
   FOR_AGENTS: '/account/for-agents',
+
   ACCOUNT_QR_CODES: '/account/qr-codes',
-  QR_CODE: '/qr-codes/id',
-  ACCOUNT_QR_CODE_EDIT: '/account/qr-codes/id/edit',
-  ACCOUNT_QR_INDIVIDUAL_CREATE: '/account/qr-codes/individual/create',
-  ACCOUNT_QR_EDIT: '/account/qr-codes/:id/edit',
-  ACCOUNT_QR_BUSINESS_CREATE: '/account/qr-codes/business/create',
-  ACCOUNT_REQUISITES: '/account/requisites',
+  QR_CODE: '/qr-codes/[id]',
+  ACCOUNT_QR_INDIVIDUALS_CREATE: '/account/qr-codes/individuals/create',
+  ACCOUNT_QR_INDIVIDUALS_EDIT: '/account/qr-codes/individuals/[id]/edit',
+  ACCOUNT_QR_INDIVIDUALS_STATISTICS: '/account/qr-codes/individuals/[id]/statistics',
+
+  ACCOUNT_QR_PLATFORMS_EDIT: '/account/qr-codes/platforms/[id]/edit',
+  ACCOUNT_QR_PLATFORMS_STATISTICS: '/account/qr-codes/platforms/[id]/statistics',
+
   ACCOUNT_PLATFORMS: '/account/platforms',
+  ACCOUNT_PLATFORMS_EDIT: '/account/platforms/[id]/edit',
+  ACCOUNT_PLATFORMS_CREATE: '/account/platforms/create',
+
+  ACCOUNT_REQUISITES: '/account/requisites',
   ACCOUNT_EMPLOYEES: '/account/employees',
+  ACCOUNT_EMPLOYEE_CREATE: '/account/employees/create',
+  ACCOUNT_EMPLOYEE_EDIT: '/account/employees/[id]/edit',
+  ACCOUNT_EMPLOYEE_STATISTICS: '/account/employees/[id]/statistics',
+
   ACCOUNT_REVIEWS: '/account/reviews',
   ACCOUNT_IDENTIFY: '/account/identify',
   ACCOUNT_PERSONAL_DATA: '/account/personal-data',
   ACCOUNT_SUPPORT: '/account/support',
   ACCOUNT_LOYALTY: '/account/loyalty',
-  ACCOUNT_QR_CODE_STATISTICS: '/account/qr-codes/:id/statistics',
-  THANK_YOU: '/thank-you'
+  ACCOUNT_UPGRADE_TO_BUSINESS: '/account/upgrade',
+
+  THANK_YOU: '/thank-you',
+  FAIL: '/fail'
 }
 
-export const PROTECTED_ROUTES = [
-  ROUTES.ACCOUNT,
-  ROUTES.FOR_AGENTS,
-  ROUTES.ACCOUNT_REQUISITES,
-  ROUTES.ACCOUNT_PLATFORMS,
-  ROUTES.ACCOUNT_EMPLOYEES,
-  ROUTES.ACCOUNT_REVIEWS,
-  ROUTES.ACCOUNT_PERSONAL_DATA,
-  ROUTES.ACCOUNT_SUPPORT,
-  ROUTES.ACCOUNT_QR_CODE_EDIT,
-  ROUTES.ACCOUNT_QR_INDIVIDUAL_CREATE,
-  ROUTES.ACCOUNT_QR_BUSINESS_CREATE,
-  ROUTES.ACCOUNT_IDENTIFY,
-  ROUTES.ACCOUNT_QR_EDIT,
-  ROUTES.ACCOUNT_QR_CODE_STATISTICS
+export const ROUTES = [
+  { path: ROUTE_NAMES.RECIPIENTS },
+  { path: ROUTE_NAMES.BUSINESS },
+  { path: ROUTE_NAMES.PAYERS },
+  { path: ROUTE_NAMES.AGENTS },
+  { path: ROUTE_NAMES.SUPPORT },
+  { path: ROUTE_NAMES.ABOUT_US },
+  { path: ROUTE_NAMES.CREDENTIALS },
+  { path: ROUTE_NAMES.PRIVACY_POLICY },
+  { path: ROUTE_NAMES.PUBLIC_OFFER },
+  { path: ROUTE_NAMES.FAQ },
+  { path: ROUTE_NAMES.AUTH },
+  { path: ROUTE_NAMES.QR_CODE },
+  { path: ROUTE_NAMES.FAIL },
+
+  { path: ROUTE_NAMES.ACCOUNT, isProtected: true },
+  { path: ROUTE_NAMES.ACCOUNT_IDENTIFY, isProtected: true },
+
+  { path: ROUTE_NAMES.ACCOUNT_QR_CODES, isProtected: true },
+  { path: ROUTE_NAMES.ACCOUNT_QR_INDIVIDUALS_CREATE, isProtected: true },
+  { path: ROUTE_NAMES.ACCOUNT_QR_INDIVIDUALS_EDIT, isProtected: true },
+  { path: ROUTE_NAMES.ACCOUNT_QR_INDIVIDUALS_STATISTICS, isProtected: true },
+
+  { path: ROUTE_NAMES.ACCOUNT_PLATFORMS, isProtected: true, forBusinessAccount: true },
+  { path: ROUTE_NAMES.ACCOUNT_PLATFORMS_EDIT, isProtected: true, forBusinessAccount: true },
+  { path: ROUTE_NAMES.ACCOUNT_PLATFORMS_CREATE, isProtected: true, forBusinessAccount: true },
+
+  { path: ROUTE_NAMES.ACCOUNT_QR_PLATFORMS_EDIT, isProtected: true, forBusinessAccount: true },
+
+  { path: ROUTE_NAMES.ACCOUNT_REQUISITES, isProtected: true },
+  { path: ROUTE_NAMES.ACCOUNT_EMPLOYEES, isProtected: true, forBusinessAccount: true },
+  { path: ROUTE_NAMES.ACCOUNT_EMPLOYEE_CREATE, isProtected: true, forBusinessAccount: true },
+  { path: ROUTE_NAMES.ACCOUNT_EMPLOYEE_EDIT, isProtected: true, forBusinessAccount: true },
+  { path: ROUTE_NAMES.ACCOUNT_EMPLOYEE_STATISTICS, isProtected: true, forBusinessAccount: true },
+  { path: ROUTE_NAMES.ACCOUNT_REVIEWS, isProtected: true, forBusinessAccount: true },
+  { path: ROUTE_NAMES.ACCOUNT_PERSONAL_DATA, isProtected: true },
+  { path: ROUTE_NAMES.ACCOUNT_SUPPORT, isProtected: true },
+  { path: ROUTE_NAMES.ACCOUNT_LOYALTY, isProtected: true },
+  { path: ROUTE_NAMES.ACCOUNT_UPGRADE_TO_BUSINESS, isProtected: true }
 ]

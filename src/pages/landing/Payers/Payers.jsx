@@ -12,7 +12,7 @@ import {
 } from 'landing/sections'
 import { LinkButton } from 'ui'
 
-import { ROUTES } from 'core/routes'
+import { ROUTE_NAMES } from 'core/routes'
 
 import dashboard from '@public/img/landing/payers-banner-dashboard.png'
 import dashboardMobile from '@public/img/landing/payers-banner-dashboard-mobile.png'
@@ -39,9 +39,9 @@ export const PayersPage = () => {
 
   const bannerActions = (
     <>
-      <LinkButton href={ROUTES.AUTH}>Получать чаевые</LinkButton>
+      <LinkButton href={ROUTE_NAMES.AUTH}>Получать чаевые</LinkButton>
 
-      <LinkButton href={ROUTES.AUTH} variant="bordered">
+      <LinkButton href={ROUTE_NAMES.AUTH} variant="bordered">
         Оплатить чаевые
       </LinkButton>
     </>

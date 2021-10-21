@@ -6,9 +6,8 @@ import { QrImage, QrModal } from 'components'
 import { DeleteConfirmModal } from '../DeleteConfirmModal'
 import { Button } from 'ui'
 
-import { qrCodesStore, userStore, statisticsStore } from 'store'
-import { ROUTES } from 'core/routes'
-import { getTimeZoneOffset } from 'utils'
+import { qrCodesStore } from 'store'
+import { ROUTE_NAMES } from 'core/routes'
 
 import * as S from './Card.styled'
 
@@ -26,7 +25,10 @@ export const QrCard = observer(({ id, templateId, label, img, tag }) => {
   const [isConfirmDeleteModalOpen, setConfirmDeleteModalOpen] = useState(false)
 
   const toQrStatisticsPage = () => {
-    router.push(`${ROUTES.ACCOUNT}/qr-codes/${id}/statistics`)
+    router.push({
+      pathname: ROUTE_NAMES.ACCOUNT_QR_INDIVIDUALS_STATISTICS,
+      query: { id }
+    })
   }
 
   const onShare = () => {
@@ -34,7 +36,10 @@ export const QrCard = observer(({ id, templateId, label, img, tag }) => {
   }
 
   const onEdit = (templateId) => {
-    router.push(`${ROUTES.ACCOUNT_QR_CODES}/${templateId}/edit`)
+    router.push({
+      pathname: ROUTE_NAMES.ACCOUNT_QR_INDIVIDUALS_EDIT,
+      query: { id: templateId }
+    })
   }
 
   const onDelete = () => {
@@ -44,7 +49,10 @@ export const QrCard = observer(({ id, templateId, label, img, tag }) => {
   const onConfirmDelete = (templateId) => [qrCodesStore.deleteQrCode(templateId)]
 
   const toQrCodePage = (id) => {
-    router.push(`/qr-codes/${id}`)
+    router.push({
+      pathname: ROUTE_NAMES.QR_CODE,
+      query: { id }
+    })
   }
 
   const actions = [

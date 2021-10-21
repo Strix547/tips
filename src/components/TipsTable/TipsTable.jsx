@@ -7,9 +7,9 @@ import { TimePeriodFilter, StatisticRow } from 'components'
 import { ExcelDownload } from 'common'
 import { Table } from 'ui'
 
-import { ROUTES } from 'core/routes'
+import { ROUTE_NAMES } from 'core/routes'
 import { userStore } from 'store'
-import { formatPrice } from 'utils'
+import { getPriceLabel } from 'utils'
 
 import * as S from './TipsTable.styled'
 
@@ -46,7 +46,7 @@ export const TipsTable = observer(({ data = [], isDataLoading, onExcelDownload }
     id,
     dateTime: `${dateTime?.toLocaleDateString()} ${dateTime?.toLocaleTimeString().slice(0, 5)}`,
     qrName,
-    tipAmount: `${tipAmount} ${currencyLabel}`,
+    tipAmount: getPriceLabel(tipAmount, currencyLabel),
     impression
   }))
 
@@ -68,7 +68,7 @@ export const TipsTable = observer(({ data = [], isDataLoading, onExcelDownload }
             <S.Text>
               {dateTime?.toLocaleDateString()} {dateTime?.toLocaleTimeString().slice(0, 5)}
             </S.Text>
-            <S.Text>{formatPrice(tipAmount, currencyLabel)}</S.Text>
+            <S.Text>{getPriceLabel(tipAmount, currencyLabel)}</S.Text>
           </S.TipCardTop>
 
           <S.TipCardMain>
@@ -76,7 +76,7 @@ export const TipsTable = observer(({ data = [], isDataLoading, onExcelDownload }
               <S.Text>Имя QR-кода</S.Text>
 
               {type === 'BUSINESS' ? (
-                <Link href={`${ROUTES.QR_CODES}/${qrId}/edit`}>
+                <Link href={`${ROUTE_NAMES.QR_CODES}/${qrId}/edit`}>
                   <a>{qrName}</a>
                 </Link>
               ) : (
@@ -86,7 +86,7 @@ export const TipsTable = observer(({ data = [], isDataLoading, onExcelDownload }
 
             <S.TipCardRow>
               <S.Text>Размер чаевых</S.Text>
-              <S.Text>{formatPrice(tipAmount, currencyLabel)}</S.Text>
+              <S.Text>{getPriceLabel(tipAmount, currencyLabel)}</S.Text>
             </S.TipCardRow>
 
             <S.TipCardRow>

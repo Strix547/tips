@@ -1,6 +1,6 @@
 import { Line } from 'react-chartjs-2'
 
-import { createTooltip } from 'utils'
+import { createChartTooltip } from 'utils'
 
 import * as S from './LineChart.styled'
 
@@ -42,7 +42,7 @@ export const LineChart = ({
       }
     },
     enabled: false,
-    external: (context) => createTooltip(context, 55, 30)
+    external: (context) => createChartTooltip(context, 55, 30)
   }
 
   const scales = {

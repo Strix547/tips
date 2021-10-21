@@ -6,6 +6,8 @@ import { paymentStore } from './payment'
 import { statisticsStore } from './statistics'
 import { supportStore } from './support'
 import { bankAccountStore } from './bankAccount'
+import { platformsStore } from './platforms'
+import { employeesStore } from './employees'
 
 export {
   authStore,
@@ -15,5 +17,7 @@ export {
   paymentStore,
   statisticsStore,
   supportStore,
-  bankAccountStore
+  bankAccountStore,
+  platformsStore,
+  employeesStore
 }

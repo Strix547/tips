@@ -54,12 +54,8 @@ export const PaymentCardOptionsPanelIndividual = observer(({ action }) => {
       </S.AmountPresetsRow>
 
       <S.Options>
-        <Switch name="impressions" label="Впечатления" labelPlacement="start" size="big" />
+        <Switch name="impression" label="Впечатления" labelPlacement="start" size="big" />
       </S.Options>
-
-      {/* <ColorPickerField name="bgColor" label="Код цвета для подложки" />
-
-      <ColorPickerField name="buttonColor" label="Код цвета для кнопки" /> */}
 
       <Button onClick={action.onClick}>{action.label}</Button>
     </S.PaymentCardOptionsPanelIndividual>

@@ -2,9 +2,9 @@ import Link from 'next/link'
 import { FormProvider, useForm } from 'react-hook-form'
 
 import { Logo } from 'common'
-import { FormField, Button } from 'ui'
+import { FormField, Button, EmailField } from 'ui'
 
-import { ROUTES } from 'core/routes'
+import { ROUTE_NAMES } from 'core/routes'
 
 import * as S from './Footer.styled'
 
@@ -26,17 +26,17 @@ export const Footer = () => {
   const useFormProps = useForm()
 
   const navFirstColumn = [
-    { label: 'О «Tips.me»‎', link: ROUTES.ABOUT_US },
-    { label: 'Реквизиты и информация', link: ROUTES.CREDENTIALS },
-    { label: 'Публичная оферта', link: ROUTES.PUBLIC_OFFER },
-    { label: 'Положение о конфиденциальности', link: ROUTES.PRIVACY_POLICY }
+    { label: 'О «Tips.me»‎', link: ROUTE_NAMES.ABOUT_US },
+    { label: 'Реквизиты и информация', link: ROUTE_NAMES.CREDENTIALS },
+    { label: 'Публичная оферта', link: ROUTE_NAMES.PUBLIC_OFFER },
+    { label: 'Положение о конфиденциальности', link: ROUTE_NAMES.PRIVACY_POLICY }
   ]
 
   const navSecondColumn = [
-    { label: 'Частые вопросы', link: ROUTES.FAQ },
-    { label: 'Служба поддержки', link: ROUTES.SUPPORT },
-    { label: 'Войти в кабинет', link: ROUTES.AUTH },
-    { label: 'Зарегистрироваться‎', link: ROUTES.AUTH }
+    { label: 'Частые вопросы', link: ROUTE_NAMES.FAQ },
+    { label: 'Служба поддержки', link: ROUTE_NAMES.SUPPORT },
+    { label: 'Войти в кабинет', link: ROUTE_NAMES.AUTH },
+    { label: 'Зарегистрироваться‎', link: ROUTE_NAMES.AUTH }
   ]
 
   const paymentServices = [
@@ -104,12 +104,7 @@ export const Footer = () => {
 
             <S.SubscriptionForm>
               <FormProvider {...useFormProps}>
-                <FormField
-                  type="email"
-                  name="email"
-                  label="Подписка на новости сервиса"
-                  placeholder="Введите e-mail"
-                />
+                <EmailField label="Подписка на новости сервиса" />
 
                 <Button type="submit">
                   <Telegram />

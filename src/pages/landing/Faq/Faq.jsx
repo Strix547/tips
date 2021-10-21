@@ -6,7 +6,7 @@ import Head from 'next/head'
 import { Header, Footer } from 'layout'
 import { AccordionSummary, AccordionDetails } from 'ui'
 
-import { ROUTES } from 'core/routes'
+import { ROUTE_NAMES } from 'core/routes'
 
 import { MEDIA_TABLET } from 'styles/media'
 import * as S from './Faq.styled'
@@ -132,7 +132,7 @@ export const FaqPage = () => {
             <S.DidNotFindAnswer>
               <S.Text>
                 Если вы не нашли вашего ответа, задайте свой вопрос{' '}
-                <Link href={ROUTES.SUPPORT}>
+                <Link href={ROUTE_NAMES.SUPPORT}>
                   <a>разделе Служба поддержки</a>
                 </Link>{' '}
               </S.Text>

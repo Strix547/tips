@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components'
 
 import { Text, Label, gapPolyfill } from 'styled'
 import { Button } from 'ui/Button/Button.styled'
-import { FormField } from 'ui/FormField/FormField.styled'
 import { RadioGroup } from 'ui/RadioGroup/RadioGroup.styled'
 import { Dropzone } from 'ui/Dropzone/Dropzone.styled'
 
@@ -28,10 +27,6 @@ export const SupportForm = styled.form`
 
   & > *:not(:last-child) {
     margin-bottom: 20px;
-  }
-
-  ${FormField} {
-    margin-top: 10px;
   }
 
   ${Dropzone} {
@@ -173,12 +168,16 @@ export const Textarea = styled.textarea`
   }
 `
 
-export const Files = styled.div``
-
 export const LoadingContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 440px;
+  height: 448px;
+
+  ${({ big }) =>
+    big &&
+    css`
+      height: 772px;
+    `}
 `

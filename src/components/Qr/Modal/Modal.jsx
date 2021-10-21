@@ -28,7 +28,7 @@ export const QrModal = ({ id, open, onClose, label, img }) => {
     }
   }, [copyTooltipOpen])
 
-  const link = `${window.location.origin}/qr-codes/${id}`
+  const link = `${window.location.origin}/qr-codes/individuals/${id}`
 
   const networks = [
     { label: 'Vkontakte', icon: <VkIcon /> },
@@ -45,7 +45,6 @@ export const QrModal = ({ id, open, onClose, label, img }) => {
   ))
 
   const copyLinkToClipboard = () => {
-    const link = `${window.location.origin}/qr-codes/${id}`
     navigator?.clipboard?.writeText(link)
     setCopyTooltipOpen(true)
   }

@@ -1,11 +1,12 @@
+import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { Logo } from 'common'
 import { LinkButton } from 'ui'
 
-import { ROUTES } from 'core/routes'
-import { authStore } from 'store'
+import { ROUTE_NAMES } from 'core/routes'
+import { authStore, userStore } from 'store'
 
 import * as S from './Sidebar.styled'
 
@@ -22,27 +23,40 @@ import LogoutIcon from '@public/icons/logout.svg'
 
 import UserWithLaptopSvg from '@public/icons/user-with-laptop.svg'
 
-export const Sidebar = () => {
+export const Sidebar = observer(() => {
   const { pathname } = useRouter()
 
+  const isBusinessAccount = userStore.role === 'BUSINESS'
+
   const nav = [
-    { label: 'Главная', link: ROUTES.ACCOUNT, icon: <PieChartIcon /> },
-    { label: 'Мои QR', link: ROUTES.ACCOUNT_QR_CODES, icon: <QrScanIcon /> },
-    { label: 'Агентам', link: ROUTES.FOR_AGENTS, icon: <BriefCaseIcon /> },
-    { label: 'Мои реквизиты', link: ROUTES.ACCOUNT_REQUISITES, icon: <CreditCardIcon /> },
-    { label: 'Персональные данные', link: ROUTES.ACCOUNT_PERSONAL_DATA, icon: <UserIcon /> },
-    { label: 'Мои площадки', link: ROUTES.ACCOUNT_PLATFORMS, icon: <PaperIcon /> },
+    { label: 'Главная', link: ROUTE_NAMES.ACCOUNT, icon: <PieChartIcon /> },
+    { label: 'Мои QR', link: ROUTE_NAMES.ACCOUNT_QR_CODES, icon: <QrScanIcon /> },
+    { label: 'Агентам', link: ROUTE_NAMES.FOR_AGENTS, icon: <BriefCaseIcon /> },
+    { label: 'Мои реквизиты', link: ROUTE_NAMES.ACCOUNT_REQUISITES, icon: <CreditCardIcon /> },
+    { label: 'Персональные данные', link: ROUTE_NAMES.ACCOUNT_PERSONAL_DATA, icon: <UserIcon /> },
+    {
+      label: 'Мои площадки',
+      link: ROUTE_NAMES.ACCOUNT_PLATFORMS,
+      icon: <PaperIcon />,
+      forBusiness: true
+    },
     {
       label: 'Мои сотрудники',
-      link: ROUTES.ACCOUNT_EMPLOYEES,
-      icon: <UserGroupIcon />
+      link: ROUTE_NAMES.ACCOUNT_EMPLOYEES,
+      icon: <UserGroupIcon />,
+      forBusiness: true
     },
-    { label: 'Мои отзывы', link: ROUTES.ACCOUNT_REVIEWS, icon: <StarIcon fill="#777D82" /> },
-    { label: 'Программа лояльности', link: ROUTES.ACCOUNT_LOYALTY, icon: <TagIcon /> }
+    {
+      label: 'Мои отзывы',
+      link: ROUTE_NAMES.ACCOUNT_REVIEWS,
+      icon: <StarIcon fill="#777D82" />,
+      forBusiness: true
+    },
+    { label: 'Программа лояльности', link: ROUTE_NAMES.ACCOUNT_LOYALTY, icon: <TagIcon /> }
   ]
 
-  const navList = nav.map(({ label, link, icon }) => (
-    <S.NavItem key={label} active={pathname === link}>
+  const navList = nav.map(({ label, link, icon, forBusiness }) => (
+    <S.NavItem key={label} active={pathname === link} bgRed={forBusiness && !isBusinessAccount}>
       <Link href={link}>
         <a>
           {icon} {label}
@@ -63,7 +77,7 @@ export const Sidebar = () => {
         <S.Support>
           <UserWithLaptopSvg />
 
-          <LinkButton href={ROUTES.ACCOUNT_SUPPORT}>Служба поддержки</LinkButton>
+          <LinkButton href={ROUTE_NAMES.ACCOUNT_SUPPORT}>Служба поддержки</LinkButton>
         </S.Support>
 
         <S.LogoutButton onClick={() => authStore.signOut()}>
@@ -73,4 +87,4 @@ export const Sidebar = () => {
       </S.Main>
     </S.Sidebar>
   )
-}
+})

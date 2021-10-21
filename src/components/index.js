@@ -8,15 +8,17 @@ import { LineChart } from './LineChart'
 import { StatisticRow } from './StatisticRow'
 import { Notifications } from './Notifications'
 import { CurrencySelect } from './CurrencySelect'
+import { EmployeeTable } from './EmployeeTable'
 
 import { QrCard, QrModal, QrImage } from './Qr'
 
 import {
-  AvatarBusiness,
-  PaymentCardBusiness,
-  CardBusiness,
-  PaymentCardOptionsPanelBusiness
-} from './Business'
+  PlatformAvatar,
+  PlatformPaymentCard,
+  PlatformCard,
+  PlatformPaymentCardOptionsPanel,
+  PlatformFields
+} from './Platforms'
 
 import {
   AvatarIndividual,
@@ -31,12 +33,13 @@ export {
   QrCard,
   QrModal,
   QrImage,
-  AvatarBusiness,
-  CardBusiness,
-  PaymentCardBusiness,
+  PlatformAvatar,
+  PlatformPaymentCard,
+  PlatformCard,
+  PlatformPaymentCardOptionsPanel,
+  PlatformFields,
   AvatarIndividual,
   PaymentCardIndividual,
-  PaymentCardOptionsPanelBusiness,
   PaymentCardOptionsPanelIndividual,
   TipAmount,
   RecipientCardPreview,
@@ -44,5 +47,6 @@ export {
   LineChart,
   StatisticRow,
   Notifications,
-  CurrencySelect
+  CurrencySelect,
+  EmployeeTable
 }

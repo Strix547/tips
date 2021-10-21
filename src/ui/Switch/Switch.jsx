@@ -2,7 +2,7 @@ import { Controller, useFormContext } from 'react-hook-form'
 
 import * as S from './Switch.styled'
 
-export const Switch = ({ name, label, labelPlacement, rules, size }) => {
+export const Switch = ({ name, label, labelPlacement, rules, size, onClick }) => {
   const { control } = useFormContext()
 
   return (
@@ -14,7 +14,7 @@ export const Switch = ({ name, label, labelPlacement, rules, size }) => {
         const switchCheckbox = <S.Switch checked={value} onChange={onChange} size={size} />
 
         return (
-          <S.SwitchField>
+          <S.SwitchField onClick={onClick}>
             {label ? (
               <S.FormControlLabel
                 label={label}

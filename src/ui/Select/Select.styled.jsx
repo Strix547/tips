@@ -95,9 +95,6 @@ export const Select = styled((props) => (
           }
         }
 
-        &:not(:last-child) {
-        }
-
         &:hover {
           background: #fff;
         }

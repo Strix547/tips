@@ -3,9 +3,9 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { Section } from 'landing/components'
-import { FormField, Checkbox, PhoneField, Button } from 'ui'
+import { FormField, Checkbox, PhoneField, Button, EmailField } from 'ui'
 
-import { ROUTES } from 'core/routes'
+import { ROUTE_NAMES } from 'core/routes'
 import { authStore } from 'store'
 
 import * as S from './ConnectForm.styled'
@@ -21,7 +21,7 @@ export const ConnectFormSection = () => {
     await authStore.sendCode(phone)
     authStore.setAuthData({ firstName, email, phone })
     authStore.setStep('code')
-    router.push(ROUTES.AUTH)
+    router.push(ROUTE_NAMES.AUTH)
   }
 
   return (
@@ -37,20 +37,9 @@ export const ConnectFormSection = () => {
             <FormProvider {...useFormProps}>
               <FormField name="firstName" label="Имя" placeholder="Введите Ваше имя" required />
 
-              <PhoneField
-                rules={{ required: true, minLength: 11 }}
-                name="phone"
-                country="ru"
-                placeholder="+7 (___) ___-__-__"
-              />
+              <PhoneField />
 
-              <FormField
-                type="email"
-                name="email"
-                label="E-mail"
-                placeholder="Введите e-mail"
-                required
-              />
+              <EmailField />
 
               <Checkbox
                 rules={{ required: true }}
@@ -71,7 +60,7 @@ export const ConnectFormSection = () => {
           <S.FormBottom>
             <S.Text>
               Если вы физлицо - получатель чаевых, <br />
-              <Link href={ROUTES.AUTH}>
+              <Link href={ROUTE_NAMES.AUTH}>
                 <a>зарегистрируйтесь</a>
               </Link>{' '}
               в сервисе

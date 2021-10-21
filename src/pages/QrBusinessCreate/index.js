@@ -1,1 +1,0 @@
-export { QrBusinessCreatePage } from './QrBusinessCreate'

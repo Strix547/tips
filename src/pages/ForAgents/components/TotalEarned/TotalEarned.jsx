@@ -1,4 +1,4 @@
-import { formatPrice } from 'utils'
+import { getPriceLabel } from 'utils'
 
 import * as S from './TotalEarned.styled'
 
@@ -8,7 +8,7 @@ export const TotalEarned = ({ amount }) => {
   return (
     <S.TotalEarned>
       <S.Text>Всего заработано</S.Text>
-      <S.Amount>{formatPrice(amount, currency)}</S.Amount>
+      <S.Amount>{getPriceLabel(amount, currency)}</S.Amount>
     </S.TotalEarned>
   )
 }

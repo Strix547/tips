@@ -38,7 +38,8 @@ export const FormField = styled((props) => (
   .form-field-input-root {
     height: 56px;
     margin-top: 0;
-    padding-left: 20px;
+    padding: 0 20px;
+    font-family: Formular;
     font-size: var(--font-size-md);
     border: 1px solid var(--color-gray-400);
     border-radius: 8px;

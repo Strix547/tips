@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 import router from 'next/router'
 
 import { CURRENCIES } from 'core/constants'
-import { ROUTES } from 'core/routes'
+import { ROUTE_NAMES } from 'core/routes'
 import { authStore } from 'store'
 import * as userApi from 'api/user'
 import * as bankAccountApi from 'api/bankAccount'
@@ -24,16 +24,23 @@ export const userStore = makeAutoObservable({
     address: '',
     currency: { label: '', value: '' }
   },
+  isUserLoading: false,
 
   getMyId: async () => {
     try {
       userStore.isIdLoading = true
       const id = await userApi.getMyId()
-      userStore.id = id
-      authStore.isAuth = true
+
+      if (id) {
+        userStore.id = id
+        authStore.isAuth = true
+      } else {
+        userStore.id = 0
+      }
+
       return id
     } catch ({ message }) {
-      console.log(message)
+      toast.error(message)
     } finally {
       userStore.isIdLoading = false
     }
@@ -96,7 +103,7 @@ export const userStore = makeAutoObservable({
         avatarFileId: avatar && (await getAvatarFileId(avatar))
       })
       userStore.getPersonalData(userId)
-      router.push(ROUTES.ACCOUNT)
+      router.push(ROUTE_NAMES.ACCOUNT)
       toast.success('Personal data successfully changed')
       return newInfo
     } catch ({ message }) {
@@ -147,11 +154,30 @@ export const userStore = makeAutoObservable({
       await bankAccountApi.addBankAccount({ userId, stripeToken })
       await userStore.getUserRole(userId)
       await userStore.getPersonalData(userId)
-      router.push(ROUTES.ACCOUNT)
+      router.push(ROUTE_NAMES.ACCOUNT)
     } catch ({ message }) {
       toast.error(message)
     } finally {
       userStore.isIdentifyProcessing = false
     }
+  },
+
+  upgradeAccountToBusiness: async (userId) => {
+    try {
+      await userApi.upgradeAccountToBusiness(userId)
+      router.push(ROUTE_NAMES.ACCOUNT)
+      toast.success('Account upgrated to business')
+    } catch ({ message }) {
+      toast.error(message)
+    }
+  },
+
+  getUserByPhone: async (phone) => {
+    userStore.isUserLoading = true
+
+    const employeeId = await userApi.getUserByPhone(phone)
+
+    userStore.isUserLoading = false
+    return employeeId
   }
 })

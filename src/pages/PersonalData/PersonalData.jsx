@@ -6,22 +6,23 @@ import Head from 'next/head'
 import Image from 'next/image'
 
 import { AccountLayout } from 'layout'
-import { FormField, Button } from 'ui'
+import { FormField, Button, EmailField } from 'ui'
 
 import { userStore } from 'store'
-import { transformDateFromIso, transformDateToIso } from 'utils'
+import { transformDateToLabel, transformDateLabelToIso } from 'utils'
 
 import * as S from './PersonalData.styled'
 
 import UserIcon from '@public/icons/user.svg'
 
 export const PersonalDataPage = observer(() => {
-  const { isPersonalDataLoading, id: userId, personalData } = userStore
+  const useFormProps = useForm()
+  const { formState, reset, setError, getValues } = useFormProps
+
   const [avatar, setAvatar] = useState(null)
   const [avatarPreview, setAvatarPreview] = useState(null)
-  const useFormProps = useForm()
-
-  const birthdateError = useFormProps.formState.errors?.birthDate
+  const { isPersonalDataLoading, id: userId, personalData } = userStore
+  const birthdateError = formState.errors?.birthDate
 
   useEffect(() => {
     if (!userId) return
@@ -30,23 +31,19 @@ export const PersonalDataPage = observer(() => {
   }, [userId])
 
   useEffect(() => {
-    if (!isPersonalDataLoading) {
-      const { firstName, lastName, birthDate, email, address, postal } = personalData
+    if (isPersonalDataLoading) return
 
-      const fieldsTemplate = [
-        { label: 'firstName', value: firstName },
-        { label: 'lastName', value: lastName },
-        { label: 'birthDate', value: birthDate && transformDateFromIso(birthDate) },
-        { label: 'email', value: email },
-        { label: 'address', value: address },
-        { label: 'postal', value: postal }
-      ]
+    const { firstName, lastName, birthDate, email, address, postal } = personalData
 
-      fieldsTemplate.forEach(({ label, value }) => {
-        useFormProps.setValue(label, value)
-      })
-    }
-  }, [isPersonalDataLoading, personalData])
+    reset({
+      firstName,
+      lastName,
+      birthDate: birthDate && transformDateToLabel(birthDate),
+      email,
+      address,
+      postal
+    })
+  }, [personalData, isPersonalDataLoading])
 
   const dateHaventPlaceholderSymbols = (date) => {
     const haventPlaceholderSymbol = date?.indexOf('_') === -1
@@ -81,14 +78,14 @@ export const PersonalDataPage = observer(() => {
   }
 
   const onEditData = () => {
-    const { firstName, lastName, email, address, postal, birthDate } = useFormProps.getValues()
+    const { firstName, lastName, email, address, postal, birthDate } = getValues()
 
     if (!dateHaventPlaceholderSymbols(birthDate)) {
-      useFormProps.setError('birthDate')
+      setError('birthDate')
     }
 
     if (!dateMoreThanEighteen(birthDate)) {
-      useFormProps.setError('birthDate', {
+      setError('birthDate', {
         type: 'moreThanEighteen',
         message: 'You must be at least 18 years old'
       })
@@ -102,7 +99,7 @@ export const PersonalDataPage = observer(() => {
         email,
         address,
         postalCode: postal,
-        birthDate: transformDateToIso(birthDate),
+        birthDate: transformDateLabelToIso(birthDate),
         avatar
       })
     }
@@ -144,7 +141,7 @@ export const PersonalDataPage = observer(() => {
               MaskProps={{ mask: '99/99/9999' }}
             />
 
-            <FormField type="email" name="email" label="E-mail" placeholder="Введите e-mail" />
+            <EmailField />
 
             <FormField name="address" label="Адрес" placeholder="Введите адрес" />
 

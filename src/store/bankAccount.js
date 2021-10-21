@@ -6,11 +6,16 @@ import * as bankAccountApi from 'api/bankAccount'
 export const bankAccountStore = makeAutoObservable({
   selectedBankAccountId: '',
   bankAccounts: [],
+  isBankAccountsLoading: false,
 
   getBankAccounts: async (userId) => {
+    bankAccountStore.isBankAccountsLoading = true
+
     const { selectedBankAccountId, bankAccounts } = await bankAccountApi.getBankAccounts(userId)
     bankAccountStore.selectedBankAccountId = selectedBankAccountId
     bankAccountStore.bankAccounts = bankAccounts
+
+    bankAccountStore.isBankAccountsLoading = false
   },
 
   addBankAccount: async ({ userId, stripeTokenId }) => {

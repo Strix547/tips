@@ -12,7 +12,7 @@ import {
 } from 'landing/sections'
 import { LinkButton } from 'ui'
 
-import { ROUTES } from 'core/routes'
+import { ROUTE_NAMES } from 'core/routes'
 
 import dashboard from '@public/img/landing/agents-banner-dashboard.png'
 import dashboardMobile from '@public/img/landing/agents-banner-dashboard-mobile.png'
@@ -42,7 +42,7 @@ export const AgentsPage = () => {
     'Дополните свой портфель актуальным сервисом'
   ]
 
-  const bannerAction = <LinkButton href={ROUTES.AUTH}>Стать агентом</LinkButton>
+  const bannerAction = <LinkButton href={ROUTE_NAMES.AUTH}>Стать агентом</LinkButton>
 
   return (
     <>

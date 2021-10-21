@@ -8,8 +8,8 @@ import { transformDateToIso } from 'utils'
 
 import * as S from './TimePeriodFilter.styled'
 
-export const TimePeriodFilter = () => {
-  const screenLess1500 = useMediaQuery({ maxWidth: 1500 })
+export const TimePeriodFilter = ({ miniVersionMedia = 1500 }) => {
+  const screenLess1500 = useMediaQuery({ maxWidth: miniVersionMedia })
   const screenLess700 = useMediaQuery({ maxWidth: 700 })
   const { watch, setValue } = useFormContext()
 

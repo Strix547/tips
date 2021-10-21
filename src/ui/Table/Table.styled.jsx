@@ -76,9 +76,6 @@ export const Table = styled((props) => (
       &-cell {
         &:last-child {
           position: relative;
-
-          &::after {
-          }
         }
       }
 

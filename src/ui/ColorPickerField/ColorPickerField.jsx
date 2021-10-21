@@ -3,12 +3,12 @@ import { Controller, useFormContext } from 'react-hook-form'
 
 import * as S from './ColorPickerField.styled'
 
-export const ColorPickerField = ({ name, rules, label, ...props }) => {
+export const ColorPickerField = ({ name, defaultColor, rules, label, ...props }) => {
   const { control, watch } = useFormContext()
 
   const rootRef = useRef(null)
   const [isColorPickerOpen, setColorPickerOpen] = useState(false)
-  const [color, setColor] = useState()
+  const [color, setColor] = useState(defaultColor)
 
   const onOutsideClick = (event) => {
     if (!rootRef?.current?.contains(event.target)) {

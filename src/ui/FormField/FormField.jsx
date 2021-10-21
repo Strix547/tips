@@ -7,7 +7,6 @@ export const FormField = ({
   name,
   rules,
   required,
-  type,
   defaultValue,
   InputProps,
   MaskProps,
@@ -31,7 +30,6 @@ export const FormField = ({
 
         const baseProps = {
           ...props,
-          type,
           haveError,
           InputProps: {
             inputProps: { maxLength: 255 },

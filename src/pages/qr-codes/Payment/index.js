@@ -1,0 +1,1 @@
+export { QrPaymentPage } from './Payment'

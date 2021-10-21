@@ -32,7 +32,7 @@ export const supportStore = makeAutoObservable({
         })
       }
 
-      toast.success('Message successfully sended')
+      toast.success('Message sended')
     } catch ({ message }) {
       toast.error('Failed to send message')
     } finally {

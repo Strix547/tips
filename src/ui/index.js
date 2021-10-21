@@ -20,6 +20,10 @@ import { Autocomplete } from './Autocomplete'
 import { Stepper, Step, StepLabel } from './Stepper'
 import { LocationSearch } from './LocationSearch'
 import { CircularProgress } from './CircularProgress'
+import { EmailField } from './EmailField'
+import { BankAccountSelect } from './BankAccountSelect'
+import { BirthDateAdultValid } from './BirthDateAdultValid'
+import { PlatformSearch } from './PlatformSearch'
 
 export {
   Button,
@@ -48,5 +52,9 @@ export {
   Step,
   StepLabel,
   LocationSearch,
-  CircularProgress
+  CircularProgress,
+  EmailField,
+  BankAccountSelect,
+  BirthDateAdultValid,
+  PlatformSearch
 }

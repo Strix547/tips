@@ -22,12 +22,7 @@ export const PhoneStep = ({ defaultPhone, onPhoneSubmit }) => {
   return (
     <S.PhoneStep onSubmit={handleSubmit(onSubmit)}>
       <FormProvider {...useFormProps}>
-        <PhoneField
-          name="phone"
-          rules={{ required: true }}
-          country="ru"
-          placeholder="+7 (___) ___-__-__"
-        />
+        <PhoneField />
 
         <Switch name="remember" label="Запомнить меня" />
 

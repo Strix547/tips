@@ -13,7 +13,7 @@ import {
 import { LinkButton } from 'ui'
 import { HowServiceWorkSection } from './sections'
 
-import { ROUTES } from 'core/routes'
+import { ROUTE_NAMES } from 'core/routes'
 
 import dashboard from '@public/img/landing/recipients-banner-dashboard.png'
 import dashboardMobile from '@public/img/landing/recipients-banner-dashboard-mobile.png'
@@ -44,7 +44,7 @@ export const RecipientsPage = () => {
     'Расчеты обеспечивает Тинькофф'
   ]
 
-  const bannerAction = <LinkButton href={ROUTES.AUTH}>Получать чаевые</LinkButton>
+  const bannerAction = <LinkButton href={ROUTE_NAMES.AUTH}>Получать чаевые</LinkButton>
 
   return (
     <>

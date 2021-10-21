@@ -11,10 +11,11 @@ import {
   RadioGroup,
   Dropzone,
   CircularProgress,
-  PhoneField
+  PhoneField,
+  EmailField
 } from 'ui'
 
-import { ROUTES } from 'core/routes'
+import { ROUTE_NAMES } from 'core/routes'
 import { userStore, authStore, supportStore } from 'store'
 
 import * as S from './SupportForm.styled'
@@ -55,7 +56,7 @@ export const SupportForm = observer(() => {
       message,
       files
     })
-    console.log(1, { firstName, phone, email })
+
     authStore.setAuthData({ firstName, phone, email })
 
     reset()
@@ -67,14 +68,9 @@ export const SupportForm = observer(() => {
     <>
       <FormField name="firstName" label="Имя" placeholder="Введите Ваше имя" required />
 
-      <PhoneField
-        rules={{ required: true, minLength: 11 }}
-        name="phone"
-        country="ru"
-        placeholder="+7 (___) ___-__-__"
-      />
+      <PhoneField />
 
-      <FormField type="email" name="email" label="E-mail" placeholder="Введите e-mail" required />
+      <EmailField />
     </>
   )
 
@@ -95,7 +91,7 @@ export const SupportForm = observer(() => {
         <S.Text>Часто задаваемые вопросы</S.Text>
         <S.Text>
           Прочитать самые частые вопросы вы можете в{' '}
-          <Link href={ROUTES.FAQ}>
+          <Link href={ROUTE_NAMES.FAQ}>
             <a>разделе FAQ</a>
           </Link>
         </S.Text>
@@ -146,7 +142,7 @@ export const SupportForm = observer(() => {
           <Button type="submit">Отправить сообщение</Button>
         </FormProvider>
       ) : (
-        <S.LoadingContainer>
+        <S.LoadingContainer big={!userStore.id}>
           <CircularProgress size={80} />
         </S.LoadingContainer>
       )}

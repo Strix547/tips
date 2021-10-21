@@ -1,4 +1,4 @@
-import { FormProvider, useForm } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 import { Radio } from '@material-ui/core'
 import Image from 'next/image'
 
@@ -13,15 +13,15 @@ import smilingHeartEyesImg from '@public/img/emodji/smiling-heart-eyes.png'
 import smilingSunglassesImg from '@public/img/emodji/smiling-sunglasses.png'
 
 export const ImpressionRow = () => {
-  const useFormProps = useForm()
+  const useFormProps = useFormContext()
   const { watch } = useFormProps
 
   const emodjies = [
-    { value: 'slightly frowing', img: slightlyFrowningImg },
-    { value: 'slightly smiling', img: slightlySmilingImg },
-    { value: 'smiling with smiling eyes', img: smilingSmilingEyesImg },
-    { value: 'smiling with heart eyes', img: smilingHeartEyesImg },
-    { value: 'smiling with sunglasses', img: smilingSunglassesImg }
+    { value: '🙁', img: slightlyFrowningImg },
+    { value: '🙂', img: slightlySmilingImg },
+    { value: '😊', img: smilingSmilingEyesImg },
+    { value: '😍', img: smilingHeartEyesImg },
+    { value: '😎', img: smilingSunglassesImg }
   ]
 
   const emodjiRadios = emodjies.map(({ value, img }) => {
@@ -30,7 +30,7 @@ export const ImpressionRow = () => {
         key={value}
         value={value}
         label={
-          <S.EmodjiRadio active={watch('emodji') === value}>
+          <S.EmodjiRadio active={watch('impression') === value}>
             <Image src={img} alt={value} />
           </S.EmodjiRadio>
         }
@@ -41,11 +41,9 @@ export const ImpressionRow = () => {
 
   return (
     <S.ImpressionRow>
-      <FormProvider {...useFormProps}>
-        <S.Text>Ваши впечатления</S.Text>
+      <S.Text>Ваши впечатления</S.Text>
 
-        <RadioGroup name="emodji">{emodjiRadios}</RadioGroup>
-      </FormProvider>
+      <RadioGroup name="impression">{emodjiRadios}</RadioGroup>
     </S.ImpressionRow>
   )
 }

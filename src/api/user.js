@@ -10,17 +10,9 @@ export const changeUserLanguage = ({ userId, languageCode }) => {
 }
 
 export const getMyId = async () => {
-  try {
-    const { status, data } = await API.get('/me')
+  const { data } = await API.get('/me')
 
-    if (status === 401) {
-      throw new Error('not auth')
-    }
-
-    return data.userId
-  } catch ({ message }) {
-    throw new Error(message)
-  }
+  return data?.userId
 }
 
 export const getUserRole = async (userId) => {
@@ -91,4 +83,20 @@ export const uploadFile = async (formData) => {
   })
 
   return data
+}
+
+export const upgradeAccountToBusiness = async (userId) => {
+  const res = await API.post(`/upgrade-account-to-business/${userId}`)
+
+  const errorCodes = [{ label: 'Your account is already business ', code: 'ALREADY_UPGRADED' }]
+
+  handleResponse(res, errorCodes)
+}
+
+export const getUserByPhone = async (phone) => {
+  const { data } = await API.get(`/person-by-phone`, {
+    params: { phone: `+${phone}` }
+  })
+
+  return data.personUserId
 }

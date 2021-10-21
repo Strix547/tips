@@ -1,1 +1,0 @@
-export { PaymentCardOptionsPanelBusiness } from './PaymentCardOptionsPanel'

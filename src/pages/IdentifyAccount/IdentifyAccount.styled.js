@@ -1,11 +1,13 @@
 import styled from 'styled-components'
 
-import { Heading, Text, ErrorText, WhiteBox } from 'styled'
+import { Heading, Text, ErrorText } from 'styled'
 import { Button } from 'ui/Button/Button.styled'
 import { Stepper } from 'ui/Stepper/Stepper.styled'
 import { FormField } from 'ui/FormField/FormField.styled'
 
 import { media } from 'styles/media'
+
+const media1460 = media.createMedia(1460)
 
 export { Heading, Text, FormField, ErrorText }
 
@@ -50,7 +52,30 @@ export const Content = styled.div`
   }
 
   ${Stepper} {
-    margin-top: 30px;
+    justify-content: center;
+    margin: 30px auto 0;
+
+    &::before,
+    &::after {
+      width: calc((50vw - 585px) / 2);
+    }
+
+    .MuiStepConnector-root {
+      max-width: 256px;
+    }
+  }
+
+  ${media1460} {
+    ${Stepper} {
+      &::before,
+      &::after {
+        width: 58px;
+      }
+
+      .MuiStepConnector-root {
+        max-width: 100%;
+      }
+    }
   }
 
   ${media.createMedia(500)} {
@@ -69,9 +94,28 @@ export const FieldsLabel = styled(Text)`
   font-weight: 700;
 `
 
+export const Step = styled.div`
+  max-width: 600px;
+  margin: 30px auto 0;
+  padding: 0 50px;
+
+  ${ErrorText} {
+    margin-top: 15px;
+  }
+
+  ${media1460} {
+    max-width: 100%;
+  }
+
+  ${media.createMedia(500)} {
+    padding: 0 15px;
+  }
+`
+
 export const StepNav = styled.div`
   display: flex;
-  margin-top: 30px;
+  max-width: 600px;
+  margin: 30px auto 0;
   padding: 0 50px;
 
   ${Button} {
@@ -82,17 +126,8 @@ export const StepNav = styled.div`
     }
   }
 
-  ${media.createMedia(500)} {
-    padding: 0 15px;
-  }
-`
-
-export const Step = styled.div`
-  margin-top: 30px;
-  padding: 0 50px;
-
-  ${ErrorText} {
-    margin-top: 15px;
+  ${media1460} {
+    max-width: 100%;
   }
 
   ${media.createMedia(500)} {

@@ -24,11 +24,15 @@ export const getSuggestedLanguage = () => {
 }
 
 export const getCountries = async ({ search, languageCode, limit = 10 }) => {
-  const { data } = await API.get('/country-names', {
-    params: { search, 'language-code': languageCode, limit }
-  })
+  try {
+    const { data } = await API.get('/country-names', {
+      params: { search, 'language-code': languageCode, limit }
+    })
 
-  return transformCountries(data)
+    return transformCountries(data)
+  } catch (err) {
+    //
+  }
 }
 
 export const getCities = async ({ search, countryCode, languageCode, limit = 10 }) => {

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import { Text, Label, RecipientCard, RecipientCardTop, RecipientCardMain } from 'styled'
-import { AvatarBusiness } from 'components/Business/Avatar/Avatar.styled'
+import { PlatformAvatar } from 'components/Platforms/Avatar/Avatar.styled'
 import { ImpressionRow } from 'common/ImpressionRow/ImpressionRow.styled'
 import { Button as ButtonUI } from 'ui/Button/Button.styled'
 
@@ -22,7 +22,7 @@ export const RecipientCardPreview = styled.div`
     }
   }
 
-  ${AvatarBusiness} {
+  ${PlatformAvatar} {
     align-items: flex-start;
   }
 

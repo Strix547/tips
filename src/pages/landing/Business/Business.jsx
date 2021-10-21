@@ -12,7 +12,7 @@ import {
 } from 'landing/sections'
 import { LinkButton } from 'ui'
 
-import { ROUTES } from 'core/routes'
+import { ROUTE_NAMES } from 'core/routes'
 
 import dashboard from '@public/img/landing/business-banner-dashboard.png'
 import dashboardMobile from '@public/img/landing/business-banner-dashboard-mobile.png'
@@ -46,7 +46,7 @@ export const BusinessPage = () => {
     'Инструмент повышения уровня сервиса и гостеприимства'
   ]
 
-  const bannerAction = <LinkButton href={ROUTES.AUTH}>Подключить чаевые</LinkButton>
+  const bannerAction = <LinkButton href={ROUTE_NAMES.AUTH}>Подключить чаевые</LinkButton>
 
   return (
     <>

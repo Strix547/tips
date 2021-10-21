@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite'
 
-import { AvatarBusiness, AvatarIndividual, TipAmount } from 'components'
+import { PlatformAvatar, AvatarIndividual, TipAmount } from 'components'
 import { ImpressionRow, RatingRow, FeedbackTextarea } from 'common'
 
 import { userStore } from 'store'
@@ -15,11 +15,11 @@ export const RecipientCardPreview = observer(
     firstName,
     lastName,
     amountPresets,
-    impressions,
+    impression,
     reviews,
     rating,
     bgColor,
-    buttonColor,
+    btnColor,
     company
   }) => {
     const avatarPreview = userStore.personalData.avatar || avatar
@@ -36,9 +36,9 @@ export const RecipientCardPreview = observer(
             {type === 'individual' ? (
               <AvatarIndividual avatar={avatarPreview} firstName={firstName} lastName={lastName} />
             ) : (
-              <AvatarBusiness
+              <PlatformAvatar
                 avatar={avatar}
-                company={{ name: company.name, logo: company.logo }}
+                company={company}
                 firstName={firstName}
                 lastName={lastName}
               />
@@ -48,11 +48,11 @@ export const RecipientCardPreview = observer(
           <S.RecipientCardMain>
             <TipAmount presets={amountPresets} />
 
-            {impressions && <ImpressionRow />}
+            {impression && <ImpressionRow />}
             {rating && <RatingRow />}
             {reviews && <FeedbackTextarea />}
 
-            <S.Button $color={buttonColor}>Поблагодарить</S.Button>
+            <S.Button $color={btnColor}>Поблагодарить</S.Button>
 
             <S.Text>Tips.me - это сервис для перевод чаевых и донатов.</S.Text>
           </S.RecipientCardMain>

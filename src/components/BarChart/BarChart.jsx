@@ -1,7 +1,7 @@
 import { Bar } from 'react-chartjs-2'
 import Skeleton from 'react-loading-skeleton'
 
-import { createTooltip } from 'utils'
+import { createChartTooltip } from 'utils'
 
 import * as S from './BarChart.styled'
 
@@ -75,7 +75,7 @@ export const BarChart = ({
       }
     },
     enabled: false,
-    external: (context) => createTooltip(context, 45, 30)
+    external: (context) => createChartTooltip(context, 45, 30)
   }
 
   const scales = {

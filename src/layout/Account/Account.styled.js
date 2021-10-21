@@ -107,7 +107,4 @@ export const ContentHead = styled.div`
       }
     }
   }
-
-  ${media.createMedia(440)} {
-  }
 `

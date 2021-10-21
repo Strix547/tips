@@ -11,7 +11,7 @@ import {
 import { LinkButton } from 'ui'
 import { UsersSection, HowServiceWorkSection, WhereCanUseSection } from './sections'
 
-import { ROUTES } from 'core/routes'
+import { ROUTE_NAMES } from 'core/routes'
 
 import dashboard from '@public/img/landing/main-banner-dashboard.png'
 import dashboardMobile from '@public/img/landing/main-banner-dashboard-mobile.png'
@@ -19,9 +19,9 @@ import dashboardMobile from '@public/img/landing/main-banner-dashboard-mobile.pn
 export const MainPage = () => {
   const bannerActions = (
     <>
-      <LinkButton href={ROUTES.RECIPIENTS}>Получать чаевые</LinkButton>
+      <LinkButton href={ROUTE_NAMES.RECIPIENTS}>Получать чаевые</LinkButton>
 
-      <LinkButton href={ROUTES.PAYERS} variant="bordered">
+      <LinkButton href={ROUTE_NAMES.PAYERS} variant="bordered">
         Оплатить чаевые
       </LinkButton>
     </>

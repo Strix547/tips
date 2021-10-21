@@ -11,9 +11,9 @@ import * as S from './PaymentCard.styled'
 import avatar from '@public/img/placeholders/avatar.png'
 
 export const PaymentCardIndividual = observer(() => {
-  const { firstName, lastName, amountPresets, impressions } = paymentStore.individualData
+  const { firstName, lastName, amountPresets, impression } = paymentStore.paymentData
 
-  const avatarPreview = paymentStore.individualData.avatar || avatar
+  const avatarPreview = paymentStore.paymentData.avatar || avatar
 
   return (
     <S.RecipientCard>
@@ -24,7 +24,7 @@ export const PaymentCardIndividual = observer(() => {
       <S.RecipientCardMain>
         <TipAmount presets={amountPresets} />
 
-        {impressions && <ImpressionRow />}
+        {impression && <ImpressionRow />}
 
         <Button>Заплатить</Button>
 

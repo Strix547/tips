@@ -8,7 +8,7 @@ import { AccountLayout } from 'layout'
 import { BarChart, TipsTable } from 'components'
 
 import { userStore, statisticsStore } from 'store'
-import { ROUTES } from 'core/routes'
+import { ROUTE_NAMES } from 'core/routes'
 import { getTimeZoneOffset } from 'utils'
 
 export const UserMainPage = observer(() => {
@@ -19,7 +19,7 @@ export const UserMainPage = observer(() => {
     }
   })
 
-  const { id: userId } = userStore
+  const { id: userId, role } = userStore
   const { incomeStatistics, isIncomeStatisticsLoading } = statisticsStore
   const currency = userStore.personalData.currency.value
 
@@ -30,8 +30,13 @@ export const UserMainPage = observer(() => {
   const diagramDays = incomeStatistics.diagram.map(({ date }) => date?.getDate())
   const diagramAmounts = incomeStatistics.diagram.map(({ tipAmount }) => tipAmount)
 
+  const getStatistics =
+    role === 'BUSINESS'
+      ? statisticsStore.getBusinessIncomeStatistics
+      : statisticsStore.getIndividualIncomeStatistics
+
   useEffect(() => {
-    if (!userId && !currency) return
+    if (!userId && !currency && !role) return
 
     const commonData = {
       format: 'JSON',
@@ -40,7 +45,7 @@ export const UserMainPage = observer(() => {
     }
 
     if (periodSelected !== 'custom') {
-      statisticsStore.getUserIncomeStatistics({
+      getStatistics({
         ...commonData,
         userId,
         period: periodSelected
@@ -48,21 +53,21 @@ export const UserMainPage = observer(() => {
     }
 
     if (periodFromSelected && periodToSelected) {
-      statisticsStore.getUserIncomeStatistics({
+      getStatistics({
         ...commonData,
         userId,
         periodFrom: periodFromSelected,
         periodTo: periodToSelected
       })
     }
-  }, [userId, periodSelected, periodFromSelected, periodToSelected])
+  }, [role, userId, periodSelected, periodFromSelected, periodToSelected])
 
   const toQrCodesPage = () => {
-    router.push(ROUTES.ACCOUNT_QR_INDIVIDUAL_CREATE)
+    router.push(ROUTE_NAMES.ACCOUNT_QR_INDIVIDUALS_CREATE)
   }
 
-  const downloadExcelFile = (userId) => {
-    statisticsStore.getUserIncomeStatistics({
+  const downloadStatisticExcel = (userId) => {
+    getStatistics({
       userId,
       format: 'XLSX',
       period: periodSelected,
@@ -94,7 +99,7 @@ export const UserMainPage = observer(() => {
           <TipsTable
             data={incomeStatistics.table}
             isDataLoading={isIncomeStatisticsLoading}
-            onExcelDownload={() => downloadExcelFile(userId)}
+            onExcelDownload={() => downloadStatisticExcel(userId)}
           />
         </FormProvider>
       </AccountLayout>

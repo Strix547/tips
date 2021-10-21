@@ -4,7 +4,13 @@ import 'react-phone-input-2/lib/style.css'
 
 import * as S from './PhoneField.styled'
 
-export const PhoneField = ({ name, rules, placeholder, country, ...props }) => {
+export const PhoneField = ({
+  name = 'phone',
+  rules = { required: true, minLength: 11 },
+  placeholder = '+7 (___) ___-__-__',
+  country = 'ru',
+  ...props
+}) => {
   const {
     control,
     formState: { errors }
@@ -20,14 +26,15 @@ export const PhoneField = ({ name, rules, placeholder, country, ...props }) => {
       render={({ field }) => {
         return (
           <S.PhoneField haveError={haveError}>
-            <S.Text>Номер телефона</S.Text>
+            <S.Label>Номер телефона</S.Label>
 
             <PhoneInputLib
               {...field}
               {...props}
-              mask={{ ru: '7(...) ...-..-..' }}
+              name={name}
               country={country}
               placeholder={placeholder}
+              mask={{ ru: '7(...) ...-..-..' }}
             />
           </S.PhoneField>
         )

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 import { observer } from 'mobx-react-lite'
 import { Radio } from '@material-ui/core'
 
@@ -9,13 +9,14 @@ import { localStore } from 'store'
 
 import * as S from './TipAmount.styled'
 
-export const TipAmount = observer(({ presets = [100, 149, 299] }) => {
-  const useFormProps = useForm()
-  const { watch, setValue } = useFormProps
+export const TipAmount = observer(({ presets }) => {
+  const useFormProps = useFormContext()
+  const { watch, setValue, clearErrors } = useFormProps
 
   useEffect(() => {
     if (watch('preset')) {
-      setValue('amount', watch('preset'))
+      setValue('tipAmount', watch('preset'))
+      clearErrors('tipAmount')
     }
   }, [watch('preset')])
 
@@ -32,7 +33,7 @@ export const TipAmount = observer(({ presets = [100, 149, 299] }) => {
           <S.BaseAmountRadio
             active={parseInt(watch('preset'), 10) === value}
             onClick={() => {
-              setValue('amount', value)
+              setValue('tipAmount', value)
             }}
           >
             {value} {currency}
@@ -45,16 +46,15 @@ export const TipAmount = observer(({ presets = [100, 149, 299] }) => {
 
   return (
     <S.TipAmount>
-      <FormProvider {...useFormProps}>
-        <FormField
-          label="Сумма чаевых"
-          name="amount"
-          placeholder={`От ${minPresetValue} до ${maxPresetValue}`}
-          InputProps={{ endAdornment: currency }}
-        />
+      <FormField
+        label="Сумма чаевых"
+        name="tipAmount"
+        placeholder={`От ${minPresetValue} до ${maxPresetValue}`}
+        InputProps={{ endAdornment: currency }}
+        required
+      />
 
-        <RadioGroup name="preset">{baseAmountRadios}</RadioGroup>
-      </FormProvider>
+      <RadioGroup name="preset">{baseAmountRadios}</RadioGroup>
     </S.TipAmount>
   )
 })

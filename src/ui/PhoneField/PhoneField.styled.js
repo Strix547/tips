@@ -1,20 +1,13 @@
 import styled, { css } from 'styled-components'
 
-import { Text } from 'styled'
+import { Label } from 'styled'
 
-export { Text }
+export { Label }
 
 export const PhoneField = styled.div`
   position: relative;
 
-  ${Text} {
-    font-weight: 500;
-    color: var(--color-black-200);
-  }
-
   .react-tel-input {
-    margin-top: 10px;
-
     .form-control {
       width: 100%;
       height: 56px;

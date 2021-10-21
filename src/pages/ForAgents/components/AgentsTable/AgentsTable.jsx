@@ -5,7 +5,7 @@ import { TimePeriodFilter, StatisticRow } from 'components'
 import { Table } from 'ui'
 
 import { userStore } from 'store'
-import { formatPrice } from 'utils'
+import { getPriceLabel } from 'utils'
 
 import * as S from './AgentsTable.styled'
 
@@ -39,49 +39,49 @@ export const AgentsTable = observer(() => {
     {
       id: 1,
       date: new Date().toLocaleDateString(),
-      tipAmount: formatPrice(4983, currency),
+      tipAmount: getPriceLabel(4983, currency),
       email: 'afansyef.evgen20@gmail.com'
     },
     {
       id: 2,
       date: new Date().toLocaleDateString(),
-      tipAmount: formatPrice(4983, currency),
+      tipAmount: getPriceLabel(4983, currency),
       email: 'afansyef.evgen20@gmail.com'
     },
     {
       id: 3,
       date: new Date().toLocaleDateString(),
-      tipAmount: formatPrice(4983, currency),
+      tipAmount: getPriceLabel(4983, currency),
       email: 'afansyef.evgen20@gmail.com'
     },
     {
       id: 4,
       date: new Date().toLocaleDateString(),
-      tipAmount: formatPrice(4983, currency),
+      tipAmount: getPriceLabel(4983, currency),
       email: 'afansyef.evgen20@gmail.com'
     },
     {
       id: 5,
       date: new Date().toLocaleDateString(),
-      tipAmount: formatPrice(4983, currency),
+      tipAmount: getPriceLabel(4983, currency),
       email: 'afansyef.evgen20@gmail.com'
     },
     {
       id: 6,
       date: new Date().toLocaleDateString(),
-      tipAmount: formatPrice(4983, currency),
+      tipAmount: getPriceLabel(4983, currency),
       email: 'afansyef.evgen20@gmail.com'
     },
     {
       id: 7,
       date: new Date().toLocaleDateString(),
-      tipAmount: formatPrice(4983, currency),
+      tipAmount: getPriceLabel(4983, currency),
       email: 'afansyef.evgen20@gmail.com'
     },
     {
       id: 8,
       date: new Date().toLocaleDateString(),
-      tipAmount: formatPrice(4983, currency),
+      tipAmount: getPriceLabel(4983, currency),
       email: 'afansyef.evgen20@gmail.com'
     }
   ]
