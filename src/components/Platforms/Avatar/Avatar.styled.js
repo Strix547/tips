@@ -21,7 +21,7 @@ export const CompanyLogo = styled.div`
     height: auto !important;
     min-width: auto !important;
     min-height: auto !important;
-    margin: 0 !important;
+    margin: 0 auto !important;
   }
 `
 

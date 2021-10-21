@@ -1,1 +1,1 @@
-export { Rating } from './Rating.styled'
+export { Rating } from './Rating'

@@ -15,33 +15,47 @@ import * as S from './QrCodes.styled'
 export const QrCodesPage = observer(() => {
   const router = useRouter()
   const { id: userId, role } = userStore
-  const { qrCodes, isQrCodesLoading } = qrCodesStore
-
-  const isPlatform = role === 'BUSINESS'
+  const { qrCodesIndividuals, qrCodesPlatforms, isQrCodesLoading } = qrCodesStore
 
   useEffect(async () => {
     if (!userId || !role) return
 
-    const getQrCodes = isPlatform
-      ? qrCodesStore.getPlatformQrCodes
-      : qrCodesStore.getIndividualQrCodes
+    if (role === 'BUSINESS') {
+      qrCodesStore.getPlatformQrCodes(userId)
+    }
 
-    getQrCodes(userId)
+    qrCodesStore.getIndividualQrCodes(userId)
   }, [userId, role])
 
   const toQrCreatePage = () => {
-    router.push(
-      isPlatform ? ROUTE_NAMES.ACCOUNT_PLATFORMS_CREATE : ROUTE_NAMES.ACCOUNT_QR_INDIVIDUALS_CREATE
-    )
+    router.push(ROUTE_NAMES.ACCOUNT_QR_INDIVIDUALS_CREATE)
   }
 
-  const qrCodeList = qrCodes.length ? (
-    qrCodes.map(({ id, templateId, name, img }) => (
-      <QrCard key={id} id={id} templateId={templateId} tag="li" label={name} img={img} />
-    ))
-  ) : (
-    <S.NoQrCodesText>No qr codes</S.NoQrCodesText>
-  )
+  const qrCodeIndividualsList = qrCodesIndividuals.map(({ id, templateId, name, img }) => (
+    <QrCard
+      key={id}
+      id={id}
+      type="individual"
+      templateId={templateId}
+      tag="li"
+      label={name}
+      img={img}
+    />
+  ))
+
+  const qrCodePlatformsList = qrCodesPlatforms.map(({ id, templateId, name, img }) => (
+    <QrCard
+      key={id}
+      id={id}
+      type="platform"
+      templateId={templateId}
+      tag="li"
+      label={name}
+      img={img}
+    />
+  ))
+
+  const qrCodeList = [...qrCodePlatformsList, ...qrCodeIndividualsList]
 
   return (
     <>
@@ -51,7 +65,9 @@ export const QrCodesPage = observer(() => {
 
       <AccountLayout title="Мои QR" button={{ label: 'Добавить QR-код', onClick: toQrCreatePage }}>
         {!isQrCodesLoading ? (
-          <S.QrGrid>{qrCodeList}</S.QrGrid>
+          <S.QrGrid>
+            {qrCodeList.length ? qrCodeList : <S.NoQrCodesText>No qr codes</S.NoQrCodesText>}
+          </S.QrGrid>
         ) : (
           <S.QrGridSkeleton>
             <Skeleton height={418} count={3} />

@@ -8,7 +8,7 @@ export const RatingRow = () => {
       <S.Text>Рейтинг</S.Text>
 
       <S.RatingContainer>
-        <Rating />
+        <Rating name="rating" />
       </S.RatingContainer>
     </S.RatingRow>
   )

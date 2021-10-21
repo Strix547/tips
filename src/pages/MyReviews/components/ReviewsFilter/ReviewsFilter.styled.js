@@ -5,7 +5,7 @@ import { media } from 'styles/media'
 
 import { Select } from 'ui/Select/Select.styled'
 import { RadioGroup } from 'ui/RadioGroup/RadioGroup.styled'
-import { Autocomplete } from 'ui/Autocomplete/Autocomplete.styled'
+import { Autocomplete, Popper } from 'ui/Autocomplete/Autocomplete.styled'
 import { TimePeriodFilter } from 'components/TimePeriodFilter/TimePeriodFilter.styled'
 
 export { Label }
@@ -93,6 +93,17 @@ export const PlatformField = styled(Field)`
     .form-field-input-root {
       border-radius: 46px;
     }
+
+    .MuiAutocomplete-popper {
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      border-top: 1px solid var(--color-gray-400);
+      margin-top: 10px;
+    }
+
+    .MuiAutocomplete-paper {
+      border-radius: 8px;
+    }
   }
 `
 
@@ -104,6 +115,12 @@ export const RatingField = styled(Field)`
 
     .select-root {
       border-radius: 46px;
+    }
+
+    .menu-paper {
+      border-radius: 8px;
+      border-top: 1px solid var(--color-gray-400);
+      margin-top: 10px;
     }
   }
 

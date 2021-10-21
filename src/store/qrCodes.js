@@ -10,7 +10,8 @@ import * as platformsApi from 'api/platforms'
 import * as userApi from 'api/user'
 
 export const qrCodesStore = makeAutoObservable({
-  qrCodes: [],
+  qrCodesIndividuals: [],
+  qrCodesPlatforms: [],
   isQrCodesLoading: false,
   qrCode: {
     name: '',
@@ -58,14 +59,14 @@ export const qrCodesStore = makeAutoObservable({
   getIndividualQrCodes: async (userId) => {
     qrCodesStore.isQrCodesLoading = true
     const qrCodes = await qrCodesApi.getIndividualQrCodes(userId)
-    qrCodesStore.qrCodes = qrCodes
+    qrCodesStore.qrCodesIndividuals = qrCodes
     qrCodesStore.isQrCodesLoading = false
   },
 
   getPlatformQrCodes: async (userId) => {
     qrCodesStore.isQrCodesLoading = true
     const qrCodes = await qrCodesApi.getPlatformQrCodes(userId)
-    qrCodesStore.qrCodes = qrCodes
+    qrCodesStore.qrCodesPlatforms = qrCodes
     qrCodesStore.isQrCodesLoading = false
   },
 

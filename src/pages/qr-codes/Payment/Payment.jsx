@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 
 import { PaymentCardIndividual, PlatformPaymentCard } from 'components'
 
-import { paymentStore, userStore } from 'store'
+import { paymentStore } from 'store'
 
 import * as S from './Payment.styled'
 
@@ -14,15 +14,16 @@ export const QrPaymentPage = observer(() => {
   const router = useRouter()
   const useFormProps = useForm({
     defaultValues: {
-      impression: '😊'
+      impression: '😊',
+      rating: 5
     }
   })
-  const { handleSubmit, reset } = useFormProps
+  const { handleSubmit } = useFormProps
 
-  const { role } = userStore
   const { paymentData, isPaymentDataLoading } = paymentStore
-  const { name, firstName, lastName } = paymentData
-  const isPlatform = role === 'BUSINESS'
+  const { name, firstName, lastName, type } = paymentData
+
+  const isPlatformQr = type === 'BUSINESS'
   const qrId = router.query.id
 
   useEffect(() => {
@@ -31,27 +32,15 @@ export const QrPaymentPage = observer(() => {
     }
   }, [qrId])
 
-  useEffect(() => {
-    if (isPaymentDataLoading) return
-
-    const { amountPresets } = paymentData
-
-    reset({
-      preset1: amountPresets[0],
-      preset2: amountPresets[1],
-      preset3: amountPresets[2]
-    })
-  }, [paymentData, isPaymentDataLoading])
-
-  const onTipsPay = ({ tipAmount, impression }) => {
-    const payMethod = isPlatform ? paymentStore.payTipsPlatform : paymentStore.payTipsIndividual
-
-    payMethod({
-      qrId,
-      tipAmount,
-      impression
-    })
+  const onTipsPay = ({ tipAmount, impression, rating, comment }) => {
+    if (isPlatformQr) {
+      paymentStore.payTipsPlatform({ qrId, tipAmount, impression, rating, comment })
+    } else {
+      paymentStore.payTipsIndividual({ qrId, tipAmount, impression })
+    }
   }
+
+  if (isPaymentDataLoading) return null
 
   return (
     <>
@@ -66,7 +55,7 @@ export const QrPaymentPage = observer(() => {
 
         <form onSubmit={handleSubmit(onTipsPay)}>
           <FormProvider {...useFormProps}>
-            {isPlatform ? <PlatformPaymentCard /> : <PaymentCardIndividual />}
+            {isPlatformQr ? <PlatformPaymentCard /> : <PaymentCardIndividual />}
           </FormProvider>
         </form>
       </S.RecipientCardContainer>

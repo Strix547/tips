@@ -18,7 +18,7 @@ import PenIcon from '@public/icons/pen.svg'
 import TrashIcon from '@public/icons/trash.svg'
 import ArrowRightIcon from '@public/icons/arrows/gray-right.svg'
 
-export const QrCard = observer(({ id, templateId, label, img, tag }) => {
+export const QrCard = observer(({ id, type, templateId, label, img, tag }) => {
   const router = useRouter()
 
   const [isQrModalOpen, setQrModalOpen] = useState(false)
@@ -88,8 +88,8 @@ export const QrCard = observer(({ id, templateId, label, img, tag }) => {
         </S.ActionRowCol>
 
         <S.ActionRowCol>
-          {createActionButton(actions[2])}
-          {createActionButton(actions[3])}
+          {type !== 'platform' && createActionButton(actions[2])}
+          {type !== 'platform' && createActionButton(actions[3])}
         </S.ActionRowCol>
       </S.ActionRow>
 

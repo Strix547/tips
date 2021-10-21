@@ -22,7 +22,8 @@ export const QrPlatformEditPage = observer(() => {
   const platformId = router.query.id
   const { isQrCodeLoading, qrCode } = qrCodesStore
   const { isPlatformNameLoading, platformName } = platformsStore
-  const { rating, reviews, preset1, preset2, preset3, impression, btnColor, bgColor } = watch()
+  const { ratingSwitch, reviews, preset1, preset2, preset3, impressions, btnColor, bgColor } =
+    watch()
 
   // load qr code
   useEffect(() => {
@@ -44,8 +45,8 @@ export const QrPlatformEditPage = observer(() => {
       preset1: amountPresets[0],
       preset2: amountPresets[1],
       preset3: amountPresets[2],
-      impression,
-      rating,
+      impressions: impression,
+      ratingSwitch: rating,
       reviews,
       btnColor: { hex: btnColor },
       bgColor: { hex: bgColor }
@@ -62,15 +63,15 @@ export const QrPlatformEditPage = observer(() => {
   }
 
   const editQr = () => {
-    const { rating, reviews, preset1, preset2, preset3, impression, btnColor, bgColor } =
+    const { ratingSwitch, reviews, preset1, preset2, preset3, impressions, btnColor, bgColor } =
       getValues()
 
     qrCodesStore.changePlatformQrCode({
       platformId,
-      rating,
+      rating: ratingSwitch,
       reviews,
       amountPresets: [preset1, preset2, preset3],
-      impression,
+      impression: impressions,
       btnColor: btnColor.hex,
       bgColor: bgColor.hex,
       logo: companyLogoFile
@@ -98,10 +99,10 @@ export const QrPlatformEditPage = observer(() => {
                 company={{ name: platformName, logo: companyImg.src }}
                 firstName="Вася"
                 lastName="Пупкин"
-                rating={rating}
+                rating={ratingSwitch}
                 reviews={reviews}
                 amountPresets={[preset1, preset2, preset3]}
-                impression={impression}
+                impression={impressions}
                 btnColor={btnColor?.hex}
                 bgColor={bgColor?.hex}
               />

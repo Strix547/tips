@@ -10,37 +10,17 @@ const transformIndividualPaymentData = ({
   presetPaymentSizes,
   firstName,
   lastName,
-  smiles
+  smiles,
+  logoFileUrl,
+  reviews,
+  rating,
+  backgroundHexColor,
+  buttonHexColor
 }) => {
   return {
     type,
     pageId: paymentPageId,
     avatar: avatarFileUrl && `${window.location.origin}${avatarFileUrl}`,
-    name,
-    firstName,
-    lastName,
-    amountPresets: presetPaymentSizes,
-    impression: smiles
-  }
-}
-
-const transformPlatformPaymentData = ({
-  type,
-  logoFileUrl,
-  paymentPageId,
-  name,
-  presetPaymentSizes,
-  firstName,
-  lastName,
-  smiles,
-  backgroundHexColor,
-  buttonHexColor,
-  reviews,
-  rating
-}) => {
-  return {
-    type,
-    pageId: paymentPageId,
     logo: logoFileUrl && `${window.location.origin}${logoFileUrl}`,
     name,
     firstName,
@@ -76,9 +56,4 @@ export const payTipsPlatform = async ({ paymentPageId, sum, smile, userId, revie
   })
 
   return data.payUrl
-}
-
-export const getPlatformPaymentData = async (platformId) => {
-  const { data } = await API.get(`/business-payment-page-template/${platformId}`)
-  return transformPlatformPaymentData(data)
 }

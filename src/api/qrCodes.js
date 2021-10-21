@@ -11,7 +11,12 @@ const transformQrData = ({
   personPaymentPageTemplateId,
   presetPaymentSizes,
   smiles,
-  qrImagePngRef
+  qrImagePngRef,
+  reviews,
+  rating,
+  backgroundHexColor,
+  buttonHexColor,
+  logoFileUrl
 }) => {
   return {
     id: paymentPageId,
@@ -20,7 +25,12 @@ const transformQrData = ({
     name,
     amountPresets: presetPaymentSizes,
     impression: smiles,
-    img: qrImagePngRef
+    img: qrImagePngRef,
+    bgColor: backgroundHexColor,
+    btnColor: buttonHexColor,
+    reviews,
+    rating,
+    logo: logoFileUrl && `${window.location.origin}${logoFileUrl}`
   }
 }
 

@@ -57,13 +57,13 @@ export const PlatformPaymentCardOptionsPanel = observer(
 
         <S.Options>
           <S.Label>Рейтинг (звездочки)</S.Label>
-          <Switch name="rating" size="big" />
+          <Switch name="ratingSwitch" size="big" />
 
           <S.Label>Отзывы</S.Label>
           <Switch name="reviews" size="big" />
 
           <S.Label>Впечатления</S.Label>
-          <Switch name="impression" size="big" />
+          <Switch name="impressions" size="big" />
         </S.Options>
 
         <ColorPickerField

@@ -6,7 +6,6 @@ import StarIcon from '@public/icons/star.svg'
 export const Rating = styled((props) => (
   <MuiRating
     {...props}
-    name="rating"
     emptyIcon={<StarIcon fill="#C8C9CF" />}
     icon={<StarIcon fill="#FEA929" />}
     classes={{

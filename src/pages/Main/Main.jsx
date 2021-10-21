@@ -36,7 +36,7 @@ export const UserMainPage = observer(() => {
       : statisticsStore.getIndividualIncomeStatistics
 
   useEffect(() => {
-    if (!userId && !currency && !role) return
+    if (!userId || !currency || !role) return
 
     const commonData = {
       format: 'JSON',
@@ -60,7 +60,7 @@ export const UserMainPage = observer(() => {
         periodTo: periodToSelected
       })
     }
-  }, [role, userId, periodSelected, periodFromSelected, periodToSelected])
+  }, [role, userId, currency, periodSelected, periodFromSelected, periodToSelected])
 
   const toQrCodesPage = () => {
     router.push(ROUTE_NAMES.ACCOUNT_QR_INDIVIDUALS_CREATE)

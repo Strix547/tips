@@ -1,23 +1,12 @@
-import { useState } from 'react'
+import { useFormContext, Controller } from 'react-hook-form'
 
 import * as S from './FeedbackTextarea.styled'
 
 export const FeedbackTextarea = () => {
-  const [comment, setComment] = useState(null)
-  const [commentLength, setCommentLength] = useState(null)
+  const { control, watch } = useFormContext()
 
   const lengthAvailable = 1000
-
-  const onCommentChange = ({ target }) => {
-    const commentLength = parseInt(target.value.length, 10)
-
-    if (commentLength > lengthAvailable) {
-      return
-    }
-
-    setComment(target.value)
-    setCommentLength(commentLength)
-  }
+  const commentLength = watch('comment')?.length
 
   return (
     <S.FeedbackTextarea>
@@ -30,11 +19,22 @@ export const FeedbackTextarea = () => {
         </S.Text>
       </S.Top>
 
-      <S.Textarea
+      <Controller
+        control={control}
         name="comment"
-        placeholder="Ваш комментарий"
-        value={comment}
-        onChange={onCommentChange}
+        render={({ field: { value, onChange } }) => (
+          <S.Textarea
+            placeholder="Ваш комментарий"
+            value={value}
+            onChange={(e) => {
+              if (e.target.value.length > lengthAvailable) {
+                return
+              }
+
+              onChange(e)
+            }}
+          />
+        )}
       />
     </S.FeedbackTextarea>
   )

@@ -22,15 +22,6 @@ export const paymentStore = makeAutoObservable({
     paymentStore.isPaymentDataLoading = false
   },
 
-  getPlatformPaymentData: async (plaftormId) => {
-    paymentStore.isPaymentDataLoading = true
-
-    const paymentData = await paymentApi.getPlatformPaymentData(plaftormId)
-    paymentStore.paymentData = paymentData
-
-    paymentStore.isPaymentDataLoading = false
-  },
-
   payTipsIndividual: async ({ qrId, userId, tipAmount, impression }) => {
     const payUrl = await paymentApi.payTipsIndividual({
       paymentPageId: qrId,

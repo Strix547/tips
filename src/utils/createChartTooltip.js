@@ -10,7 +10,7 @@ export const createChartTooltip = (context, offsetTop, offsetLeft) => {
     tooltipEl.innerHTML = '<table></table>'
     document.body.appendChild(tooltipEl)
   }
-  console.log(5, context.tooltip)
+
   // Hide if no tooltip
   const tooltipModel = context.tooltip
   if (tooltipModel.opacity === 0) {

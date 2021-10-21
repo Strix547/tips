@@ -20,6 +20,26 @@ const transformIncomeStatistics = ({
   }
 }
 
+const transformPlatformIncomeStatistics = ({
+  localDateTime,
+  paymentId,
+  paymentPageId,
+  title,
+  income,
+  smile,
+  type
+}) => {
+  return {
+    id: paymentId,
+    qrName: title,
+    paymentPageId,
+    dateTime: new Date(localDateTime),
+    tipAmount: income,
+    impression: smile,
+    type
+  }
+}
+
 export const getIndividualIncomeStatistics = async ({
   userId,
   currency = 'eur',
@@ -144,7 +164,7 @@ export const getBusinessIncomeStatistics = async ({
   const { table, diagram } = JSON.parse(data).result
 
   return {
-    table: table.map((item) => transformIncomeStatistics(item)),
+    table: table.map((item) => transformPlatformIncomeStatistics(item)),
     diagram: diagram.map(({ localDate, sum }) => ({ date: new Date(localDate), tipAmount: sum }))
   }
 }

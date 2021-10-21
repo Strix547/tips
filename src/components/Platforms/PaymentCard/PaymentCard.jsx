@@ -12,7 +12,7 @@ import avatar from '@public/img/placeholders/avatar.png'
 import companyLogo from '@public/img/placeholders/company-logo.png'
 
 export const PlatformPaymentCard = observer(() => {
-  const { name, firstName, lastName, amountPresets, impression, reviews, rating, logo } =
+  const { name, firstName, lastName, amountPresets, impression, comment, rating, logo } =
     paymentStore.paymentData
 
   const avatarPreview = paymentStore.paymentData.avatar || avatar
@@ -35,7 +35,7 @@ export const PlatformPaymentCard = observer(() => {
 
         {rating && <RatingRow />}
 
-        {reviews && <FeedbackTextarea />}
+        {comment && <FeedbackTextarea />}
 
         <Button type="submit">Заплатить</Button>
 
