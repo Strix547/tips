@@ -64,8 +64,10 @@ export const PlatformCard = observer(
     ]
 
     const actionList = actions.map(({ label, content, onClick }) => (
-      <li key={label} onClick={() => onClick(id)}>
-        {content}
+      <li key={label}>
+        <button type="button" onClick={() => onClick(id)}>
+          {content}
+        </button>
       </li>
     ))
 

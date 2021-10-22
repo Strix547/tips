@@ -108,5 +108,12 @@ export const ActionList = styled.ul`
     width: 48px;
     height: 48px;
     cursor: pointer;
+
+    button {
+      background: transparent;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
   }
 `

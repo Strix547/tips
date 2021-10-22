@@ -3,13 +3,14 @@ import { observer } from 'mobx-react-lite'
 import { MuiThemeProvider } from '@material-ui/core'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
+import NProgress from 'nprogress'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
 import { Notifications } from 'components'
 
 import { userStore } from 'store'
-import { ROUTES, PROTECTED_ROUTES } from 'core/routes'
+import { ROUTE_NAMES, ROUTES } from 'core/routes'
 
 import { createTheme } from '@material-ui/core/styles'
 
@@ -22,12 +23,6 @@ const stripePromise = loadStripe(
 
 const App = ({ Component, pageProps }) => {
   const router = useRouter()
-  const { isIdLoading, role, id } = userStore
-
-  const currentPathname = router.pathname
-  const isAuthRoute = currentPathname === ROUTES.AUTH
-  const isProtectedRoute = PROTECTED_ROUTES.includes(currentPathname)
-
   const theme = createTheme({
     props: {
       MuiButtonBase: { disableRipple: true }
@@ -41,34 +36,71 @@ const App = ({ Component, pageProps }) => {
     }
   })
 
-  useEffect(async () => {
-    const id = await userStore.getMyId()
+  const { isIdLoading, id: userId } = userStore
 
-    if (id) {
-      await userStore.getUserRole(id)
-      await userStore.getPersonalData(id)
-    }
+  const currentPathname = router.pathname
+  const isAuthRoute = currentPathname === ROUTE_NAMES.AUTH
+  const currentRouteConfig = ROUTES.find(({ path }) => currentPathname === path)
+  const isProtectedRoute = currentRouteConfig?.isProtected
+  const isBusinessRoute = currentRouteConfig?.forBusinessAccount
 
-    if (id && isAuthRoute) {
-      window.location.href = ROUTES.ACCOUNT
-      return
-    }
+  const onRouteLoading = () => {
+    NProgress.start()
+  }
 
-    if (!id && isProtectedRoute && currentPathname !== ROUTES.AUTH) {
-      window.location.href = ROUTES.AUTH
+  const onRouteLoaded = () => {
+    NProgress.done()
+  }
+
+  useEffect(() => {
+    router.events.on('routeChangeStart', onRouteLoading)
+    router.events.on('routeChangeComplete', onRouteLoaded)
+    router.events.on('routeChangeError', onRouteLoaded)
+
+    return () => {
+      router.events.off('routeChangeStart', onRouteLoading)
+      router.events.off('routeChangeComplete', onRouteLoaded)
+      router.events.off('routeChangeError', onRouteLoaded)
     }
   }, [])
 
-  const getContent = (isIdLoading, role, isProtectedRoute, pageProps) => {
-    if (isIdLoading) return null
+  useEffect(async () => {
+    // first load data and redirects
 
-    if (role === 'UNVERIFIED' && isProtectedRoute && currentPathname !== ROUTES.ACCOUNT_IDENTIFY) {
-      router.push(ROUTES.ACCOUNT_IDENTIFY)
+    const id = await userStore.getMyId()
+
+    if (!id && isProtectedRoute && !isAuthRoute) {
+      router.push(ROUTE_NAMES.AUTH)
+    }
+
+    if (!id) return
+
+    const role = await userStore.getUserRole(id)
+    await userStore.getPersonalData(id)
+
+    if (
+      role === 'UNVERIFIED' &&
+      (isProtectedRoute || currentPathname === ROUTE_NAMES.AUTH) &&
+      currentPathname !== ROUTE_NAMES.ACCOUNT_IDENTIFY
+    ) {
+      router.push(ROUTE_NAMES.ACCOUNT_IDENTIFY)
       return
     }
 
-    return <Component {...pageProps} stripePromise={stripePromise} />
-  }
+    if (role !== 'BUSINESS' && isBusinessRoute) {
+      router.push(ROUTE_NAMES.ACCOUNT_UPGRADE_TO_BUSINESS)
+      return
+    }
+
+    if (role === 'BUSINESS' && currentPathname === ROUTE_NAMES.ACCOUNT_UPGRADE_TO_BUSINESS) {
+      router.push(ROUTE_NAMES.ACCOUNT)
+      return
+    }
+
+    if (isAuthRoute) {
+      router.push(ROUTE_NAMES.ACCOUNT)
+    }
+  }, [])
 
   return (
     <>
@@ -83,7 +115,9 @@ const App = ({ Component, pageProps }) => {
 
       <MuiThemeProvider theme={theme}>
         <Elements stripe={stripePromise}>
-          {getContent(isIdLoading, role, isProtectedRoute, pageProps)}
+          {!isIdLoading && (userId || userId === 0) ? (
+            <Component {...pageProps} stripePromise={stripePromise} />
+          ) : null}
           <Notifications />
         </Elements>
       </MuiThemeProvider>

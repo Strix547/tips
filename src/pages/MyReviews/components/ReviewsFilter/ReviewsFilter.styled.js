@@ -5,7 +5,7 @@ import { media } from 'styles/media'
 
 import { Select } from 'ui/Select/Select.styled'
 import { RadioGroup } from 'ui/RadioGroup/RadioGroup.styled'
-import { Autocomplete, Popper } from 'ui/Autocomplete/Autocomplete.styled'
+import { Autocomplete } from 'ui/Autocomplete/Autocomplete.styled'
 import { TimePeriodFilter } from 'components/TimePeriodFilter/TimePeriodFilter.styled'
 
 export { Label }

@@ -9,7 +9,6 @@ import { paymentStore } from 'store'
 import * as S from './PaymentCard.styled'
 
 import avatar from '@public/img/placeholders/avatar.png'
-import companyLogo from '@public/img/placeholders/company-logo.png'
 
 export const PlatformPaymentCard = observer(() => {
   const { name, firstName, lastName, amountPresets, impression, comment, rating, logo } =
