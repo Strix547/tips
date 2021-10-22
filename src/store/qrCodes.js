@@ -156,7 +156,7 @@ export const qrCodesStore = makeAutoObservable({
     logoFileId
   }) => {
     try {
-      await platformsApi.changeBusinessQrCode({
+      await platformsApi.changePlatformQrCode({
         platformId,
         presetPaymentSizes: amountPresets,
         reviews,

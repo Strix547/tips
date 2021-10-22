@@ -1,1 +1,1 @@
-export { Fail } from './Fail'
+export { FailPage } from './Fail'
