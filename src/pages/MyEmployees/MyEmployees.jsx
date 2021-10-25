@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
-import Head from 'next/head'
 import { observer } from 'mobx-react-lite'
 import Skeleton from 'react-loading-skeleton'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 import { AccountLayout } from 'layout'
 import { EmployeeTable } from 'components'
@@ -14,54 +14,6 @@ import * as S from './MyEmployees.styled'
 
 export const MyEmployeesPage = observer(() => {
   const router = useRouter()
-
-  // const employees = [
-  //   {
-  //     id: 1,
-  //     number: 1392051820,
-  //     firstName: 'Alexey',
-  //     lastName: 'Berezin',
-  //     email: 'afansyef.evgen2011@gmail.com',
-  //     platform: 'Ресторан Чечки Бречки',
-  //     statistics: 1890
-  //   },
-  //   {
-  //     id: 2,
-  //     number: 1392051820,
-  //     firstName: 'Artem',
-  //     lastName: 'Berezin',
-  //     email: 'afansyef.evgen2012@gmail.com',
-  //     platform: 'Ресторан Чечки Бречки',
-  //     statistics: 1330
-  //   },
-  //   {
-  //     id: 3,
-  //     number: 1392052320,
-  //     firstName: 'Alexander',
-  //     lastName: 'Berezin',
-  //     email: 'afansyef.evgen2033@gmail.com',
-  //     platform: 'Ресторан Чечки Бречки',
-  //     statistics: 1220
-  //   },
-  //   {
-  //     id: 4,
-  //     number: 1343434320,
-  //     firstName: 'Andrey',
-  //     lastName: 'Berezin',
-  //     email: 'afansyef.evgen2044@gmail.com',
-  //     platform: 'Ресторан Чечки Бречки',
-  //     statistics: 1110
-  //   },
-  //   {
-  //     id: 5,
-  //     number: 1394234234,
-  //     firstName: 'Konstantin',
-  //     lastName: 'Berezin',
-  //     email: 'afansyef.evgen2055@gmail.com',
-  //     platform: 'Ресторан Чечки Бречки',
-  //     statistics: 1430
-  //   }
-  // ]
 
   const userId = userStore.id
   const { employees, isEmployeesLoading } = employeesStore

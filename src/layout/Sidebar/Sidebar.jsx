@@ -55,6 +55,10 @@ export const Sidebar = observer(() => {
     { label: 'Программа лояльности', link: ROUTE_NAMES.ACCOUNT_LOYALTY, icon: <TagIcon /> }
   ]
 
+  const onSignOut = () => {
+    authStore.signOut()
+  }
+
   const navList = nav.map(({ label, link, icon, forBusiness }) => (
     <S.NavItem key={label} active={pathname === link} bgRed={forBusiness && !isBusinessAccount}>
       <Link href={link}>
@@ -80,7 +84,7 @@ export const Sidebar = observer(() => {
           <LinkButton href={ROUTE_NAMES.ACCOUNT_SUPPORT}>Служба поддержки</LinkButton>
         </S.Support>
 
-        <S.LogoutButton onClick={() => authStore.signOut()}>
+        <S.LogoutButton type="button" onClick={() => onSignOut()}>
           <LogoutIcon />
           Выйти
         </S.LogoutButton>

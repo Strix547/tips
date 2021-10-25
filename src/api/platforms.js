@@ -102,7 +102,7 @@ export const changePlatform = async ({
 
 export const removePlatform = async (id) => {
   const res = await API.post(`${root}/${id}/remove`)
-  return res
+  handleResponse(res)
 }
 
 export const getPlatformQrCode = async (id) => {
@@ -155,7 +155,7 @@ export const getPlatform = async (id) => {
 export const getPlatforms = async (userId) => {
   const { data: platforms } = await API.get(`${root}`, { params: { 'owner-user-id': userId } })
 
-  return platforms.map((platform) => transformPlatform(platform))
+  return platforms?.map((platform) => transformPlatform(platform))
 }
 
 export const getPlatformTitles = async ({ platformTitleSearch, platformOwnerUserId }) => {
@@ -179,5 +179,5 @@ export const getReviews = async ({
     params: { ownerUserId, platformId, rating, zoneOffset, period, periodFrom, periodTo }
   })
 
-  return reviews.map((review) => transformReview(review))
+  return reviews?.map((review) => transformReview(review))
 }

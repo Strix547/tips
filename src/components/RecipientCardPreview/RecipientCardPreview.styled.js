@@ -64,4 +64,8 @@ export const TopBackground = styled.div`
 
 export const Button = styled(ButtonUI)`
   background: ${({ $color = 'var(--color-primary-200)' }) => $color};
+
+  &:hover {
+    background: ${({ $color = 'var(--color-primary-200)' }) => $color};
+  }
 `

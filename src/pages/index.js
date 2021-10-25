@@ -14,7 +14,12 @@ import {
 } from './landing'
 
 import { CommissionsPage } from './admin'
-import { MyPlatformsPage, PlatformCreatePage, PlatformEditPage } from './platforms'
+import {
+  MyPlatformsPage,
+  PlatformCreatePage,
+  PlatformEditPage,
+  PlatformStatisticsPage
+} from './platforms'
 import {
   QrIndividualCreatePage,
   QrIndividualEditPage,
@@ -38,6 +43,7 @@ import { FailPage } from './Fail'
 import { UpgradeToBusinessPage } from './UpgradeToBusiness'
 import { MyReviewsPage } from './MyReviews'
 import { EmployeeEditPage } from './EmployeeEdit'
+import { EmployeeStatisticsPage } from './EmployeeStatistics'
 
 export {
   AgentsPage,
@@ -75,5 +81,7 @@ export {
   QrPlatformEditPage,
   UpgradeToBusinessPage,
   MyReviewsPage,
-  EmployeeEditPage
+  EmployeeEditPage,
+  EmployeeStatisticsPage,
+  PlatformStatisticsPage
 }

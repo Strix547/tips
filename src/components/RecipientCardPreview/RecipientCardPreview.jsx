@@ -46,7 +46,7 @@ export const RecipientCardPreview = observer(
           </S.RecipientCardTop>
 
           <S.RecipientCardMain>
-            <TipAmount presets={amountPresets} />
+            <TipAmount presets={amountPresets} required={false} />
 
             {impression && <ImpressionRow />}
             {rating && <RatingRow />}

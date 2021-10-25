@@ -1,141 +1,78 @@
 import Skeleton from 'react-loading-skeleton'
 import { observer } from 'mobx-react-lite'
 import { toJS } from 'mobx'
-import Link from 'next/link'
 
 import { TimePeriodFilter, StatisticRow } from 'components'
 import { ExcelDownload } from 'common'
 import { Table } from 'ui'
 
-import { ROUTE_NAMES } from 'core/routes'
 import { userStore } from 'store'
-import { getPriceLabel } from 'utils'
 
 import * as S from './TipsTable.styled'
 
-export const TipsTable = observer(({ data = [], isDataLoading, onExcelDownload }) => {
-  const transformedData = toJS(data)
-  const haveTips = transformedData.length !== 0
+export const TipsTable = observer(
+  ({ data, columns, rows, cardList, haveCommission, isDataLoading, onExcelDownload }) => {
+    const dataJS = toJS(data)
+    const notEmpty = dataJS.length !== 0
+    const currencyLabel = userStore.personalData.currency.label
 
-  const currencyLabel = userStore.personalData.currency.label
+    const tipsTotal = dataJS
+      .map(({ tipAmount }) => tipAmount)
+      .reduce((amount, total) => amount + total, 0)
+    const tipsAverage = dataJS.length ? Number(tipsTotal / dataJS.length).toFixed(0) : 0
+    const commissionTotal = dataJS
+      .map(({ commission }) => commission)
+      .reduce((amount, total) => amount + total, 0)
 
-  const columns = [
-    {
-      headerName: 'Дата и время',
-      field: 'dateTime',
-      flex: 1
-    },
-    {
-      headerName: 'Имя QR-кода',
-      field: 'qrName',
-      flex: 1
-    },
-    {
-      headerName: 'Размер чаевых',
-      field: 'tipAmount',
-      flex: 1
-    },
-    {
-      headerName: 'Впечатление',
-      field: 'impression',
-      flex: 1
-    }
-  ]
+    const statisticTotal = !haveCommission
+      ? [
+          { label: 'Всего чаевых', value: tipsTotal },
+          { label: 'Средний чек', value: tipsAverage }
+        ]
+      : [
+          { label: 'Всего чаевых', value: tipsTotal },
+          { label: 'Средний чек', value: tipsAverage },
+          { label: 'Всего комиссия', value: commissionTotal }
+        ]
 
-  const rows = transformedData.map(({ id, dateTime, qrName, tipAmount, impression }) => ({
-    id,
-    dateTime: `${dateTime?.toLocaleDateString()} ${dateTime?.toLocaleTimeString().slice(0, 5)}`,
-    qrName,
-    tipAmount: getPriceLabel(tipAmount, currencyLabel),
-    impression
-  }))
+    const statisticRow = notEmpty ? (
+      <StatisticRow stats={statisticTotal} isLoading={isDataLoading} currency={currencyLabel} />
+    ) : null
 
-  const tipsTotal = transformedData
-    .map(({ tipAmount }) => tipAmount)
-    .reduce((amount, total) => amount + total, 0)
-  const tipsAverage = transformedData.length ? Number(tipsTotal / data.length).toFixed(0) : 0
+    return (
+      <S.TipsTable>
+        <S.Top>
+          <S.TopLeft>
+            <TimePeriodFilter />
+          </S.TopLeft>
 
-  const statisticTotal = [
-    { label: 'Всего чаевых', value: tipsTotal },
-    { label: 'Средний чек', value: tipsAverage }
-  ]
+          <ExcelDownload onClick={onExcelDownload} />
+        </S.Top>
 
-  const tipCardList = haveTips ? (
-    transformedData.map(({ qrId, qrName, dateTime, tipAmount, impression, type }) => {
-      return (
-        <S.TipCard key={qrId}>
-          <S.TipCardTop>
-            <S.Text>
-              {dateTime?.toLocaleDateString()} {dateTime?.toLocaleTimeString().slice(0, 5)}
-            </S.Text>
-            <S.Text>{getPriceLabel(tipAmount, currencyLabel)}</S.Text>
-          </S.TipCardTop>
+        <S.TableContainer>
+          {statisticRow}
 
-          <S.TipCardMain>
-            <S.TipCardRow>
-              <S.Text>Имя QR-кода</S.Text>
+          {!isDataLoading ? (
+            <Table columns={columns} rows={rows} />
+          ) : (
+            <S.TableSkeleton>
+              <Skeleton count={5} height={60} />
+            </S.TableSkeleton>
+          )}
 
-              {type === 'BUSINESS' ? (
-                <Link href={`${ROUTE_NAMES.QR_CODES}/${qrId}/edit`}>
-                  <a>{qrName}</a>
-                </Link>
-              ) : (
-                <S.Text>{qrName}</S.Text>
-              )}
-            </S.TipCardRow>
+          {!isDataLoading ? (
+            <S.TipCardList>
+              {notEmpty ? cardList : <S.NoTipsText>No tips for this period</S.NoTipsText>}
+            </S.TipCardList>
+          ) : (
+            <S.TipCardSkeleton>
+              <Skeleton count={5} height={184} />
+            </S.TipCardSkeleton>
+          )}
 
-            <S.TipCardRow>
-              <S.Text>Размер чаевых</S.Text>
-              <S.Text>{getPriceLabel(tipAmount, currencyLabel)}</S.Text>
-            </S.TipCardRow>
-
-            <S.TipCardRow>
-              <S.Text>Впечатление</S.Text>
-              <S.Text>{impression}</S.Text>
-            </S.TipCardRow>
-          </S.TipCardMain>
-        </S.TipCard>
-      )
-    })
-  ) : (
-    <S.NoTipsText>No tips for this period</S.NoTipsText>
-  )
-
-  const statisticRow = haveTips ? (
-    <StatisticRow stats={statisticTotal} isLoading={isDataLoading} currency={currencyLabel} />
-  ) : null
-
-  return (
-    <S.TipsTable>
-      <S.Top>
-        <S.TopLeft>
-          <TimePeriodFilter />
-        </S.TopLeft>
-
-        <ExcelDownload onClick={onExcelDownload} />
-      </S.Top>
-
-      <S.TableContainer>
-        {statisticRow}
-
-        {!isDataLoading ? (
-          <Table columns={columns} rows={rows} />
-        ) : (
-          <S.TableSkeleton>
-            <Skeleton count={5} height={60} />
-          </S.TableSkeleton>
-        )}
-
-        {!isDataLoading ? (
-          <S.TipCardList>{tipCardList}</S.TipCardList>
-        ) : (
-          <S.TipCardSkeleton>
-            <Skeleton count={5} height={184} />
-          </S.TipCardSkeleton>
-        )}
-
-        {statisticRow}
-      </S.TableContainer>
-    </S.TipsTable>
-  )
-})
+          {statisticRow}
+        </S.TableContainer>
+      </S.TipsTable>
+    )
+  }
+)

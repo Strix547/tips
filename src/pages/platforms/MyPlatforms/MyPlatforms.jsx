@@ -25,7 +25,7 @@ export const MyPlatformsPage = observer(() => {
     router.push(ROUTE_NAMES.ACCOUNT_PLATFORMS_CREATE)
   }
 
-  const platformList = platforms.map(
+  const platformList = platforms?.length ? platforms.map(
     ({ id, type, name, address, tipsAmountMonth, tipsAmountYear, active, employeeCount }) => (
       <PlatformCard
         key={id}
@@ -39,7 +39,7 @@ export const MyPlatformsPage = observer(() => {
         employeeCount={employeeCount}
       />
     )
-  )
+  ) : <S.Text>Нет платформ</S.Text>
 
   return (
     <>

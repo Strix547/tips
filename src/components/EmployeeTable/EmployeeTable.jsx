@@ -14,8 +14,8 @@ export const EmployeeTable = ({ employees }) => {
   const screenLess720 = useMediaQuery({ maxWidth: 720 })
 
   const renderActionCell = ({ row }) => {
-    const { id, platformId, available } = row
-    return <ActionsForm employeeId={id} platformId={platformId} available={available} />
+    const { employeeId, platformId, available } = row
+    return <ActionsForm employeeId={employeeId} platformId={platformId} available={available} />
   }
 
   const renderTooltip = (text) => {
@@ -32,16 +32,24 @@ export const EmployeeTable = ({ employees }) => {
     )
   }
 
-  const toEmployeeEditPage = ({ id }) => {
+  const toEmployeeEditPage = (employeeId) => {
     router.push({
       pathname: ROUTE_NAMES.ACCOUNT_EMPLOYEE_EDIT,
-      query: { id }
+      query: { id: employeeId }
     })
   }
 
-  const renderEmployeeCard = ({ id, platformId, fullName, phone, platform, statistics }) => {
+  const renderEmployeeCard = ({
+    id,
+    employeeId,
+    platformId,
+    fullName,
+    phone,
+    platform,
+    statistics
+  }) => {
     return (
-      <S.EmployeeCard onClick={() => toEmployeeEditPage({ id })}>
+      <S.EmployeeCard onClick={() => toEmployeeEditPage(employeeId)}>
         <S.EmployeeCardTop>
           <S.Text>{id}</S.Text>
 
@@ -100,9 +108,10 @@ export const EmployeeTable = ({ employees }) => {
     }
   ]
 
-  const rows = employees.map(
+  const rows = employees?.map(
     ({ id, platformId, firstName, lastName, phone, platformName, tips, available }) => ({
-      id,
+      id: `${platformId}` + `${id}`,
+      employeeId: id,
       fullName: `${firstName} ${lastName}`,
       phone,
       platform: platformName,
@@ -112,20 +121,27 @@ export const EmployeeTable = ({ employees }) => {
     })
   )
 
-  const employeeCardList = employees.map(({ id, firstName, lastName, phone, platformName, tips }) =>
-    renderEmployeeCard({
-      id,
-      fullName: `${firstName} ${lastName}`,
-      phone: `+${phone}`,
-      platform: platformName,
-      statistics: tips
-    })
+  const employeeCardList = employees?.map(
+    ({ id, platformId, firstName, lastName, phone, platformName, tips }) =>
+      renderEmployeeCard({
+        id: `${platformId}` + `${id}`,
+        employeeId: id,
+        fullName: `${firstName} ${lastName}`,
+        phone: `+${phone}`,
+        platform: platformName,
+        platformId,
+        statistics: tips
+      })
   )
 
   return (
     <S.EmployeeTable>
       {!screenLess720 ? (
-        <Table columns={columns} rows={rows} onRowClick={toEmployeeEditPage} />
+        <Table
+          columns={columns}
+          rows={rows}
+          onRowClick={({ row }) => toEmployeeEditPage(row.employeeId)}
+        />
       ) : (
         employeeCardList
       )}

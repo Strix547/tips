@@ -24,7 +24,6 @@ export const userStore = makeAutoObservable({
     address: '',
     currency: { label: '', value: '' }
   },
-  isUserLoading: false,
 
   getMyId: async () => {
     try {
@@ -165,19 +164,11 @@ export const userStore = makeAutoObservable({
   upgradeAccountToBusiness: async (userId) => {
     try {
       await userApi.upgradeAccountToBusiness(userId)
+      await userStore.getUserRole(userId)
       router.push(ROUTE_NAMES.ACCOUNT)
       toast.success('Account upgrated to business')
     } catch ({ message }) {
       toast.error(message)
     }
-  },
-
-  getUserByPhone: async (phone) => {
-    userStore.isUserLoading = true
-
-    const employeeId = await userApi.getUserByPhone(phone)
-
-    userStore.isUserLoading = false
-    return employeeId
   }
 })

@@ -4,7 +4,7 @@ import { PaymentCardOptionsPanelIndividual } from 'components/Individual/Payment
 
 import { media } from 'styles/media'
 
-export const Content = styled.div`
+export const Content = styled.form`
   display: flex;
 
   & > *:not(:last-child) {

@@ -4,11 +4,10 @@ import { createChartTooltip } from 'utils'
 
 import * as S from './LineChart.styled'
 
-export const LineChart = ({
-  labels = ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
-  values = [0, 400, 200, 300, 700, 300, 200, 800, 200, 100, 400, 200],
-  title
-}) => {
+export const LineChart = ({ data, title }) => {
+  const labels = data.map(({ date }) => date?.getDate())
+  const values = data.map(({ tipAmount }) => tipAmount)
+
   const getLineData = (canvas) => {
     const ctx = canvas.getContext('2d')
     const gradient = ctx.createLinearGradient(0, 0, 0, 320)
@@ -89,7 +88,7 @@ export const LineChart = ({
 
   return (
     <S.LineChart>
-      <S.Heading level={6}>{title}</S.Heading>
+      {title && <S.Heading level={6}>{title}</S.Heading>}
 
       <S.LineChartContainer>
         <Line

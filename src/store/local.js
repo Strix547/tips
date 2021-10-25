@@ -7,6 +7,8 @@ export const localStore = makeAutoObservable({
   cities: [],
   selectedCountryCode: null,
   currency: { label: '€', value: 'EUR' },
+  isAddressesLoading: false,
+  addresses: [],
 
   setSelectedCountryCode: (code) => {
     localStore.selectedCountryCode = code
@@ -35,5 +37,14 @@ export const localStore = makeAutoObservable({
     runInAction(() => {
       localStore.countries = countries
     })
+  },
+
+  getAddress: async (address) => {
+    localStore.isAddressesLoading = true
+
+    const addreses = await localApi.getAddress(address)
+    localStore.addresses = addreses
+
+    localStore.isAddressesLoading = false
   }
 })

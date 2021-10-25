@@ -9,7 +9,7 @@ import { localStore } from 'store'
 
 import * as S from './TipAmount.styled'
 
-export const TipAmount = observer(({ presets }) => {
+export const TipAmount = observer(({ presets, required = true }) => {
   const useFormProps = useFormContext()
   const { watch, setValue, clearErrors } = useFormProps
 
@@ -51,7 +51,7 @@ export const TipAmount = observer(({ presets }) => {
         name="tipAmount"
         placeholder={`От ${minPresetValue} до ${maxPresetValue}`}
         InputProps={{ endAdornment: currency }}
-        required
+        required={required}
       />
 
       <RadioGroup name="preset">{baseAmountRadios}</RadioGroup>

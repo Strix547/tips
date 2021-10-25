@@ -100,7 +100,7 @@ export const TableContainer = styled.div`
         top: -56px;
       }
 
-      &-cell {
+      /* &-cell {
         &:nth-child(1),
         &:nth-child(3),
         &:nth-child(4) {
@@ -111,7 +111,7 @@ export const TableContainer = styled.div`
           font-size: 24px;
           line-height: 60px;
         }
-      }
+      } */
     }
   }
 
@@ -275,4 +275,13 @@ export const TipCardSkeleton = styled.div`
 export const NoTipsText = styled(Text)`
   text-align: center;
   font-weight: 500;
+`
+
+export const RatingCell = styled.div`
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: 5px;
+  }
 `

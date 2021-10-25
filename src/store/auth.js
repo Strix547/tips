@@ -66,24 +66,10 @@ export const authStore = makeAutoObservable({
 
   signOut: async () => {
     await authApi.signOut()
+    await userApi.getMyId()
 
     authStore.isAuth = false
     authStore.step = 'phone'
-
-    userStore.id = null
-    userStore.role = null
-    userStore.personalData = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      dateOfBirth: '',
-      countryCode: '',
-      city: '',
-      address: '',
-      currency: { label: '', value: '' }
-    }
-
-    await userApi.getMyId()
 
     router.push(ROUTE_NAMES.RECIPIENTS)
   }

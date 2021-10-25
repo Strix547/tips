@@ -118,5 +118,77 @@ export const statisticsStore = makeAutoObservable({
     })
     statisticsStore.incomeStatistics = incomeStatistics
     statisticsStore.isIncomeStatisticsLoading = false
+  },
+
+  getEmployeeIncomeStatistics: async ({
+    userId,
+    employeeId,
+    format,
+    period,
+    zoneOffset,
+    periodFrom,
+    periodTo
+  }) => {
+    if (format === 'XLSX') {
+      statisticsApi.getBusinessIncomeStatistics({
+        ownerUserId: userId,
+        employeeUserId: employeeId,
+        format,
+        period,
+        zoneOffset,
+        periodFrom,
+        periodTo
+      })
+
+      return
+    }
+
+    statisticsStore.isIncomeStatisticsLoading = true
+    const incomeStatistics = await statisticsApi.getEmployeeIncomeStatistics({
+      ownerUserId: userId,
+      employeeUserId: employeeId,
+      format,
+      period,
+      zoneOffset,
+      periodFrom,
+      periodTo
+    })
+    statisticsStore.incomeStatistics = incomeStatistics
+    statisticsStore.isIncomeStatisticsLoading = false
+  },
+
+  getPlatformIncomeStatistics: async ({
+    platformId,
+    format,
+    period,
+    zoneOffset,
+    periodFrom,
+    periodTo
+  }) => {
+    if (format === 'XLSX') {
+      statisticsApi.getBusinessIncomeStatistics({
+        ownerUserId: userId,
+        employeeUserId: employeeId,
+        format,
+        period,
+        zoneOffset,
+        periodFrom,
+        periodTo
+      })
+
+      return
+    }
+
+    statisticsStore.isIncomeStatisticsLoading = true
+    const incomeStatistics = await statisticsApi.getPlatformIncomeStatistics({
+      platformId,
+      format,
+      period,
+      zoneOffset,
+      periodFrom,
+      periodTo
+    })
+    statisticsStore.incomeStatistics = incomeStatistics
+    statisticsStore.isIncomeStatisticsLoading = false
   }
 })

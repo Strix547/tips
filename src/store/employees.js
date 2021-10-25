@@ -9,13 +9,25 @@ import * as userApi from 'api/user'
 export const employeesStore = makeAutoObservable({
   employees: [],
   isEmployeesLoading: false,
-  isEmployeeCreating: false,
-  userNotFound: false,
+  employeeNotFound: false,
+  employee: {
+    isEmployeeConnecting: false,
+    isEmployeeFinding: false,
+    userId: null
+  },
+
+  resetEmployeeCreating: () => {
+    employeesStore.employee = {
+      isEmployeeConnecting: false,
+      isEmployeeFinding: false,
+      userId: null
+    }
+  },
 
   getEmployees: async (ownerId) => {
     employeesStore.isEmployeesLoading = true
 
-    const employees = await employeesApi.getEmployees(ownerId)
+    const employees = await employeesApi.fetchEmployees(ownerId)
 
     employeesStore.employees = employees
     employeesStore.isEmployeesLoading = false
@@ -36,7 +48,7 @@ export const employeesStore = makeAutoObservable({
     postal
   }) => {
     try {
-      employeesStore.isEmployeeCreating = true
+      employeesStore.employee.isEmployeeConnecting = true
 
       await employeesApi.createEmployee({
         platformId,
@@ -55,61 +67,58 @@ export const employeesStore = makeAutoObservable({
     } catch ({ message }) {
       toast.error(message)
     } finally {
-      employeesStore.isEmployeeCreating = false
+      employeesStore.employee.isEmployeeConnecting = false
     }
   },
 
   changeEmployeeAvailability: async ({ employeeId, platformId, available }) => {
-    await employeesApi.changeEmployeeAvailability({
+    await employeesApi.changeEmployeeActive({
       employeeUserId: employeeId,
       platformId,
       active: available
     })
   },
 
-  removeEmployeeFromPlatform: async ({ employeeId, platformId, userId }) => {
+  deleteEmployeeFromPlatform: async ({ employeeId, platformId, userId }) => {
     try {
       await employeesApi.removeEmployee({
         employeeUserId: employeeId,
         platformId
       })
       await employeesStore.getEmployees(userId)
-      toast.success('Employee successfully removed')
+      toast.success('Employee successfully deleted')
     } catch ({ message }) {
-      toast.error('Failed to remove employee')
+      toast.error('Failed to delete employee')
     }
   },
 
-  connectEmployeeToPlatform: async ({ phone, platformId }) => {
+  findEmployeeByPhone: async (phone) => {
+    employeesStore.employee.isEmployeeFinding = true
+    employeesStore.employee.userId = null
+
+    const userId = await userApi.getUserByPhone(phone)
+
+    if (!userId) {
+      toast.info('Employee not found')
+    } else {
+      toast.info('Employee found')
+    }
+
+    employeesStore.employee.userId = userId
+    employeesStore.employee.isEmployeeFinding = false
+  },
+
+  connectEmployeeToPlatform: async ({ userId, platformId }) => {
     try {
-      employeesStore.userNotFound = false
-      employeesStore.isEmployeeCreating = true
+      employeesStore.employee.isEmployeeConnecting = true
 
-      const userId = await userApi.getUserByPhone(phone)
-
-      if (!userId) {
-        employeesStore.userNotFound = true
-        return
-      }
-
-      await employeesApi.addUserToPlatform({ platformId, personUserId: userId })
+      await employeesApi.addEmployeeToPlatform({ platformId, personUserId: userId })
       toast.success('User successfully added to platform')
       router.push(ROUTE_NAMES.ACCOUNT_EMPLOYEES)
     } catch ({ message }) {
       toast.error(message)
     } finally {
-      employeesStore.isEmployeeCreating = false
-    }
-  },
-
-  changeEmployeePlatform: async ({ platformId, employeeId }) => {
-    try {
-      await employeesApi.addUserToPlatform({ platformId, personUserId: employeeId })
-
-      toast.success('User successfully added to platform')
-      router.push(ROUTE_NAMES.ACCOUNT_EMPLOYEES)
-    } catch ({ message }) {
-      toast.error(message)
+      employeesStore.employee.isEmployeeConnecting = false
     }
   }
 })

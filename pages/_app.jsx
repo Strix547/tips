@@ -9,7 +9,7 @@ import Head from 'next/head'
 
 import { Notifications } from 'components'
 
-import { userStore } from 'store'
+import { userStore, authStore } from 'store'
 import { ROUTE_NAMES, ROUTES } from 'core/routes'
 
 import { createTheme } from '@material-ui/core/styles'
@@ -36,7 +36,8 @@ const App = ({ Component, pageProps }) => {
     }
   })
 
-  const { isIdLoading, id: userId } = userStore
+  const { isIdLoading, id: userId, role } = userStore
+  const { isAuth } = authStore
 
   const currentPathname = router.pathname
   const isAuthRoute = currentPathname === ROUTE_NAMES.AUTH
@@ -52,17 +53,17 @@ const App = ({ Component, pageProps }) => {
     NProgress.done()
   }
 
-  useEffect(() => {
-    router.events.on('routeChangeStart', onRouteLoading)
-    router.events.on('routeChangeComplete', onRouteLoaded)
-    router.events.on('routeChangeError', onRouteLoaded)
+  // useEffect(() => {
+  //   router.events.on('routeChangeStart', onRouteLoading)
+  //   router.events.on('routeChangeComplete', onRouteLoaded)
+  //   router.events.on('routeChangeError', onRouteLoaded)
 
-    return () => {
-      router.events.off('routeChangeStart', onRouteLoading)
-      router.events.off('routeChangeComplete', onRouteLoaded)
-      router.events.off('routeChangeError', onRouteLoaded)
-    }
-  }, [])
+  //   return () => {
+  //     router.events.off('routeChangeStart', onRouteLoading)
+  //     router.events.off('routeChangeComplete', onRouteLoaded)
+  //     router.events.off('routeChangeError', onRouteLoaded)
+  //   }
+  // }, [])
 
   useEffect(async () => {
     // first load data and redirects
@@ -71,6 +72,7 @@ const App = ({ Component, pageProps }) => {
 
     if (!id && isProtectedRoute && !isAuthRoute) {
       router.push(ROUTE_NAMES.AUTH)
+      return
     }
 
     if (!id) return
@@ -102,6 +104,20 @@ const App = ({ Component, pageProps }) => {
     }
   }, [])
 
+  useEffect(() => {
+    if (!role) return
+
+    if (role !== 'BUSINESS' && isBusinessRoute) {
+      router.push(ROUTE_NAMES.ACCOUNT_UPGRADE_TO_BUSINESS)
+      return
+    }
+
+    if (role === 'BUSINESS' && currentPathname === ROUTE_NAMES.ACCOUNT_UPGRADE_TO_BUSINESS) {
+      router.push(ROUTE_NAMES.ACCOUNT)
+      return
+    }
+  }, [role, currentPathname])
+
   return (
     <>
       <Head>
@@ -109,6 +125,10 @@ const App = ({ Component, pageProps }) => {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
         />
+
+        {/* <script
+          src={`https://maps.googleapis.com/maps/api/js?key=AIzaSyDSVk9cak0LLFi-PjTkpVXFXTm9VzGkNfI&libraries=places&callback=initMap`}
+        /> */}
       </Head>
 
       <GlobalStyles />

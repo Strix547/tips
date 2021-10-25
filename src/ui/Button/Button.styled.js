@@ -1,16 +1,16 @@
 import styled, { css } from 'styled-components'
 
-const getVariantStyles = (varaint) => {
+const getVariantStyles = (varaint, color = 'var(--color-primary-200)') => {
   switch (varaint) {
     case 'bordered':
       return css`
         padding: 0 42px;
-        color: var(--color-primary-200);
-        border: 2px solid var(--color-primary-200);
+        color: ${color};
+        border: 2px solid ${color};
         background: #fff;
 
         &:hover {
-          background: var(--color-primary-200);
+          background: ${color};
           color: #fff;
         }
       `
@@ -37,7 +37,7 @@ export const Button = styled.button`
   font-weight: 500;
   font-size: var(--font-size-reg);
   color: #fff;
-  background: ${({ color }) => color || 'var(--color-primary-200)'};
+  background: ${({ color = 'var(--color-primary-200)' }) => color};
   border-radius: 40px;
   border: none;
   transition: 0.3s;
@@ -53,12 +53,14 @@ export const Button = styled.button`
   }
 
   &:hover {
-    background: var(--color-primary-600);
+    background: ${({ color = 'var(--color-primary-600)' }) => color};
     transition: 0.3s;
   }
 
-  ${({ variant }) => getVariantStyles(variant)}
+  ${({ variant, color }) => getVariantStyles(variant, color)}
+
   ${({ size }) => getSizeStyles(size)}
+
   ${({ disabled }) =>
     disabled &&
     css`

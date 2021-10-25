@@ -6,6 +6,7 @@ import { handleResponse } from './handleResponse'
 import { transformDateLabelToIso } from './transformDateLabelToIso'
 import { transformDateToLabel } from './transformDateToLabel'
 import { transformDateToIso } from './transformDateToIso'
+import { transformDateTimeToLabel } from './transformDateTimeToLabel'
 
 export {
   getPriceLabel,
@@ -17,5 +18,6 @@ export {
   handleResponse,
   transformDateLabelToIso,
   transformDateToLabel,
-  transformDateToIso
+  transformDateToIso,
+  transformDateTimeToLabel
 }

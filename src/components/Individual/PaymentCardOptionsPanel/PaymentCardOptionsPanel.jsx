@@ -57,7 +57,7 @@ export const PaymentCardOptionsPanelIndividual = observer(({ action }) => {
         <Switch name="impression" label="Впечатления" labelPlacement="start" size="big" />
       </S.Options>
 
-      <Button onClick={action.onClick}>{action.label}</Button>
+      <Button type="submit">{action.label}</Button>
     </S.PaymentCardOptionsPanelIndividual>
   )
 })

@@ -43,6 +43,7 @@ export const confirmCode = async ({ phone, code, remember }) => {
   }
 }
 
-export const signOut = () => {
-  return API.post(`${root}/sign-out`)
+export const signOut = async () => {
+  const res = await API.post(`${root}/sign-out`)
+  return res
 }

@@ -27,9 +27,9 @@ export const PlatformCard = observer(
     const currency = localStore.currency.label
     const available = watch('available')
 
-    const toQrStatisticsPage = (id) => {
+    const toPlatformStatisticsPage = (id) => {
       router.push({
-        pathname: ROUTE_NAMES.ACCOUNT_QR_PLATFORMS_STATISTICS,
+        pathname: ROUTE_NAMES.ACCOUNT_PLATFORMS_STATISTICS,
         query: { id }
       })
     }
@@ -60,7 +60,7 @@ export const PlatformCard = observer(
         onClick: togglePlatformAvailability
       },
       { label: 'qr', content: <QrIcon />, onClick: toQrEditPage },
-      { label: 'chart', content: <ChartIcon />, onClick: toQrStatisticsPage }
+      { label: 'chart', content: <ChartIcon />, onClick: toPlatformStatisticsPage }
     ]
 
     const actionList = actions.map(({ label, content, onClick }) => (

@@ -19,7 +19,7 @@ export const QrIndividualCreatePage = observer(() => {
       impression: false
     }
   })
-  const { watch, getValues } = useFormProps
+  const { watch, getValues, handleSubmit } = useFormProps
 
   const { preset1, preset2, preset3, impression } = watch()
 
@@ -41,11 +41,9 @@ export const QrIndividualCreatePage = observer(() => {
       </Head>
 
       <AccountLayout title="Создать QR-код">
-        <S.Content>
+        <S.Content onSubmit={handleSubmit(createQr)}>
           <FormProvider {...useFormProps}>
-            <PaymentCardOptionsPanelIndividual
-              action={{ label: 'Создать QR-код', onClick: createQr }}
-            />
+            <PaymentCardOptionsPanelIndividual action={{ label: 'Создать QR-код' }} />
 
             <RecipientCardPreview
               type="individual"

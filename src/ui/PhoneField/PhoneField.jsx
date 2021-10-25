@@ -9,6 +9,7 @@ export const PhoneField = ({
   rules = { required: true, minLength: 11 },
   placeholder = '+7 (___) ___-__-__',
   country = 'ru',
+  onChange,
   ...props
 }) => {
   const {
@@ -31,6 +32,13 @@ export const PhoneField = ({
             <PhoneInputLib
               {...field}
               {...props}
+              onChange={(...props) => {
+                field.onChange(...props)
+
+                if (onChange) {
+                  return onChange(...props)
+                }
+              }}
               name={name}
               country={country}
               placeholder={placeholder}

@@ -118,7 +118,7 @@ export const platformsStore = makeAutoObservable({
 
   getReviews: async ({ userId, platformId, rating, zoneOffset, period, periodFrom, periodTo }) => {
     platformsStore.isReviewsLoading = true
-
+    console.log(55)
     const reviews = await platformsApi.getReviews({
       ownerUserId: userId,
       platformId,
@@ -133,5 +133,15 @@ export const platformsStore = makeAutoObservable({
     platformsStore.isReviewsLoading = false
 
     return reviews
+  },
+
+  deletePlatform: async (id) => {
+    try {
+      await platformsApi.removePlatform(id)
+      router.push(ROUTE_NAMES.ACCOUNT_PLATFORMS)
+      toast.success('Platform successfully deleted')
+    } catch ({ message }) {
+      toast.error('Failed to remove platform')
+    }
   }
 })

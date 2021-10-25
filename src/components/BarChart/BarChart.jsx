@@ -5,30 +5,10 @@ import { createChartTooltip } from 'utils'
 
 import * as S from './BarChart.styled'
 
-export const BarChart = ({
-  title,
-  labels = [
-    '15',
-    '16',
-    '17',
-    '18',
-    '19',
-    '20',
-    '21',
-    '22',
-    '23',
-    '24',
-    '25',
-    '26',
-    '27',
-    '28',
-    '29',
-    '30',
-    '31'
-  ],
-  values = [590, 410, 580, 580, 590, 590, 420, 480, 490, 500, 539, 500, 420, 480, 510, 440, 510],
-  isLoading
-}) => {
+export const BarChart = ({ title, data, isLoading }) => {
+  const labels = data.map(({ date }) => date?.getDate())
+  const values = data.map(({ tipAmount }) => tipAmount)
+
   const createLinearGradient = (canvas) => {
     const ctx = canvas.getContext('2d')
     const w = canvas.width

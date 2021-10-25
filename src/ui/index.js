@@ -24,6 +24,7 @@ import { EmailField } from './EmailField'
 import { BankAccountSelect } from './BankAccountSelect'
 import { BirthDateAdultValid } from './BirthDateAdultValid'
 import { PlatformSearch } from './PlatformSearch'
+import { AddressSearch } from './AddressSearch'
 
 export {
   Button,
@@ -56,5 +57,6 @@ export {
   EmailField,
   BankAccountSelect,
   BirthDateAdultValid,
-  PlatformSearch
+  PlatformSearch,
+  AddressSearch
 }

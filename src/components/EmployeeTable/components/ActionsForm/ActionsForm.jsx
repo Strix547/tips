@@ -34,7 +34,7 @@ export const ActionsForm = observer(({ platformId, employeeId, available }) => {
   }
 
   const deleteEmployee = () => {
-    employeesStore.removeEmployeeFromPlatform({ employeeId, platformId, userId })
+    employeesStore.deleteEmployeeFromPlatform({ employeeId, platformId, userId })
   }
 
   const onActionClick = (e) => {

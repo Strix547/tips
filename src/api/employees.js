@@ -24,33 +24,16 @@ const transformEmployee = ({
   }
 }
 
-export const getEmployees = async (ownerUserId) => {
+export const fetchEmployees = async (ownerUserId) => {
   const { data: employees } = await API.get(`/employee`, { params: { ownerUserId } })
 
-  return employees.map((employee) => transformEmployee(employee))
+  return employees?.map((employee) => transformEmployee(employee))
 }
 
 export const removeEmployee = async ({ employeeUserId, platformId }) => {
   const res = await API.post(
     `/remove-employee?employeeUserId=${employeeUserId}&platformId=${platformId}`
   )
-
-  handleResponse(res)
-}
-
-export const changeEmployeeAvailability = async ({ employeeUserId, platformId, active }) => {
-  const res = await API.post(
-    `/change-employee?employeeUserId=${employeeUserId}&platformId=${platformId}`,
-    {
-      active
-    }
-  )
-
-  handleResponse(res)
-}
-
-export const connectEmployeeToPlatform = async ({ platformId, personUserId }) => {
-  const res = await API.post(`/change-employee`, { platformId, personUserId })
 
   handleResponse(res)
 }
@@ -69,7 +52,7 @@ export const createEmployee = async ({
 }) => {
   const res = await API.post(`/create-employee`, {
     platformId,
-    phone,
+    phone: `+${phone}`,
     email,
     firstName,
     lastName,
@@ -86,7 +69,18 @@ export const createEmployee = async ({
   handleResponse(res, errorCodes)
 }
 
-export const addUserToPlatform = async ({ platformId, personUserId }) => {
+export const changeEmployeeActive = async ({ employeeUserId, platformId, active }) => {
+  const res = await API.post(
+    `/change-employee?employeeUserId=${employeeUserId}&platformId=${platformId}`,
+    {
+      active
+    }
+  )
+
+  handleResponse(res)
+}
+
+export const addEmployeeToPlatform = async ({ platformId, personUserId }) => {
   const res = await API.post('/add-employee', {
     platformId,
     personUserId

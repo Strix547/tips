@@ -1,5 +1,7 @@
+import { useState, useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { observer } from 'mobx-react-lite'
+import Skeleton from 'react-loading-skeleton'
 import Head from 'next/head'
 
 import { AccountLayout } from 'layout'
@@ -11,7 +13,8 @@ import {
   PhoneField,
   BirthDateAdultValid,
   PlatformSearch,
-  CircularProgress
+  CircularProgress,
+  AddressSearch
 } from 'ui'
 
 import { employeesStore } from 'store'
@@ -23,7 +26,14 @@ export const EmployeeCreatePage = observer(() => {
   const useFormProps = useForm()
   const { handleSubmit } = useFormProps
 
-  const { isEmployeeCreating, userNotFound } = employeesStore
+  const { isEmployeeConnecting, isEmployeeFinding, userId } = employeesStore.employee
+  const [employeeFieldsVisible, setEmployeeFieldsVisible] = useState(false)
+
+  const isUserFound = Boolean(userId)
+
+  useEffect(() => {
+    employeesStore.resetEmployeeCreating()
+  }, [])
 
   const onCreateEmployee = ({
     platform,
@@ -51,11 +61,16 @@ export const EmployeeCreatePage = observer(() => {
     })
   }
 
-  const onUserFind = ({ phone, platform }) => {
-    employeesStore.connectEmployeeToPlatform({ phone, platformId: platform.platformId })
+  const onUserFind = ({ phone }) => {
+    employeesStore.findEmployeeByPhone(phone)
+    setEmployeeFieldsVisible(true)
   }
 
-  const newEmployeeFields = !isEmployeeCreating ? (
+  const onConnectToPlatform = ({ platform }) => {
+    employeesStore.connectEmployeeToPlatform({ userId, platformId: platform.platformId })
+  }
+
+  const newEmployeeForm = !isEmployeeConnecting ? (
     <S.FormContainer onSubmit={handleSubmit(onCreateEmployee)}>
       <FormProvider {...useFormProps}>
         <FormField name="firstName" label="Имя" placeholder="Введите имя" required />
@@ -68,9 +83,11 @@ export const EmployeeCreatePage = observer(() => {
 
         <LocationSearch />
 
-        <FormField name="address" label="Адрес" placeholder="Введите адрес" required />
+        <FormField name="address" label="Адрес" placeholder="Введите адрес" />
 
         <FormField name="postal" label="Индекс" placeholder="Введите почтовый индекс" required />
+
+        <PlatformSearch label="Площадка, с которой связывается профиль сотрудника" />
 
         <Button type="submit">Создать сотрудника</Button>
       </FormProvider>
@@ -81,6 +98,36 @@ export const EmployeeCreatePage = observer(() => {
     </S.LoadingContainer>
   )
 
+  const findEmployeeForm = (
+    <S.FormContainer onSubmit={handleSubmit(onUserFind)}>
+      {!isEmployeeFinding ? (
+        <FormProvider {...useFormProps}>
+          <PhoneField />
+
+          <Button type="submit">Найти сотрудника</Button>
+        </FormProvider>
+      ) : (
+        <Skeleton height={164} />
+      )}
+    </S.FormContainer>
+  )
+
+  const connectToPlatformForm = (
+    <S.FormContainer onSubmit={handleSubmit(onConnectToPlatform)}>
+      {!isEmployeeConnecting ? (
+        <FormProvider {...useFormProps}>
+          <PlatformSearch />
+
+          <Button type="submit">Подключить к площадке</Button>
+        </FormProvider>
+      ) : (
+        <Skeleton height={164} />
+      )}
+    </S.FormContainer>
+  )
+
+  const employeeFields = isUserFound ? connectToPlatformForm : newEmployeeForm
+
   return (
     <>
       <Head>
@@ -88,18 +135,7 @@ export const EmployeeCreatePage = observer(() => {
       </Head>
 
       <AccountLayout title="Создание сотрудника">
-        {!userNotFound ? (
-          <S.FormContainer onSubmit={handleSubmit(onUserFind)}>
-            <FormProvider {...useFormProps}>
-              <PhoneField />
-              <PlatformSearch label="Площадка, с которой связывается профиль сотрудника" />
-
-              <Button type="submit">Добавить</Button>
-            </FormProvider>
-          </S.FormContainer>
-        ) : (
-          newEmployeeFields
-        )}
+        {employeeFieldsVisible && !isEmployeeFinding ? employeeFields : findEmployeeForm}
       </AccountLayout>
     </>
   )

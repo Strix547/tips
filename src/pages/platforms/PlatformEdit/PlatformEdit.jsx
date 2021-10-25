@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 import { AccountLayout } from 'layout'
 import { Button } from 'ui'
 import { PlatformFields } from 'components/Platforms'
+import { DeleteConfirmModal } from 'components/Qr'
 
 import { platformsStore } from 'store'
 import { PLATFORM_TYPES } from 'core/constants'
@@ -20,6 +21,7 @@ export const PlatformEditPage = observer(() => {
   const { handleSubmit, reset } = useFormProps
 
   const platformId = router.query.id
+  const [isConfirmModalOpen, setConfirmModalOpen] = useState(false)
   const [incomePercentage, setIncomePercentage] = useState(50)
 
   const { platform, isPlatformLoading } = platformsStore
@@ -70,6 +72,10 @@ export const PlatformEditPage = observer(() => {
     })
   }
 
+  const onDeletePlatform = () => {
+    platformsStore.deletePlatform(platformId)
+  }
+
   return (
     <>
       <Head>
@@ -85,7 +91,19 @@ export const PlatformEditPage = observer(() => {
                 onIncomePercentageChange={onIncomePercentageChange}
               />
 
-              <Button type="submit">Сохранить</Button>
+              <S.ActionRow>
+                <Button type="submit">Сохранить</Button>
+                <Button
+                  type="button"
+                  variant="bordered"
+                  color="var(--color-red-100)"
+                  onClick={() => {
+                    setConfirmModalOpen(true)
+                  }}
+                >
+                  Удалить
+                </Button>
+              </S.ActionRow>
             </S.Form>
           ) : (
             <>
@@ -95,6 +113,14 @@ export const PlatformEditPage = observer(() => {
             </>
           )}
         </FormProvider>
+
+        <DeleteConfirmModal
+          open={isConfirmModalOpen}
+          onConfirm={onDeletePlatform}
+          onClose={() => {
+            setConfirmModalOpen(false)
+          }}
+        />
       </AccountLayout>
     </>
   )

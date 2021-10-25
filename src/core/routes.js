@@ -25,6 +25,7 @@ export const ROUTE_NAMES = {
 
   ACCOUNT_PLATFORMS: '/account/platforms',
   ACCOUNT_PLATFORMS_EDIT: '/account/platforms/[id]/edit',
+  ACCOUNT_PLATFORMS_STATISTICS: '/account/platforms/[id]/statistics',
   ACCOUNT_PLATFORMS_CREATE: '/account/platforms/create',
 
   ACCOUNT_REQUISITES: '/account/requisites',
@@ -70,6 +71,7 @@ export const ROUTES = [
   { path: ROUTE_NAMES.ACCOUNT_PLATFORMS, isProtected: true, forBusinessAccount: true },
   { path: ROUTE_NAMES.ACCOUNT_PLATFORMS_EDIT, isProtected: true, forBusinessAccount: true },
   { path: ROUTE_NAMES.ACCOUNT_PLATFORMS_CREATE, isProtected: true, forBusinessAccount: true },
+  { path: ROUTE_NAMES.ACCOUNT_PLATFORMS_STATISTICS, isProtected: true, forBusinessAccount: true },
 
   { path: ROUTE_NAMES.ACCOUNT_QR_PLATFORMS_EDIT, isProtected: true, forBusinessAccount: true },
 
