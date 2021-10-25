@@ -19,6 +19,8 @@ export const ActionsForm = observer(({ platformId, employeeId, available }) => {
       available
     }
   })
+  const { watch } = useFormProps
+  const availableWatch = watch('available')
 
   const userId = userStore.id
 
@@ -30,7 +32,11 @@ export const ActionsForm = observer(({ platformId, employeeId, available }) => {
   }
 
   const toggleEmployeeAvailable = () => {
-    employeesStore.changeEmployeeAvailability({ platformId, employeeId, available: !available })
+    employeesStore.changeEmployeeAvailability({
+      platformId,
+      employeeId,
+      available: !availableWatch
+    })
   }
 
   const deleteEmployee = () => {
