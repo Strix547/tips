@@ -114,7 +114,6 @@ const App = ({ Component, pageProps }) => {
 
     if (role === 'BUSINESS' && currentPathname === ROUTE_NAMES.ACCOUNT_UPGRADE_TO_BUSINESS) {
       router.push(ROUTE_NAMES.ACCOUNT)
-      return
     }
   }, [role, currentPathname])
 

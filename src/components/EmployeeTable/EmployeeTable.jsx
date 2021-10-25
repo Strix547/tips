@@ -110,7 +110,7 @@ export const EmployeeTable = ({ employees }) => {
 
   const rows = employees?.map(
     ({ id, platformId, firstName, lastName, phone, platformName, tips, available }) => ({
-      id: `${platformId}` + `${id}`,
+      id: platformId + id,
       employeeId: id,
       fullName: `${firstName} ${lastName}`,
       phone,
@@ -124,7 +124,7 @@ export const EmployeeTable = ({ employees }) => {
   const employeeCardList = employees?.map(
     ({ id, platformId, firstName, lastName, phone, platformName, tips }) =>
       renderEmployeeCard({
-        id: `${platformId}` + `${id}`,
+        id: platformId + id,
         employeeId: id,
         fullName: `${firstName} ${lastName}`,
         phone: `+${phone}`,

@@ -42,7 +42,7 @@ export const AmountPresetsFields = styled.div`
   }
 
   ${media700} {
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
 `
 

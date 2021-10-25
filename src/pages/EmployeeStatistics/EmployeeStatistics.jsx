@@ -175,7 +175,7 @@ export const EmployeeStatisticsPage = observer(() => {
             rows={rows}
             cardList={cardList}
             isDataLoading={isIncomeStatisticsLoading}
-            haveCommission={true}
+            haveCommission
             onExcelDownload={() => downloadStatisticExcel()}
           />
         </FormProvider>
