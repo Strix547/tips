@@ -101,6 +101,18 @@ export const EmployeeTable = styled(WhiteBox)`
   position: relative;
 
   ${Table} {
+    ${Switch} {
+      margin-right: 0;
+
+      .switch-base {
+        transform: translate(-8px, -1px);
+
+        &.Mui-checked {
+          transform: translate(8px, -1px);
+        }
+      }
+    }
+
     .MuiDataGrid {
       &-columnHeader,
       &-cell {

@@ -54,7 +54,7 @@ export const EmployeeTable = ({ employees }) => {
           <S.Text>{id}</S.Text>
 
           <S.EmployeeCardActions>
-            <ActionsForm employeeId={id} platformId={platformId} />
+            <ActionsForm employeeId={employeeId} platformId={platformId} />
           </S.EmployeeCardActions>
         </S.EmployeeCardTop>
 
