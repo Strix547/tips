@@ -1,4 +1,12 @@
 {
+  "root": true,
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
   "extends": ["next", "airbnb", "prettier"],
   "rules": {
     "jsx-quotes": [1, "prefer-double"],

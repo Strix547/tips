@@ -1,3 +1,9 @@
-import { RecipientCardContainer, Heading } from 'styled'
+import styled from 'styled-components'
 
-export { RecipientCardContainer, Heading }
+import { RecipientCardContainer, Heading as HeadingCommon } from 'styled'
+
+export { RecipientCardContainer }
+
+export const Heading = styled(HeadingCommon)`
+  color: ${({ $color = 'var(--color-black-200)' }) => $color};
+`

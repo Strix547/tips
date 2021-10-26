@@ -118,7 +118,7 @@ export const platformsStore = makeAutoObservable({
 
   getReviews: async ({ userId, platformId, rating, zoneOffset, period, periodFrom, periodTo }) => {
     platformsStore.isReviewsLoading = true
-    console.log(55)
+
     const reviews = await platformsApi.getReviews({
       ownerUserId: userId,
       platformId,

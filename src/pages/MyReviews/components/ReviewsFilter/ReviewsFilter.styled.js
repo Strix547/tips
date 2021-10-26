@@ -8,6 +8,8 @@ import { RadioGroup } from 'ui/RadioGroup/RadioGroup.styled'
 import { Autocomplete } from 'ui/Autocomplete/Autocomplete.styled'
 import { TimePeriodFilter } from 'components/TimePeriodFilter/TimePeriodFilter.styled'
 
+const media600 = media.createMedia(600)
+
 export { Label }
 
 export const ReviewsFilter = styled(WhiteBox)`
@@ -15,6 +17,14 @@ export const ReviewsFilter = styled(WhiteBox)`
 
   ${TimePeriodFilter} {
     width: auto;
+  }
+
+  ${media600} {
+    padding: 20px;
+
+    ${TimePeriodFilter} {
+      width: 100%;
+    }
   }
 `
 
@@ -30,6 +40,12 @@ export const Row = styled.div`
       flex-direction: column;
     }
   }
+
+  ${media600} {
+    &:first-child {
+      margin-bottom: 20px;
+    }
+  }
 `
 
 export const Field = styled.div`
@@ -39,6 +55,21 @@ export const Field = styled.div`
   ${Label} {
     margin-bottom: 0;
     margin-right: 10px;
+  }
+
+  ${media600} {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+
+    ${Label} {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+
+    ${Select} {
+      width: 100%;
+    }
   }
 `
 
@@ -84,6 +115,12 @@ export const PeriodField = styled(Field)`
       margin-bottom: 0;
     }
   }
+
+  ${media600} {
+    ${Label} {
+      margin-bottom: 10px;
+    }
+  }
 `
 
 export const PlatformField = styled(Field)`
@@ -103,6 +140,12 @@ export const PlatformField = styled(Field)`
 
     .MuiAutocomplete-paper {
       border-radius: 8px;
+    }
+  }
+
+  ${media600} {
+    ${Autocomplete} {
+      width: 100%;
     }
   }
 `
@@ -127,6 +170,12 @@ export const RatingField = styled(Field)`
   ${media.createMedia(940)} {
     margin-left: 0;
     margin-top: 20px;
+  }
+
+  ${media600} {
+    ${Select} {
+      width: 100%;
+    }
   }
 `
 

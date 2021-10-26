@@ -5,18 +5,16 @@ import Skeleton from 'react-loading-skeleton'
 import Head from 'next/head'
 
 import { AccountLayout } from 'layout'
-import { ReviewsFilter } from './components'
+import { ReviewsFilter, ReviewsTable } from './components'
 
 import { userStore, platformsStore } from 'store'
 import { getTimeZoneOffset } from 'utils'
-
-import * as S from './MyReviews.styled'
 
 export const MyReviewsPage = observer(() => {
   const useFormProps = useForm({
     defaultValues: {
       period: 'MONTH',
-      rating: 4
+      rating: 'any'
     }
   })
   const { watch, getValues } = useFormProps
@@ -26,14 +24,12 @@ export const MyReviewsPage = observer(() => {
   const { platform, period, periodFrom, periodTo, rating } = watch()
 
   useEffect(() => {
-    if (!platform?.platformId) return
-
     const { period, periodFrom, periodTo, rating } = getValues()
 
     const commonData = {
       userId,
-      platformId: platform.platformId,
-      rating,
+      platformId: platform?.platformId,
+      rating: rating !== 'any' ? rating : null,
       zoneOffset: getTimeZoneOffset()
     }
 
@@ -64,7 +60,7 @@ export const MyReviewsPage = observer(() => {
           <ReviewsFilter />
 
           {!isReviewsLoading ? (
-            <S.NoReviewsText>Отзывов не найдено</S.NoReviewsText>
+            <ReviewsTable reviews={reviews} />
           ) : (
             <Skeleton style={{ height: 200, marginTop: 20 }} />
           )}

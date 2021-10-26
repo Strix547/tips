@@ -11,5 +11,8 @@ module.exports = {
   images: {
     domains: ['localhost', 'tips.tmweb.ru', 'bs-local.com']
   },
-  reactStrictMode: true
+  reactStrictMode: true,
+  eslint: {
+    ignoreDuringBuilds: true
+  }
 }

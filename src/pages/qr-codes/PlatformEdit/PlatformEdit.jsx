@@ -90,6 +90,8 @@ export const QrPlatformEditPage = observer(() => {
             <FormProvider {...useFormProps}>
               <PlatformPaymentCardOptionsPanel
                 action={{ label: 'Сохранить QR-код', onClick: editQr }}
+                btnDefaultColor={btnColor?.hex}
+                bgDefaultColor={bgColor?.hex}
                 companyLogo={companyImg}
                 onLogoChange={uploadCompanyLogo}
               />

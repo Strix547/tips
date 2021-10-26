@@ -6,6 +6,7 @@ import { ImpressionRow } from 'common/ImpressionRow/ImpressionRow.styled'
 import { Button as ButtonUI } from 'ui/Button/Button.styled'
 
 import { media } from 'styles/media'
+import { changeColorLuminosity } from 'utils'
 
 export { Text, Label, RecipientCard, RecipientCardTop, RecipientCardMain }
 
@@ -63,9 +64,13 @@ export const TopBackground = styled.div`
 `
 
 export const Button = styled(ButtonUI)`
-  background: ${({ $color = 'var(--color-primary-200)' }) => $color};
+  background: ${({ bgColor = 'var(--color-primary-200)' }) => bgColor};
+  color: ${({ textColor }) => textColor};
+  transition: 0.3s;
 
   &:hover {
-    background: ${({ $color = 'var(--color-primary-200)' }) => $color};
+    background: ${({ bgColor = 'var(--color-primary-200)' }) =>
+      bgColor && changeColorLuminosity(bgColor, 0.15)};
+    transition: 0.3s;
   }
 `

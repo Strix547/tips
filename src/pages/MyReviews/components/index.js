@@ -1,3 +1,4 @@
 import { ReviewsFilter } from './ReviewsFilter'
+import { ReviewsTable } from './Table'
 
-export { ReviewsFilter }
+export { ReviewsFilter, ReviewsTable }

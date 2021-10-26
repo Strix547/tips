@@ -10,6 +10,12 @@ export const ColorPickerField = ({ name, defaultColor, rules, label, ...props })
   const [isColorPickerOpen, setColorPickerOpen] = useState(false)
   const [color, setColor] = useState(defaultColor)
 
+  useEffect(() => {
+    if (color !== defaultColor) {
+      setColor(defaultColor)
+    }
+  }, [defaultColor])
+
   const onOutsideClick = (event) => {
     if (!rootRef?.current?.contains(event.target)) {
       setColorPickerOpen(false)

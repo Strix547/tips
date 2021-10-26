@@ -3,10 +3,15 @@ import { createChartTooltip } from './createChartTooltip'
 import { getCookie, setCookie, deleteCookie } from './cookie'
 import { getTimeZoneOffset } from './getTimeZoneOffset'
 import { handleResponse } from './handleResponse'
-import { transformDateLabelToIso } from './transformDateLabelToIso'
-import { transformDateToLabel } from './transformDateToLabel'
-import { transformDateToIso } from './transformDateToIso'
-import { transformDateTimeToLabel } from './transformDateTimeToLabel'
+
+import {
+  transformDateLabelToIso,
+  transformDateToLabel,
+  transformDateToIso,
+  transformDateTimeToLabel
+} from './dateTransformers'
+
+import { changeColorLuminosity, convertHexToRgb, getTextColorBgBased } from './colors'
 
 export {
   getPriceLabel,
@@ -19,5 +24,8 @@ export {
   transformDateLabelToIso,
   transformDateToLabel,
   transformDateToIso,
-  transformDateTimeToLabel
+  transformDateTimeToLabel,
+  changeColorLuminosity,
+  convertHexToRgb,
+  getTextColorBgBased
 }

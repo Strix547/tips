@@ -58,7 +58,7 @@ const transformReview = ({
   platformId
 }) => {
   return {
-    dateTime,
+    dateTime: new Date(dateTime),
     platformId,
     platformName: title,
     impression: smile,

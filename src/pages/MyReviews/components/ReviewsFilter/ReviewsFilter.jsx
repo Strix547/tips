@@ -9,6 +9,7 @@ import StarIcon from '@public/icons/star.svg'
 
 export const ReviewsFilter = () => {
   const ratings = [
+    { label: 'Любой', value: 'any' },
     {
       label: (
         <S.StarList>

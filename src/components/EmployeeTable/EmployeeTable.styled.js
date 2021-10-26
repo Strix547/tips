@@ -137,9 +137,6 @@ export const EmployeeTable = styled(WhiteBox)`
         }
       }
 
-      &-windowContainer {
-      }
-
       &-columnsContainer {
         border-bottom: 1px solid var(--color-gray-700);
       }

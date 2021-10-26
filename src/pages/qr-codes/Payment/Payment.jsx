@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
+import { toJS } from 'mobx'
 import { FormProvider, useForm } from 'react-hook-form'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -7,6 +8,7 @@ import { useRouter } from 'next/router'
 import { PaymentCardIndividual, PlatformPaymentCard } from 'components'
 
 import { paymentStore } from 'store'
+import { getTextColorBgBased, convertHexToRgb, changeColorLuminosity } from 'utils'
 
 import * as S from './Payment.styled'
 
@@ -21,10 +23,12 @@ export const QrPaymentPage = observer(() => {
   const { handleSubmit } = useFormProps
 
   const { paymentData, isPaymentDataLoading } = paymentStore
-  const { name, firstName, lastName, type } = paymentData
+  const { name, firstName, lastName, type, bgColor } = paymentData
 
   const isPlatformQr = type === 'BUSINESS'
   const qrId = router.query.id
+  const bgColorDarker = bgColor && changeColorLuminosity(bgColor, -0.15)
+  const bgColorText = bgColorDarker && getTextColorBgBased(convertHexToRgb(bgColorDarker))
 
   useEffect(() => {
     if (qrId) {
@@ -50,8 +54,10 @@ export const QrPaymentPage = observer(() => {
         </title>
       </Head>
 
-      <S.RecipientCardContainer>
-        <S.Heading level={5}>{name}</S.Heading>
+      <S.RecipientCardContainer bgColor={bgColorDarker}>
+        <S.Heading level={5} $color={bgColorText}>
+          {name}
+        </S.Heading>
 
         <form onSubmit={handleSubmit(onTipsPay)}>
           <FormProvider {...useFormProps}>
