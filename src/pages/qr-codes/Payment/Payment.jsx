@@ -1,11 +1,10 @@
 import { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
-import { toJS } from 'mobx'
 import { FormProvider, useForm } from 'react-hook-form'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-import { PaymentCardIndividual, PlatformPaymentCard } from 'components'
+import { IndividualPaymentCard, PlatformPaymentCard } from 'components'
 
 import { paymentStore } from 'store'
 import { getTextColorBgBased, convertHexToRgb, changeColorLuminosity } from 'utils'
@@ -61,7 +60,7 @@ export const QrPaymentPage = observer(() => {
 
         <form onSubmit={handleSubmit(onTipsPay)}>
           <FormProvider {...useFormProps}>
-            {isPlatformQr ? <PlatformPaymentCard /> : <PaymentCardIndividual />}
+            {isPlatformQr ? <PlatformPaymentCard /> : <IndividualPaymentCard />}
           </FormProvider>
         </form>
       </S.RecipientCardContainer>

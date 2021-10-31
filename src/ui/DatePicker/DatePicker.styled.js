@@ -264,8 +264,8 @@ export const DatePicker = styled.div`
     }
   }
 
-  ${({ haveError }) =>
-    haveError &&
+  ${({ error }) =>
+    error &&
     css`
       .react-datepicker {
         &__input-container {

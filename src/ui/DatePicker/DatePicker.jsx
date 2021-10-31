@@ -20,7 +20,7 @@ export const DatePicker = ({
     formState: { errors }
   } = useFormContext()
 
-  const haveError = Object.keys(errors).some((inputName) => inputName === name)
+  const error = Object.keys(errors).some((inputName) => inputName === name)
 
   return (
     <Controller
@@ -29,7 +29,7 @@ export const DatePicker = ({
       rules={required ? { ...rules, required: { value: true, message: 'required' } } : rules}
       defaultValue={defaultValue}
       render={({ field }) => (
-        <S.DatePicker haveError={haveError}>
+        <S.DatePicker error={error}>
           {label && <S.Label>{label}</S.Label>}
 
           <Picker

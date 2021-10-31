@@ -1,9 +1,8 @@
 import Head from 'next/head'
 
 import { Header, Footer } from 'layout'
-import { PageBanner } from 'landing/components'
+import { PageBanner, Section } from 'landing/components'
 import {
-  TipsSection,
   ListIconSection,
   TariffsSection,
   TrustUsSection,
@@ -40,8 +39,8 @@ export const RecipientsPage = () => {
 
   const bannerFeatures = [
     'Не облагаются налогом',
-    'Моментальное зачисление на карту',
-    'Расчеты обеспечивает Тинькофф'
+    'Вывод накопленных чаевых на любой счет',
+    'Принимайте чаевые с карт'
   ]
 
   const bannerAction = <LinkButton href={ROUTE_NAMES.AUTH}>Получать чаевые</LinkButton>
@@ -56,13 +55,21 @@ export const RecipientsPage = () => {
 
       <S.Main>
         <PageBanner
-          title="Чаевые картой моментально"
+          title="Электронные чаевые моментально"
           features={bannerFeatures}
           actions={bannerAction}
           img={{ desktop: dashboard, mobile: dashboardMobile }}
         />
 
-        <TipsSection />
+        <Section styles={S.sectionStyles}>
+          <S.Text>
+            Зарегистрируйтесь в нашем сервисе и получите персональный QR код. Предоставляйте этот QR
+            код вашим клиентам, чтобы те оставляли вам чаевые или донаты! Всё, что нужно клиенту -
+            это навести камеру своего смартфона на ваш код и сделать 2 клика в открывшемся окне,
+            оставив вам картой желанную сумму. Оставлять чаевые ещё никогда не было так просто!
+          </S.Text>
+        </Section>
+
         <HowServiceWorkSection />
         <ListIconSection title="Кто может быть агентом" list={agentTypes} />
         <TariffsSection />

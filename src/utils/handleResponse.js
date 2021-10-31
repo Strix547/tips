@@ -3,9 +3,9 @@ export const handleResponse = ({ status, statusText, data }, errorCodeLabels = [
   if (codes.includes(status)) return data
 
   const errorCode = data?.code
-  const haveErrorLabel = errorCodeLabels.some((error) => error?.code === errorCode)
+  const errorLabel = errorCodeLabels.some((error) => error?.code === errorCode)
 
-  if (errorCode && haveErrorLabel) {
+  if (errorCode && errorLabel) {
     throw new Error(errorCodeLabels.find((error) => error?.code === errorCode)?.label)
   }
 

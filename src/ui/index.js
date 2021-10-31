@@ -25,6 +25,7 @@ import { BankAccountSelect } from './BankAccountSelect'
 import { BirthDateAdultValid } from './BirthDateAdultValid'
 import { PlatformSearch } from './PlatformSearch'
 import { AddressSearch } from './AddressSearch'
+import { CurrencySelect } from './CurrencySelect'
 
 export {
   Button,
@@ -58,5 +59,6 @@ export {
   BankAccountSelect,
   BirthDateAdultValid,
   PlatformSearch,
-  AddressSearch
+  AddressSearch,
+  CurrencySelect
 }

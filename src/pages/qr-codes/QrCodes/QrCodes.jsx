@@ -5,7 +5,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 import { AccountLayout } from 'layout'
-import { QrCard } from 'components'
+import { QrCard, NoResultFound } from 'components'
 
 import { ROUTE_NAMES } from 'core/routes'
 import { userStore, qrCodesStore } from 'store'
@@ -14,24 +14,25 @@ import * as S from './QrCodes.styled'
 
 export const QrCodesPage = observer(() => {
   const router = useRouter()
+
   const { id: userId, role } = userStore
   const { qrCodesIndividuals, qrCodesPlatforms, isQrCodesLoading } = qrCodesStore
 
-  useEffect(async () => {
+  useEffect(() => {
     if (!userId || !role) return
 
     if (role === 'BUSINESS') {
-      qrCodesStore.getPlatformQrCodes(userId)
+      qrCodesStore.getQrCodesPlatform(userId)
     }
 
-    qrCodesStore.getIndividualQrCodes(userId)
+    qrCodesStore.getQrCodesIndividual(userId)
   }, [userId, role])
 
   const toQrCreatePage = () => {
     router.push(ROUTE_NAMES.ACCOUNT_QR_INDIVIDUALS_CREATE)
   }
 
-  const qrCodeIndividualsList = qrCodesIndividuals.map(({ id, templateId, name, img }) => (
+  const qrCodeIndividualsCards = qrCodesIndividuals.map(({ id, templateId, name, img }) => (
     <QrCard
       key={id}
       id={id}
@@ -43,7 +44,7 @@ export const QrCodesPage = observer(() => {
     />
   ))
 
-  const qrCodePlatformsList = qrCodesPlatforms.map(({ id, templateId, name, img }) => (
+  const qrCodePlatformsCards = qrCodesPlatforms.map(({ id, templateId, name, img }) => (
     <QrCard
       key={id}
       id={id}
@@ -55,7 +56,13 @@ export const QrCodesPage = observer(() => {
     />
   ))
 
-  const qrCodeList = [...qrCodePlatformsList, ...qrCodeIndividualsList]
+  const qrCardList = [...qrCodePlatformsCards, ...qrCodeIndividualsCards]
+
+  const qrListContent = qrCardList.length ? (
+    <S.QrGrid>{qrCardList}</S.QrGrid>
+  ) : (
+    <NoResultFound>Нет qr-кодов</NoResultFound>
+  )
 
   return (
     <>
@@ -65,12 +72,10 @@ export const QrCodesPage = observer(() => {
 
       <AccountLayout title="Мои QR" button={{ label: 'Добавить QR-код', onClick: toQrCreatePage }}>
         {!isQrCodesLoading ? (
-          <S.QrGrid>
-            {qrCodeList.length ? qrCodeList : <S.NoQrCodesText>No qr codes</S.NoQrCodesText>}
-          </S.QrGrid>
+          qrListContent
         ) : (
           <S.QrGridSkeleton>
-            <Skeleton height={418} count={3} />
+            <Skeleton height={418} count={6} />
           </S.QrGridSkeleton>
         )}
       </AccountLayout>

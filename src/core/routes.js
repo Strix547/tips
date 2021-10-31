@@ -42,7 +42,13 @@ export const ROUTE_NAMES = {
   ACCOUNT_UPGRADE_TO_BUSINESS: '/account/upgrade',
 
   THANK_YOU: '/thank-you',
-  FAIL: '/fail'
+  FAIL: '/fail',
+
+  ADMIN_USERS: '/admin/users',
+  ADMIN_USERS_EDIT: '/admin/users/[id]/edit',
+  ADMIN_USERS_STATISTICS: '/admin/users/[id]/statistics',
+  ADMIN_PAYMENT_STATISTICS: '/admin/payment-statistics',
+  ADMIN_COMISSIONS: '/admin/comissions'
 }
 
 export const ROUTES = [
@@ -68,21 +74,27 @@ export const ROUTES = [
   { path: ROUTE_NAMES.ACCOUNT_QR_INDIVIDUALS_EDIT, isProtected: true },
   { path: ROUTE_NAMES.ACCOUNT_QR_INDIVIDUALS_STATISTICS, isProtected: true },
 
-  { path: ROUTE_NAMES.ACCOUNT_PLATFORMS, isProtected: true, forBusinessAccount: true },
-  { path: ROUTE_NAMES.ACCOUNT_PLATFORMS_EDIT, isProtected: true, forBusinessAccount: true },
-  { path: ROUTE_NAMES.ACCOUNT_PLATFORMS_CREATE, isProtected: true, forBusinessAccount: true },
-  { path: ROUTE_NAMES.ACCOUNT_PLATFORMS_STATISTICS, isProtected: true, forBusinessAccount: true },
+  { path: ROUTE_NAMES.ACCOUNT_PLATFORMS, isProtected: true, role: 'BUSINESS' },
+  { path: ROUTE_NAMES.ACCOUNT_PLATFORMS_EDIT, isProtected: true, role: 'BUSINESS' },
+  { path: ROUTE_NAMES.ACCOUNT_PLATFORMS_CREATE, isProtected: true, role: 'BUSINESS' },
+  { path: ROUTE_NAMES.ACCOUNT_PLATFORMS_STATISTICS, isProtected: true, role: 'BUSINESS' },
 
-  { path: ROUTE_NAMES.ACCOUNT_QR_PLATFORMS_EDIT, isProtected: true, forBusinessAccount: true },
+  { path: ROUTE_NAMES.ACCOUNT_QR_PLATFORMS_EDIT, isProtected: true, role: 'BUSINESS' },
 
   { path: ROUTE_NAMES.ACCOUNT_REQUISITES, isProtected: true },
-  { path: ROUTE_NAMES.ACCOUNT_EMPLOYEES, isProtected: true, forBusinessAccount: true },
-  { path: ROUTE_NAMES.ACCOUNT_EMPLOYEE_CREATE, isProtected: true, forBusinessAccount: true },
-  { path: ROUTE_NAMES.ACCOUNT_EMPLOYEE_EDIT, isProtected: true, forBusinessAccount: true },
-  { path: ROUTE_NAMES.ACCOUNT_EMPLOYEE_STATISTICS, isProtected: true, forBusinessAccount: true },
-  { path: ROUTE_NAMES.ACCOUNT_REVIEWS, isProtected: true, forBusinessAccount: true },
+  { path: ROUTE_NAMES.ACCOUNT_EMPLOYEES, isProtected: true, role: 'BUSINESS' },
+  { path: ROUTE_NAMES.ACCOUNT_EMPLOYEE_CREATE, isProtected: true, role: 'BUSINESS' },
+  { path: ROUTE_NAMES.ACCOUNT_EMPLOYEE_EDIT, isProtected: true, role: 'BUSINESS' },
+  { path: ROUTE_NAMES.ACCOUNT_EMPLOYEE_STATISTICS, isProtected: true, role: 'BUSINESS' },
+  { path: ROUTE_NAMES.ACCOUNT_REVIEWS, isProtected: true, role: 'BUSINESS' },
   { path: ROUTE_NAMES.ACCOUNT_PERSONAL_DATA, isProtected: true },
   { path: ROUTE_NAMES.ACCOUNT_SUPPORT, isProtected: true },
   { path: ROUTE_NAMES.ACCOUNT_LOYALTY, isProtected: true },
-  { path: ROUTE_NAMES.ACCOUNT_UPGRADE_TO_BUSINESS, isProtected: true }
+  { path: ROUTE_NAMES.ACCOUNT_UPGRADE_TO_BUSINESS, isProtected: true },
+
+  { path: ROUTE_NAMES.ADMIN_USERS, isProtected: true },
+  { path: ROUTE_NAMES.ADMIN_USERS_EDIT, isProtected: true, role: 'ADMIN' },
+  { path: ROUTE_NAMES.ADMIN_USERS_STATISTICS, isProtected: true, role: 'ADMIN' },
+  { path: ROUTE_NAMES.ADMIN_PAYMENT_STATISTICS, isProtected: true, role: 'ADMIN' },
+  { path: ROUTE_NAMES.ADMIN_COMISSIONS, isProtected: true, role: 'ADMIN' }
 ]

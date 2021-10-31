@@ -1,6 +1,6 @@
 import { API } from 'core/axios'
 
-const transformIncomeStatistics = ({
+const transformStatistics = ({
   localDateTime,
   paymentId,
   paymentPageId,
@@ -20,20 +20,25 @@ const transformIncomeStatistics = ({
   }
 }
 
-export const getIndividualIncomeStatistics = async ({
-  userId,
-  currency = 'eur',
-  format,
-  zoneOffset,
-  period,
-  periodFrom,
-  periodTo
-}) => {
+const downloadStatistics = (data) => {
+  const url = window.URL.createObjectURL(new Blob([data]))
+  const link = document.createElement('a')
+  link.href = url
+  link.setAttribute('download', 'incoming-payment-statistics.xlsx')
+  document.body.appendChild(link)
+  link.click()
+  document.querySelector('body').removeChild(link)
+}
+
+const getStatistics = async (
+  url,
+  { format, zoneOffset, period, periodFrom, periodTo },
+  transformer
+) => {
   const isXlsxFormat = format === 'XLSX'
 
-  const { data } = await API.get(`/personal-income-statistics/${userId}`, {
+  const { data } = await API.get(url, {
     params: {
-      currency,
       format,
       'zone-offset': zoneOffset,
       period,
@@ -45,22 +50,31 @@ export const getIndividualIncomeStatistics = async ({
   })
 
   if (isXlsxFormat) {
-    const url = window.URL.createObjectURL(new Blob([data]))
-    const link = document.createElement('a')
-    link.href = url
-    link.setAttribute('download', 'incoming-payment-statistics.xlsx')
-    document.body.appendChild(link)
-    link.click()
-    document.querySelector('body').removeChild(link)
+    downloadStatistics(data)
     return
   }
 
   const { table, diagram } = JSON.parse(data).result
 
   return {
-    table: table.map((item) => transformIncomeStatistics(item)),
+    table: table.map((item) => transformer(item)),
     diagram: diagram.map(({ localDate, sum }) => ({ date: new Date(localDate), tipAmount: sum }))
   }
+}
+
+export const getIndividualAccountIncomeStatistics = async ({
+  userId,
+  format,
+  zoneOffset,
+  period,
+  periodFrom,
+  periodTo
+}) => {
+  return await getStatistics(
+    `/personal-income-statistics/${userId}`,
+    { format, zoneOffset, period, periodFrom, periodTo },
+    transformStatistics
+  )
 }
 
 export const getQrIncomeStatistics = async ({
@@ -71,91 +85,46 @@ export const getQrIncomeStatistics = async ({
   periodFrom,
   periodTo
 }) => {
-  const isXlsxFormat = format === 'XLSX'
-
-  const { data } = await API.get(`/person-payment-page-income-statistics/${qrId}`, {
-    params: {
-      format,
-      'zone-offset': zoneOffset,
-      period,
-      'period-from': periodFrom,
-      'period-to': periodTo
-    },
-    responseType: isXlsxFormat ? 'blob' : 'json',
-    transformResponse: [(data) => data]
-  })
-
-  if (isXlsxFormat) {
-    const url = window.URL.createObjectURL(new Blob([data]))
-    const link = document.createElement('a')
-    link.href = url
-    link.setAttribute('download', 'incoming-payment-statistics.xlsx')
-    document.body.appendChild(link)
-    link.click()
-    document.querySelector('body').removeChild(link)
-    return
-  }
-
-  const { table, diagram } = JSON.parse(data).result
-
-  return {
-    table: table.map((item) => transformIncomeStatistics(item)),
-    diagram: diagram.map(({ localDate, sum }) => ({ date: new Date(localDate), tipAmount: sum }))
-  }
+  return await getStatistics(
+    `/person-payment-page-income-statistics/${qrId}`,
+    { format, zoneOffset, period, periodFrom, periodTo },
+    transformStatistics
+  )
 }
 
-export const getBusinessIncomeStatistics = async ({
+export const getBusinessAccountIncomeStatistics = async ({
   userId,
-  currency = 'eur',
   format,
   zoneOffset,
   period,
   periodFrom,
   periodTo
 }) => {
-  const isXlsxFormat = format === 'XLSX'
-
-  const { data } = await API.get(`/business-income-statistics/${userId}`, {
-    params: {
-      currency,
-      format,
-      'zone-offset': zoneOffset,
-      period,
-      'period-from': periodFrom,
-      'period-to': periodTo
-    },
-    responseType: isXlsxFormat ? 'blob' : 'json',
-    transformResponse: [(data) => data]
-  })
-
-  if (isXlsxFormat) {
-    const url = window.URL.createObjectURL(new Blob([data]))
-    const link = document.createElement('a')
-    link.href = url
-    link.setAttribute('download', 'incoming-payment-statistics.xlsx')
-    document.body.appendChild(link)
-    link.click()
-    document.querySelector('body').removeChild(link)
-    return
-  }
-
-  const { table, diagram } = JSON.parse(data).result
-
-  return {
-    table: table.map(
-      ({ paymentId, firstName, lastName, commission, income, localDateTime, rating, title }) => ({
-        id: paymentId,
-        dateTime: new Date(localDateTime),
-        tipAmount: income,
-        commission,
-        firstName,
-        lastName,
-        rating,
-        platformName: title
-      })
-    ),
-    diagram: diagram.map(({ localDate, sum }) => ({ date: new Date(localDate), tipAmount: sum }))
-  }
+  return await getStatistics(
+    `/business-income-statistics/${userId}`,
+    { format, zoneOffset, period, periodFrom, periodTo },
+    ({
+      paymentId,
+      platformId,
+      firstName,
+      lastName,
+      commission,
+      income,
+      localDateTime,
+      rating,
+      title
+    }) => ({
+      id: paymentId,
+      platformId,
+      dateTime: new Date(localDateTime),
+      tipAmount: income,
+      commission,
+      firstName,
+      lastName,
+      rating,
+      platformName: title
+    })
+  )
 }
 
 export const getEmployeeIncomeStatistics = async ({
@@ -167,44 +136,19 @@ export const getEmployeeIncomeStatistics = async ({
   periodFrom,
   periodTo
 }) => {
-  const isXlsxFormat = format === 'XLSX'
-
-  const { data } = await API.get(`/employee-income-statistics/${ownerUserId}/${employeeUserId}`, {
-    params: {
-      format,
-      'zone-offset': zoneOffset,
-      period,
-      'period-from': periodFrom,
-      'period-to': periodTo
-    },
-    responseType: isXlsxFormat ? 'blob' : 'json',
-    transformResponse: [(data) => data]
-  })
-
-  if (isXlsxFormat) {
-    const url = window.URL.createObjectURL(new Blob([data]))
-    const link = document.createElement('a')
-    link.href = url
-    link.setAttribute('download', 'incoming-payment-statistics.xlsx')
-    document.body.appendChild(link)
-    link.click()
-    document.querySelector('body').removeChild(link)
-    return
-  }
-
-  const { table, diagram } = JSON.parse(data).result
-
-  return {
-    table: table.map(({ paymentId, localDateTime, income, commission, title, rating }) => ({
+  return await getStatistics(
+    `/employee-income-statistics/${ownerUserId}/${employeeUserId}`,
+    { format, zoneOffset, period, periodFrom, periodTo },
+    ({ paymentId, platformId, localDateTime, income, commission, title, rating }) => ({
       id: paymentId,
+      platformId,
       dateTime: new Date(localDateTime),
       tipAmount: income,
       commission,
       platformName: title,
       rating
-    })),
-    diagram: diagram.map(({ localDate, sum }) => ({ date: new Date(localDate), tipAmount: sum }))
-  }
+    })
+  )
 }
 
 export const getPlatformIncomeStatistics = async ({
@@ -215,45 +159,17 @@ export const getPlatformIncomeStatistics = async ({
   periodFrom,
   periodTo
 }) => {
-  const isXlsxFormat = format === 'XLSX'
-
-  const { data } = await API.get(`/platform-income-statistics/${platformId}`, {
-    params: {
-      format,
-      'zone-offset': zoneOffset,
-      period,
-      'period-from': periodFrom,
-      'period-to': periodTo
-    },
-    responseType: isXlsxFormat ? 'blob' : 'json',
-    transformResponse: [(data) => data]
-  })
-
-  if (isXlsxFormat) {
-    const url = window.URL.createObjectURL(new Blob([data]))
-    const link = document.createElement('a')
-    link.href = url
-    link.setAttribute('download', 'incoming-payment-statistics.xlsx')
-    document.body.appendChild(link)
-    link.click()
-    document.querySelector('body').removeChild(link)
-    return
-  }
-
-  const { table, diagram } = JSON.parse(data).result
-
-  return {
-    table: table.map(
-      ({ paymentId, localDateTime, income, firstName, lastName, commission, rating }) => ({
-        id: paymentId,
-        dateTime: new Date(localDateTime),
-        tipAmount: income,
-        commission,
-        firstName,
-        lastName,
-        rating
-      })
-    ),
-    diagram: diagram.map(({ localDate, sum }) => ({ date: new Date(localDate), tipAmount: sum }))
-  }
+  return await getStatistics(
+    `/platform-income-statistics/${platformId}`,
+    { format, zoneOffset, period, periodFrom, periodTo },
+    ({ paymentId, localDateTime, income, firstName, lastName, commission, rating }) => ({
+      id: paymentId,
+      dateTime: new Date(localDateTime),
+      tipAmount: income,
+      commission,
+      firstName,
+      lastName,
+      rating
+    })
+  )
 }

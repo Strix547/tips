@@ -2,6 +2,22 @@ import { makeAutoObservable } from 'mobx'
 
 import * as statisticsApi from 'api/statistics'
 
+const getStaitsitcs = async (params, apiMethod, store) => {
+  if (params.format === 'XLSX') {
+    apiMethod()
+    return
+  }
+
+  store.isIncomeStatisticsLoading = true
+  const statistics = await apiMethod(params)
+  store.incomeStatistics = statistics
+  store.isIncomeStatisticsLoading = false
+}
+
+const getStatisticsPeriodProps = (period, periodFrom, periodTo) => {
+  return period !== 'custom' ? { period } : { periodFrom, periodTo }
+}
+
 export const statisticsStore = makeAutoObservable({
   incomeStatistics: {
     table: [],
@@ -9,115 +25,63 @@ export const statisticsStore = makeAutoObservable({
   },
   isIncomeStatisticsLoading: false,
 
-  getIndividualIncomeStatistics: async ({
+  getAccountIncomeStatistics: async ({
     userId,
-    currency,
+    userRole,
     format,
     zoneOffset,
     period,
     periodFrom,
     periodTo
   }) => {
-    if (format === 'XLSX') {
-      statisticsApi.getIndividualIncomeStatistics({
+    const incomeMethod =
+      userRole === 'BUSINESS'
+        ? statisticsApi.getBusinessAccountIncomeStatistics
+        : statisticsApi.getIndividualAccountIncomeStatistics
+
+    await getStaitsitcs(
+      {
         userId,
-        currency,
         format,
-        period,
         zoneOffset,
-        periodFrom,
-        periodTo
-      })
-
-      return
-    }
-
-    statisticsStore.isIncomeStatisticsLoading = true
-    const incomeStatistics = await statisticsApi.getIndividualIncomeStatistics({
-      userId,
-      currency,
-      format,
-      period,
-      zoneOffset,
-      periodFrom,
-      periodTo
-    })
-    statisticsStore.incomeStatistics = incomeStatistics
-    statisticsStore.isIncomeStatisticsLoading = false
+        ...getStatisticsPeriodProps(period, periodFrom, periodTo)
+      },
+      incomeMethod,
+      statisticsStore
+    )
   },
 
-  getQrIncomeStatistics: async ({
-    qrId,
-    currency,
+  getPlatformIncomeStatistics: async ({
+    platformId,
     format,
-    zoneOffset,
     period,
+    zoneOffset,
     periodFrom,
     periodTo
   }) => {
-    if (format === 'XLSX') {
-      statisticsApi.getQrIncomeStatistics({
+    await getStaitsitcs(
+      {
+        platformId,
+        format,
+        zoneOffset,
+        ...getStatisticsPeriodProps(period, periodFrom, periodTo)
+      },
+      statisticsApi.getPlatformIncomeStatistics,
+      statisticsStore
+    )
+  },
+
+  getQrIncomeStatistics: async ({ qrId, format, zoneOffset, period, periodFrom, periodTo }) => {
+    await getStaitsitcs(
+      {
         qrId,
-        currency,
         format,
-        period,
         zoneOffset,
-        periodFrom,
-        periodTo
-      })
-
-      return
-    }
-
-    statisticsStore.isIncomeStatisticsLoading = true
-    const incomeStatistics = await statisticsApi.getQrIncomeStatistics({
-      qrId,
-      currency,
-      format,
-      period,
-      zoneOffset,
-      periodFrom,
-      periodTo
-    })
-    statisticsStore.incomeStatistics = incomeStatistics
-    statisticsStore.isIncomeStatisticsLoading = false
-  },
-
-  getBusinessIncomeStatistics: async ({
-    userId,
-    currency,
-    format,
-    zoneOffset,
-    period,
-    periodFrom,
-    periodTo
-  }) => {
-    if (format === 'XLSX') {
-      statisticsApi.getBusinessIncomeStatistics({
-        userId,
-        currency,
-        format,
-        period,
-        zoneOffset,
-        periodFrom,
-        periodTo
-      })
-
-      return
-    }
-
-    statisticsStore.isIncomeStatisticsLoading = true
-    const incomeStatistics = await statisticsApi.getBusinessIncomeStatistics({
-      userId,
-      currency,
-      format,
-      period,
-      zoneOffset,
-      periodFrom,
-      periodTo
-    })
-    statisticsStore.incomeStatistics = incomeStatistics
-    statisticsStore.isIncomeStatisticsLoading = false
+        ...getStatisticsPeriodProps(period, periodFrom, periodTo)
+      },
+      statisticsApi.getQrIncomeStatistics,
+      statisticsStore
+    )
   },
 
   getEmployeeIncomeStatistics: async ({
@@ -129,66 +93,16 @@ export const statisticsStore = makeAutoObservable({
     periodFrom,
     periodTo
   }) => {
-    if (format === 'XLSX') {
-      statisticsApi.getBusinessIncomeStatistics({
+    await getStaitsitcs(
+      {
         ownerUserId: userId,
         employeeUserId: employeeId,
         format,
-        period,
         zoneOffset,
-        periodFrom,
-        periodTo
-      })
-
-      return
-    }
-
-    statisticsStore.isIncomeStatisticsLoading = true
-    const incomeStatistics = await statisticsApi.getEmployeeIncomeStatistics({
-      ownerUserId: userId,
-      employeeUserId: employeeId,
-      format,
-      period,
-      zoneOffset,
-      periodFrom,
-      periodTo
-    })
-    statisticsStore.incomeStatistics = incomeStatistics
-    statisticsStore.isIncomeStatisticsLoading = false
-  },
-
-  getPlatformIncomeStatistics: async ({
-    platformId,
-    format,
-    period,
-    zoneOffset,
-    periodFrom,
-    periodTo
-  }) => {
-    if (format === 'XLSX') {
-      statisticsApi.getBusinessIncomeStatistics({
-        ownerUserId: userId,
-        employeeUserId: employeeId,
-        format,
-        period,
-        zoneOffset,
-        periodFrom,
-        periodTo
-      })
-
-      return
-    }
-
-    statisticsStore.isIncomeStatisticsLoading = true
-    const incomeStatistics = await statisticsApi.getPlatformIncomeStatistics({
-      platformId,
-      format,
-      period,
-      zoneOffset,
-      periodFrom,
-      periodTo
-    })
-    statisticsStore.incomeStatistics = incomeStatistics
-    statisticsStore.isIncomeStatisticsLoading = false
+        ...getStatisticsPeriodProps(period, periodFrom, periodTo)
+      },
+      statisticsApi.getEmployeeIncomeStatistics,
+      statisticsStore
+    )
   }
 })

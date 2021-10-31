@@ -5,9 +5,9 @@ import * as S from './Logo.styled'
 export const Logo = () => (
   <Link href="/" passHref>
     <S.Link>
-      <span>Tips</span>
+      <span>Fly</span>
       <S.Circle />
-      <span>me</span>
+      <span>Tips</span>
     </S.Link>
   </Link>
 )

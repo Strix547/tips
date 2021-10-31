@@ -1,9 +1,12 @@
+import { observer } from 'mobx-react-lite'
+
+import { localStore } from 'store'
 import { getPriceLabel } from 'utils'
 
 import * as S from './TotalEarned.styled'
 
-export const TotalEarned = ({ amount }) => {
-  const currency = '₽'
+export const TotalEarned = observer(({ amount }) => {
+  const currency = localStore.currency.label
 
   return (
     <S.TotalEarned>
@@ -11,4 +14,4 @@ export const TotalEarned = ({ amount }) => {
       <S.Amount>{getPriceLabel(amount, currency)}</S.Amount>
     </S.TotalEarned>
   )
-}
+})

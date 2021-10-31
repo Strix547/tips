@@ -59,8 +59,8 @@ export const PhoneField = styled.div`
     }
   }
 
-  ${({ haveError }) =>
-    haveError &&
+  ${({ error }) =>
+    error &&
     css`
       .react-tel-input .form-control {
         border-color: var(--color-red-100);

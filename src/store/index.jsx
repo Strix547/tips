@@ -8,6 +8,7 @@ import { supportStore } from './support'
 import { bankAccountStore } from './bankAccount'
 import { platformsStore } from './platforms'
 import { employeesStore } from './employees'
+import { adminStore } from './admin'
 
 export {
   authStore,
@@ -19,5 +20,6 @@ export {
   supportStore,
   bankAccountStore,
   platformsStore,
-  employeesStore
+  employeesStore,
+  adminStore
 }

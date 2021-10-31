@@ -56,9 +56,9 @@ export const Autocomplete = styled.div`
     }
   }
 
-  ${({ haveError }) => {
+  ${({ error }) => {
     return (
-      haveError &&
+      error &&
       css`
         && {
           .form-field-input-root.autocomplete-input-root {

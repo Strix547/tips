@@ -16,7 +16,7 @@ export const CommissionsPage = () => {
   }
 
   const onSaveComissions = (data) => {
-    console.log(data)
+    // console.log(data)
   }
 
   const errorsEntries = Object.entries(formState.errors)

@@ -1,9 +1,9 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import MuiSelect from '@material-ui/core/Select'
 
 import ArrowGrayIcon from '@public/icons/arrows/gray-solid-down.svg'
 
-export const Select = styled((props) => (
+export const Select = styled(({ rounded, ...props }) => (
   <MuiSelect
     {...props}
     classes={{ root: 'select-root', icon: 'icon', iconOpen: 'is-open' }}
@@ -101,4 +101,29 @@ export const Select = styled((props) => (
       }
     }
   }
+
+  ${({ rounded }) =>
+    rounded &&
+    css`
+      .select-root {
+        border-radius: 46px;
+
+        &[aria-expanded='true'] {
+          border-bottom-left-radius: 46px;
+          border-bottom-right-radius: 46px;
+          transition: 0.3s;
+        }
+
+        &:focus {
+          border-radius: 46px;
+        }
+      }
+
+      .menu-paper {
+        margin-top: 15px;
+        padding: 10px 0;
+        border-top: 1px solid var(--color-gray-400);
+        border-radius: 23px;
+      }
+    `}
 `

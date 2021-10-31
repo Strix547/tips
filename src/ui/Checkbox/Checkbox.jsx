@@ -8,7 +8,7 @@ export const Checkbox = ({ name, rules, label, ...props }) => {
     formState: { errors }
   } = useFormContext()
 
-  const haveError = Object.keys(errors).some((inputName) => inputName === name)
+  const error = Object.keys(errors).some((inputName) => inputName === name)
 
   return (
     <Controller
@@ -27,7 +27,7 @@ export const Checkbox = ({ name, rules, label, ...props }) => {
           <S.CheckboxRow label={label} control={<S.Checkbox {...propsCommon} />} />
         ) : (
           <>
-            <S.Checkbox {...propsCommon} haveError={haveError} />
+            <S.Checkbox {...propsCommon} error={error} />
           </>
         )
       }}

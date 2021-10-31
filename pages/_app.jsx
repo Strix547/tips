@@ -37,21 +37,21 @@ const App = ({ Component, pageProps }) => {
   })
 
   const { isIdLoading, id: userId, role } = userStore
-  const { isAuth } = authStore
 
   const currentPathname = router.pathname
   const isAuthRoute = currentPathname === ROUTE_NAMES.AUTH
   const currentRouteConfig = ROUTES.find(({ path }) => currentPathname === path)
   const isProtectedRoute = currentRouteConfig?.isProtected
-  const isBusinessRoute = currentRouteConfig?.forBusinessAccount
+  const isBusinessRoute = currentRouteConfig?.role === 'BUSINESS'
+  const isAdminRoute = currentRouteConfig?.role === 'ADMIN'
 
-  const onRouteLoading = () => {
-    NProgress.start()
-  }
+  // const onRouteLoading = () => {
+  //   NProgress.start()
+  // }
 
-  const onRouteLoaded = () => {
-    NProgress.done()
-  }
+  // const onRouteLoaded = () => {
+  //   NProgress.done()
+  // }
 
   // useEffect(() => {
   //   router.events.on('routeChangeStart', onRouteLoading)
@@ -99,6 +99,10 @@ const App = ({ Component, pageProps }) => {
       return
     }
 
+    if (role !== 'ADMIN' && isAdminRoute) {
+      router.push(ROUTE_NAMES.ACCOUNT)
+    }
+
     if (isAuthRoute) {
       router.push(ROUTE_NAMES.ACCOUNT)
     }
@@ -113,6 +117,10 @@ const App = ({ Component, pageProps }) => {
     }
 
     if (role === 'BUSINESS' && currentPathname === ROUTE_NAMES.ACCOUNT_UPGRADE_TO_BUSINESS) {
+      router.push(ROUTE_NAMES.ACCOUNT)
+    }
+
+    if (role !== 'ADMIN' && isAdminRoute) {
       router.push(ROUTE_NAMES.ACCOUNT)
     }
   }, [role, currentPathname])

@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react-lite'
 
 import { PlatformAvatar, TipAmount } from 'components'
-import { Button } from 'ui'
 import { ImpressionRow, RatingRow, FeedbackTextarea } from 'common'
 
 import { paymentStore } from 'store'

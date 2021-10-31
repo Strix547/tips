@@ -5,12 +5,10 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 
 import { AccountLayout } from 'layout'
-import { BarChart, TipsTable } from 'components'
+import { BarChart, TipsTable, TableRowCard } from 'components'
 
 import { userStore, statisticsStore } from 'store'
 import { getTimeZoneOffset, transformDateTimeToLabel, getPriceLabel } from 'utils'
-
-import * as S from './Statistics.styled'
 
 export const QrStatisticsPage = observer(() => {
   const router = useRouter()
@@ -19,105 +17,79 @@ export const QrStatisticsPage = observer(() => {
       period: 'MONTH'
     }
   })
+  const { watch } = useFormProps
 
   const qrId = router?.query?.id
   const { incomeStatistics, isIncomeStatisticsLoading } = statisticsStore
   const currencyLabel = userStore.personalData.currency.label
-
-  const periodSelected = useFormProps.watch('period')
-  const periodFromSelected = useFormProps.watch('periodFrom')
-  const periodToSelected = useFormProps.watch('periodTo')
+  const { period, periodFrom, periodTo } = watch()
 
   useEffect(() => {
-    if (!qrId) return
+    if (!qrId || (period === 'custom' && !periodFrom && !periodTo)) return
 
-    const commonData = {
+    statisticsStore.getQrIncomeStatistics({
+      qrId,
+      period,
+      periodFrom,
+      periodTo,
       format: 'JSON',
       zoneOffset: getTimeZoneOffset()
+    })
+  }, [qrId, period, periodFrom, periodTo])
+
+  const columns = [
+    {
+      headerName: 'Дата и время',
+      field: 'dateTime',
+      flex: 1
+    },
+    {
+      headerName: 'Имя QR-кода',
+      field: 'qrName',
+      flex: 1
+    },
+    {
+      headerName: 'Размер чаевых',
+      field: 'tipAmount',
+      flex: 1
+    },
+    {
+      headerName: 'Впечатление',
+      field: 'impression',
+      flex: 1
     }
+  ]
 
-    if (periodSelected !== 'custom') {
-      statisticsStore.getQrIncomeStatistics({
-        ...commonData,
-        qrId,
-        period: periodSelected
-      })
-    }
-
-    if (periodFromSelected && periodToSelected) {
-      statisticsStore.getQrIncomeStatistics({
-        ...commonData,
-        qrId,
-        periodFrom: periodFromSelected,
-        periodTo: periodToSelected
-      })
-    }
-  }, [qrId, periodSelected, periodFromSelected, periodToSelected])
-
-const columns = [
-  {
-    headerName: 'Дата и время',
-    field: 'dateTime',
-    flex: 1
-  },
-  {
-    headerName: 'Имя QR-кода',
-    field: 'qrName',
-    flex: 1
-  },
-  {
-    headerName: 'Размер чаевых',
-    field: 'tipAmount',
-    flex: 1
-  },
-  {
-    headerName: 'Впечатление',
-    field: 'impression',
-    flex: 1
-  }
-]
-
-const rows = incomeStatistics.table.map(
-  ({ id, dateTime, qrName, tipAmount, impression }) => ({
+  const rows = incomeStatistics.table.map(({ id, dateTime, qrName, tipAmount, impression }) => ({
     id,
     dateTime: transformDateTimeToLabel(dateTime),
     qrName,
     tipAmount: getPriceLabel(tipAmount, currencyLabel),
     impression
-  })
-)
+  }))
 
-  const cardList = incomeStatistics.table.map(
-    ({ qrId, qrName, dateTime, tipAmount, impression, type }) => {
+  const tableCards = incomeStatistics.table.map(
+    ({ qrId, qrName, dateTime, tipAmount, impression }) => {
+      const rows = [
+        { label: 'Имя QR-кода', value: qrName },
+        { label: 'Размер чаевых', value: getPriceLabel(tipAmount, currencyLabel) },
+        { label: 'Впечатление', value: impression }
+      ]
+
       return (
-        <S.TipCard key={qrId}>
-          <S.TipCardTop>
-            <S.Text>{transformDateTimeToLabel(dateTime)}</S.Text>
-            <S.Text>{getPriceLabel(tipAmount, currencyLabel)}</S.Text>
-          </S.TipCardTop>
-
-          <S.TipCardMain>
-            <S.TipCardRow>
-              <S.Text>Имя QR-кода</S.Text>
-              <S.Text>{qrName}</S.Text>
-            </S.TipCardRow>
-
-            <S.TipCardRow>
-              <S.Text>Размер чаевых</S.Text>
-              <S.Text>{getPriceLabel(tipAmount, currencyLabel)}</S.Text>
-            </S.TipCardRow>
-
-            <S.TipCardRow>
-              <S.Text>Впечатление</S.Text>
-              <S.Text>{impression}</S.Text>
-            </S.TipCardRow>
-          </S.TipCardMain>
-        </S.TipCard>
+        <TableRowCard
+          key={qrId}
+          top={{
+            left: transformDateTimeToLabel(dateTime),
+            right: getPriceLabel(tipAmount, currencyLabel)
+          }}
+          rows={rows}
+        />
       )
     }
   )
 
-  const downloadExcelFile = (qrId) => {
+  const downloadExcelFile = () => {
     statisticsStore.getQrIncomeStatistics({
       qrId,
       format: 'XLSX',
@@ -150,9 +122,10 @@ const rows = incomeStatistics.table.map(
             data={incomeStatistics.table}
             columns={columns}
             rows={rows}
-            cardList={cardList}
+            cardList={tableCards}
             isDataLoading={isIncomeStatisticsLoading}
-            onExcelDownload={() => downloadExcelFile(qrId)}
+            periodFilter={period}
+            onExcelDownload={() => downloadExcelFile()}
           />
         </FormProvider>
       </AccountLayout>

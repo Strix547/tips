@@ -24,7 +24,7 @@ export const QrIndividualEditPage = observer(() => {
 
   useEffect(() => {
     if (qrId) {
-      qrCodesStore.getIndividualQrCode(qrId)
+      qrCodesStore.getQrCodeIndividual(qrId)
     }
   }, [qrId])
 
@@ -45,7 +45,7 @@ export const QrIndividualEditPage = observer(() => {
   const editQr = () => {
     const { name, preset1, preset2, preset3, impression } = getValues()
 
-    qrCodesStore.changeIndividualQrCode({
+    qrCodesStore.changeQrCodeIndividual({
       id: qrId,
       name,
       amountPresets: [preset1, preset2, preset3],

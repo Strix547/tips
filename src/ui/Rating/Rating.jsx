@@ -17,6 +17,7 @@ export const Rating = ({ name, rules, required }) => {
           <S.Rating
             value={value}
             onChange={(_, value) => {
+              if (!value) return
               onChange(value)
             }}
           />

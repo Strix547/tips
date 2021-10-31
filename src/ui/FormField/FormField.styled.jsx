@@ -92,8 +92,8 @@ export const FormField = styled((props) => (
     color: var(--color-gray-300);
   }
 
-  ${({ haveError }) =>
-    haveError &&
+  ${({ error }) =>
+    error &&
     css`
       .form-field-input-root {
         border-color: var(--color-red-100);

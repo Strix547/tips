@@ -37,8 +37,8 @@ export const MainPage = () => {
 
       <main>
         <PageBanner
-          title="Получайте чаевые мгновенно. Где угодно. От кого-либо"
-          subtitle="Оплачивайте чаевые мгновенно. Где угодно. Любому получателю в мире"
+          title="Получайте чаевые мгновенно. От кого-либо"
+          subtitle="Получайте чаевые и донаты мгновенно. Где либо. Без налога"
           actions={bannerActions}
           img={{ desktop: dashboard, mobile: dashboardMobile }}
         />

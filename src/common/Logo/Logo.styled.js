@@ -15,7 +15,7 @@ export const Link = styled.a`
 export const Circle = styled.span`
   position: absolute;
   bottom: 8px;
-  left: 45px;
+  left: 34px;
   width: 6px;
   height: 6px;
   margin: 0 3px;

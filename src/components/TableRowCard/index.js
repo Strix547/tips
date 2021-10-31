@@ -1,0 +1,1 @@
+export { TableRowCard } from './TableRowCard'

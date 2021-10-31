@@ -1,9 +1,8 @@
 import Head from 'next/head'
 
 import { Header, Footer } from 'layout'
-import { PageBanner } from 'landing/components'
+import { PageBanner, Section } from 'landing/components'
 import {
-  TipsSection,
   ListIconSection,
   TariffsSection,
   TrustUsSection,
@@ -20,6 +19,8 @@ import dashboardMobile from '@public/img/landing/business-banner-dashboard-mobil
 import DeviceDesignIcon from '@public/icons/device-design.svg'
 import DeviceWindowSettingsIcon from '@public/icons/devices-window-settings.svg'
 import CashierMachineIcon from '@public/icons/cashier-machine.svg'
+
+import * as S from './Business.styled'
 
 export const BusinessPage = () => {
   const integrationTypes = [
@@ -41,9 +42,9 @@ export const BusinessPage = () => {
   ]
 
   const bannerFeatures = [
-    'Бесплатно для бизнеса',
-    'Дополнительный заработок для персонала',
-    'Инструмент повышения уровня сервиса и гостеприимства'
+    'Бесплатное подключение вашего бизнеса',
+    'Увеличьте заработок вашего персонала',
+    'Повысьте уровень сервиса и гостеприимства'
   ]
 
   const bannerAction = <LinkButton href={ROUTE_NAMES.AUTH}>Подключить чаевые</LinkButton>
@@ -64,7 +65,14 @@ export const BusinessPage = () => {
           img={{ desktop: dashboard, mobile: dashboardMobile }}
         />
 
-        <TipsSection />
+        <Section title="Ваше заведение - ваши чаевые" styles={S.sectionStyles}>
+          <S.Text>
+            Кумулируйте чаевые на свой счёт в нашем сервисе благодаря присвоенному вашему заведению
+            КР коду. Управляйте потоками чаевых через удобную панель и отслеживайте статистику
+            чаевых по каждому из сотрудников!
+          </S.Text>
+        </Section>
+
         <ListIconSection title="Возможности интеграции" list={integrationTypes} />
         <TariffsSection />
         <TrustUsSection />

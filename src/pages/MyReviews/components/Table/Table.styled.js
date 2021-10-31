@@ -2,17 +2,11 @@ import styled from 'styled-components'
 
 import { Text, WhiteBox } from 'styled'
 import { media } from 'styles/media'
-import {
-  TipCardList,
-  TipCard,
-  TipCardTop,
-  TipCardMain,
-  TipCardRow,
-  RatingCell
-} from 'components/TipsTable/TipsTable.styled'
+
+import { TipCardList } from 'components/TipsTable/TipsTable.styled'
 import { Table } from 'ui/Table/Table.styled'
 
-export { Text, TipCardList, TipCard, TipCardTop, TipCardMain, TipCardRow, RatingCell, WhiteBox }
+export { Text, TipCardList, WhiteBox }
 
 export const ReviewsTable = styled.div`
   margin-top: 20px;
@@ -41,9 +35,4 @@ export const ReviewsTable = styled.div`
       }
     }
   }
-`
-
-export const NoReviewsText = styled(Text)`
-  text-align: center;
-  font-weight: 500;
 `

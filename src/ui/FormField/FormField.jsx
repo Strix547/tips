@@ -17,7 +17,7 @@ export const FormField = ({
     formState: { errors }
   } = useFormContext()
 
-  const haveError = Object.keys(errors).some((inputName) => inputName === name)
+  const error = Object.keys(errors).some((inputName) => inputName === name)
 
   return (
     <Controller
@@ -30,7 +30,7 @@ export const FormField = ({
 
         const baseProps = {
           ...props,
-          haveError,
+          error,
           InputProps: {
             inputProps: { maxLength: 255 },
             inputRef: ref,

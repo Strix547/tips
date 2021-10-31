@@ -57,7 +57,7 @@ export const MyReviewsPage = observer(() => {
 
       <AccountLayout title="Мои отзывы">
         <FormProvider {...useFormProps}>
-          <ReviewsFilter />
+          <ReviewsFilter period={period} />
 
           {!isReviewsLoading ? (
             <ReviewsTable reviews={reviews} />

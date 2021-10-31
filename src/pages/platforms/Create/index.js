@@ -1,0 +1,1 @@
+export { PlatformCreatePage } from './Create'

@@ -1,11 +1,13 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { WhiteBox, Label, ErrorText } from 'styled'
 import { media } from 'styles/media'
 
+import { Button } from 'ui/Button/Button.styled'
+
 export { Label, ErrorText }
 
-export const Content = styled(WhiteBox)`
+const containerStyles = css`
   display: flex;
   flex-direction: column;
   padding: 40px;
@@ -13,19 +15,26 @@ export const Content = styled(WhiteBox)`
   & > *:not(:last-child) {
     margin-bottom: 20px;
   }
+`
+
+export const Content = styled(WhiteBox)`
+  ${containerStyles}
 
   /* skeleton */
   & > span {
-    display: flex;
-    flex-direction: column;
+    ${containerStyles}
+  }
 
-    & > *:not(:last-child) {
-      margin-bottom: 20px;
-    }
+  ${Button} {
+    max-width: 260px;
   }
 
   ${media.createMedia(500)} {
     padding: 20px;
+
+    & > span {
+      padding: 20px;
+    }
   }
 `
 
@@ -56,7 +65,13 @@ export const Avatar = styled.div`
 
 export const AvatarUploadLabel = styled.label`
   margin-left: 10px;
+  color: var(--color-primary-200);
+  text-decoration: underline;
   cursor: pointer;
+
+  &:hover {
+    text-decoration: none;
+  }
 
   input {
     opacity: 0;

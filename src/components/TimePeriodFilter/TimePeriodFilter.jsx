@@ -8,16 +8,14 @@ import { transformDateToIso } from 'utils'
 
 import * as S from './TimePeriodFilter.styled'
 
-export const TimePeriodFilter = ({ miniVersionMedia = 1500 }) => {
+export const TimePeriodFilter = ({ period, miniVersionMedia = 1500 }) => {
   const screenLess1500 = useMediaQuery({ maxWidth: miniVersionMedia })
   const screenLess700 = useMediaQuery({ maxWidth: 700 })
-  const { watch, setValue } = useFormContext()
+  const { setValue } = useFormContext()
 
   const [isDatePickerModalOpen, setDatePickerModalOpen] = useState(false)
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(null)
-
-  const periodSelected = watch('period')
 
   const periods = [
     { label: 'За сегодня', value: 'TODAY' },
@@ -54,7 +52,7 @@ export const TimePeriodFilter = ({ miniVersionMedia = 1500 }) => {
     <FormControlLabel
       key={value}
       value={value}
-      label={<S.PeriodRadio active={periodSelected === value}>{label}</S.PeriodRadio>}
+      label={<S.PeriodRadio active={period === value}>{label}</S.PeriodRadio>}
       control={<Radio />}
       onClick={() => chooseCustomPeriod(value)}
     />
@@ -71,7 +69,9 @@ export const TimePeriodFilter = ({ miniVersionMedia = 1500 }) => {
       {!screenLess1500 ? (
         <RadioGroup name="period">{periodRadios}</RadioGroup>
       ) : (
-        <Select name="period">{periodMenuItems}</Select>
+        <Select name="period" rounded>
+          {periodMenuItems}
+        </Select>
       )}
 
       <S.DatePickerModal

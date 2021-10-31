@@ -155,16 +155,6 @@ export const RatingField = styled(Field)`
 
   ${Select} {
     width: 260px;
-
-    .select-root {
-      border-radius: 46px;
-    }
-
-    .menu-paper {
-      border-radius: 8px;
-      border-top: 1px solid var(--color-gray-400);
-      margin-top: 10px;
-    }
   }
 
   ${media.createMedia(940)} {

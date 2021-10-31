@@ -99,6 +99,11 @@ export const ContentHead = styled.div`
   ${Button} {
     padding: 0 20px;
     height: 50px;
+    background-color: var(--color-primary-700);
+
+    &:hover {
+      background-color: #40d574;
+    }
 
     svg {
       transform: rotate(45deg);

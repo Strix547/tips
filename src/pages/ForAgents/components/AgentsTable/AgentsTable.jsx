@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite'
 import { TimePeriodFilter, StatisticRow } from 'components'
 import { Table } from 'ui'
 
-import { userStore } from 'store'
+import { userStore, localStore } from 'store'
 import { getPriceLabel } from 'utils'
 
 import * as S from './AgentsTable.styled'
@@ -15,7 +15,7 @@ export const AgentsTable = observer(() => {
       period: 'MONTH'
     }
   })
-  const currency = '₽'
+  const currency = localStore.currency.label
 
   const columns = [
     {

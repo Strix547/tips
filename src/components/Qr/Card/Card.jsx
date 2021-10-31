@@ -2,8 +2,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { observer } from 'mobx-react-lite'
 
-import { QrImage, QrModal } from 'components'
-import { DeleteConfirmModal } from '../DeleteConfirmModal'
+import { QrImage, QrModal, ConfirmModal } from 'components'
 import { Button } from 'ui'
 
 import { qrCodesStore } from 'store'
@@ -103,7 +102,7 @@ export const QrCard = observer(({ id, type, templateId, label, img, tag }) => {
         }}
       />
 
-      <DeleteConfirmModal
+      <ConfirmModal
         open={isConfirmDeleteModalOpen}
         onClose={() => {
           setConfirmDeleteModalOpen(false)

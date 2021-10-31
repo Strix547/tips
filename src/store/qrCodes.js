@@ -36,10 +36,10 @@ export const qrCodesStore = makeAutoObservable({
     }
   },
 
-  getIndividualQrCode: async (qrId) => {
+  getQrCodeIndividual: async (qrId) => {
     qrCodesStore.isQrCodeLoading = true
 
-    const qr = await qrCodesApi.getIndividualQrCode(qrId)
+    const qr = await qrCodesApi.getQrCodeIndividual(qrId)
     qrCodesStore.qrCode = qr
 
     qrCodesStore.isQrCodeLoading = false
@@ -56,16 +56,16 @@ export const qrCodesStore = makeAutoObservable({
     return qr
   },
 
-  getIndividualQrCodes: async (userId) => {
+  getQrCodesIndividual: async (userId) => {
     qrCodesStore.isQrCodesLoading = true
-    const qrCodes = await qrCodesApi.getIndividualQrCodes(userId)
+    const qrCodes = await qrCodesApi.getQrCodesIndividual(userId)
     qrCodesStore.qrCodesIndividuals = qrCodes
     qrCodesStore.isQrCodesLoading = false
   },
 
-  getPlatformQrCodes: async (userId) => {
+  getQrCodesPlatform: async (userId) => {
     qrCodesStore.isQrCodesLoading = true
-    const qrCodes = await qrCodesApi.getPlatformQrCodes(userId)
+    const qrCodes = await qrCodesApi.getQrCodesPlatform(userId)
     qrCodesStore.qrCodesPlatforms = qrCodes
     qrCodesStore.isQrCodesLoading = false
   },
@@ -73,14 +73,14 @@ export const qrCodesStore = makeAutoObservable({
   createIndividualQrCode: async ({ userId, name, amountPresets, impression }) => {
     try {
       const qrId = await qrCodesApi.createIndividualQrCode(userId)
-      await qrCodesApi.changeIndividualQrCode({
+      await qrCodesApi.changeQrCodeIndividual({
         id: qrId,
         name,
         amountPresets,
         impression
       })
 
-      qrCodesStore.getIndividualQrCodes(userStore.id)
+      qrCodesStore.getQrCodesIndividual(userStore.id)
       router.push(ROUTE_NAMES.ACCOUNT_QR_CODES)
       toast.success('QR successfully created')
     } catch ({ message }) {
@@ -88,14 +88,14 @@ export const qrCodesStore = makeAutoObservable({
     }
   },
 
-  changeIndividualQrCode: async ({ id, name, amountPresets, impression }) => {
-    await qrCodesApi.changeIndividualQrCode({
+  changeQrCodeIndividual: async ({ id, name, amountPresets, impression }) => {
+    await qrCodesApi.changeQrCodeIndividual({
       id,
       name,
       amountPresets,
       impression
     })
-    qrCodesStore.getIndividualQrCodes(userStore.id)
+    qrCodesStore.getQrCodesIndividual(userStore.id)
     router.push(ROUTE_NAMES.ACCOUNT_QR_CODES)
     toast.success('QR successfully changed')
   },
@@ -138,7 +138,7 @@ export const qrCodesStore = makeAutoObservable({
   deleteQrCode: async (id) => {
     try {
       await qrCodesApi.removeQrCode(id)
-      qrCodesStore.getIndividualQrCodes(userStore.id)
+      qrCodesStore.getQrCodesIndividual(userStore.id)
       toast.success('QR successfully deleted')
     } catch ({ message }) {
       toast.error(message)

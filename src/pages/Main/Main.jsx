@@ -5,15 +5,11 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 import { AccountLayout } from 'layout'
-import { BarChart, TipsTable } from 'components'
+import { BarChart, TipsTable, RatingCell, TableRowCard } from 'components'
 
 import { userStore, statisticsStore } from 'store'
 import { ROUTE_NAMES } from 'core/routes'
 import { getTimeZoneOffset, transformDateTimeToLabel, getPriceLabel } from 'utils'
-
-import * as S from './Main.styled'
-
-import StarIcon from '@public/icons/star.svg'
 
 export const UserMainPage = observer(() => {
   const router = useRouter()
@@ -30,42 +26,19 @@ export const UserMainPage = observer(() => {
   const { period, periodFrom, periodTo } = watch()
   const isBusinessAccount = role === 'BUSINESS'
 
-  const getStatisticsMethod = isBusinessAccount
-    ? statisticsStore.getBusinessIncomeStatistics
-    : statisticsStore.getIndividualIncomeStatistics
-
   useEffect(() => {
-    if (!userId || !role) return
+    if (!userId || !role || (period === 'custom' && !periodFrom && !periodTo)) return
 
-    const commonData = {
+    statisticsStore.getAccountIncomeStatistics({
       userId,
+      userRole: role,
       format: 'JSON',
+      period,
+      periodFrom,
+      periodTo,
       zoneOffset: getTimeZoneOffset()
-    }
-
-    if (period !== 'custom') {
-      getStatisticsMethod({
-        ...commonData,
-        period
-      })
-    }
-
-    if (periodFrom && periodTo) {
-      getStatisticsMethod({
-        ...commonData,
-        periodFrom,
-        periodTo
-      })
-    }
+    })
   }, [role, userId, period, periodFrom, periodTo])
-
-  const renderRatingCell = ({ row }) => {
-    return (
-      <S.RatingCell>
-        <StarIcon /> {row.rating}/5
-      </S.RatingCell>
-    )
-  }
 
   const columns = isBusinessAccount
     ? [
@@ -98,7 +71,7 @@ export const UserMainPage = observer(() => {
           headerName: 'Рейтинг',
           field: 'rating',
           flex: 1,
-          renderCell: renderRatingCell
+          renderCell: ({ row }) => <RatingCell rating={row.rating} />
         }
       ]
     : [
@@ -124,7 +97,7 @@ export const UserMainPage = observer(() => {
         }
       ]
 
-  const userDefaultTableRows = incomeStatistics.table.map(
+  const individualRows = incomeStatistics.table.map(
     ({ id, dateTime, qrName, tipAmount, impression }) => ({
       id,
       dateTime: transformDateTimeToLabel(dateTime),
@@ -134,7 +107,7 @@ export const UserMainPage = observer(() => {
     })
   )
 
-  const userBusinessTableRows = incomeStatistics.table.map(
+  const platformRows = incomeStatistics.table.map(
     ({ id, dateTime, platformName, firstName, lastName, tipAmount, commission, rating }) => ({
       id,
       dateTime: transformDateTimeToLabel(dateTime),
@@ -146,93 +119,62 @@ export const UserMainPage = observer(() => {
     })
   )
 
-  const rows = isBusinessAccount ? userBusinessTableRows : userDefaultTableRows
+  const individualTableCards = incomeStatistics.table.map(
+    ({ qrId, qrName, dateTime, tipAmount, impression }) => {
+      const rows = [
+        { label: 'Имя QR-кода', value: qrName },
+        { label: 'Размер чаевых', value: getPriceLabel(tipAmount, currencyLabel) },
+        { label: 'Впечатление', value: impression }
+      ]
 
-  const userDefaultCardList = incomeStatistics.table.map(
-    ({ qrId, qrName, dateTime, tipAmount, impression, type }) => {
       return (
-        <S.TipCard key={qrId}>
-          <S.TipCardTop>
-            <S.Text>{transformDateTimeToLabel(dateTime)}</S.Text>
-            <S.Text>{getPriceLabel(tipAmount, currencyLabel)}</S.Text>
-          </S.TipCardTop>
-
-          <S.TipCardMain>
-            <S.TipCardRow>
-              <S.Text>Имя QR-кода</S.Text>
-              <S.Text>{qrName}</S.Text>
-            </S.TipCardRow>
-
-            <S.TipCardRow>
-              <S.Text>Размер чаевых</S.Text>
-              <S.Text>{getPriceLabel(tipAmount, currencyLabel)}</S.Text>
-            </S.TipCardRow>
-
-            <S.TipCardRow>
-              <S.Text>Впечатление</S.Text>
-              <S.Text>{impression}</S.Text>
-            </S.TipCardRow>
-          </S.TipCardMain>
-        </S.TipCard>
+        <TableRowCard
+          key={qrId}
+          top={{
+            left: transformDateTimeToLabel(dateTime),
+            right: getPriceLabel(tipAmount, currencyLabel)
+          }}
+          rows={rows}
+        />
       )
     }
   )
 
-  const userBusinessCardList = incomeStatistics.table.map(
+  const platformTableCards = incomeStatistics.table.map(
     ({ id, platformName, dateTime, firstName, lastName, tipAmount, commission, rating }) => {
+      const rows = [
+        { label: 'Площадка', value: platformName },
+        { label: 'Пользователь', value: `${lastName} ${firstName}` },
+        { label: 'Размер чаевых', value: getPriceLabel(tipAmount, currencyLabel) },
+        { label: 'Комссия', value: getPriceLabel(commission, currencyLabel) },
+        { label: 'Рейтинг', value: <RatingCell rating={rating} /> }
+      ]
+
       return (
-        <S.TipCard key={id}>
-          <S.TipCardTop>
-            <S.Text>{transformDateTimeToLabel(dateTime)}</S.Text>
-            <S.Text>{getPriceLabel(tipAmount, currencyLabel)}</S.Text>
-          </S.TipCardTop>
-
-          <S.TipCardMain>
-            <S.TipCardRow>
-              <S.Text>Площадка</S.Text>
-              <S.Text>{platformName}</S.Text>
-            </S.TipCardRow>
-
-            <S.TipCardRow>
-              <S.Text>Пользователь</S.Text>
-              <S.Text>
-                {lastName} {firstName}
-              </S.Text>
-            </S.TipCardRow>
-
-            <S.TipCardRow>
-              <S.Text>Размер чаевых</S.Text>
-              <S.Text>{getPriceLabel(tipAmount, currencyLabel)}</S.Text>
-            </S.TipCardRow>
-
-            <S.TipCardRow>
-              <S.Text>Комссия</S.Text>
-              <S.Text>{getPriceLabel(commission, currencyLabel)}</S.Text>
-            </S.TipCardRow>
-
-            <S.TipCardRow>
-              <S.Text>Рейтинг</S.Text>
-              <S.RatingCell>
-                <StarIcon /> {rating}/5
-              </S.RatingCell>
-            </S.TipCardRow>
-          </S.TipCardMain>
-        </S.TipCard>
+        <TableRowCard
+          key={id}
+          top={{
+            left: transformDateTimeToLabel(dateTime),
+            right: getPriceLabel(tipAmount, currencyLabel)
+          }}
+          rows={rows}
+        />
       )
     }
   )
-
-  const cardList = isBusinessAccount ? userBusinessCardList : userDefaultCardList
 
   const toQrCodesPage = () => {
     router.push(ROUTE_NAMES.ACCOUNT_QR_INDIVIDUALS_CREATE)
   }
 
-  const downloadStatisticExcel = (userId) => {
-    getStatisticsMethod({
+  const downloadStatisticExcel = () => {
+    statisticsStore.getAccountIncomeStatistics({
       userId,
+      userRole: role,
       format: 'XLSX',
       period,
+      periodFrom,
+      periodTo,
       zoneOffset: getTimeZoneOffset()
     })
   }
@@ -259,11 +201,12 @@ export const UserMainPage = observer(() => {
           <TipsTable
             data={incomeStatistics.table}
             columns={columns}
-            rows={rows}
-            cardList={cardList}
+            rows={isBusinessAccount ? platformRows : individualRows}
+            cardList={isBusinessAccount ? platformTableCards : individualTableCards}
             isDataLoading={isIncomeStatisticsLoading}
+            periodFilter={period}
             haveCommission={isBusinessAccount}
-            onExcelDownload={() => downloadStatisticExcel(userId)}
+            onExcelDownload={() => downloadStatisticExcel()}
           />
         </FormProvider>
       </AccountLayout>

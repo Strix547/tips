@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { WhiteBox, RecipientCard, RecipientCardTop, RecipientCardMain, Heading } from 'styled'
+import { WhiteBox, RecipientCard, RecipientCardTop, Heading } from 'styled'
 
 import { media } from 'styles/media'
 
@@ -46,12 +46,7 @@ export const RecipientCardContainer = styled(WhiteBox)`
     }
 
     ${RecipientCardTop} {
-      padding-top: 0;
       margin: 0 15px;
-    }
-
-    ${RecipientCardMain} {
-      padding-bottom: 0;
     }
   }
 `

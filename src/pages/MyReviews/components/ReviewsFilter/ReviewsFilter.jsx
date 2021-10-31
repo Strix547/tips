@@ -7,7 +7,7 @@ import * as S from './ReviewsFilter.styled'
 
 import StarIcon from '@public/icons/star.svg'
 
-export const ReviewsFilter = () => {
+export const ReviewsFilter = ({ period }) => {
   const ratings = [
     { label: 'Любой', value: 'any' },
     {
@@ -74,7 +74,7 @@ export const ReviewsFilter = () => {
       <S.Row>
         <S.PeriodField>
           <S.Label>Выберите период:</S.Label>
-          <TimePeriodFilter miniVersionMedia={864} />
+          <TimePeriodFilter period={period} miniVersionMedia={864} />
         </S.PeriodField>
       </S.Row>
 
@@ -87,7 +87,9 @@ export const ReviewsFilter = () => {
         <S.RatingField>
           <S.Label>Рейтинг:</S.Label>
 
-          <Select name="rating">{ratingMenuItems}</Select>
+          <Select name="rating" rounded>
+            {ratingMenuItems}
+          </Select>
         </S.RatingField>
       </S.Row>
     </S.ReviewsFilter>

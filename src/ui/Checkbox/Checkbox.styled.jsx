@@ -65,9 +65,11 @@ export const Checkbox = styled(({ ...props }) => (
     }
   }
 
-  ${({ haveError }) => haveError && css`
-  &&.checkbox-root {
-    border-color: var(--color-red-100);
-  }
-  `}
+  ${({ error }) =>
+    error &&
+    css`
+      &&.checkbox-root {
+        border-color: var(--color-red-100);
+      }
+    `}
 `

@@ -7,8 +7,11 @@ import { SupportForm } from './SupportForm'
 import { LineChart } from './LineChart'
 import { StatisticRow } from './StatisticRow'
 import { Notifications } from './Notifications'
-import { CurrencySelect } from './CurrencySelect'
 import { EmployeeTable } from './EmployeeTable'
+import { NoResultFound } from './NoResultFound'
+import { RatingCell } from './RatingCell'
+import { TableRowCard } from './TableRowCard'
+import { ConfirmModal } from './ConfirmModal'
 
 import { QrCard, QrModal, QrImage } from './Qr'
 
@@ -22,7 +25,7 @@ import {
 
 import {
   AvatarIndividual,
-  PaymentCardIndividual,
+  IndividualPaymentCard,
   PaymentCardOptionsPanelIndividual
 } from './Individual'
 
@@ -39,7 +42,7 @@ export {
   PlatformPaymentCardOptionsPanel,
   PlatformFields,
   AvatarIndividual,
-  PaymentCardIndividual,
+  IndividualPaymentCard,
   PaymentCardOptionsPanelIndividual,
   TipAmount,
   RecipientCardPreview,
@@ -47,6 +50,9 @@ export {
   LineChart,
   StatisticRow,
   Notifications,
-  CurrencySelect,
-  EmployeeTable
+  EmployeeTable,
+  NoResultFound,
+  RatingCell,
+  TableRowCard,
+  ConfirmModal
 }

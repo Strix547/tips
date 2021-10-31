@@ -79,7 +79,7 @@ export const AuthPage = observer(() => {
           <S.LeftContent>
             {!isTablet && <Logo />}
 
-            <S.Heading level={1}>Вход в Tips.me</S.Heading>
+            <S.Heading level={1}>Вход в Fly.Tips</S.Heading>
 
             {authStore.step === 'phone' ? (
               <PhoneStep defaultPhone={phoneDefault} onPhoneSubmit={sendCode} />

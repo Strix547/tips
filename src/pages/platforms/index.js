@@ -1,6 +1,6 @@
 import { MyPlatformsPage } from './MyPlatforms'
-import { PlatformCreatePage } from './PlatformCreate'
-import { PlatformEditPage } from './PlatformEdit'
-import { PlatformStatisticsPage } from './PlatformStatistics'
+import { PlatformCreatePage } from './Create'
+import { PlatformEditPage } from './Edit'
+import { PlatformStatisticsPage } from './Statistics'
 
-export { MyPlatformsPage, PlatformCreatePage, PlatformEditPage,PlatformStatisticsPage }
+export { MyPlatformsPage, PlatformCreatePage, PlatformEditPage, PlatformStatisticsPage }

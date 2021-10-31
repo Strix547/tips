@@ -26,18 +26,6 @@ export const TimePeriodFilter = styled.div`
   ${Select} {
     display: none;
     width: 250px;
-
-    .select-root {
-      border-radius: 46px;
-      background: #fff;
-    }
-
-    .menu-paper {
-      margin-top: 15px;
-      padding: 10px 0;
-      border-top: 1px solid var(--color-gray-400);
-      border-radius: 23px;
-    }
   }
 
   ${media1500} {

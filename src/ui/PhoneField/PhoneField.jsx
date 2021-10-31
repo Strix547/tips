@@ -17,7 +17,7 @@ export const PhoneField = ({
     formState: { errors }
   } = useFormContext()
 
-  const haveError = Object.keys(errors).some((inputName) => inputName === name)
+  const error = Object.keys(errors).some((inputName) => inputName === name)
 
   return (
     <Controller
@@ -26,7 +26,7 @@ export const PhoneField = ({
       rules={rules}
       render={({ field }) => {
         return (
-          <S.PhoneField haveError={haveError}>
+          <S.PhoneField error={error}>
             <S.Label>Номер телефона</S.Label>
 
             <PhoneInputLib

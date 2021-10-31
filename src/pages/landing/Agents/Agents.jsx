@@ -1,7 +1,7 @@
 import Head from 'next/head'
 
 import { Header, Footer } from 'layout'
-import { PageBanner } from 'landing/components'
+import { PageBanner, Section } from 'landing/components'
 import {
   TipsSection,
   ListIconSection,
@@ -21,6 +21,8 @@ import SheetIcon from '@public/icons/sheet.svg'
 import DeviceDesignClickIcon from '@public/icons/device-design-click.svg'
 import DeviceWindowSettingsIcon from '@public/icons/devices-window-settings.svg'
 
+import * as S from './Agents.styled'
+
 export const AgentsPage = () => {
   const agentTypes = [
     {
@@ -38,8 +40,8 @@ export const AgentsPage = () => {
   ]
 
   const bannerFeatures = [
-    'Подключайте партнеров и получайте за это вознаграждение',
-    'Дополните свой портфель актуальным сервисом'
+    'Подключайте партнёров и получайте за это вознаграждение',
+    'Увеличивайте свой заработок с каждым новым пользователем'
   ]
 
   const bannerAction = <LinkButton href={ROUTE_NAMES.AUTH}>Стать агентом</LinkButton>
@@ -60,7 +62,14 @@ export const AgentsPage = () => {
           img={{ desktop: dashboard, mobile: dashboardMobile }}
         />
 
-        <TipsSection />
+        <Section styles={S.sectionStyles}>
+          <S.Text>
+            Наш сервис как дополонительный заработок! Агентом в нашем сервисе может быть абсолютно
+            кто угодно. Получайте свой % от чаевых подключенных вами пользователей.
+          </S.Text>
+          <LinkButton href="/">Подробнее</LinkButton>
+        </Section>
+
         <ListIconSection title="Кто может быть агентом" list={agentTypes} />
         <TariffsSection />
         <TrustUsSection />

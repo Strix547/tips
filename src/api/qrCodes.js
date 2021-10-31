@@ -34,12 +34,12 @@ const transformQrData = ({
   }
 }
 
-export const getIndividualQrCodes = async (userId) => {
+export const getQrCodesIndividual = async (userId) => {
   const { data } = await API.get(`${individualRoot}`, { params: { 'person-user-id': userId } })
   return data.map((qr) => transformQrData(qr))
 }
 
-export const getPlatformQrCodes = async (userId) => {
+export const getQrCodesPlatform = async (userId) => {
   const { data } = await API.get('/person-business-payment-page', {
     params: { 'person-user-id': userId }
   })
@@ -60,12 +60,12 @@ export const createIndividualQrCode = async (userId) => {
   return handleResponse(res, errorCodes)?.personPaymentPageTemplateId
 }
 
-export const getIndividualQrCode = async (id) => {
+export const getQrCodeIndividual = async (id) => {
   const { data } = await API.get(`${individualRoot}/${id}`)
   return transformQrData(data)
 }
 
-export const changeIndividualQrCode = async ({ id, name, amountPresets, impression }) => {
+export const changeQrCodeIndividual = async ({ id, name, amountPresets, impression }) => {
   return API.post(`${individualRoot}/${id}/change`, {
     name,
     presetPaymentSizes: amountPresets,

@@ -11,7 +11,16 @@ import { userStore } from 'store'
 import * as S from './TipsTable.styled'
 
 export const TipsTable = observer(
-  ({ data, columns, rows, cardList, haveCommission, isDataLoading, onExcelDownload }) => {
+  ({
+    data,
+    isDataLoading,
+    columns,
+    rows,
+    cardList,
+    haveCommission,
+    periodFilter,
+    onExcelDownload
+  }) => {
     const dataJS = toJS(data)
     const notEmpty = dataJS.length !== 0
     const currencyLabel = userStore.personalData.currency.label
@@ -43,7 +52,7 @@ export const TipsTable = observer(
       <S.TipsTable>
         <S.Top>
           <S.TopLeft>
-            <TimePeriodFilter />
+            <TimePeriodFilter period={periodFilter} />
           </S.TopLeft>
 
           <ExcelDownload onClick={onExcelDownload} />

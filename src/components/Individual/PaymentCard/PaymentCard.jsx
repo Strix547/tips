@@ -10,7 +10,7 @@ import * as S from './PaymentCard.styled'
 
 import avatar from '@public/img/placeholders/avatar.png'
 
-export const PaymentCardIndividual = observer(() => {
+export const IndividualPaymentCard = observer(() => {
   const { firstName, lastName, amountPresets, impression } = paymentStore.paymentData
 
   const avatarPreview = paymentStore.paymentData.avatar || avatar

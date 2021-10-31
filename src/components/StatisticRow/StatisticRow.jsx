@@ -5,7 +5,6 @@ import { getPriceLabel } from 'utils'
 import * as S from './StatisticRow.styled'
 
 export const StatisticRow = ({ stats, isLoading, currency }) => {
-  console.log(stats)
   return (
     <S.StatisticRow>
       {stats.map(({ label, value }) => (

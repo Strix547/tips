@@ -1,6 +1,6 @@
 import { FormField } from 'ui'
 
-export const BirthDateAdultValid = () => {
+export const BirthDateAdultValid = ({ label = 'Дата рождения' }) => {
   const checkDateHaventPlaceholderSymbols = (date) => {
     const haventPlaceholderSymbol = date?.indexOf('_') === -1
 
@@ -34,7 +34,7 @@ export const BirthDateAdultValid = () => {
         }
       }}
       name="birthDate"
-      label="Дата рождения"
+      label={label}
       placeholder="dd/mm/yyyy"
       MaskProps={{ mask: '99/99/9999' }}
     />

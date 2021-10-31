@@ -6,7 +6,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 
 import { AccountLayout } from 'layout'
-import { FormField, Button, EmailField } from 'ui'
+import { FormField, Button, EmailField, BirthDateAdultValid } from 'ui'
 
 import { userStore } from 'store'
 import { transformDateToLabel, transformDateLabelToIso } from 'utils'
@@ -134,12 +134,7 @@ export const PersonalDataPage = observer(() => {
 
             <FormField name="lastName" label="Фамилия" placeholder="Введите фамилию" />
 
-            <FormField
-              name="birthDate"
-              label="Дата рождения"
-              placeholder="dd/mm/yyyy"
-              MaskProps={{ mask: '99/99/9999' }}
-            />
+            <BirthDateAdultValid />
 
             <EmailField />
 

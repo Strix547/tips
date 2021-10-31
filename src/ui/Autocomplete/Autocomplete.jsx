@@ -11,10 +11,10 @@ export const Autocomplete = ({ label, name, rules, onChange, required, ...props 
     control,
     formState: { errors }
   } = useFormContext()
-  const haveError = Object.keys(errors).some((inputName) => inputName === name)
+  const error = Object.keys(errors).some((inputName) => inputName === name)
 
   return (
-    <S.Autocomplete haveError={haveError}>
+    <S.Autocomplete error={error}>
       <Controller
         control={control}
         name={name}

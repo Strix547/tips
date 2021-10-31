@@ -13,13 +13,15 @@ import {
   PrivacyPolicyPage
 } from './landing'
 
-import { CommissionsPage } from './admin'
+import { CommissionsPage, UsersPage } from './admin'
+
 import {
   MyPlatformsPage,
   PlatformCreatePage,
   PlatformEditPage,
   PlatformStatisticsPage
 } from './platforms'
+
 import {
   QrIndividualCreatePage,
   QrIndividualEditPage,
@@ -29,6 +31,13 @@ import {
   QrPlatformEditPage
 } from './qr-codes'
 
+import {
+  EmployeeCreatePage,
+  EmployeeEditPage,
+  EmployeeStatisticsPage,
+  MyEmployeesPage
+} from './employees'
+
 import { UserMainPage } from './Main'
 import { ThankYouPage } from './ThankYou'
 import { SupportPage as AccountSupportPage } from './Support'
@@ -37,13 +46,9 @@ import { RequisitesPage } from './Requisites'
 import { PersonalDataPage } from './PersonalData'
 import { IdentifyAccountPage } from './IdentifyAccount'
 import { LoyaltyPage } from './Loyalty'
-import { MyEmployeesPage } from './MyEmployees'
-import { EmployeeCreatePage } from './EmployeeCreate'
 import { FailPage } from './Fail'
 import { UpgradeToBusinessPage } from './UpgradeToBusiness'
 import { MyReviewsPage } from './MyReviews'
-import { EmployeeEditPage } from './EmployeeEdit'
-import { EmployeeStatisticsPage } from './EmployeeStatistics'
 
 export {
   AgentsPage,
@@ -83,5 +88,6 @@ export {
   MyReviewsPage,
   EmployeeEditPage,
   EmployeeStatisticsPage,
-  PlatformStatisticsPage
+  PlatformStatisticsPage,
+  UsersPage
 }
