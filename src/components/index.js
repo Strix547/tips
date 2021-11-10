@@ -8,10 +8,7 @@ import { LineChart } from './LineChart'
 import { StatisticRow } from './StatisticRow'
 import { Notifications } from './Notifications'
 import { EmployeeTable } from './EmployeeTable'
-import { NoResultFound } from './NoResultFound'
-import { RatingCell } from './RatingCell'
 import { TableRowCard } from './TableRowCard'
-import { ConfirmModal } from './ConfirmModal'
 
 import { QrCard, QrModal, QrImage } from './Qr'
 
@@ -51,8 +48,5 @@ export {
   StatisticRow,
   Notifications,
   EmployeeTable,
-  NoResultFound,
-  RatingCell,
-  TableRowCard,
-  ConfirmModal
+  TableRowCard
 }

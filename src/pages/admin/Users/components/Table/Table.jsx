@@ -1,17 +1,53 @@
-import { Table, FormField } from 'ui'
-import { ExcelDownload } from 'common'
+import { useRouter } from 'next/router'
 
-import { transformDateToLabel } from 'utils'
+import { Table, FormField } from 'ui'
+import { ExcelDownload, ActionCell } from 'common'
+import { TableRowCard } from 'components'
+
+import { USER_ROLES } from 'core/constants'
+import { ROUTE_NAMES } from 'core/routes'
+import { transformDateTimeToLabel } from 'utils'
 
 import * as S from './Table.styled'
 
-export const UsersTable = ({ users, onExcelDownload }) => {
+import LoupeIcon from '@public/icons/loupe.svg'
+
+export const UsersTable = ({ users = [], isUsersLoading, onExcelDownload }) => {
+  const router = useRouter()
+
+  const toUserStatisticsPage = (userId) => {
+    router.push({
+      pathname: ROUTE_NAMES.ADMIN_USERS_STATISTICS,
+      query: { id: userId }
+    })
+  }
+
+  const toggleUserActive = () => {}
+
+  const toUserEditPage = (userId) => {
+    router.push({
+      pathname: ROUTE_NAMES.ADMIN_USERS_EDIT,
+      query: { id: userId }
+    })
+  }
+
+  // 1210px show more icon and popup
+  const renderActionCell = ({ id, active }) => {
+    return (
+      <ActionCell
+        active={active}
+        actions={[
+          { label: 'active', onClick: () => toggleUserActive(), order: 1 },
+          { label: 'edit', onClick: () => toUserEditPage(id), order: 2 },
+          { label: 'chart', onClick: () => toUserStatisticsPage(id), order: 3 }
+        ]}
+      />
+    )
+  }
+
+  const getRoleLabel = (role) => USER_ROLES.find(({ value }) => role === value).label
+
   const columns = [
-    {
-      headerName: 'Дата регистрации',
-      field: 'date',
-      flex: 1
-    },
     {
       headerName: 'Имя',
       field: 'fullName',
@@ -28,6 +64,11 @@ export const UsersTable = ({ users, onExcelDownload }) => {
       flex: 1
     },
     {
+      headerName: 'Дата регистрации',
+      field: 'date',
+      flex: 1
+    },
+    {
       headerName: 'Страна',
       field: 'country',
       flex: 1
@@ -36,50 +77,72 @@ export const UsersTable = ({ users, onExcelDownload }) => {
       headerName: 'Группа',
       field: 'group',
       flex: 1
+    },
+    {
+      headerName: 'Действия',
+      field: 'actions',
+      flex: 1,
+      sortable: false,
+      renderCell: ({ row: { id, active } }) => renderActionCell({ id, active })
     }
   ]
 
   const rows = users.map(
-    ({ id, phone, firstName, lastName, email, country, role, active, date }) => ({
+    ({ id, phone, firstName, lastName, email, country, role, signUpDateTime, active }) => ({
       id,
       phone,
       fullName: `${lastName} ${firstName}`,
       email,
       country,
-      group: role,
-      date: transformDateToLabel(date)
+      group: getRoleLabel(role),
+      date: transformDateTimeToLabel(signUpDateTime),
+      active
     })
   )
 
-  // const tableCards = users.map(
-  //   ({ id, platformName, dateTime, tipAmount, commission, rating }) => {
-  //     const rows = [
-  //       { label: 'Площадка', value: platformName },
-  //       { label: 'Размер чаевых', value: getPriceLabel(tipAmount, currencyLabel) },
-  //       { label: 'Комссия', value: getPriceLabel(commission, currencyLabel) },
-  //       { label: 'Рейтинг', value: <RatingCell rating={rating} /> }
-  //     ]
-  //     return (
-  //       <TableRowCard
-  //         key={id}
-  //         top={{
-  //           left: transformDateTimeToLabel(dateTime),
-  //           right: getPriceLabel(tipAmount, currencyLabel)
-  //         }}
-  //         rows={rows}
-  //       />
-  //     )
-  //   }
-  // )
+  const tableCards = users.map(
+    ({ id, firstName, lastName, phone, country, role, email, signUpDateTime, active }) => {
+      const rows = [
+        { label: 'Телефон', value: phone },
+        { label: 'E-mail', value: email },
+        { label: 'Дата', value: transformDateTimeToLabel(signUpDateTime) },
+        { label: 'Группа', value: getRoleLabel(role) },
+        { label: 'Страна', value: country }
+      ]
+
+      return (
+        <TableRowCard
+          key={id}
+          top={{
+            left: `${lastName} ${firstName}`,
+            right: renderActionCell({ id, role, active })
+          }}
+          rows={rows}
+        />
+      )
+    }
+  )
 
   return (
-    <S.Table>
+    <S.UsersTable>
       <S.Top>
-        <FormField name="name" placeholder="Поиск по сотруднику" />
+        <FormField
+          name="name"
+          placeholder="Поиск по сотруднику"
+          InputProps={{ endAdornment: <LoupeIcon /> }}
+        />
+
         <ExcelDownload onClick={onExcelDownload} />
       </S.Top>
 
-      <Table columns={columns} rows={rows} />
-    </S.Table>
+      <Table
+        columns={columns}
+        rows={rows}
+        cards={tableCards}
+        cardHeight={254}
+        isLoading={isUsersLoading}
+        noText="Пользователи не найдены"
+      />
+    </S.UsersTable>
   )
 }

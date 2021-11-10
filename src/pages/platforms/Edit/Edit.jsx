@@ -6,7 +6,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 import { AccountLayout } from 'layout'
-import { ConfirmModal } from 'components'
+import { ConfirmModal } from 'common'
 import { Button } from 'ui'
 import { PlatformFields } from 'components/Platforms'
 

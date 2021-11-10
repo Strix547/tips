@@ -1,1 +1,1 @@
-export { Table } from './Table.styled'
+export { Table } from './Table'

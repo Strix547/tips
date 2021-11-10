@@ -1,4 +1,6 @@
-import { Select, MenuItem, BirthDateAdultValid } from 'ui'
+import { Select, MenuItem, DatePicker, PhoneField } from 'ui'
+
+import { USER_ROLES } from 'core/constants'
 
 import * as S from './Filter.styled'
 
@@ -8,20 +10,13 @@ export const UsersFilter = () => {
     { label: 'Активный', value: true }
   ]
 
-  const groups = [
-    { label: 'Пользователи', value: 'REGULAR' },
-    { label: 'Бизнес', value: 'BUSINESS' },
-    { label: 'Не верифицированные', value: 'UNVERIFIED' },
-    { label: 'Админы', value: 'ADMIN' }
-  ]
-
   const activityMenuItems = activities.map(({ label, value }) => (
     <MenuItem key={label} value={value}>
       {label}
     </MenuItem>
   ))
 
-  const groupMenuItems = groups.map(({ label, value }) => (
+  const groupMenuItems = USER_ROLES.map(({ label, value }) => (
     <MenuItem key={label} value={value}>
       {label}
     </MenuItem>
@@ -30,11 +25,11 @@ export const UsersFilter = () => {
   return (
     <S.Filter>
       <S.Column>
-        <BirthDateAdultValid label="Дата:" />
+        <DatePicker name="date" label="Дата:" placeholderText="Выберите дату" withIcon />
       </S.Column>
 
       <S.Column>
-        <S.Label>Логин:</S.Label>
+        <PhoneField label="Номер телефона:" />
       </S.Column>
 
       <S.Column>

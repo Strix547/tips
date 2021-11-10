@@ -45,6 +45,7 @@ export const Select = styled(({ rounded, ...props }) => (
     font-size: var(--font-size-reg);
     color: var(--color-black-100);
     border: 1px solid var(--color-gray-400);
+    background: #fff;
     border-radius: 8px;
     box-sizing: border-box;
     transition: 0.3s;

@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 
 import { AccountLayout } from 'layout'
 import { PlatformCard } from 'components'
+import { NoResultFound } from 'common'
 
 import { platformsStore, userStore } from 'store'
 import { ROUTE_NAMES } from 'core/routes'
@@ -25,7 +26,7 @@ export const MyPlatformsPage = observer(() => {
     router.push(ROUTE_NAMES.ACCOUNT_PLATFORMS_CREATE)
   }
 
-  const platformList = platforms?.length ? platforms.map(
+  const platformCardList = platforms.map(
     ({ id, type, name, address, tipsAmountMonth, tipsAmountYear, active, employeeCount }) => (
       <PlatformCard
         key={id}
@@ -39,7 +40,14 @@ export const MyPlatformsPage = observer(() => {
         employeeCount={employeeCount}
       />
     )
-  ) : <S.Text>Нет платформ</S.Text>
+  )
+
+  const platformsContent =
+    platforms?.length !== 0 ? (
+      <S.PlatformsGrid>{platformCardList}</S.PlatformsGrid>
+    ) : (
+      <NoResultFound>Платформы отсутствуют</NoResultFound>
+    )
 
   return (
     <>
@@ -52,9 +60,13 @@ export const MyPlatformsPage = observer(() => {
         button={{ label: 'Добавить площадку', onClick: addPlatform }}
         styles={S.layoutStyles}
       >
-        <S.Content>
-          {!isPlatformsLoading ? platformList : <Skeleton count={3} height={353} />}
-        </S.Content>
+        {!isPlatformsLoading ? (
+          platformsContent
+        ) : (
+          <S.PlatformsGridSkeleton>
+            <Skeleton count={4} height={353} />
+          </S.PlatformsGridSkeleton>
+        )}
       </AccountLayout>
     </>
   )

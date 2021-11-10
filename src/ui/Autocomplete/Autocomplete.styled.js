@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { Text, Label } from 'styled'
+import { FormField } from 'ui/FormField/FormField.styled'
 
 export { Text, Label }
 
@@ -19,6 +20,11 @@ export const Autocomplete = styled.div`
     }
   }
 
+  [aria-expanded='false'] ${FormField} .form-field-input-root {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+
   .autocomplete-no-options {
     padding: 8px 15px;
     font-family: 'Formular';
@@ -29,7 +35,6 @@ export const Autocomplete = styled.div`
   .autocomplete-focused .form-field-input-root {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    cursor: '';
   }
 
   .autocomplete-end-adornment {

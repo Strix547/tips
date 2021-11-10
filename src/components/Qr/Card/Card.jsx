@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { observer } from 'mobx-react-lite'
 
-import { QrImage, QrModal, ConfirmModal } from 'components'
+import { QrImage, QrModal } from 'components'
+import { ConfirmModal } from 'common'
 import { Button } from 'ui'
 
 import { qrCodesStore } from 'store'

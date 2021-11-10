@@ -5,6 +5,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 import { IndividualPaymentCard, PlatformPaymentCard } from 'components'
+import { CircularProgress } from 'ui'
 
 import { paymentStore } from 'store'
 import { getTextColorBgBased, convertHexToRgb, changeColorLuminosity } from 'utils'
@@ -43,7 +44,20 @@ export const QrPaymentPage = observer(() => {
     }
   }
 
-  if (isPaymentDataLoading) return null
+  if (isPaymentDataLoading)
+    return (
+      <>
+        <Head>
+          <title>
+            Оплата чаевых {firstName} {lastName}
+          </title>
+        </Head>
+
+        <S.LoadingScreen>
+          <CircularProgress size={80} />
+        </S.LoadingScreen>
+      </>
+    )
 
   return (
     <>

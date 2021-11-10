@@ -114,6 +114,15 @@ export const ActionList = styled.ul`
       border: none;
       padding: 0;
       cursor: pointer;
+
+      svg {
+        transition: 0.3s;
+
+        &:hover {
+          fill: var(--color-primary-200);
+          transition: 0.3s;
+        }
+      }
     }
   }
 `

@@ -1,4 +1,3 @@
-import Skeleton from 'react-loading-skeleton'
 import { observer } from 'mobx-react-lite'
 import { toJS } from 'mobx'
 
@@ -17,23 +16,26 @@ export const TipsTable = observer(
     columns,
     rows,
     cardList,
+    cardHeight,
     haveCommission,
     periodFilter,
     onExcelDownload
   }) => {
     const dataJS = toJS(data)
-    const notEmpty = dataJS.length !== 0
+    const notEmpty = rows.length !== 0
     const currencyLabel = userStore.personalData.currency.label
 
     const tipsTotal = dataJS
       .map(({ tipAmount }) => tipAmount)
       .reduce((amount, total) => amount + total, 0)
+
     const tipsAverage = dataJS.length ? Number(Number(tipsTotal / dataJS.length).toFixed(0)) : 0
+
     const commissionTotal = dataJS
       .map(({ commission }) => commission)
       .reduce((amount, total) => amount + total, 0)
 
-    const statisticTotal = !haveCommission
+    const statisticTotals = !haveCommission
       ? [
           { label: 'Всего чаевых', value: tipsTotal },
           { label: 'Средний чек', value: tipsAverage }
@@ -44,9 +46,10 @@ export const TipsTable = observer(
           { label: 'Всего комиссия', value: commissionTotal }
         ]
 
-    const statisticRow = notEmpty ? (
-      <StatisticRow stats={statisticTotal} isLoading={isDataLoading} currency={currencyLabel} />
-    ) : null
+    const statisticRow =
+      notEmpty || isDataLoading ? (
+        <StatisticRow stats={statisticTotals} isLoading={isDataLoading} currency={currencyLabel} />
+      ) : null
 
     return (
       <S.TipsTable>
@@ -61,23 +64,14 @@ export const TipsTable = observer(
         <S.TableContainer>
           {statisticRow}
 
-          {!isDataLoading ? (
-            <Table columns={columns} rows={rows} />
-          ) : (
-            <S.TableSkeleton>
-              <Skeleton count={5} height={60} />
-            </S.TableSkeleton>
-          )}
-
-          {!isDataLoading ? (
-            <S.TipCardList>
-              {notEmpty ? cardList : <S.NoTipsText>No tips for this period</S.NoTipsText>}
-            </S.TipCardList>
-          ) : (
-            <S.TipCardSkeleton>
-              <Skeleton count={5} height={184} />
-            </S.TipCardSkeleton>
-          )}
+          <Table
+            columns={columns}
+            rows={rows}
+            cards={cardList}
+            cardHeight={cardHeight}
+            isLoading={isDataLoading}
+            noText="Чаевые за этот период отсутствуют"
+          />
 
           {statisticRow}
         </S.TableContainer>

@@ -4,6 +4,7 @@ import { MuiThemeProvider } from '@material-ui/core'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 import NProgress from 'nprogress'
+import { appWithTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
@@ -89,18 +90,24 @@ const App = ({ Component, pageProps }) => {
       return
     }
 
-    if (role !== 'BUSINESS' && isBusinessRoute) {
+    if (role !== 'BUSINESS' && isBusinessRoute && role !== 'ADMIN') {
       router.push(ROUTE_NAMES.ACCOUNT_UPGRADE_TO_BUSINESS)
+      return
+    }
+
+    if (role !== 'ADMIN' && isAdminRoute) {
+      router.push(ROUTE_NAMES.ACCOUNT)
+      return
+    }
+
+    if (role === 'ADMIN') {
+      router.push(ROUTE_NAMES.ADMIN_USERS)
       return
     }
 
     if (role === 'BUSINESS' && currentPathname === ROUTE_NAMES.ACCOUNT_UPGRADE_TO_BUSINESS) {
       router.push(ROUTE_NAMES.ACCOUNT)
       return
-    }
-
-    if (role !== 'ADMIN' && isAdminRoute) {
-      router.push(ROUTE_NAMES.ACCOUNT)
     }
 
     if (isAuthRoute) {
@@ -111,16 +118,12 @@ const App = ({ Component, pageProps }) => {
   useEffect(() => {
     if (!role) return
 
-    if (role !== 'BUSINESS' && isBusinessRoute) {
+    if (role !== 'BUSINESS' && isBusinessRoute && role !== 'ADMIN') {
       router.push(ROUTE_NAMES.ACCOUNT_UPGRADE_TO_BUSINESS)
       return
     }
 
     if (role === 'BUSINESS' && currentPathname === ROUTE_NAMES.ACCOUNT_UPGRADE_TO_BUSINESS) {
-      router.push(ROUTE_NAMES.ACCOUNT)
-    }
-
-    if (role !== 'ADMIN' && isAdminRoute) {
       router.push(ROUTE_NAMES.ACCOUNT)
     }
   }, [role, currentPathname])
@@ -132,10 +135,6 @@ const App = ({ Component, pageProps }) => {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
         />
-
-        {/* <script
-          src={`https://maps.googleapis.com/maps/api/js?key=AIzaSyDSVk9cak0LLFi-PjTkpVXFXTm9VzGkNfI&libraries=places&callback=initMap`}
-        /> */}
       </Head>
 
       <GlobalStyles />
@@ -152,4 +151,4 @@ const App = ({ Component, pageProps }) => {
   )
 }
 
-export default observer(App)
+export default appWithTranslation(observer(App))

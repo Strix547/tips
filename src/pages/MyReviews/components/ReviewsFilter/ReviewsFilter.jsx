@@ -8,57 +8,30 @@ import * as S from './ReviewsFilter.styled'
 import StarIcon from '@public/icons/star.svg'
 
 export const ReviewsFilter = ({ period }) => {
+  const renderStars = (count) => {
+    return new Array(count).fill(<StarIcon />)
+  }
+
   const ratings = [
     { label: 'Любой', value: 'any' },
     {
-      label: (
-        <S.StarList>
-          <StarIcon />
-        </S.StarList>
-      ),
+      label: <S.StarList>{renderStars(1)}</S.StarList>,
       value: 1
     },
     {
-      label: (
-        <S.StarList>
-          <StarIcon />
-          <StarIcon />
-        </S.StarList>
-      ),
+      label: <S.StarList>{renderStars(2)}</S.StarList>,
       value: 2
     },
     {
-      label: (
-        <S.StarList>
-          <StarIcon />
-          <StarIcon />
-          <StarIcon />
-        </S.StarList>
-      ),
+      label: <S.StarList>{renderStars(3)}</S.StarList>,
       value: 3
     },
     {
-      label: (
-        <S.StarList>
-          <StarIcon />
-          <StarIcon />
-          <StarIcon />
-          <StarIcon />
-        </S.StarList>
-      ),
+      label: <S.StarList>{renderStars(4)}</S.StarList>,
       value: 4
     },
     {
-      label: (
-        <S.StarList>
-          <StarIcon />
-          <StarIcon />
-
-          <StarIcon />
-          <StarIcon />
-          <StarIcon />
-        </S.StarList>
-      ),
+      label: <S.StarList>{renderStars(5)}</S.StarList>,
       value: 5
     }
   ]
@@ -80,7 +53,7 @@ export const ReviewsFilter = ({ period }) => {
 
       <S.Row>
         <S.PlatformField>
-          <S.Label>Площадки</S.Label>
+          <S.Label>Площадки:</S.Label>
           <PlatformSearch />
         </S.PlatformField>
 

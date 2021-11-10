@@ -1,21 +1,67 @@
-import { useMediaQuery } from 'react-responsive'
+import { observer } from 'mobx-react-lite'
 import { Tooltip } from '@material-ui/core'
 import { useRouter } from 'next/router'
 
-import { ActionsForm } from './components'
+import { TableRowCard } from 'components'
+import { ActionCell } from 'common'
 import { Table } from 'ui'
 
+import { userStore, employeesStore } from 'store'
 import { ROUTE_NAMES } from 'core/routes'
 
 import * as S from './EmployeeTable.styled'
 
-export const EmployeeTable = ({ employees }) => {
+export const EmployeeTable = observer(({ employees, isEmployeesLoading }) => {
   const router = useRouter()
-  const screenLess720 = useMediaQuery({ maxWidth: 720 })
 
-  const renderActionCell = ({ row }) => {
-    const { employeeId, platformId, available } = row
-    return <ActionsForm employeeId={employeeId} platformId={platformId} available={available} />
+  const userId = userStore.id
+
+  const toEmployeeStatisticsPage = (employeeId) => {
+    router.push({
+      pathname: ROUTE_NAMES.ACCOUNT_EMPLOYEE_STATISTICS,
+      query: { id: employeeId }
+    })
+  }
+
+  const toggleEmployeeActive = ({ platformId, employeeId, available }) => {
+    employeesStore.changeEmployeeAvailability({
+      platformId,
+      employeeId,
+      available: !available
+    })
+  }
+
+  const deleteEmployee = ({ employeeId, platformId, userId }) => {
+    employeesStore.deleteEmployeeFromPlatform({ employeeId, platformId, userId })
+  }
+
+  const toEmployeeEditPage = (employeeId) => {
+    router.push({
+      pathname: ROUTE_NAMES.ACCOUNT_EMPLOYEE_EDIT,
+      query: { id: employeeId }
+    })
+  }
+
+  const renderActionCell = ({ employeeId, platformId, available }) => {
+    return (
+      <ActionCell
+        active={available}
+        actions={[
+          { label: 'chart', onClick: () => toEmployeeStatisticsPage(employeeId), order: 1 },
+          {
+            label: 'active',
+            onClick: ({ active }) =>
+              toggleEmployeeActive({ platformId, employeeId, available: active }),
+            order: 2
+          },
+          {
+            label: 'delete',
+            onClick: () => deleteEmployee({ employeeId, platformId, userId }),
+            order: 3
+          }
+        ]}
+      />
+    )
   }
 
   const renderTooltip = (text) => {
@@ -32,13 +78,6 @@ export const EmployeeTable = ({ employees }) => {
     )
   }
 
-  const toEmployeeEditPage = (employeeId) => {
-    router.push({
-      pathname: ROUTE_NAMES.ACCOUNT_EMPLOYEE_EDIT,
-      query: { id: employeeId }
-    })
-  }
-
   const renderEmployeeCard = ({
     id,
     employeeId,
@@ -46,32 +85,22 @@ export const EmployeeTable = ({ employees }) => {
     fullName,
     phone,
     platform,
-    statistics
+    statistics,
+    available
   }) => {
+    const rows = [
+      { label: 'Имя', value: fullName },
+      { label: 'Телефон', value: phone },
+      { label: 'Площадка', value: platform },
+      { label: 'Статистика', value: statistics }
+    ]
+
     return (
-      <S.EmployeeCard onClick={() => toEmployeeEditPage(employeeId)}>
-        <S.EmployeeCardTop>
-          <S.Text>{id}</S.Text>
-
-          <S.EmployeeCardActions>
-            <ActionsForm employeeId={employeeId} platformId={platformId} />
-          </S.EmployeeCardActions>
-        </S.EmployeeCardTop>
-
-        <S.EmployeeCardBody>
-          <S.Text>ФИО</S.Text>
-          <S.Text>{fullName}</S.Text>
-
-          <S.Text>Телефон</S.Text>
-          <S.Text>{phone}</S.Text>
-
-          <S.Text>Площадка</S.Text>
-          <S.Text>{platform}</S.Text>
-
-          <S.Text>Статистика</S.Text>
-          <S.Text>{statistics}</S.Text>
-        </S.EmployeeCardBody>
-      </S.EmployeeCard>
+      <TableRowCard
+        key={id}
+        top={{ left: employeeId, right: renderActionCell({ employeeId, platformId, available }) }}
+        rows={rows}
+      />
     )
   }
 
@@ -104,7 +133,8 @@ export const EmployeeTable = ({ employees }) => {
       field: 'actions',
       flex: 1,
       sortable: false,
-      renderCell: renderActionCell
+      renderCell: ({ row: { employeeId, platformId, available } }) =>
+        renderActionCell({ employeeId, platformId, available })
     }
   ]
 
@@ -121,30 +151,31 @@ export const EmployeeTable = ({ employees }) => {
     })
   )
 
-  const employeeCardList = employees?.map(
-    ({ id, platformId, firstName, lastName, phone, platformName, tips }) =>
+  const employeeTableCards = employees?.map(
+    ({ id, platformId, firstName, lastName, phone, platformName, available, tips }) =>
       renderEmployeeCard({
         id: platformId + id,
         employeeId: id,
         fullName: `${firstName} ${lastName}`,
-        phone: `+${phone}`,
+        phone,
         platform: platformName,
         platformId,
-        statistics: tips
+        statistics: tips,
+        available
       })
   )
 
   return (
     <S.EmployeeTable>
-      {!screenLess720 ? (
-        <Table
-          columns={columns}
-          rows={rows}
-          onRowClick={({ row }) => toEmployeeEditPage(row.employeeId)}
-        />
-      ) : (
-        employeeCardList
-      )}
+      <Table
+        columns={columns}
+        rows={rows}
+        cards={employeeTableCards}
+        cardHeight={219}
+        isLoading={isEmployeesLoading}
+        noText="Сотрудники не найдены"
+        onRowClick={({ row }) => toEmployeeEditPage(row.employeeId)}
+      />
     </S.EmployeeTable>
   )
-}
+})

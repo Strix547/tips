@@ -26,6 +26,7 @@ import { BirthDateAdultValid } from './BirthDateAdultValid'
 import { PlatformSearch } from './PlatformSearch'
 import { AddressSearch } from './AddressSearch'
 import { CurrencySelect } from './CurrencySelect'
+import { Tabs, Tab } from './Tabs'
 
 export {
   Button,
@@ -60,5 +61,7 @@ export {
   BirthDateAdultValid,
   PlatformSearch,
   AddressSearch,
-  CurrencySelect
+  CurrencySelect,
+  Tabs,
+  Tab
 }

@@ -47,8 +47,9 @@ export const ROUTE_NAMES = {
   ADMIN_USERS: '/admin/users',
   ADMIN_USERS_EDIT: '/admin/users/[id]/edit',
   ADMIN_USERS_STATISTICS: '/admin/users/[id]/statistics',
-  ADMIN_PAYMENT_STATISTICS: '/admin/payment-statistics',
-  ADMIN_COMISSIONS: '/admin/comissions'
+  ADMIN_PAYMENT_STATISTICS_OUTGOING: '/admin/payment-statistics/outgoing',
+  ADMIN_PAYMENT_STATISTICS_INCOMING: '/admin/payment-statistics/incoming',
+  ADMIN_COMMISSION: '/admin/commission'
 }
 
 export const ROUTES = [
@@ -92,9 +93,9 @@ export const ROUTES = [
   { path: ROUTE_NAMES.ACCOUNT_LOYALTY, isProtected: true },
   { path: ROUTE_NAMES.ACCOUNT_UPGRADE_TO_BUSINESS, isProtected: true },
 
-  { path: ROUTE_NAMES.ADMIN_USERS, isProtected: true },
+  { path: ROUTE_NAMES.ADMIN_USERS, isProtected: true, role: 'ADMIN' },
   { path: ROUTE_NAMES.ADMIN_USERS_EDIT, isProtected: true, role: 'ADMIN' },
-  { path: ROUTE_NAMES.ADMIN_USERS_STATISTICS, isProtected: true, role: 'ADMIN' },
-  { path: ROUTE_NAMES.ADMIN_PAYMENT_STATISTICS, isProtected: true, role: 'ADMIN' },
-  { path: ROUTE_NAMES.ADMIN_COMISSIONS, isProtected: true, role: 'ADMIN' }
+  { path: ROUTE_NAMES.ADMIN_PAYMENT_STATISTICS_OUTGOING, isProtected: true, role: 'ADMIN' },
+  { path: ROUTE_NAMES.ADMIN_PAYMENT_STATISTICS_INCOMING, isProtected: true, role: 'ADMIN' },
+  { path: ROUTE_NAMES.ADMIN_COMMISSION, isProtected: true, role: 'ADMIN' }
 ]

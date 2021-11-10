@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { observer } from 'mobx-react-lite'
-import Skeleton from 'react-loading-skeleton'
 import Head from 'next/head'
 
 import { AccountLayout } from 'layout'
@@ -59,11 +58,7 @@ export const MyReviewsPage = observer(() => {
         <FormProvider {...useFormProps}>
           <ReviewsFilter period={period} />
 
-          {!isReviewsLoading ? (
-            <ReviewsTable reviews={reviews} />
-          ) : (
-            <Skeleton style={{ height: 200, marginTop: 20 }} />
-          )}
+          <ReviewsTable reviews={reviews} isReviewsLoading={isReviewsLoading} />
         </FormProvider>
       </AccountLayout>
     </>

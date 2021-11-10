@@ -32,24 +32,9 @@ export const Main = styled.div`
 export const Nav = styled.ul``
 
 export const NavItem = styled.li`
-  height: 60px;
+  display: flex;
+  flex-direction: column;
   border-radius: 10px;
-  transition: 0.3s;
-
-  &:hover {
-    background: #e2f7e9;
-    transition: 0.3s;
-
-    a {
-      color: var(--color-primary-200);
-      transition: 0.3s;
-    }
-
-    svg {
-      fill: var(--color-primary-200);
-      transition: 0.3s;
-    }
-  }
 
   /* my qr */
   &:nth-child(2) {
@@ -71,12 +56,25 @@ export const NavItem = styled.li`
   a {
     display: flex;
     align-items: center;
-    height: 100%;
+    height: 60px;
     padding-left: 15px;
     font-weight: 500;
+    border-radius: 10px;
     color: var(--color-black-200);
     transition: 0.3s;
     box-sizing: border-box;
+    transition: 0.3s;
+
+    &:hover {
+      background: #e2f7e9;
+      color: var(--color-primary-200);
+      transition: 0.3s;
+
+      svg {
+        fill: var(--color-primary-200);
+        transition: 0.3s;
+      }
+    }
   }
 
   svg {
@@ -87,7 +85,7 @@ export const NavItem = styled.li`
   ${({ active, bgRed }) =>
     active &&
     css`
-      a {
+      & > a {
         color: var(--color-primary-200);
       }
 
@@ -199,5 +197,17 @@ export const LogoutButton = styled.button`
       fill: var(--color-primary-200);
       transition: 0.3s;
     }
+  }
+`
+
+export const LogoutAdminButton = styled(LogoutButton)`
+  font-size: 15px;
+`
+
+export const SubNav = styled.ul``
+
+export const SubNavItem = styled(NavItem)`
+  a {
+    padding-left: 54px;
   }
 `

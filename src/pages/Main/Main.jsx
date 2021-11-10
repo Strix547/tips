@@ -5,7 +5,8 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 import { AccountLayout } from 'layout'
-import { BarChart, TipsTable, RatingCell, TableRowCard } from 'components'
+import { BarChart, TipsTable, TableRowCard } from 'components'
+import { RatingCell } from 'common'
 
 import { userStore, statisticsStore } from 'store'
 import { ROUTE_NAMES } from 'core/routes'

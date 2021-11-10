@@ -1,11 +1,12 @@
-import { TableRowCard, RatingCell, NoResultFound } from 'components'
+import { TableRowCard } from 'components'
+import { RatingCell } from 'common'
 import { Table } from 'ui'
 
 import { transformDateTimeToLabel } from 'utils'
 
 import * as S from './Table.styled'
 
-export const ReviewsTable = ({ reviews }) => {
+export const ReviewsTable = ({ reviews = [], isReviewsLoading }) => {
   const columns = [
     {
       headerName: 'Дата и время',
@@ -52,7 +53,7 @@ export const ReviewsTable = ({ reviews }) => {
     })
   )
 
-  const cardList = reviews.map(
+  const tableCards = reviews.map(
     ({ dateTime, rating, comment, impression, platformName, firstName, lastName }) => {
       const rows = [
         { label: 'Комментарий', value: comment || '' },
@@ -72,13 +73,14 @@ export const ReviewsTable = ({ reviews }) => {
 
   return (
     <S.ReviewsTable>
-      <S.WhiteBox>
-        <Table columns={columns} rows={rows} />
-      </S.WhiteBox>
-
-      <S.TipCardList>
-        {reviews.length ? cardList : <NoResultFound>No reviews found</NoResultFound>}
-      </S.TipCardList>
+      <Table
+        columns={columns}
+        rows={rows}
+        isLoading={isReviewsLoading}
+        cards={tableCards}
+        cardHeight={219}
+        noText="Отзывы не найдены"
+      />
     </S.ReviewsTable>
   )
 }

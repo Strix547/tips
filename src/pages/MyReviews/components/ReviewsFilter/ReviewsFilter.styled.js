@@ -41,6 +41,12 @@ export const Row = styled.div`
     }
   }
 
+  ${media.createMedia(864)} {
+    &:first-child {
+      margin-bottom: 20px;
+    }
+  }
+
   ${media600} {
     &:first-child {
       margin-bottom: 20px;

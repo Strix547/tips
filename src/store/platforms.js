@@ -61,7 +61,7 @@ export const platformsStore = makeAutoObservable({
         bankAccountId: selectedBankAccountId
       })
       router.push(ROUTE_NAMES.ACCOUNT_PLATFORMS)
-      toast.success('Platform changed')
+      toast.success('Platform successfully changed')
     } catch ({ message }) {
       toast.error('Failed to change platform')
     }

@@ -9,6 +9,7 @@ export const PhoneField = ({
   rules = { required: true, minLength: 11 },
   placeholder = '+7 (___) ___-__-__',
   country = 'ru',
+  label = 'Номер телефона',
   onChange,
   ...props
 }) => {
@@ -27,7 +28,7 @@ export const PhoneField = ({
       render={({ field }) => {
         return (
           <S.PhoneField error={error}>
-            <S.Label>Номер телефона</S.Label>
+            <S.Label>{label}</S.Label>
 
             <PhoneInputLib
               {...field}

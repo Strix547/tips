@@ -1,8 +1,14 @@
+import { observer } from 'mobx-react-lite'
+
 import { MainInfo, TipsDistribution, PaymentAndRequisites } from './components'
+
+import { adminStore } from 'store'
 
 import * as S from './Fields.styled'
 
-export const PlatformFields = ({ incomePercentage, onIncomePercentageChange }) => {
+export const PlatformFields = observer(({ incomePercentage, onIncomePercentageChange }) => {
+  const { isAdminMode } = adminStore
+
   return (
     <S.PlatformFields>
       <MainInfo />
@@ -12,7 +18,7 @@ export const PlatformFields = ({ incomePercentage, onIncomePercentageChange }) =
         onIncomePercentageChange={onIncomePercentageChange}
       />
 
-      <PaymentAndRequisites />
+      {!isAdminMode ? <PaymentAndRequisites /> : null}
     </S.PlatformFields>
   )
-}
+})

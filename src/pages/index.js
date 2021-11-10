@@ -13,7 +13,14 @@ import {
   PrivacyPolicyPage
 } from './landing'
 
-import { CommissionsPage, UsersPage } from './admin'
+import {
+  CommissionsPage,
+  UsersPage,
+  UserEditPage,
+  UserStatisticsPage,
+  PaymentsOutgoingStatisticsPage,
+  PaymentsIncomingStatisticsPage
+} from './admin'
 
 import {
   MyPlatformsPage,
@@ -89,5 +96,9 @@ export {
   EmployeeEditPage,
   EmployeeStatisticsPage,
   PlatformStatisticsPage,
-  UsersPage
+  UsersPage,
+  UserEditPage,
+  UserStatisticsPage,
+  PaymentsOutgoingStatisticsPage,
+  PaymentsIncomingStatisticsPage
 }

@@ -65,3 +65,11 @@ export const Form = styled.form`
     }
   }
 `
+
+export const Skeleton = styled.div`
+  & > span {
+    span {
+      margin-bottom: 20px;
+    }
+  }
+`

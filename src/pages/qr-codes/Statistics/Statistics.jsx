@@ -72,7 +72,6 @@ export const QrStatisticsPage = observer(() => {
     ({ qrId, qrName, dateTime, tipAmount, impression }) => {
       const rows = [
         { label: 'Имя QR-кода', value: qrName },
-        { label: 'Размер чаевых', value: getPriceLabel(tipAmount, currencyLabel) },
         { label: 'Впечатление', value: impression }
       ]
 
@@ -94,8 +93,7 @@ export const QrStatisticsPage = observer(() => {
       qrId,
       format: 'XLSX',
       period: periodSelected,
-      zoneOffset: getTimeZoneOffset(),
-      currency: useFormProps.getValues('currency')
+      zoneOffset: getTimeZoneOffset()
     })
   }
 

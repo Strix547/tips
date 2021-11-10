@@ -5,7 +5,8 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 import { AccountLayout } from 'layout'
-import { LineChart, TipsTable, RatingCell, TableRowCard } from 'components'
+import { LineChart, TipsTable, TableRowCard } from 'components'
+import { RatingCell } from 'common'
 
 import { userStore, statisticsStore } from 'store'
 import { getTimeZoneOffset, transformDateTimeToLabel, getPriceLabel } from 'utils'

@@ -6,7 +6,7 @@ import { Logo } from 'common'
 import { LinkButton } from 'ui'
 
 import { ROUTE_NAMES } from 'core/routes'
-import { authStore, userStore } from 'store'
+import { authStore, userStore, adminStore } from 'store'
 
 import * as S from './Sidebar.styled'
 
@@ -20,15 +20,20 @@ import UserGroupIcon from '@public/icons/user-group.svg'
 import StarIcon from '@public/icons/star.svg'
 import TagIcon from '@public/icons/tag.svg'
 import LogoutIcon from '@public/icons/logout.svg'
+import DiscountIcon from '@public/icons/discount.svg'
 
 import UserWithLaptopSvg from '@public/icons/user-with-laptop.svg'
 
 export const Sidebar = observer(() => {
   const { pathname } = useRouter()
 
-  const isBusinessAccount = userStore.role === 'BUSINESS'
+  const { role } = userStore
+  const { isAdminMode } = adminStore
 
-  const nav = [
+  const isBusinessAccount = role === 'BUSINESS'
+  const isAdminAccount = role === 'ADMIN'
+
+  const userNav = [
     { label: 'Главная', link: ROUTE_NAMES.ACCOUNT, icon: <PieChartIcon /> },
     { label: 'Мои QR', link: ROUTE_NAMES.ACCOUNT_QR_CODES, icon: <QrScanIcon /> },
     { label: 'Агентам', link: ROUTE_NAMES.FOR_AGENTS, icon: <BriefCaseIcon /> },
@@ -55,19 +60,59 @@ export const Sidebar = observer(() => {
     { label: 'Программа лояльности', link: ROUTE_NAMES.ACCOUNT_LOYALTY, icon: <TagIcon /> }
   ]
 
+  const adminNav = [
+    { label: 'Список пользователей', link: ROUTE_NAMES.ADMIN_USERS, icon: <UserGroupIcon /> },
+    {
+      label: 'Статистика платежей',
+      link: ROUTE_NAMES.ADMIN_PAYMENT_STATISTICS_OUTGOING,
+      icon: <PieChartIcon />,
+      subNav: [
+        { label: 'Исходящие', link: ROUTE_NAMES.ADMIN_PAYMENT_STATISTICS_OUTGOING },
+        { label: 'Входящие', link: ROUTE_NAMES.ADMIN_PAYMENT_STATISTICS_INCOMING }
+      ]
+    },
+    { label: 'Комиссии', link: ROUTE_NAMES.ADMIN_COMMISSION, icon: <DiscountIcon /> }
+  ]
+
+  const nav = isAdminAccount && !isAdminMode ? adminNav : userNav
+
   const onSignOut = () => {
     authStore.signOut()
   }
 
-  const navList = nav.map(({ label, link, icon, forBusiness }) => (
-    <S.NavItem key={label} active={pathname === link} bgRed={forBusiness && !isBusinessAccount}>
-      <Link href={link}>
-        <a>
-          {icon} {label}
-        </a>
-      </Link>
-    </S.NavItem>
-  ))
+  const onAdminModeOff = () => {
+    adminStore.deactiveAdminMode()
+  }
+
+  const navList = nav.map(({ label, link, icon, subNav, forBusiness }) => {
+    const subNavItems = subNav?.map(({ label, link }) => {
+      return (
+        <S.SubNavItem key={label} active={pathname === link}>
+          <Link href={link}>
+            <a>{label}</a>
+          </Link>
+        </S.SubNavItem>
+      )
+    })
+
+    const isSomeSubPath = subNav?.map(({ link }) => link).some((link) => link === pathname)
+
+    return (
+      <S.NavItem
+        key={label}
+        active={subNav ? isSomeSubPath : pathname === link}
+        bgRed={forBusiness && !isBusinessAccount}
+      >
+        <Link href={link}>
+          <a>
+            {icon} {label}
+          </a>
+        </Link>
+
+        {subNav && <S.SubNav>{subNavItems}</S.SubNav>}
+      </S.NavItem>
+    )
+  })
 
   return (
     <S.Sidebar>
@@ -78,16 +123,25 @@ export const Sidebar = observer(() => {
       <S.Main>
         <S.Nav>{navList}</S.Nav>
 
-        <S.Support>
-          <UserWithLaptopSvg />
+        {!isAdminAccount ? (
+          <S.Support>
+            <UserWithLaptopSvg />
 
-          <LinkButton href={ROUTE_NAMES.ACCOUNT_SUPPORT}>Служба поддержки</LinkButton>
-        </S.Support>
+            <LinkButton href={ROUTE_NAMES.ACCOUNT_SUPPORT}>Служба поддержки</LinkButton>
+          </S.Support>
+        ) : null}
 
         <S.LogoutButton type="button" onClick={() => onSignOut()}>
           <LogoutIcon />
           Выйти
         </S.LogoutButton>
+
+        {isAdminMode ? (
+          <S.LogoutAdminButton type="button" onClick={() => onAdminModeOff()}>
+            <LogoutIcon />
+            Выйти из режима админа
+          </S.LogoutAdminButton>
+        ) : null}
       </S.Main>
     </S.Sidebar>
   )

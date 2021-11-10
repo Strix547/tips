@@ -11,7 +11,7 @@ import { Sidebar } from 'layout'
 import { Logo } from 'common'
 
 import { ROUTE_NAMES } from 'core/routes'
-import { authStore, userStore } from 'store'
+import { authStore, userStore, adminStore } from 'store'
 
 import * as S from './Header.styled'
 
@@ -25,7 +25,7 @@ export const Header = observer(({ withSidebar }) => {
   const useFormProps = useForm()
 
   const [isMenuOpen, setMenuOpen] = useState(false)
-  const { personalData, isPersonalDataLoading } = userStore
+  const { personalData, isPersonalDataLoading, role } = userStore
   const { firstName, lastName, avatar } = personalData
   const currentPathname = router.pathname
 
@@ -47,7 +47,7 @@ export const Header = observer(({ withSidebar }) => {
   }
 
   const toAccountPage = () => {
-    router.push(ROUTE_NAMES.ACCOUNT)
+    router.push(role === 'ADMIN' ? ROUTE_NAMES.ADMIN_USERS : ROUTE_NAMES.ACCOUNT)
   }
 
   const navList = nav.map(({ label, link }) => (

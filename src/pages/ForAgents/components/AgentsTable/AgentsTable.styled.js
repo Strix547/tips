@@ -14,10 +14,9 @@ export const Top = styled.div`
 export const TableContainer = styled.div`
   position: relative;
   width: calc(100% - 60px);
-  padding-bottom: 60px;
   margin: 10px 30px 0;
 
-  ${Table} {
+  /* ${Table} {
     .MuiDataGrid {
       &-cell {
         &:nth-child(1),
@@ -46,5 +45,5 @@ export const TableContainer = styled.div`
       bottom: 0;
       border-top: 2px solid #e0e3e1;
     }
-  }
+  } */
 `

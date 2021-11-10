@@ -6,9 +6,12 @@ export { Heading }
 
 export const LineChart = styled(WhiteBox)`
   padding: 30px;
+
+  ${Heading} {
+    margin-bottom: 30px;
+  }
 `
 
 export const LineChartContainer = styled.div`
   height: 400px;
-  margin-top: 30px;
 `

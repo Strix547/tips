@@ -5,7 +5,8 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 import { AccountLayout } from 'layout'
-import { LineChart, TipsTable, RatingCell, TableRowCard } from 'components'
+import { LineChart, TipsTable, TableRowCard } from 'components'
+import { RatingCell } from 'common'
 
 import { userStore, statisticsStore } from 'store'
 import { getTimeZoneOffset, transformDateTimeToLabel, getPriceLabel } from 'utils'
@@ -84,7 +85,6 @@ export const EmployeeStatisticsPage = observer(() => {
     ({ id, platformName, dateTime, tipAmount, commission, rating }) => {
       const rows = [
         { label: 'Площадка', value: platformName },
-        { label: 'Размер чаевых', value: getPriceLabel(tipAmount, currencyLabel) },
         { label: 'Комссия', value: getPriceLabel(commission, currencyLabel) },
         { label: 'Рейтинг', value: <RatingCell rating={rating} /> }
       ]
@@ -122,7 +122,11 @@ export const EmployeeStatisticsPage = observer(() => {
       <AccountLayout title={`Статистика по сотруднику №${employeeId}`}>
         {useMemo(
           () => (
-            <LineChart data={incomeStatistics.diagram} isLoading={isIncomeStatisticsLoading} />
+            <LineChart
+              title="Статистика входящих оплат"
+              data={incomeStatistics.diagram}
+              isLoading={isIncomeStatisticsLoading}
+            />
           ),
           [incomeStatistics.diagram, isIncomeStatisticsLoading]
         )}

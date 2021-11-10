@@ -7,7 +7,7 @@ import Head from 'next/head'
 import { AccountLayout } from 'layout'
 import { Button, BankAccountSelect } from 'ui'
 
-import { userStore, bankAccountStore } from 'store'
+import { userStore, bankAccountStore, adminStore } from 'store'
 
 import * as S from './Requisites.styled'
 
@@ -18,6 +18,8 @@ export const RequisitesPage = observer(({ stripePromise }) => {
 
   const [stripeError, setStripeError] = useState('')
   const [isIbanVisible, setIbanVisible] = useState(false)
+
+  const { isAdminMode } = adminStore
 
   const ibanOptions = {
     supportedCountries: ['SEPA'],
@@ -53,28 +55,30 @@ export const RequisitesPage = observer(({ stripePromise }) => {
       </Head>
 
       <AccountLayout title="Реквизиты">
-        <S.Content>
-          <S.ContentContainer>
-            <FormProvider {...useFormProps}>
-              <BankAccountSelect />
-            </FormProvider>
+        {!isAdminMode ? (
+          <S.Content>
+            <S.ContentContainer>
+              <FormProvider {...useFormProps}>
+                <BankAccountSelect />
+              </FormProvider>
 
-            {stripePromise && isIbanVisible && (
-              <S.IbanContainer>
-                <S.Label>IBAN</S.Label>
-                <S.Iban options={ibanOptions} />
-                {stripeError && <S.ErrorText>{stripeError}</S.ErrorText>}
-              </S.IbanContainer>
-            )}
+              {stripePromise && isIbanVisible && (
+                <S.IbanContainer>
+                  <S.Label>IBAN</S.Label>
+                  <S.Iban options={ibanOptions} />
+                  {stripeError && <S.ErrorText>{stripeError}</S.ErrorText>}
+                </S.IbanContainer>
+              )}
 
-            <Button
-              variant="bordered"
-              onClick={() => (!isIbanVisible ? setIbanVisible(true) : onAddIban)}
-            >
-              Добавить IBAN
-            </Button>
-          </S.ContentContainer>
-        </S.Content>
+              <Button
+                variant="bordered"
+                onClick={() => (!isIbanVisible ? setIbanVisible(true) : onAddIban)}
+              >
+                Добавить IBAN
+              </Button>
+            </S.ContentContainer>
+          </S.Content>
+        ) : null}
       </AccountLayout>
     </>
   )

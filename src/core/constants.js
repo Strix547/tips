@@ -11,3 +11,10 @@ export const PLATFORM_TYPES = [
   { label: 'Автосервис', value: 'CAR_SERVICE' },
   { label: 'Другое', value: 'OTHER' }
 ]
+
+export const USER_ROLES = [
+  { label: 'Пользователи', value: 'REGULAR' },
+  { label: 'Бизнес', value: 'BUSINESS' },
+  { label: 'Не верифицированные', value: 'UNVERIFIED' },
+  { label: 'Админы', value: 'ADMIN' }
+]

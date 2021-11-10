@@ -143,6 +143,17 @@ export const UserSkeleton = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 30px;
+
+  ${media.createMedia(540)} {
+    & > span:first-child {
+      display: none;
+    }
+
+    & > span:last-child span {
+      width: 44px !important;
+      height: 44px !important;
+    }
+  }
 `
 
 export const UserAvatar = styled.div`
@@ -167,6 +178,7 @@ export const UserAvatar = styled.div`
 
 export const UserInfo = styled.div`
   margin-left: 15px;
+
   ${Text} {
     /* fullName */
     &:first-child {
@@ -184,6 +196,7 @@ export const UserInfo = styled.div`
       line-height: 20px;
     }
   }
+
   ${media.createMedia(540)} {
     display: none;
   }

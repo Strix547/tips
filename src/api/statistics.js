@@ -1,5 +1,7 @@
 import { API } from 'core/axios'
 
+import { downloadExcel } from 'utils'
+
 const transformStatistics = ({
   localDateTime,
   paymentId,
@@ -20,20 +22,11 @@ const transformStatistics = ({
   }
 }
 
-const downloadStatistics = (data) => {
-  const url = window.URL.createObjectURL(new Blob([data]))
-  const link = document.createElement('a')
-  link.href = url
-  link.setAttribute('download', 'incoming-payment-statistics.xlsx')
-  document.body.appendChild(link)
-  link.click()
-  document.querySelector('body').removeChild(link)
-}
-
 const getStatistics = async (
   url,
   { format, zoneOffset, period, periodFrom, periodTo },
-  transformer
+  transformer,
+  diagramTransformer = ({ localDate, sum }) => ({ date: new Date(localDate), tipAmount: sum })
 ) => {
   const isXlsxFormat = format === 'XLSX'
 
@@ -50,15 +43,25 @@ const getStatistics = async (
   })
 
   if (isXlsxFormat) {
-    downloadStatistics(data)
+    downloadExcel(data, 'incoming-payment-statistics')
     return
   }
 
-  const { table, diagram } = JSON.parse(data).result
+  const {
+    table = [],
+    diagram = [],
+    diagramIncome = [],
+    diagramReferralsQuantity = []
+  } = JSON.parse(data).result
 
   return {
     table: table.map((item) => transformer(item)),
-    diagram: diagram.map(({ localDate, sum }) => ({ date: new Date(localDate), tipAmount: sum }))
+    diagram: diagram.map((item) => diagramTransformer(item)),
+    diagramIncome: diagramIncome.map(({ month, sum }) => ({ month, tipAmount: sum })),
+    diagramReferralsQuantity: diagramReferralsQuantity.map(({ localDate, sum }) => ({
+      date: new Date(localDate),
+      tipAmount: sum
+    }))
   }
 }
 
@@ -170,6 +173,169 @@ export const getPlatformIncomeStatistics = async ({
       firstName,
       lastName,
       rating
+    })
+  )
+}
+
+export const getAgentIncomeStatistics = async ({
+  agentUserId,
+  format,
+  zoneOffset,
+  period,
+  periodFrom,
+  periodTo
+}) => {
+  return await getStatistics(
+    `/agent-income-statistics/${agentUserId}`,
+    { format, zoneOffset, period, periodFrom, periodTo },
+    ({ paymentId, paymentPageId, localDateTime, income, agentIncome, firstName, lastName }) => ({
+      id: paymentId,
+      paymentPageId,
+      dateTime: new Date(localDateTime),
+      tipAmount: income,
+      agentIncome,
+      firstName,
+      lastName
+    })
+  )
+}
+
+export const getUserPaymentIncomeStatistics = async ({
+  userId,
+  format,
+  zoneOffset,
+  period,
+  periodFrom,
+  periodTo
+}) => {
+  return await getStatistics(
+    `/admin/income-statistics/${userId}`,
+    { format, zoneOffset, period, periodFrom, periodTo },
+    ({ paymentId, dateTime, countryName, currency, sum, feeSum, last4Digits }) => ({
+      id: paymentId,
+      dateTime: new Date(dateTime),
+      tipAmount: sum,
+      commission: feeSum,
+      country: countryName,
+      currency,
+      last4Digits
+    }),
+    ({ day, sum }) => ({
+      date: new Date(day),
+      tipAmount: sum
+    })
+  )
+}
+
+export const getUserAgentIncomeStatistics = async ({
+  userId,
+  format,
+  zoneOffset,
+  period,
+  periodFrom,
+  periodTo
+}) => {
+  return await getStatistics(
+    `/admin/agent-income-statistics/${userId}`,
+    { format, zoneOffset, period, periodFrom, periodTo },
+    ({
+      paymentId,
+      dateTime,
+      countryName,
+      currecny,
+      initUserName,
+      agentSum,
+      fullSum,
+      feeSum,
+      last4Digits
+    }) => ({
+      id: paymentId,
+      dateTime: new Date(dateTime),
+      country: countryName,
+      currecny,
+      initUserName,
+      agentIncome: agentSum,
+      payment: fullSum,
+      commission: feeSum,
+      last4Digits
+    }),
+    ({ day, sum }) => ({
+      date: new Date(day),
+      tipAmount: sum
+    })
+  )
+}
+
+export const getUserPaymentsStatistics = async ({
+  userId,
+  format,
+  zoneOffset,
+  period,
+  periodFrom,
+  periodTo
+}) => {
+  return await getStatistics(
+    `/admin/payments-statistics/${userId}`,
+    { format, zoneOffset, period, periodFrom, periodTo },
+    ({ paymentId, dateTime, currency, sum, phone }) => ({
+      id: paymentId,
+      dateTime: new Date(dateTime),
+      currency,
+      tipAmount: sum,
+      phone
+    }),
+    ({ day, sum }) => ({
+      date: new Date(day),
+      tipAmount: sum
+    })
+  )
+}
+
+export const getPaymentsOutgoingStatistics = async ({
+  format,
+  zoneOffset,
+  period,
+  periodFrom,
+  periodTo
+}) => {
+  console.log(2, format)
+  return await getStatistics(
+    `/admin/outgoing-payments-statistics`,
+    { format, zoneOffset, period, periodFrom, periodTo },
+    ({ paymentId, localDateTime, countryName, income, feeIncome }) => ({
+      id: paymentId,
+      dateTime: new Date(localDateTime),
+      country: countryName,
+      tipAmount: income,
+      commission: feeIncome
+    }),
+    ({ day, sum }) => ({
+      date: new Date(day),
+      tipAmount: sum
+    })
+  )
+}
+
+export const getPaymentsIncomingStatistics = async ({
+  format,
+  zoneOffset,
+  period,
+  periodFrom,
+  periodTo
+}) => {
+  return await getStatistics(
+    `/admin/incoming-payments-statistics`,
+    { format, zoneOffset, period, periodFrom, periodTo },
+    ({ paymentId, localDateTime, income, phone, last4Digits }) => ({
+      id: paymentId,
+      dateTime: new Date(localDateTime),
+      tipAmount: income,
+      phone,
+      last4Digits
+    }),
+    ({ day, sum }) => ({
+      date: new Date(day),
+      tipAmount: sum
     })
   )
 }

@@ -141,10 +141,8 @@ export const DatePicker = styled.div`
 
       &:hover {
         background: var(--color-gray-100);
+        border-radius: 50%;
         transition: background color 0.3s;
-      }
-
-      &--selected {
       }
 
       &--keyboard-selected {
@@ -156,8 +154,9 @@ export const DatePicker = styled.div`
       &--in-selecting-range,
       &--selected {
         background: var(--color-gray-100);
+        border-radius: 50%;
 
-        &::before,
+        /* &::before,
         &::after {
           content: '';
           position: absolute;
@@ -177,7 +176,7 @@ export const DatePicker = styled.div`
 
         &:last-of-type::after {
           display: none;
-        }
+        } */
       }
 
       &--range-start,
@@ -194,13 +193,13 @@ export const DatePicker = styled.div`
           color: #fff;
         }
 
-        &::before,
+        /* &::before,
         &::after {
           display: none;
-        }
+        } */
       }
 
-      &--range-start,
+      /* &--range-start,
       &--selecting-range-start {
         z-index: 10;
 
@@ -221,7 +220,7 @@ export const DatePicker = styled.div`
       &--range-end,
       &--selecting-range-end {
         z-index: 10;
-      }
+      } */
 
       &--in-selecting-range {
         &:hover {
@@ -229,10 +228,10 @@ export const DatePicker = styled.div`
           border-radius: 50%;
           color: #fff;
 
-          &::before,
+          /* &::before,
           &::after {
             display: none;
-          }
+          } */
         }
       }
 
@@ -241,7 +240,7 @@ export const DatePicker = styled.div`
         color: var(--color-gray-300);
         border-radius: 50%;
 
-        &::before,
+        /* &::before,
         &::after {
           background: #fff;
           margin-top: -20px;
@@ -253,7 +252,7 @@ export const DatePicker = styled.div`
 
         &::after {
           right: -6px;
-        }
+        } */
 
         &:hover {
           background: var(--color-primary-200);
@@ -279,4 +278,17 @@ export const DatePicker = styled.div`
         }
       }
     `}
+`
+
+export const Icon = styled.div`
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+`
+
+export const PickerContainer = styled.div`
+  position: relative;
 `

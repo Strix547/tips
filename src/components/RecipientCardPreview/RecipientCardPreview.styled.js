@@ -64,13 +64,12 @@ export const TopBackground = styled.div`
 `
 
 export const Button = styled(ButtonUI)`
-  background: ${({ bgColor = 'var(--color-primary-200)' }) => bgColor};
+  background: ${({ bgColor }) => bgColor};
   color: ${({ textColor }) => textColor};
   transition: 0.3s;
 
   &:hover {
-    background: ${({ bgColor = 'var(--color-primary-200)' }) =>
-      bgColor && changeColorLuminosity(bgColor, 0.15)};
+    background: ${({ bgColor }) => bgColor && changeColorLuminosity(bgColor, 0.15)};
     transition: 0.3s;
   }
 `

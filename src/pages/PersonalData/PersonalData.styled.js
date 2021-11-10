@@ -10,7 +10,6 @@ export { Label, ErrorText }
 const containerStyles = css`
   display: flex;
   flex-direction: column;
-  padding: 40px;
 
   & > *:not(:last-child) {
     margin-bottom: 20px;
@@ -19,6 +18,7 @@ const containerStyles = css`
 
 export const Content = styled(WhiteBox)`
   ${containerStyles}
+  padding: 40px;
 
   /* skeleton */
   & > span {

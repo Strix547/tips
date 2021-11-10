@@ -3,6 +3,7 @@ import { createChartTooltip } from './createChartTooltip'
 import { getCookie, setCookie, deleteCookie } from './cookie'
 import { getTimeZoneOffset } from './getTimeZoneOffset'
 import { handleResponse } from './handleResponse'
+import { downloadExcel } from './downloadExcel'
 
 import {
   transformDateLabelToIso,
@@ -27,5 +28,6 @@ export {
   transformDateTimeToLabel,
   changeColorLuminosity,
   convertHexToRgb,
-  getTextColorBgBased
+  getTextColorBgBased,
+  downloadExcel
 }

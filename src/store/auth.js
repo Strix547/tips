@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 import router from 'next/router'
 
 import { ROUTE_NAMES } from 'core/routes'
-import { userStore } from 'store'
+import { userStore, adminStore } from 'store'
 import * as authApi from 'api/auth'
 import * as userApi from 'api/user'
 
@@ -70,6 +70,9 @@ export const authStore = makeAutoObservable({
 
     authStore.isAuth = false
     authStore.step = 'phone'
+
+    adminStore.adminId = null
+    adminStore.isAdminMode = false
 
     router.push(ROUTE_NAMES.RECIPIENTS)
   }

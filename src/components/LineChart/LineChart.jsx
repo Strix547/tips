@@ -1,10 +1,13 @@
 import { Line } from 'react-chartjs-2'
+import Skeleton from 'react-loading-skeleton'
+
+import { NoResultFound } from 'common'
 
 import { createChartTooltip } from 'utils'
 
 import * as S from './LineChart.styled'
 
-export const LineChart = ({ data, title }) => {
+export const LineChart = ({ data, title, isLoading, noText = 'Нет данных' }) => {
   const labels = data.map(({ date }) => date?.getDate())
   const values = data.map(({ tipAmount }) => tipAmount)
 
@@ -86,11 +89,9 @@ export const LineChart = ({ data, title }) => {
     }
   }
 
-  return (
-    <S.LineChart>
-      {title && <S.Heading level={6}>{title}</S.Heading>}
-
-      <S.LineChartContainer>
+  const lineContainer = (
+    <S.LineChartContainer>
+      {data.length !== 0 ? (
         <Line
           data={getLineData}
           options={{
@@ -106,7 +107,17 @@ export const LineChart = ({ data, title }) => {
             fill: true
           }}
         />
-      </S.LineChartContainer>
+      ) : (
+        <NoResultFound>{noText}</NoResultFound>
+      )}
+    </S.LineChartContainer>
+  )
+
+  return (
+    <S.LineChart>
+      {title && <S.Heading level={6}>{title}</S.Heading>}
+
+      {!isLoading ? lineContainer : <Skeleton height={400} />}
     </S.LineChart>
   )
 }

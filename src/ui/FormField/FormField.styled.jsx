@@ -12,7 +12,8 @@ export const FormField = styled((props) => (
       ...props.InputProps,
       classes: {
         root: 'form-field-input-root',
-        error: 'form-field-input-error'
+        error: 'form-field-input-error',
+        disabled: 'form-field-input-disabled'
       }
     }}
     FormHelperTextProps={{ classes: { root: 'form-field-helper-text' } }}
@@ -77,10 +78,9 @@ export const FormField = styled((props) => (
     }
   }
 
-  .form-field-helper-text {
-  }
-
-  .form-field-input-error {
+  .form-field-input-disabled {
+    background: var(--color-gray-100);
+    border-color: var(--color-gray-100);
   }
 
   .MuiInputBase-inputAdornedEnd {

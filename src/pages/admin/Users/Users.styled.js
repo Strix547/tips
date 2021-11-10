@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { Text, WhiteBox } from 'styled'
+import { Text } from 'styled'
 
 export { Text }
 

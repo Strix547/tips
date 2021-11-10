@@ -4,7 +4,7 @@ import * as statisticsApi from 'api/statistics'
 
 const getStaitsitcs = async (params, apiMethod, store) => {
   if (params.format === 'XLSX') {
-    apiMethod()
+    apiMethod(params)
     return
   }
 
@@ -21,7 +21,9 @@ const getStatisticsPeriodProps = (period, periodFrom, periodTo) => {
 export const statisticsStore = makeAutoObservable({
   incomeStatistics: {
     table: [],
-    diagram: []
+    diagram: [],
+    diagramIncome: [],
+    diagramReferralsQuantity: []
   },
   isIncomeStatisticsLoading: false,
 
@@ -102,6 +104,111 @@ export const statisticsStore = makeAutoObservable({
         ...getStatisticsPeriodProps(period, periodFrom, periodTo)
       },
       statisticsApi.getEmployeeIncomeStatistics,
+      statisticsStore
+    )
+  },
+
+  getAgentIncomeStatistics: async ({
+    agentId,
+    format,
+    period,
+    periodFrom,
+    periodTo,
+    zoneOffset
+  }) => {
+    await getStaitsitcs(
+      {
+        agentUserId: agentId,
+        format,
+        zoneOffset,
+        ...getStatisticsPeriodProps(period, periodFrom, periodTo)
+      },
+      statisticsApi.getAgentIncomeStatistics,
+      statisticsStore
+    )
+  },
+
+  getUserPaymentIncomeStatistics: async ({
+    userId,
+    format,
+    period,
+    periodFrom,
+    periodTo,
+    zoneOffset
+  }) => {
+    await getStaitsitcs(
+      {
+        userId,
+        format,
+        zoneOffset,
+        ...getStatisticsPeriodProps(period, periodFrom, periodTo)
+      },
+      statisticsApi.getUserPaymentIncomeStatistics,
+      statisticsStore
+    )
+  },
+
+  getUserAgentIncomeStatistics: async ({
+    userId,
+    format,
+    period,
+    periodFrom,
+    periodTo,
+    zoneOffset
+  }) => {
+    await getStaitsitcs(
+      {
+        userId,
+        format,
+        zoneOffset,
+        ...getStatisticsPeriodProps(period, periodFrom, periodTo)
+      },
+      statisticsApi.getUserAgentIncomeStatistics,
+      statisticsStore
+    )
+  },
+
+  getUserPaymentsStatistics: async ({
+    userId,
+    format,
+    period,
+    periodFrom,
+    periodTo,
+    zoneOffset
+  }) => {
+    await getStaitsitcs(
+      {
+        userId,
+        format,
+        zoneOffset,
+        ...getStatisticsPeriodProps(period, periodFrom, periodTo)
+      },
+      statisticsApi.getUserPaymentsStatistics,
+      statisticsStore
+    )
+  },
+
+  getPaymentsOutgoingStatistics: async ({ format, period, periodFrom, periodTo, zoneOffset }) => {
+    console.log(format)
+    await getStaitsitcs(
+      {
+        format,
+        zoneOffset,
+        ...getStatisticsPeriodProps(period, periodFrom, periodTo)
+      },
+      statisticsApi.getPaymentsOutgoingStatistics,
+      statisticsStore
+    )
+  },
+
+  getPaymentsIncomingStatistics: async ({ format, period, periodFrom, periodTo, zoneOffset }) => {
+    await getStaitsitcs(
+      {
+        format,
+        zoneOffset,
+        ...getStatisticsPeriodProps(period, periodFrom, periodTo)
+      },
+      statisticsApi.getPaymentsIncomingStatistics,
       statisticsStore
     )
   }

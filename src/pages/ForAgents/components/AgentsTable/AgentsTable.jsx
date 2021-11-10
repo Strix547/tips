@@ -1,26 +1,19 @@
-import { FormProvider, useForm } from 'react-hook-form'
 import { observer } from 'mobx-react-lite'
-
 import { TimePeriodFilter, StatisticRow } from 'components'
 import { Table } from 'ui'
 
-import { userStore, localStore } from 'store'
-import { getPriceLabel } from 'utils'
+import { userStore } from 'store'
+import { transformDateTimeToLabel, getPriceLabel } from 'utils'
 
 import * as S from './AgentsTable.styled'
 
-export const AgentsTable = observer(() => {
-  const useFormProps = useForm({
-    defaultValues: {
-      period: 'MONTH'
-    }
-  })
-  const currency = localStore.currency.label
+export const AgentsTable = observer(({ statistics = [], isStatisticsLoading }) => {
+  const currencyLabel = userStore.personalData.currency.label
 
   const columns = [
     {
-      headerName: 'Дата',
-      field: 'date',
+      headerName: 'Дата и время',
+      field: 'dateTime',
       flex: 1
     },
     {
@@ -29,78 +22,45 @@ export const AgentsTable = observer(() => {
       flex: 1
     },
     {
-      headerName: 'Логин',
-      field: 'email',
+      headerName: 'Агенту',
+      field: 'agentIncome',
+      flex: 1
+    },
+    {
+      headerName: 'Имя',
+      field: 'fullName',
       flex: 1
     }
   ]
 
-  const rows = [
-    {
-      id: 1,
-      date: new Date().toLocaleDateString(),
-      tipAmount: getPriceLabel(4983, currency),
-      email: 'afansyef.evgen20@gmail.com'
-    },
-    {
-      id: 2,
-      date: new Date().toLocaleDateString(),
-      tipAmount: getPriceLabel(4983, currency),
-      email: 'afansyef.evgen20@gmail.com'
-    },
-    {
-      id: 3,
-      date: new Date().toLocaleDateString(),
-      tipAmount: getPriceLabel(4983, currency),
-      email: 'afansyef.evgen20@gmail.com'
-    },
-    {
-      id: 4,
-      date: new Date().toLocaleDateString(),
-      tipAmount: getPriceLabel(4983, currency),
-      email: 'afansyef.evgen20@gmail.com'
-    },
-    {
-      id: 5,
-      date: new Date().toLocaleDateString(),
-      tipAmount: getPriceLabel(4983, currency),
-      email: 'afansyef.evgen20@gmail.com'
-    },
-    {
-      id: 6,
-      date: new Date().toLocaleDateString(),
-      tipAmount: getPriceLabel(4983, currency),
-      email: 'afansyef.evgen20@gmail.com'
-    },
-    {
-      id: 7,
-      date: new Date().toLocaleDateString(),
-      tipAmount: getPriceLabel(4983, currency),
-      email: 'afansyef.evgen20@gmail.com'
-    },
-    {
-      id: 8,
-      date: new Date().toLocaleDateString(),
-      tipAmount: getPriceLabel(4983, currency),
-      email: 'afansyef.evgen20@gmail.com'
-    }
-  ]
+  const rows = statistics.map(({ id, dateTime, tipAmount, firstName, lastName }) => ({
+    id,
+    dateTime: transformDateTimeToLabel(dateTime),
+    tipAmount: getPriceLabel(tipAmount, currencyLabel),
+    agentIncome: getPriceLabel(agentIncome, currencyLabel),
+    fullName: `${lastName} ${firstName}`
+  }))
 
   return (
     <S.AgentsTable>
       <S.Top>
-        <FormProvider {...useFormProps}>
-          <TimePeriodFilter />
-        </FormProvider>
+        <TimePeriodFilter />
       </S.Top>
 
       <S.TableContainer>
-        <Table columns={[columns]} rows={[]} />
-
-        <StatisticRow
-          stats={[{ label: 'Итого заработано', value: 0 }]}
-          currency={userStore.personalData.currency.label}
+        <Table
+          columns={columns}
+          rows={rows}
+          isLoading={isStatisticsLoading}
+          noText="Чаевые за этот период отсутствуют"
         />
+
+        {statistics.length !== 0 || isStatisticsLoading ? (
+          <StatisticRow
+            stats={[{ label: 'Итого заработано', value: 0 }]}
+            currency={userStore.personalData.currency.label}
+          />
+        ) : null}
       </S.TableContainer>
     </S.AgentsTable>
   )

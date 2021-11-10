@@ -5,7 +5,8 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 import { AccountLayout } from 'layout'
-import { QrCard, NoResultFound } from 'components'
+import { QrCard } from 'components'
+import { NoResultFound } from 'common'
 
 import { ROUTE_NAMES } from 'core/routes'
 import { userStore, qrCodesStore } from 'store'
@@ -21,10 +22,7 @@ export const QrCodesPage = observer(() => {
   useEffect(() => {
     if (!userId || !role) return
 
-    if (role === 'BUSINESS') {
-      qrCodesStore.getQrCodesPlatform(userId)
-    }
-
+    qrCodesStore.getQrCodesPlatform(userId)
     qrCodesStore.getQrCodesIndividual(userId)
   }, [userId, role])
 
@@ -61,7 +59,7 @@ export const QrCodesPage = observer(() => {
   const qrListContent = qrCardList.length ? (
     <S.QrGrid>{qrCardList}</S.QrGrid>
   ) : (
-    <NoResultFound>Нет qr-кодов</NoResultFound>
+    <NoResultFound>Qr-коды отсутствуют</NoResultFound>
   )
 
   return (
@@ -75,7 +73,7 @@ export const QrCodesPage = observer(() => {
           qrListContent
         ) : (
           <S.QrGridSkeleton>
-            <Skeleton height={418} count={6} />
+            <Skeleton height={420} count={6} />
           </S.QrGridSkeleton>
         )}
       </AccountLayout>

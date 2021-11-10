@@ -39,7 +39,7 @@ export const MyEmployeesPage = observer(() => {
         button={{ label: 'Создать сотрудника', onClick: toCreateEmployeePage }}
         styles={S.layoutStyles}
       >
-        {!isEmployeesLoading ? <EmployeeTable employees={employees} /> : <Skeleton height={356} />}
+        <EmployeeTable employees={employees} isEmployeesLoading={isEmployeesLoading} />
       </AccountLayout>
     </>
   )
