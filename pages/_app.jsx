@@ -100,7 +100,7 @@ const App = ({ Component, pageProps }) => {
       return
     }
 
-    if (role === 'ADMIN') {
+    if (role === 'ADMIN' && isProtectedRoute) {
       router.push(ROUTE_NAMES.ADMIN_USERS)
       return
     }
