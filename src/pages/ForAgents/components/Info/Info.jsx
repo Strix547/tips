@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Tooltip from '@material-ui/core/Tooltip'
+import { useTranslation } from 'next-i18next'
 
 import * as S from './Info.styled'
 
@@ -12,6 +13,7 @@ import TelegramIcon from '@public/icons/networks/telegram-big.svg'
 import WhatsAppIcon from '@public/icons/networks/whats-app-big.svg'
 
 export const Info = () => {
+  const { t } = useTranslation('common')
   const [copyTooltipOpen, setCopyTooltipOpen] = useState(false)
 
   const link = 'https://tips.me/signup/agent=SjddSzj41Fz'
@@ -49,21 +51,13 @@ export const Info = () => {
 
   return (
     <S.Info>
-      <S.Text>
-        Агентом может быть как физическое лицо так и юридическое лицо. После регистрации вы
-        получаете реферальную ссылку и промокод, которые закрепляются за вами. Со всех заказов
-        привлеченных клиентов вы получаете свой процент.
-      </S.Text>
+      <S.Text>{t('agent-can-be-individual-or-legal-entity')}</S.Text>
 
-      <S.Text>
-        От вас не требуется какого-либо дальнейшего участия с момента как только вы подключили к
-        нашей системе нового пользователя. Вы просто начинаете пассивно зарабатывать, получая свой
-        %.
-      </S.Text>
+      <S.Text>{t('no-further-participation-is-required')}</S.Text>
 
       <S.LinksBlock>
         <S.LinksBlockLeft>
-          <S.Text>HASH с идентификатором агента:</S.Text>
+          <S.Text>{t('your-hash-link')}</S.Text>
 
           <S.LinkContainer>
             <Link href={link}>

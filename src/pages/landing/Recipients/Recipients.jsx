@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useTranslation } from 'next-i18next'
 
 import { Header, Footer } from 'layout'
 import { PageBanner, Section } from 'landing/components'
@@ -22,6 +23,8 @@ import SheetIcon from '@public/icons/sheet.svg'
 import * as S from './Recipients.styled'
 
 export const RecipientsPage = () => {
+  const { t } = useTranslation('common')
+
   const agentTypes = [
     {
       icon: <SheetIcon />,
@@ -38,40 +41,35 @@ export const RecipientsPage = () => {
   ]
 
   const bannerFeatures = [
-    'Не облагаются налогом',
-    'Вывод накопленных чаевых на любой счет',
-    'Принимайте чаевые с карт'
+    t('free-from-any-taxes'),
+    t('transfer-earned-money-bank'),
+    t('start-accepting-tips-from-clients')
   ]
 
-  const bannerAction = <LinkButton href={ROUTE_NAMES.AUTH}>Получать чаевые</LinkButton>
+  const bannerAction = <LinkButton href={ROUTE_NAMES.AUTH}>{t('receive-tips')}</LinkButton>
 
   return (
     <>
       <Head>
-        <title>Получателям</title>
+        <title>{t('recipients')}</title>
       </Head>
 
       <Header />
 
       <S.Main>
         <PageBanner
-          title="Электронные чаевые моментально"
+          title={t('electronic-tips')}
           features={bannerFeatures}
           actions={bannerAction}
           img={{ desktop: dashboard, mobile: dashboardMobile }}
         />
 
         <Section styles={S.sectionStyles}>
-          <S.Text>
-            Зарегистрируйтесь в нашем сервисе и получите персональный QR код. Предоставляйте этот QR
-            код вашим клиентам, чтобы те оставляли вам чаевые или донаты! Всё, что нужно клиенту -
-            это навести камеру своего смартфона на ваш код и сделать 2 клика в открывшемся окне,
-            оставив вам картой желанную сумму. Оставлять чаевые ещё никогда не было так просто!
-          </S.Text>
+          <S.Text>{t('recipients-text')}</S.Text>
         </Section>
 
         <HowServiceWorkSection />
-        <ListIconSection title="Кто может быть агентом" list={agentTypes} />
+        <ListIconSection title={t('ho-can-be-agent')} list={agentTypes} />
         <TariffsSection />
         <TrustUsSection />
         <MediaAboutUsSection />

@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useTranslation } from 'next-i18next'
 
 import { Header, Footer } from 'layout'
 import { PageBanner, Section } from 'landing/components'
@@ -24,53 +25,52 @@ import DeviceWindowSettingsIcon from '@public/icons/devices-window-settings.svg'
 import * as S from './Agents.styled'
 
 export const AgentsPage = () => {
+  const { t } = useTranslation('common')
+
   const agentTypes = [
     {
       icon: <SheetIcon />,
-      label: 'У вас есть клиентская база из ресторанов, салонов красоты или доставок'
+      label: t('have-customer-base')
     },
     {
       icon: <DeviceDesignClickIcon />,
-      label: 'Вы создатель агрегатора ресторанов, салонов красоты, доставок'
+      label: t('you-createtor-business')
     },
     {
       icon: <DeviceWindowSettingsIcon />,
-      label: 'Автоматизируете рестораны'
+      label: t('you-automate-restaurants')
     }
   ]
 
   const bannerFeatures = [
-    'Подключайте партнёров и получайте за это вознаграждение',
-    'Увеличивайте свой заработок с каждым новым пользователем'
+    t('connect-people-to-system-start-earning'),
+    t('increase-money-incomes-new-user')
   ]
 
-  const bannerAction = <LinkButton href={ROUTE_NAMES.AUTH}>Стать агентом</LinkButton>
+  const bannerAction = <LinkButton href={ROUTE_NAMES.AUTH}>{t('become-agent')}</LinkButton>
 
   return (
     <>
       <Head>
-        <title>Агентам</title>
+        <title>{t('agents')}</title>
       </Head>
 
       <Header />
 
       <main>
         <PageBanner
-          title="Зарабатывайте вместе с нами"
+          title={t('make-money-with-us')}
           features={bannerFeatures}
           actions={bannerAction}
           img={{ desktop: dashboard, mobile: dashboardMobile }}
         />
 
         <Section styles={S.sectionStyles}>
-          <S.Text>
-            Наш сервис как дополонительный заработок! Агентом в нашем сервисе может быть абсолютно
-            кто угодно. Получайте свой % от чаевых подключенных вами пользователей.
-          </S.Text>
-          <LinkButton href="/">Подробнее</LinkButton>
+          <S.Text>{t('our-service-additional-income')}</S.Text>
+          <LinkButton href="/">{t('more')}</LinkButton>
         </Section>
 
-        <ListIconSection title="Кто может быть агентом" list={agentTypes} />
+        <ListIconSection title={t('who-can-be-agent')} list={agentTypes} />
         <TariffsSection />
         <TrustUsSection />
         <MediaAboutUsSection />

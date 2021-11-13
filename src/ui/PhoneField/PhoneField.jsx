@@ -1,5 +1,7 @@
 import { Controller, useFormContext } from 'react-hook-form'
 import PhoneInputLib from 'react-phone-input-2'
+import { useTranslation } from 'next-i18next'
+
 import 'react-phone-input-2/lib/style.css'
 
 import * as S from './PhoneField.styled'
@@ -9,10 +11,12 @@ export const PhoneField = ({
   rules = { required: true, minLength: 11 },
   placeholder = '+7 (___) ___-__-__',
   country = 'ru',
-  label = 'Номер телефона',
+  label,
   onChange,
   ...props
 }) => {
+  const { t } = useTranslation('common')
+
   const {
     control,
     formState: { errors }
@@ -28,7 +32,7 @@ export const PhoneField = ({
       render={({ field }) => {
         return (
           <S.PhoneField error={error}>
-            <S.Label>{label}</S.Label>
+            <S.Label>{label || t('phone')}</S.Label>
 
             <PhoneInputLib
               {...field}

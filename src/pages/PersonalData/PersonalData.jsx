@@ -4,6 +4,7 @@ import Skeleton from 'react-loading-skeleton'
 import { observer } from 'mobx-react-lite'
 import Head from 'next/head'
 import Image from 'next/image'
+import { useTranslation } from 'next-i18next'
 
 import { AccountLayout } from 'layout'
 import { FormField, Button, EmailField, BirthDateAdultValid } from 'ui'
@@ -16,6 +17,7 @@ import * as S from './PersonalData.styled'
 import UserIcon from '@public/icons/user.svg'
 
 export const PersonalDataPage = observer(() => {
+  const { t } = useTranslation('common')
   const useFormProps = useForm()
   const { formState, reset, setError, getValues } = useFormProps
 
@@ -109,10 +111,10 @@ export const PersonalDataPage = observer(() => {
     return (
       <>
         <Head>
-          <title>Персональные данные</title>
+          <title>{t('personal-information')}</title>
         </Head>
 
-        <AccountLayout title="Персональные данные">
+        <AccountLayout title={t('personal-information')}>
           <S.Content>
             <Skeleton count={7} height={88} />
           </S.Content>
@@ -124,26 +126,26 @@ export const PersonalDataPage = observer(() => {
   return (
     <>
       <Head>
-        <title>Персональные данные</title>
+        <title>{t('personal-information')}</title>
       </Head>
 
-      <AccountLayout title="Персональные данные">
+      <AccountLayout title={t('personal-information')}>
         <S.Content>
           <FormProvider {...useFormProps}>
-            <FormField name="firstName" label="Имя" placeholder="Введите имя" />
+            <FormField name="firstName" label={t('First name')} placeholder="Введите имя" />
 
-            <FormField name="lastName" label="Фамилия" placeholder="Введите фамилию" />
+            <FormField name="lastName" label={t('last-name')} placeholder="Введите фамилию" />
 
             <BirthDateAdultValid />
 
             <EmailField />
 
-            <FormField name="address" label="Адрес" placeholder="Введите адрес" />
+            <FormField name="address" label={t('address')} placeholder="Введите адрес" />
 
-            <FormField name="postal" label="Индекс" placeholder="Введите почтовый индекс" />
+            <FormField name="postal" label={t('zip-code')} placeholder="Введите почтовый индекс" />
 
             <S.AvatarField>
-              <S.Label>Аватар</S.Label>
+              <S.Label>{t('avatar')}</S.Label>
 
               <S.AvatarRow>
                 {avatarPreview || personalData.avatar ? (
@@ -161,7 +163,7 @@ export const PersonalDataPage = observer(() => {
                 )}
 
                 <S.AvatarUploadLabel for="avatar">
-                  Загрузить
+                  {t('upload')}
                   <input
                     id="avatar"
                     name="avatar"
@@ -177,7 +179,7 @@ export const PersonalDataPage = observer(() => {
               <S.ErrorText>{birthdateError?.message}</S.ErrorText>
             )}
 
-            <Button onClick={onEditData}>Сохранить</Button>
+            <Button onClick={onEditData}>{t('save')}</Button>
           </FormProvider>
         </S.Content>
       </AccountLayout>

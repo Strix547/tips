@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useTranslation } from 'next-i18next'
 
 import { Header, Footer } from 'layout'
 import { PageBanner, Section } from 'landing/components'
@@ -23,57 +24,55 @@ import CashierMachineIcon from '@public/icons/cashier-machine.svg'
 import * as S from './Business.styled'
 
 export const BusinessPage = () => {
+  const { t } = useTranslation('common')
+
   const integrationTypes = [
     {
       icon: <DeviceDesignIcon />,
-      label: 'Без интеграции',
+      label: t('without-integration'),
       desc: 'Описание возможностей системы по генерации QR кода и информация о статистике'
     },
     {
       icon: <DeviceWindowSettingsIcon />,
-      label: 'Интеграция по API',
+      label: t('Интеграция по API'),
       desc: 'Описание возможностей системы по интеграции с внешними сервисами по API и с мобильными приложениями'
     },
     {
       icon: <CashierMachineIcon />,
-      label: 'Интеграция с кассовым ПО',
+      label: t('integration-cash-register'),
       desc: 'Описание возможностей интеграции с кассовым ПО'
     }
   ]
 
   const bannerFeatures = [
-    'Бесплатное подключение вашего бизнеса',
-    'Увеличьте заработок вашего персонала',
-    'Повысьте уровень сервиса и гостеприимства'
+    t('connect-company-free'),
+    t('increase-employee-income'),
+    t('give-customers-additional-service')
   ]
 
-  const bannerAction = <LinkButton href={ROUTE_NAMES.AUTH}>Подключить чаевые</LinkButton>
+  const bannerAction = <LinkButton href={ROUTE_NAMES.AUTH}>{t('start-getting-tips')}</LinkButton>
 
   return (
     <>
       <Head>
-        <title>Бизнесу</title>
+        <title>{t('business')}</title>
       </Head>
 
       <Header />
 
       <main>
         <PageBanner
-          title="Чаевые картой – удобно гостю, выгодно персоналу"
+          title={t('tips-by-card-easy-for-client')}
           features={bannerFeatures}
           actions={bannerAction}
           img={{ desktop: dashboard, mobile: dashboardMobile }}
         />
 
-        <Section title="Ваше заведение - ваши чаевые" styles={S.sectionStyles}>
-          <S.Text>
-            Кумулируйте чаевые на свой счёт в нашем сервисе благодаря присвоенному вашему заведению
-            КР коду. Управляйте потоками чаевых через удобную панель и отслеживайте статистику
-            чаевых по каждому из сотрудников!
-          </S.Text>
+        <Section title={t('your-company-your-tips')} styles={S.sectionStyles}>
+          <S.Text>{t('business-section-text')}</S.Text>
         </Section>
 
-        <ListIconSection title="Возможности интеграции" list={integrationTypes} />
+        <ListIconSection title={t('possibillities-integration')} list={integrationTypes} />
         <TariffsSection />
         <TrustUsSection />
         <MediaAboutUsSection />

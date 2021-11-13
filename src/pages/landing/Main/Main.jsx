@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useTranslation } from 'next-i18next'
 
 import { Header, Footer } from 'layout'
 import { PageBanner } from 'landing/components'
@@ -17,12 +18,14 @@ import dashboard from '@public/img/landing/main-banner-dashboard.png'
 import dashboardMobile from '@public/img/landing/main-banner-dashboard-mobile.png'
 
 export const MainPage = () => {
+  const { t } = useTranslation('common')
+
   const bannerActions = (
     <>
-      <LinkButton href={ROUTE_NAMES.RECIPIENTS}>Получать чаевые</LinkButton>
+      <LinkButton href={ROUTE_NAMES.RECIPIENTS}>{t('receive-tips')}</LinkButton>
 
       <LinkButton href={ROUTE_NAMES.PAYERS} variant="bordered">
-        Оплатить чаевые
+        {t('pay-tips')}
       </LinkButton>
     </>
   )
@@ -30,15 +33,15 @@ export const MainPage = () => {
   return (
     <>
       <Head>
-        <title>Главная</title>
+        <title>{t('main-page')}</title>
       </Head>
 
       <Header />
 
       <main>
         <PageBanner
-          title="Получайте чаевые мгновенно. От кого-либо"
-          subtitle="Получайте чаевые и донаты мгновенно. Где либо. Без налога"
+          title={t('get-tips-instantly')}
+          subtitle={t('get-tax-free-donations-instantly')}
           actions={bannerActions}
           img={{ desktop: dashboard, mobile: dashboardMobile }}
         />

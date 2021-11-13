@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import { observer } from 'mobx-react-lite'
 import Head from 'next/head'
+import { useTranslation } from 'next-i18next'
 
 import { Logo } from 'common'
 import { Header } from 'layout'
@@ -15,6 +16,7 @@ import * as S from './Auth.styled'
 import CommentRegulationIcon from '@public/img/landing/comment-regulation.svg'
 
 export const AuthPage = observer(() => {
+  const { t } = useTranslation('common')
   const isTablet = useMediaQuery({ maxWidth: MEDIA_TABLET })
 
   const [rememberUser, setRememberUser] = useState(false)
@@ -79,7 +81,7 @@ export const AuthPage = observer(() => {
           <S.LeftContent>
             {!isTablet && <Logo />}
 
-            <S.Heading level={1}>Вход в Fly.Tips</S.Heading>
+            <S.Heading level={1}>{t('login-into-fly')}</S.Heading>
 
             {authStore.step === 'phone' ? (
               <PhoneStep defaultPhone={phoneDefault} onPhoneSubmit={sendCode} />

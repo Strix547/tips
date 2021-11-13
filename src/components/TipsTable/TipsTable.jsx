@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import { toJS } from 'mobx'
+import { useTranslation } from 'next-i18next'
 
 import { TimePeriodFilter, StatisticRow } from 'components'
 import { ExcelDownload } from 'common'
@@ -21,6 +22,7 @@ export const TipsTable = observer(
     periodFilter,
     onExcelDownload
   }) => {
+    const { t } = useTranslation('common')
     const dataJS = toJS(data)
     const notEmpty = rows.length !== 0
     const currencyLabel = userStore.personalData.currency.label
@@ -37,12 +39,12 @@ export const TipsTable = observer(
 
     const statisticTotals = !haveCommission
       ? [
-          { label: 'Всего чаевых', value: tipsTotal },
-          { label: 'Средний чек', value: tipsAverage }
+          { label: t('total-tip'), value: tipsTotal },
+          { label: t('average-tip'), value: tipsAverage }
         ]
       : [
-          { label: 'Всего чаевых', value: tipsTotal },
-          { label: 'Средний чек', value: tipsAverage },
+          { label: t('total-tip'), value: tipsTotal },
+          { label: t('average-tip'), value: tipsAverage },
           { label: 'Всего комиссия', value: commissionTotal }
         ]
 

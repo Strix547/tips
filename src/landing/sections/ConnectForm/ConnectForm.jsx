@@ -1,6 +1,7 @@
 import { FormProvider, useForm } from 'react-hook-form'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 
 import { Section } from 'landing/components'
 import { FormField, Checkbox, PhoneField, Button, EmailField } from 'ui'
@@ -15,6 +16,7 @@ import GreenDotesSvg from '@public/img/landing/green-dotes.svg'
 export const ConnectFormSection = () => {
   const router = useRouter()
   const useFormProps = useForm()
+  const { t } = useTranslation('common')
   const { handleSubmit } = useFormProps
 
   const toCodeStepWithAuthData = async ({ firstName, email, phone }) => {
@@ -25,45 +27,39 @@ export const ConnectFormSection = () => {
   }
 
   return (
-    <Section title={['Форма подключения', 'Бизнес-площадки к системе']} styles={S.sectionStyles}>
+    <Section title={[t('fill-form'), t('to-connect-business-to-site')]} styles={S.sectionStyles}>
       <S.Content>
-        <S.Subtitle>
-          Посетитель может оставить заявку на звонок менеджера для консультации по подключению
-          бизнеса к системе
-        </S.Subtitle>
+        <S.Subtitle>{t('manager-contact-you')}</S.Subtitle>
 
         <S.FormContainer>
           <S.Form onSubmit={handleSubmit(toCodeStepWithAuthData)}>
             <FormProvider {...useFormProps}>
-              <FormField name="firstName" label="Имя" placeholder="Введите Ваше имя" required />
+              <FormField
+                name="firstName"
+                label={t('name')}
+                placeholder={t('write-name')}
+                required
+              />
 
               <PhoneField />
 
               <EmailField />
 
-              <Checkbox
-                rules={{ required: true }}
-                label="Даю согласие на обработку персональных данных"
-                required
-              />
+              <Checkbox rules={{ required: true }} label={t('use-personal-data-agree')} required />
 
-              <Checkbox
-                rules={{ required: true }}
-                label="Согласен на маркетинговую рассылку"
-                required
-              />
+              <Checkbox rules={{ required: true }} label={t('news-agree')} required />
 
-              <Button type="submit">Подключить заведение</Button>
+              <Button type="submit">{t('my-business-connect')}</Button>
             </FormProvider>
           </S.Form>
 
           <S.FormBottom>
             <S.Text>
-              Если вы физлицо - получатель чаевых, <br />
+              {t('you-physical-person-receive-tips')} <br />
               <Link href={ROUTE_NAMES.AUTH}>
-                <a>зарегистрируйтесь</a>
+                <a>{t('register')}</a>
               </Link>{' '}
-              в сервисе
+              {t('in-our-service')}
             </S.Text>
           </S.FormBottom>
         </S.FormContainer>

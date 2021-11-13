@@ -3,6 +3,7 @@ import { useMediaQuery } from 'react-responsive'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Controller, Navigation } from 'swiper/core'
 import Image from 'next/image'
+import { useTranslation } from 'next-i18next'
 
 import { MEDIA_LAPTOP } from 'styles/media'
 
@@ -19,15 +20,17 @@ import ArrowGreenIcon from '@public/icons/arrows/green-right.svg'
 SwiperCore.use([Controller, Navigation])
 
 export const ServiceWorkSteps = () => {
+  const { t } = useTranslation('common')
+
   const sliderRef = useRef(null)
   const isLaptop = useMediaQuery({ maxWidth: MEDIA_LAPTOP })
 
   const steps = [
-    { title: 'Регистрация в сервисе', img: screenSignUp },
-    { title: 'Получатель создает QR-код', img: screenCreateQr },
-    { title: 'Клиент сканирует QR-код', img: screenScanQr },
-    { title: 'Клиент вводит сумму и оплачивает', img: screenPay },
-    { title: 'Получатель получает деньги', img: screenThank }
+    { title: t('create-account-minute'), img: screenSignUp },
+    { title: t('get-your-qr'), img: screenCreateQr },
+    { title: t('let-qr-scanned'), img: screenScanQr },
+    { title: t('client-enters-amount'), img: screenPay },
+    { title: t('you-get-tips'), img: screenThank }
   ]
 
   const sliderSettings = {

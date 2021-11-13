@@ -20,8 +20,9 @@ export const getSupportedLanguages = () => {
   return API.get('/supported-language-codes')
 }
 
-export const getSuggestedLanguage = () => {
-  return API.get('/suggested-language')
+export const getSuggestedLanguage = async () => {
+  const { data } = await API.get('/suggested-language')
+  return data.languageCode
 }
 
 export const getCountries = async ({ search, languageCode, limit = 10 }) => {

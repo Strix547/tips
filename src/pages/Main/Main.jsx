@@ -3,6 +3,7 @@ import { useForm, FormProvider } from 'react-hook-form'
 import { observer } from 'mobx-react-lite'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 
 import { AccountLayout } from 'layout'
 import { BarChart, TipsTable, TableRowCard } from 'components'
@@ -13,6 +14,7 @@ import { ROUTE_NAMES } from 'core/routes'
 import { getTimeZoneOffset, transformDateTimeToLabel, getPriceLabel } from 'utils'
 
 export const UserMainPage = observer(() => {
+  const { t } = useTranslation('common')
   const router = useRouter()
   const useFormProps = useForm({
     defaultValues: {
@@ -44,7 +46,7 @@ export const UserMainPage = observer(() => {
   const columns = isBusinessAccount
     ? [
         {
-          headerName: 'Дата и время',
+          headerName: t('Date & time'),
           field: 'dateTime',
           flex: 1
         },
@@ -59,7 +61,7 @@ export const UserMainPage = observer(() => {
           flex: 1
         },
         {
-          headerName: 'Размер чаевых',
+          headerName: t('tip-size'),
           field: 'tipAmount',
           flex: 1
         },
@@ -77,17 +79,17 @@ export const UserMainPage = observer(() => {
       ]
     : [
         {
-          headerName: 'Дата и время',
+          headerName: t('Date & time'),
           field: 'dateTime',
           flex: 1
         },
         {
-          headerName: 'Имя QR-кода',
+          headerName: t('name-qr-code'),
           field: 'qrName',
           flex: 1
         },
         {
-          headerName: 'Размер чаевых',
+          headerName: t('tip-size'),
           field: 'tipAmount',
           flex: 1
         },
@@ -123,8 +125,8 @@ export const UserMainPage = observer(() => {
   const individualTableCards = incomeStatistics.table.map(
     ({ qrId, qrName, dateTime, tipAmount, impression }) => {
       const rows = [
-        { label: 'Имя QR-кода', value: qrName },
-        { label: 'Размер чаевых', value: getPriceLabel(tipAmount, currencyLabel) },
+        { label: t('name-qr-code'), value: qrName },
+        { label: t('tip-size'), value: getPriceLabel(tipAmount, currencyLabel) },
         { label: 'Впечатление', value: impression }
       ]
 
@@ -146,7 +148,7 @@ export const UserMainPage = observer(() => {
       const rows = [
         { label: 'Площадка', value: platformName },
         { label: 'Пользователь', value: `${lastName} ${firstName}` },
-        { label: 'Размер чаевых', value: getPriceLabel(tipAmount, currencyLabel) },
+        { label: t('tip-size'), value: getPriceLabel(tipAmount, currencyLabel) },
         { label: 'Комссия', value: getPriceLabel(commission, currencyLabel) },
         { label: 'Рейтинг', value: <RatingCell rating={rating} /> }
       ]
@@ -183,14 +185,17 @@ export const UserMainPage = observer(() => {
   return (
     <>
       <Head>
-        <title>Главная</title>
+        <title>{t('main-page')}</title>
       </Head>
 
-      <AccountLayout title="Главная" button={{ label: 'Создать QR-код', onClick: toQrCodesPage }}>
+      <AccountLayout
+        title={t('main-page')}
+        button={{ label: t('create-new-qr-code'), onClick: toQrCodesPage }}
+      >
         {useMemo(
           () => (
             <BarChart
-              title="Статистика входящих оплат"
+              title={t('incoming-payments-statistics')}
               data={incomeStatistics.diagram}
               isLoading={isIncomeStatisticsLoading}
             />

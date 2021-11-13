@@ -56,7 +56,7 @@ export const Footer = () => {
 
   const transformNavToList = (nav) => {
     return nav.map(({ label, link }) => (
-      <li key={link}>
+      <li key={label}>
         <Link href={link}>
           <a>{label}</a>
         </Link>
@@ -115,7 +115,7 @@ export const Footer = () => {
         </S.Top>
 
         <S.Bottom>
-          <S.Copyright>© 2021 «Tips.me»‎</S.Copyright>
+          <S.Copyright>© 2021 «FlyTips.com»‎</S.Copyright>
 
           <S.PaymentServices>
             <S.Text>Принимаем к оплате</S.Text> <ul>{paymentServiceList}</ul>

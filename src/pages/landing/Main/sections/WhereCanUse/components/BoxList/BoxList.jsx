@@ -1,3 +1,5 @@
+import { useTranslation } from 'next-i18next'
+
 import { Box } from '../Box'
 
 import * as S from './BoxList.styled'
@@ -12,35 +14,43 @@ import recipientCardMobile from '@public/img/landing/recipient-card-mobile.png'
 import emotionsBlock from '@public/img/landing/emotions-block.png'
 
 export const BoxList = () => {
+  const { t } = useTranslation('common')
+
   const boxes = [
     {
-      title: 'Чаевые по QR-коду',
-      subtitle: 'Размещайте QR-код на POS-материалах и любой заметной поверхности:',
-      points: ['Визитки', 'Нашивки на форму', 'Наклейки', 'Чеки и пречеки', 'Тейбл-тенты'],
+      title: t('tips-qr-code'),
+      subtitle: t('put-qr-anywhere'),
+      points: [
+        t('on-visit-cards'),
+        t('emblems-clothing'),
+        t('on-stickers'),
+        t('bills'),
+        t('on-tables')
+      ],
       preview: [{ label: 'qr-код заведения', desktop: qrFirst }]
     },
     {
-      title: 'Чаевые и донаты по ссылке',
-      subtitle: 'Размещайте ссылку на любой удобной площадке:',
+      title: t('tips-donate-link'),
+      subtitle: t('put-qr-anywhere'),
       points: [
-        'В соцсетях',
-        'В SMS',
-        'На сайте',
-        'В E-mail рассылках',
-        'В моб приложении',
-        'В PUSH-уведомлениях',
-        'На стриме',
-        'В мессенджерах'
+        t('in-social-networks'),
+        t('sms'),
+        t('on-website'),
+        t('emails'),
+        t('in-mobile-app'),
+        t('in-push-notifications'),
+        t('in-live-streams'),
+        t('in-messengers')
       ],
       preview: [{ label: 'qr-код заведения с сылками', desktop: qrSecond, mobile: qrSecondMobile }]
     },
     {
-      title: 'Интеграция по API и SDK',
-      subtitle: 'Наши API и SDK позволяют:',
+      title: t('integration-api-sdk'),
+      subtitle: t('our-api-skd-let-us'),
       points: [
-        'Просто и быстро реализовать отправку чаевых в мобильном приложении и на сайте',
-        'Добавить ссылку на отправку чаевых в рассылку (SMS/E-mail/PUSH-уведомления)',
-        'Регистрировать пользователей, получать статистику и многое другое'
+        t('receive-tips-quick-easy-way'),
+        t('to-add-link-for-receiving-tips'),
+        t('register-users-analyse-statistics')
       ],
       preview: [
         { label: 'карточка получателя', desktop: recipientCard, mobile: recipientCardMobile },
@@ -48,9 +58,8 @@ export const BoxList = () => {
       ]
     },
     {
-      title: 'Интеграция с кассовым ПО',
-      subtitle:
-        'Сервис легко интегрируется с кассовым ПО. Готовые модули для систем iiko, r_keeper, poster позволяют печатать QR-код прямо в чеке/пречеке.',
+      title: t('cash-register-integration'),
+      subtitle: t('cash-register-integration-text'),
       preview: [{ label: 'qr-код заведения', desktop: qrThird }]
     }
   ]

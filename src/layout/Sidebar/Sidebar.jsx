@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 
 import { Logo } from 'common'
 import { LinkButton } from 'ui'
@@ -25,6 +26,7 @@ import DiscountIcon from '@public/icons/discount.svg'
 import UserWithLaptopSvg from '@public/icons/user-with-laptop.svg'
 
 export const Sidebar = observer(() => {
+  const { t } = useTranslation('common')
   const { pathname } = useRouter()
 
   const { role } = userStore
@@ -34,30 +36,30 @@ export const Sidebar = observer(() => {
   const isAdminAccount = role === 'ADMIN'
 
   const userNav = [
-    { label: 'Главная', link: ROUTE_NAMES.ACCOUNT, icon: <PieChartIcon /> },
-    { label: 'Мои QR', link: ROUTE_NAMES.ACCOUNT_QR_CODES, icon: <QrScanIcon /> },
-    { label: 'Агентам', link: ROUTE_NAMES.FOR_AGENTS, icon: <BriefCaseIcon /> },
-    { label: 'Мои реквизиты', link: ROUTE_NAMES.ACCOUNT_REQUISITES, icon: <CreditCardIcon /> },
-    { label: 'Персональные данные', link: ROUTE_NAMES.ACCOUNT_PERSONAL_DATA, icon: <UserIcon /> },
+    { label: t('main-page'), link: ROUTE_NAMES.ACCOUNT, icon: <PieChartIcon /> },
+    { label: t('my-qr-codes'), link: ROUTE_NAMES.ACCOUNT_QR_CODES, icon: <QrScanIcon /> },
+    { label: t('agents'), link: ROUTE_NAMES.FOR_AGENTS, icon: <BriefCaseIcon /> },
+    { label: t('my-bank-info'), link: ROUTE_NAMES.ACCOUNT_REQUISITES, icon: <CreditCardIcon /> },
+    { label: t('personal-info'), link: ROUTE_NAMES.ACCOUNT_PERSONAL_DATA, icon: <UserIcon /> },
     {
-      label: 'Мои площадки',
+      label: t('my-working-places'),
       link: ROUTE_NAMES.ACCOUNT_PLATFORMS,
       icon: <PaperIcon />,
       forBusiness: true
     },
     {
-      label: 'Мои сотрудники',
+      label: t('my-salarees'),
       link: ROUTE_NAMES.ACCOUNT_EMPLOYEES,
       icon: <UserGroupIcon />,
       forBusiness: true
     },
     {
-      label: 'Мои отзывы',
+      label: t('my-reviews'),
       link: ROUTE_NAMES.ACCOUNT_REVIEWS,
       icon: <StarIcon fill="#777D82" />,
       forBusiness: true
     },
-    { label: 'Программа лояльности', link: ROUTE_NAMES.ACCOUNT_LOYALTY, icon: <TagIcon /> }
+    { label: t('loyalty-program'), link: ROUTE_NAMES.ACCOUNT_LOYALTY, icon: <TagIcon /> }
   ]
 
   const adminNav = [

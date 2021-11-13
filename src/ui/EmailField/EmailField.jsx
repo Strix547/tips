@@ -1,6 +1,10 @@
+import { useTranslation } from 'next-i18next'
+
 import { FormField } from 'ui'
 
 export const EmailField = (props) => {
+  const { t } = useTranslation('common')
+
   return (
     <FormField
       rules={{
@@ -12,7 +16,7 @@ export const EmailField = (props) => {
       type="email"
       name="email"
       label="E-mail"
-      placeholder="Введите e-mail"
+      placeholder={t('write-email')}
       required
       {...props}
     />

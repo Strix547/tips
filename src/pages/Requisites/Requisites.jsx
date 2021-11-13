@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useStripe, useElements, IbanElement } from '@stripe/react-stripe-js'
 import Head from 'next/head'
+import { useTranslation } from 'next-i18next'
 
 import { AccountLayout } from 'layout'
 import { Button, BankAccountSelect } from 'ui'
@@ -12,6 +13,7 @@ import { userStore, bankAccountStore, adminStore } from 'store'
 import * as S from './Requisites.styled'
 
 export const RequisitesPage = observer(({ stripePromise }) => {
+  const { t } = useTranslation('common')
   const stripe = useStripe()
   const stripeElements = useElements()
   const useFormProps = useForm()
@@ -51,10 +53,10 @@ export const RequisitesPage = observer(({ stripePromise }) => {
   return (
     <>
       <Head>
-        <title>Мои реквизиты</title>
+        <title>{'my-bank-info'}</title>
       </Head>
 
-      <AccountLayout title="Реквизиты">
+      <AccountLayout title={t('your-bank-information')}>
         {!isAdminMode ? (
           <S.Content>
             <S.ContentContainer>
@@ -64,7 +66,7 @@ export const RequisitesPage = observer(({ stripePromise }) => {
 
               {stripePromise && isIbanVisible && (
                 <S.IbanContainer>
-                  <S.Label>IBAN</S.Label>
+                  <S.Label>{t('your-bank-account-iban')}</S.Label>
                   <S.Iban options={ibanOptions} />
                   {stripeError && <S.ErrorText>{stripeError}</S.ErrorText>}
                 </S.IbanContainer>
@@ -74,7 +76,7 @@ export const RequisitesPage = observer(({ stripePromise }) => {
                 variant="bordered"
                 onClick={() => (!isIbanVisible ? setIbanVisible(true) : onAddIban)}
               >
-                Добавить IBAN
+                {t('add-iban')}
               </Button>
             </S.ContentContainer>
           </S.Content>

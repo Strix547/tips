@@ -1,5 +1,6 @@
 import { Section } from 'landing/components'
 import { RowSection } from './components'
+import { useTranslation } from 'next-i18next'
 
 import { ROUTE_NAMES } from 'core/routes'
 
@@ -10,66 +11,56 @@ import agentDashboard from '@public/img/landing/agent-dashboard.png'
 import payerDashboard from '@public/img/landing/payer-dashboard.png'
 
 export const UsersSection = () => {
+  const { t } = useTranslation('common')
+
   const sections = [
     {
-      title: 'Бизнесу',
-      subtitle: 'Мотивируйте сотрудников и повышайте лояльность гостей',
+      title: t('for-business'),
+      subtitle: t('motivate-employees'),
       pageLink: ROUTE_NAMES.BUSINESS,
       features: [
-        'Бесплатно для бизнеса',
-        'Дополнительный заработок для',
-        'Инструмент повышения уровня сервиса и гостеприимства',
-        'Простая интеграция: API, SDK, модули для касс'
+        t('free-for-business'),
+        t('additional-money'),
+        t('improvement-tool'),
+        t('quick-api-skd-integration')
       ],
-      action: { label: 'Подключить заведение' },
+      action: { label: t('business-connect') },
       img: businessDashboard
     },
     {
-      title: 'Работникам сферы услуг',
-      subtitle: 'Принимайте безналичные чаевые по QR-коду или ссылке',
+      title: t('for-service-workers'),
+      subtitle: t('receive-electronic-tips'),
       pageLink: ROUTE_NAMES.RECIPIENTS,
-      features: [
-        'Не облагаются налогом',
-        'Показывайте присвоенный вам личный QR код вашим клиентам',
-        'Получайте чаевые и выводите их на любой счёт'
-      ],
-      action: { label: 'Получать чаевые' },
+      features: [t('free-from-taxes')],
+      action: { label: t('start-receive-tips') },
       img: recipientDashboard
     },
     {
-      title: 'Блогерам, артистам и музыкантам',
-      subtitle: 'Принимайте донаты и адресные пожертвования на сайте, в блоге и соцсетях',
+      title: t('for-artists'),
+      subtitle: t('receive-tips-your-website'),
       pageLink: ROUTE_NAMES.RECIPIENTS,
       features: [
-        'Указывайте присвоенный вам QR код где угодно и получайте чаевые',
-        'Возможность вывода накопленного на любой счёт',
-        'Удобный и простой интерфейс личного кабинета'
+        t('indicate-qr-code'),
+        t('transfer-earned-money-bank-card'),
+        t('easy-intuitive-interface')
       ],
-      action: { label: 'Получать донаты' },
+      action: { label: t('start-receive-donates') },
       img: artistDashboard
     },
     {
-      title: 'Агентам',
-      subtitle: 'Приглашайте людей и получайте от их чеков проценты',
+      title: t('for-agents'),
+      subtitle: t('invite-people-receive-profit'),
       pageLink: ROUTE_NAMES.AGENTS,
-      features: [
-        'Дополнительный заработок',
-        'Выводите заработанное на любой счет',
-        'Увеличивайте свой доход подключая новых пользователей'
-      ],
-      action: { label: 'Стать агентом' },
+      features: [t('transfer-earned-money-bank')],
+      action: { label: t('become-agent') },
       img: agentDashboard
     },
     {
-      title: 'Плательщикам',
-      subtitle: 'Оставляйте чаевые, сканируя QR код',
+      title: t('for-payers'),
+      subtitle: t('pay-tips-by-scan-qr'),
       pageLink: ROUTE_NAMES.PAYERS,
-      features: [
-        'Нет наличных? Чаевые картой просто и в 2 клика',
-        'Анонимно или публично после регистрации в нашем сервисе',
-        'Возможность оставлять отзыв о получателе или заведении'
-      ],
-      action: { label: 'Оставить чаевые' },
+      features: [t('pay-tips-2-click')],
+      action: { label: t('pay-tips') },
       img: payerDashboard
     }
   ]
@@ -78,5 +69,5 @@ export const UsersSection = () => {
     <RowSection key={props.title} {...props} reversed={idx % 2 !== 0} />
   ))
 
-  return <Section title={['Для всех, кто получает', 'чаевые и донаты']}>{sectionList}</Section>
+  return <Section title={[t('For all who receive'), t('tips-donates')]}>{sectionList}</Section>
 }

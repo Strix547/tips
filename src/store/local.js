@@ -9,6 +9,7 @@ export const localStore = makeAutoObservable({
   currency: { label: '€', value: 'EUR' },
   isAddressesLoading: false,
   addresses: [],
+  lang: '',
 
   setSelectedCountryCode: (code) => {
     localStore.selectedCountryCode = code
@@ -46,5 +47,11 @@ export const localStore = makeAutoObservable({
     localStore.addresses = addreses
 
     localStore.isAddressesLoading = false
+  },
+
+  getSuggestedLanguage: async () => {
+    const langCode = await localApi.getSuggestedLanguage()
+    localStore.lang = langCode
+    return langCode
   }
 })

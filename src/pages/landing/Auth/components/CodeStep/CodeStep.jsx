@@ -1,5 +1,6 @@
 import { useState, useRef, useMemo } from 'react'
 import Countdown from 'react-countdown'
+import { useTranslation } from 'next-i18next'
 
 import { Button } from 'ui'
 
@@ -12,6 +13,7 @@ export const CodeStep = ({
   onCodeResend,
   onCodeConfirm
 }) => {
+  const { t } = useTranslation('common')
   const countdownRef = useRef(null)
 
   const [code, setCode] = useState(null)
@@ -29,10 +31,10 @@ export const CodeStep = ({
   return (
     <S.CodeStep>
       <S.SendText>
-        Отправили код подтверждения на номер <br /> +{phone}
+        {t('we-sent-sms')} <br /> +{phone}
       </S.SendText>
 
-      <S.Label>Пароль из смс</S.Label>
+      <S.Label>{t('password-from-sms')}</S.Label>
 
       <S.CodeInput value={code} onChange={setCode} fields={4} autoFocus />
 
@@ -45,9 +47,11 @@ export const CodeStep = ({
             autoFocus
             renderer={({ seconds }) =>
               isCodeSendAllow ? (
-                <S.SendCodeButton onClick={onResendClick}>Отправить код повторно</S.SendCodeButton>
+                <S.SendCodeButton onClick={onResendClick}>{t('send-again')}</S.SendCodeButton>
               ) : (
-                <S.CountdownText>Отправить код еще раз через {seconds} сек.</S.CountdownText>
+                <S.CountdownText>
+                  {t('send-sms-once-again-in')} {seconds} {t('seconds')}
+                </S.CountdownText>
               )
             }
             onComplete={() => {
@@ -65,7 +69,7 @@ export const CodeStep = ({
           onCodeConfirm(code)
         }}
       >
-        Войти
+        {t('logIn')}
       </Button>
     </S.CodeStep>
   )

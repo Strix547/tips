@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { observer } from 'mobx-react-lite'
 import Head from 'next/head'
+import { useTranslation } from 'next-i18next'
 
 import { AccountLayout } from 'layout'
 import { BarChart, LineChart } from 'components'
@@ -13,6 +14,8 @@ import { getTimeZoneOffset } from 'utils'
 import * as S from './ForAgentsPage.styled'
 
 export const ForAgentsPage = observer(() => {
+  const { t } = useTranslation('common')
+
   const useFormProps = useForm({
     defaultValues: {
       period: 'MONTH'
@@ -41,19 +44,16 @@ export const ForAgentsPage = observer(() => {
   return (
     <>
       <Head>
-        <title>Агентам</title>
+        <title>{t('agents')}</title>
       </Head>
 
-      <AccountLayout title="Агентам">
+      <AccountLayout title={t('agents')}>
         <S.Content>
           <Info />
 
           <TotalEarned amount={0} />
 
-          <BarChart
-            data={diagramReferralsQuantity}
-            title="Количество зарегистрированных реферальных пользователей"
-          />
+          <BarChart data={diagramReferralsQuantity} title={t('number-referal-users')} />
 
           <LineChart data={diagramIncome} title="Чаевые заработанные реферальными пользователями" />
 

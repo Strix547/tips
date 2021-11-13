@@ -3,6 +3,7 @@ import { FormProvider, useForm, Controller } from 'react-hook-form'
 import { Radio } from '@material-ui/core'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
+import { useTranslation } from 'next-i18next'
 
 import {
   FormField,
@@ -23,6 +24,8 @@ import * as S from './SupportForm.styled'
 import ClipIcon from '@public/icons/clip.svg'
 
 export const SupportForm = observer(() => {
+  const { t } = useTranslation('common')
+
   const useFormProps = useForm({
     defaultValues: {
       letterTheme: 'complaint'
@@ -34,13 +37,13 @@ export const SupportForm = observer(() => {
   const letterTheme = watch('letterTheme')
 
   const letterThemes = [
-    { label: 'Жалоба', value: 'complaint' },
-    { label: 'Комментарий', value: 'comment' },
-    { label: 'Отзыв', value: 'feedback' },
-    { label: 'Вопрос', value: 'question' },
-    { label: 'Предложения по сайту', value: 'improvement' },
-    { label: 'Ошибка на сайте', value: 'error' },
-    { label: 'Другое', value: 'other' }
+    { label: t('complaint'), value: 'complaint' },
+    { label: t('comment'), value: 'comment' },
+    { label: t('review'), value: 'feedback' },
+    { label: t('ask-question'), value: 'question' },
+    { label: t('suggestions'), value: 'improvement' },
+    { label: t('glitch'), value: 'error' },
+    { label: t('other'), value: 'other' }
   ]
 
   const getFileNamesString = (files) => {
@@ -66,7 +69,7 @@ export const SupportForm = observer(() => {
 
   const guestFields = (
     <>
-      <FormField name="firstName" label="Имя" placeholder="Введите Ваше имя" required />
+      <FormField name="firstName" label={t('name')} placeholder={t('write-name')} required />
 
       <PhoneField />
 
@@ -88,11 +91,11 @@ export const SupportForm = observer(() => {
   return (
     <S.SupportForm onSubmit={handleSubmit(onFormSubmit)}>
       <S.Faq>
-        <S.Text>Часто задаваемые вопросы</S.Text>
+        <S.Text>{t('faq')}</S.Text>
         <S.Text>
-          Прочитать самые частые вопросы вы можете в{' '}
+          {t('faq-link')}{' '}
           <Link href={ROUTE_NAMES.FAQ}>
-            <a>разделе FAQ</a>
+            <a>{t('section-faq')}</a>
           </Link>
         </S.Text>
       </S.Faq>
@@ -115,7 +118,7 @@ export const SupportForm = observer(() => {
             control={control}
             name="message"
             render={({ field: { value, onChange } }) => (
-              <S.Textarea value={value} onChange={onChange} placeholder="Введите сообщение" />
+              <S.Textarea value={value} onChange={onChange} placeholder={t('Your text here')} />
             )}
           />
 
@@ -136,10 +139,10 @@ export const SupportForm = observer(() => {
             }
           >
             <ClipIcon />
-            <S.Text>{!files.length ? 'Загрузите файл' : getFileNamesString(files)}</S.Text>
+            <S.Text>{!files.length ? t('upload-file') : getFileNamesString(files)}</S.Text>
           </Dropzone>
 
-          <Button type="submit">Отправить сообщение</Button>
+          <Button type="submit">{t('send-message')}</Button>
         </FormProvider>
       ) : (
         <S.LoadingContainer big={!userStore.id}>

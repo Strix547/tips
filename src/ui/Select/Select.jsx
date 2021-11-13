@@ -5,7 +5,7 @@ import * as S from './Select.styled'
 
 export { MenuItem }
 
-export const Select = ({ name, defaultValue, onChange, children, rounded }) => {
+export const Select = ({ name, defaultValue = '', onChange, children, rounded }) => {
   const { control } = useFormContext()
 
   return (

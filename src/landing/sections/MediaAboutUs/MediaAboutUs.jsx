@@ -1,6 +1,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper'
 import Image from 'next/image'
+import { useTranslation } from 'next-i18next'
 
 import { Section } from 'landing/components'
 
@@ -11,6 +12,8 @@ import QuoteIcon from '@public/icons/quote.svg'
 import vedomostiLogo from '@public/img/placeholders/vedomosti.png'
 
 export const MediaAboutUsSection = () => {
+  const { t } = useTranslation('common')
+
   const sliderSettings = {
     modules: [Autoplay],
     slidesPerView: 'auto',
@@ -65,7 +68,7 @@ export const MediaAboutUsSection = () => {
   ))
 
   return (
-    <Section title="Сми о нас" gray fullWidth styles={S.sectionStyles}>
+    <Section title={t('media-about-us')} gray fullWidth styles={S.sectionStyles}>
       <S.Content>
         <Swiper {...sliderSettings}>{mediaSlides}</Swiper>
       </S.Content>

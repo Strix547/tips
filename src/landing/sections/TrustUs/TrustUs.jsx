@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Controller, Autoplay } from 'swiper/core'
 import Image from 'next/image'
+import { useTranslation } from 'next-i18next'
 
 import { Section } from 'landing/components'
 
@@ -14,6 +15,8 @@ import DodoLogo from '@public/img/placeholders/dodo.png'
 SwiperCore.use([Controller, Autoplay])
 
 export const TrustUsSection = () => {
+  const { t } = useTranslation('common')
+
   const [sliderController, setSliderController] = useState(null)
 
   useEffect(() => {
@@ -69,7 +72,7 @@ export const TrustUsSection = () => {
   }
 
   return (
-    <Section title="Нам доверяют" fullWidth>
+    <Section title={t('those-already-trust-service')} fullWidth>
       <S.Content>
         <S.Line>
           <Swiper {...sliderSettings}>{createLogoSlides(logosFirstLine)}</Swiper>
