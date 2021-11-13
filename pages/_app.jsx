@@ -10,7 +10,7 @@ import Head from 'next/head'
 
 import { Notifications } from 'components'
 
-import { userStore, authStore } from 'store'
+import { userStore, authStore, localStore } from 'store'
 import { ROUTE_NAMES, ROUTES } from 'core/routes'
 
 import { createTheme } from '@material-ui/core/styles'
@@ -38,6 +38,7 @@ const App = ({ Component, pageProps }) => {
   })
 
   const { isIdLoading, id: userId, role } = userStore
+  const { lang } = localStore
 
   const currentPathname = router.pathname
   const isAuthRoute = currentPathname === ROUTE_NAMES.AUTH
@@ -127,6 +128,13 @@ const App = ({ Component, pageProps }) => {
       router.push(ROUTE_NAMES.ACCOUNT)
     }
   }, [role, currentPathname])
+
+  useEffect(async () => {
+    if (!lang && router) {
+      const langCode = await localStore.getSuggestedLanguage()
+      router.replace(currentPathname, currentPathname, { locale: langCode.toLowerCase() })
+    }
+  }, [lang, router, currentPathname])
 
   return (
     <>
