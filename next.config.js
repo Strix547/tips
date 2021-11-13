@@ -10,7 +10,7 @@ module.exports = {
     }
   }),
   images: {
-    domains: ['localhost', 'tips.tmweb.ru', 'bs-local.com']
+    domains: ['localhost', 'tips.tmweb.ru', 'https://flytips.com/', 'bs-local.com']
   },
   reactStrictMode: true,
   eslint: {
