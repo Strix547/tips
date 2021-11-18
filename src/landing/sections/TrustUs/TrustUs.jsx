@@ -6,7 +6,6 @@ import { useTranslation } from 'next-i18next'
 
 import { Section } from 'landing/components'
 
-import 'swiper/swiper.min.css'
 import * as S from './TrustUs.styled'
 
 import TerrassaLogo from '@public/img/placeholders/terrassa.png'

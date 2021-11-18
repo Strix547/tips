@@ -189,7 +189,6 @@ export const statisticsStore = makeAutoObservable({
   },
 
   getPaymentsOutgoingStatistics: async ({ format, period, periodFrom, periodTo, zoneOffset }) => {
-    console.log(format)
     await getStaitsitcs(
       {
         format,

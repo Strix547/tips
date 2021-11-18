@@ -132,7 +132,7 @@ export const FaqPage = () => {
             <S.DidNotFindAnswer>
               <S.Text>
                 Если вы не нашли вашего ответа, задайте свой вопрос{' '}
-                <Link href={ROUTE_NAMES.SUPPORT}>
+                <Link href={ROUTE_NAMES.SUPPORT} prefetch={false}>
                   <a>разделе Служба поддержки</a>
                 </Link>{' '}
               </S.Text>

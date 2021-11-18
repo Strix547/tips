@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Modal as MuiModal } from '@material-ui/core'
+import MuiModal from '@material-ui/core/Modal'
 
 export const Modal = styled((props) => <MuiModal {...props} />)`
   /* overlay */

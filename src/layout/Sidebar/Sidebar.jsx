@@ -90,7 +90,7 @@ export const Sidebar = observer(() => {
     const subNavItems = subNav?.map(({ label, link }) => {
       return (
         <S.SubNavItem key={label} active={pathname === link}>
-          <Link href={link}>
+          <Link href={link} prefetch={false}>
             <a>{label}</a>
           </Link>
         </S.SubNavItem>
@@ -105,7 +105,7 @@ export const Sidebar = observer(() => {
         active={subNav ? isSomeSubPath : pathname === link}
         bgRed={forBusiness && !isBusinessAccount}
       >
-        <Link href={link}>
+        <Link href={link} prefetch={false}>
           <a>
             {icon} {label}
           </a>

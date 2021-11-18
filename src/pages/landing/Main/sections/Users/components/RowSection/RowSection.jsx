@@ -19,7 +19,7 @@ export const RowSection = ({ title, subtitle, pageLink, features, action, img, r
         <S.LeftTop>
           <S.Heading level={3}>{title}</S.Heading>
 
-          <Link href={pageLink}>
+          <Link href={pageLink} prefetch={false}>
             <a>
               {t('more')}
               <ArrowIcon />
@@ -35,7 +35,7 @@ export const RowSection = ({ title, subtitle, pageLink, features, action, img, r
       </S.Left>
 
       <S.ImgContainer>
-        <Image src={img} alt={`${title} dashboard`} unoptimized />
+        <Image src={img} alt={`${title} dashboard`} />
         <S.Circle />
       </S.ImgContainer>
     </S.RowSection>

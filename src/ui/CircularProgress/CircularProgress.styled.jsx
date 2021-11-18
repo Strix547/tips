@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { CircularProgress as MuiCircularProgress } from '@material-ui/core'
+import MuiCircularProgress from '@material-ui/core/CircularProgress'
 
 export const CircularProgress = styled((props) => (
   <MuiCircularProgress {...props} classes={{ colorPrimary: 'circle-progress-color-primary' }} />

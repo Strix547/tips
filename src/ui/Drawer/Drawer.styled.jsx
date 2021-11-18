@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Drawer as MuiDrawer } from '@material-ui/core'
+import MuiDrawer from '@material-ui/core/Drawer'
 
 export const Drawer = styled((props) => <MuiDrawer {...props} />)`
   .MuiBackdrop-root {

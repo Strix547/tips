@@ -53,3 +53,17 @@ export const Iban = styled(IbanElement)`
     padding: 14px 20px;
   }
 `
+
+export const DropzoneImage = styled.div`
+  position: relative;
+  width: 100%;
+  height: 40px;
+  margin: 20px;
+
+  img {
+    width: auto !important;
+    height: auto !important;
+    min-width: auto !important;
+    min-height: auto !important;
+  }
+`

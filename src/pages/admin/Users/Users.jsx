@@ -46,15 +46,6 @@ export const UsersPage = observer(() => {
   }, [name, group, activity, date, phone])
 
   const onUserExcelDownload = () => {
-    console.log({
-      name,
-      role: group,
-      activity,
-      date,
-      phone,
-      format: 'XLSX',
-      zoneOffset: getTimeZoneOffset()
-    })
     adminStore.searchUsers({
       name,
       role: group,

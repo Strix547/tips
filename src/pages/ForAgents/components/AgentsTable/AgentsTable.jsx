@@ -33,7 +33,7 @@ export const AgentsTable = observer(({ statistics = [], isStatisticsLoading }) =
     }
   ]
 
-  const rows = statistics.map(({ id, dateTime, tipAmount, firstName, lastName }) => ({
+  const rows = statistics.map(({ id, dateTime, agentIncome, tipAmount, firstName, lastName }) => ({
     id,
     dateTime: transformDateTimeToLabel(dateTime),
     tipAmount: getPriceLabel(tipAmount, currencyLabel),

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { FormProvider, useForm } from 'react-hook-form'
 
 import { Logo } from 'common'
-import { FormField, Button, EmailField } from 'ui'
+import { Button, EmailField } from 'ui'
 
 import { ROUTE_NAMES } from 'core/routes'
 
@@ -57,7 +57,7 @@ export const Footer = () => {
   const transformNavToList = (nav) => {
     return nav.map(({ label, link }) => (
       <li key={label}>
-        <Link href={link}>
+        <Link href={link} prefetch={false}>
           <a>{label}</a>
         </Link>
       </li>
@@ -67,7 +67,7 @@ export const Footer = () => {
   const paymentServiceList = paymentServices.map(({ label, icon }) => <li key={label}>{icon}</li>)
   const networkList = networks.map(({ label, link, icon }) => (
     <li key={label}>
-      <Link href={link}>
+      <Link href={link} prefetch={false}>
         <a>{icon}</a>
       </Link>
     </li>

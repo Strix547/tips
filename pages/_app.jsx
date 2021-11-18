@@ -3,24 +3,23 @@ import { observer } from 'mobx-react-lite'
 import { MuiThemeProvider } from '@material-ui/core'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
-import NProgress from 'nprogress'
 import { appWithTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
 import { Notifications } from 'components'
 
-import { userStore, authStore, localStore } from 'store'
+import { userStore, localStore } from 'store'
 import { ROUTE_NAMES, ROUTES } from 'core/routes'
 
 import { createTheme } from '@material-ui/core/styles'
 
 import { GlobalStyles } from 'styles/GlobalStyles'
-import 'styles/fonts.css'
 
-const stripePromise = loadStripe(
-  'pk_test_51JXcqEBmR4XWceWFiU56mb6ztWQMkIrdrJvl2CkW9WGcoHcbfkZCzieUTSl2UUvmRIf985mgIXjrKDy3oWv6FJta002OlQs1Y3'
-)
+import 'styles/fonts.css'
+import 'swiper/swiper.min.css'
+
+const stripePromise = loadStripe('pk_test_w8hT3aAuQgK14ENklixWpHfx00b3mKZ9fG')
 
 const App = ({ Component, pageProps }) => {
   const router = useRouter()
@@ -37,7 +36,7 @@ const App = ({ Component, pageProps }) => {
     }
   })
 
-  const { isIdLoading, id: userId, role } = userStore
+  const { role } = userStore
   const { lang } = localStore
 
   const currentPathname = router.pathname
@@ -46,26 +45,6 @@ const App = ({ Component, pageProps }) => {
   const isProtectedRoute = currentRouteConfig?.isProtected
   const isBusinessRoute = currentRouteConfig?.role === 'BUSINESS'
   const isAdminRoute = currentRouteConfig?.role === 'ADMIN'
-
-  // const onRouteLoading = () => {
-  //   NProgress.start()
-  // }
-
-  // const onRouteLoaded = () => {
-  //   NProgress.done()
-  // }
-
-  // useEffect(() => {
-  //   router.events.on('routeChangeStart', onRouteLoading)
-  //   router.events.on('routeChangeComplete', onRouteLoaded)
-  //   router.events.on('routeChangeError', onRouteLoaded)
-
-  //   return () => {
-  //     router.events.off('routeChangeStart', onRouteLoading)
-  //     router.events.off('routeChangeComplete', onRouteLoaded)
-  //     router.events.off('routeChangeError', onRouteLoaded)
-  //   }
-  // }, [])
 
   useEffect(async () => {
     // first load data and redirects
@@ -149,9 +128,7 @@ const App = ({ Component, pageProps }) => {
 
       <MuiThemeProvider theme={theme}>
         <Elements stripe={stripePromise}>
-          {!isIdLoading && (userId || userId === 0) ? (
-            <Component {...pageProps} stripePromise={stripePromise} />
-          ) : null}
+          <Component {...pageProps} stripePromise={stripePromise} />
           <Notifications />
         </Elements>
       </MuiThemeProvider>

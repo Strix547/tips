@@ -41,7 +41,8 @@ export const changeUserInfo = async ({
   address,
   postalCode,
   policyAgreement,
-  avatarFileId
+  avatarFileId,
+  accountToken
 }) => {
   try {
     const response = await API.post(`/personal-info/${userId}/change`, {
@@ -54,7 +55,8 @@ export const changeUserInfo = async ({
       address,
       postalCode,
       avatarFileId,
-      tosAccepted: policyAgreement
+      tosAccepted: policyAgreement,
+      accountToken
     })
 
     const codeLabels = [

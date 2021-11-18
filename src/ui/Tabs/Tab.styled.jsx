@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import MuiTab from '@material-ui/core/Tab'
 
 export const Tab = styled(({ active, ...props }) => (

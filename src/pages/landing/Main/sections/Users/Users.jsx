@@ -69,5 +69,5 @@ export const UsersSection = () => {
     <RowSection key={props.title} {...props} reversed={idx % 2 !== 0} />
   ))
 
-  return <Section title={[t('For all who receive'), t('tips-donates')]}>{sectionList}</Section>
+  return <Section title={[t('for-who-receive'), t('tips-donates')]}>{sectionList}</Section>
 }

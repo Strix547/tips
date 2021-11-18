@@ -56,7 +56,7 @@ export const ConnectFormSection = () => {
           <S.FormBottom>
             <S.Text>
               {t('you-physical-person-receive-tips')} <br />
-              <Link href={ROUTE_NAMES.AUTH}>
+              <Link href={ROUTE_NAMES.AUTH} prefetch={false}>
                 <a>{t('register')}</a>
               </Link>{' '}
               {t('in-our-service')}

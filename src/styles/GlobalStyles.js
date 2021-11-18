@@ -12,7 +12,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    font-family: 'Formular';
+    font-family: 'Formular', sans-serif;
     font-size: var(--font-size-reg);
     font-weight: 400;
     color: var(--color-black-100);

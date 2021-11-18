@@ -2,7 +2,7 @@ import { FormField, EmailField, BirthDateAdultValid } from 'ui'
 
 import * as S from './PersonalData.styled'
 
-export const PersonalDataStep = () => {
+export const PersonalDataStep = ({}) => {
   return (
     <S.PersonalDataStep>
       <S.FieldsLabel>Персональные данные:</S.FieldsLabel>

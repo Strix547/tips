@@ -94,7 +94,7 @@ export const SupportForm = observer(() => {
         <S.Text>{t('faq')}</S.Text>
         <S.Text>
           {t('faq-link')}{' '}
-          <Link href={ROUTE_NAMES.FAQ}>
+          <Link href={ROUTE_NAMES.FAQ} prefetch={false}>
             <a>{t('section-faq')}</a>
           </Link>
         </S.Text>
@@ -118,7 +118,7 @@ export const SupportForm = observer(() => {
             control={control}
             name="message"
             render={({ field: { value, onChange } }) => (
-              <S.Textarea value={value} onChange={onChange} placeholder={t('Your text here')} />
+              <S.Textarea value={value} onChange={onChange} placeholder={t('your-text-here')} />
             )}
           />
 

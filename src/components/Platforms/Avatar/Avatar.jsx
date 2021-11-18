@@ -7,14 +7,7 @@ export const PlatformAvatar = ({ company, avatar, firstName, lastName }) => {
     <S.PlatformAvatar>
       {company.logo && (
         <S.CompanyLogo>
-          <Image
-            src={company.logo}
-            alt={company.name}
-            width="100%"
-            height="100%"
-            layout="fill"
-            unoptimized
-          />
+          <Image src={company.logo} alt={company.name} width="100%" height="100%" layout="fill" />
         </S.CompanyLogo>
       )}
 

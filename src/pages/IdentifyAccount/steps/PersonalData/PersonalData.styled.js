@@ -1,8 +1,10 @@
 import styled from 'styled-components'
 
+import { Text } from 'styled'
+
 import { FieldsLabel } from '../../IdentifyAccount.styled'
 
-export { FieldsLabel }
+export { FieldsLabel, Text }
 
 export const PersonalDataStep = styled.form`
   display: flex;

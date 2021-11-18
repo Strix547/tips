@@ -29,7 +29,7 @@ export const Header = observer(({ withSidebar }) => {
       lang: 'EN'
     }
   })
-  const { reset, watch } = useFormProps
+  const { reset } = useFormProps
   const { t } = useTranslation('common')
 
   const [isMenuOpen, setMenuOpen] = useState(false)
@@ -43,8 +43,6 @@ export const Header = observer(({ withSidebar }) => {
       reset({ lang })
     }
   }, [lang, reset])
-
-  console.log(watch())
 
   const nav = [
     { label: t('recipients'), link: ROUTE_NAMES.RECIPIENTS },
@@ -70,7 +68,7 @@ export const Header = observer(({ withSidebar }) => {
 
   const navList = nav.map(({ label, link }) => (
     <S.NavItem key={link} active={currentPathname === link}>
-      <Link href={link}>
+      <Link href={link} prefetch={false}>
         <a>{label}</a>
       </Link>
     </S.NavItem>
@@ -78,7 +76,7 @@ export const Header = observer(({ withSidebar }) => {
 
   const languageList = languages.map(({ label, value, icon }) => (
     <MenuItem key={value} value={value}>
-      <Link href={router.pathname} locale={value.toLowerCase()}>
+      <Link href={router.pathname} locale={value.toLowerCase()} prefetch={false}>
         <a>
           {icon}
           <S.Text>{label}</S.Text>

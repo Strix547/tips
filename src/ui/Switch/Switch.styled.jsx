@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
-import { Switch as MuiSwitch, FormControlLabel as MuiFormControlLabel } from '@material-ui/core'
+import MuiSwitch from '@material-ui/core/Switch'
+import MuiFormControlLabel from '@material-ui/core/FormControlLabel'
 
 const getSizeStyles = (size) => {
   switch (size) {

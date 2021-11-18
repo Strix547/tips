@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Slider as MuiSlider } from '@material-ui/core'
+import MuiSlider from '@material-ui/core/Slider'
 
 export const Slider = styled((props) => (
   <MuiSlider

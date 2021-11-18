@@ -3,11 +3,11 @@ import { toast } from 'react-toastify'
 
 import { handleResponse } from 'utils'
 
-export const addBankAccount = ({ userId, stripeToken }) => {
+export const addBankAccount = ({ userId, bankAccountToken }) => {
   try {
     const res = API.post('/stripe-bank-account/add', {
       ownerUserId: userId,
-      stripeBankAccountToken: stripeToken
+      stripeBankAccountToken: bankAccountToken
     })
 
     if (res.status === 403) {

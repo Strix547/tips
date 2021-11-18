@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { ChromePicker } from 'react-color'
+import ChromePicker from 'react-color/lib/Chrome'
 
 import { Label, Text } from 'styled'
 

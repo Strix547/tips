@@ -86,7 +86,6 @@ export const PlatformPaymentCardOptionsPanel = observer(
                 width="100%"
                 height="100%"
                 layout="fill"
-                unoptimized
               />
             </S.DropzoneImage>
           )}

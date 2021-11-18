@@ -3,6 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { useMediaQuery } from 'react-responsive'
 import { useStripe, useElements, IbanElement } from '@stripe/react-stripe-js'
 import { observer } from 'mobx-react-lite'
+import { toJS } from 'mobx'
 import Head from 'next/head'
 
 import { PersonalDataStep, AccountTypeStep, LocationStep } from './steps'
@@ -35,6 +36,8 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
   const isTablet = useMediaQuery({ maxWidth: MEDIA_TABLET })
   const [step, setStep] = useState(0)
   const [stripeError, setStripeError] = useState()
+  const [identityDocumentId, setIdentityDocumentId] = useState()
+  const [addressDocumentId, setAddressDocumentId] = useState()
 
   const { isIdentifyProcessing } = userStore
   const steps = ['Шаг 1', 'Шаг 2', 'Шаг 3']
@@ -45,9 +48,47 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
     </Step>
   ))
 
+  const sendIdentityDocument = async (file) => {
+    const data = new FormData()
+
+    data.append('file', file)
+    data.append('purpose', 'identity_document')
+
+    const fileResult = await fetch('https://uploads.stripe.com/v1/files', {
+      method: 'POST',
+      headers: { Authorization: 'Bearer pk_test_w8hT3aAuQgK14ENklixWpHfx00b3mKZ9fG' },
+      body: data
+    })
+
+    const { id } = await fileResult.json()
+    setIdentityDocumentId(id)
+  }
+
+  const sentAddressDocument = async (file) => {
+    const data = new FormData()
+
+    data.append('file', file)
+    data.append('purpose', 'additional_verification')
+
+    const fileResult = await fetch('https://uploads.stripe.com/v1/files', {
+      method: 'POST',
+      headers: { Authorization: 'Bearer pk_test_w8hT3aAuQgK14ENklixWpHfx00b3mKZ9fG' },
+      body: data
+    })
+
+    const { id } = await fileResult.json()
+    setAddressDocumentId(id)
+  }
+
   const crediteCardStepMemo = useMemo(
-    () => <LocationStep stripePromise={stripePromise} />,
-    [stripePromise, useFormProps]
+    () => (
+      <LocationStep
+        stripePromise={stripePromise}
+        onIndetityDocumentUpload={sendIdentityDocument}
+        onAddressDocumentUpload={sentAddressDocument}
+      />
+    ),
+    [stripePromise, useFormProps, sendIdentityDocument, sentAddressDocument]
   )
 
   const getStepContent = (step) => {
@@ -69,6 +110,7 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
     firstName,
     lastName,
     email,
+    country,
     city,
     birthDate,
     address,
@@ -87,18 +129,50 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
     if (step === 2) {
       const ibanElement = stripeElements.getElement(IbanElement)
 
-      const { token, error } = await stripe.createToken(ibanElement, {
-        account_holder_name: `${firstName} ${lastName}`,
-        account_holder_type: 'individual',
-        currency: 'eur'
+      const { token: accountToken, error: accountError } = await stripe.createToken('account', {
+        business_type: 'individual',
+        individual: {
+          first_name: firstName,
+          last_name: lastName,
+          address: {
+            country: toJS(country).code,
+            city,
+            line1: address,
+            postal_code: postal
+          },
+          dob: {
+            day: birthDate.split('/')[0],
+            month: birthDate.split('/')[1],
+            year: birthDate.split('/')[2]
+          },
+          email,
+          verification: {
+            document: {
+              front: identityDocumentId
+            },
+            additional_document: {
+              front: addressDocumentId
+            }
+          }
+        },
+        tos_shown_and_accepted: true
       })
 
-      if (error) {
+      const { token: bankAccountToken, error: bankAccountError } = await stripe.createToken(
+        ibanElement,
+        {
+          account_holder_name: `${firstName} ${lastName}`,
+          account_holder_type: 'individual',
+          currency: 'eur'
+        }
+      )
+
+      if (bankAccountError) {
         setStripeError(error.message)
         return
       }
 
-      if (token) {
+      if (accountToken && bankAccountToken) {
         userStore.identifyAccount({
           userId: userStore.id,
           email,
@@ -114,7 +188,8 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
           recipient,
           agent,
           business,
-          stripeToken: token.id
+          bankAccountToken: bankAccountToken.id,
+          accountToken: accountToken.id
         })
       }
 

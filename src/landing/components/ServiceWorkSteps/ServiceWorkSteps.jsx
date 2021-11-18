@@ -56,7 +56,7 @@ export const ServiceWorkSteps = () => {
 
   const stepList = steps.map(({ title, img }, idx) => (
     <li key={title}>
-      <Image src={img} alt={title} unoptimized />
+      <Image src={img} alt={title} />
       <S.Text>{title}</S.Text>
       <S.Counter>{idx + 1}</S.Counter>
     </li>

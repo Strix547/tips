@@ -154,7 +154,6 @@ export const PersonalDataPage = observer(() => {
                     width={90}
                     height={90}
                     alt="avatar"
-                    unoptimized
                   />
                 ) : (
                   <S.Avatar>

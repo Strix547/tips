@@ -92,7 +92,6 @@ export const adminStore = makeAutoObservable({
   activateAdminMode: async (userId, adminId) => {
     adminStore.isAdminMode = true
     adminStore.adminId = adminId
-    console.log(2, adminStore.adminId)
     userStore.id = userId
     await userStore.getUserRole(userId)
     await userStore.getPersonalData(userId)

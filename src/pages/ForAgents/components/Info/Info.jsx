@@ -43,7 +43,7 @@ export const Info = () => {
 
   const networkList = networks.map(({ label, link, icon }) => (
     <li key={label}>
-      <Link href={link}>
+      <Link href={link} prefetch={false}>
         <a>{icon}</a>
       </Link>
     </li>
@@ -60,7 +60,7 @@ export const Info = () => {
           <S.Text>{t('your-hash-link')}</S.Text>
 
           <S.LinkContainer>
-            <Link href={link}>
+            <Link href={link} prefetch={false}>
               <a>{link}</a>
             </Link>
 

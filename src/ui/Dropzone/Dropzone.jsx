@@ -7,19 +7,7 @@ export const Dropzone = ({ children, onFileChange, ...props }) => {
   const onDropAccepted = useCallback(
     ([file]) => {
       if (!file) return
-      // const notImage = !file?.type?.includes('image')
-
       onFileChange(file)
-
-      // if (notImage) {
-      //   return
-      // }
-      //
-      // const reader = new FileReader()
-      // reader.readAsDataURL(file)
-      // reader.addEventListener('load', () => {
-      //   onFileChange({ src: reader.result, name: file.name })
-      // })
     },
     [onFileChange]
   )

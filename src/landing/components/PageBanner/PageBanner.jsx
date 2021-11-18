@@ -1,10 +1,14 @@
+import { useMediaQuery } from 'react-responsive'
 import Image from 'next/image'
 
 import * as S from './PageBanner.styled'
+import { MEDIA_TABLET } from 'styles/media'
 
 import CheckIcon from '@public/icons/checkmark.svg'
 
 export const PageBanner = ({ title, subtitle, features = [], actions, img }) => {
+  const isTablet = useMediaQuery({ maxWidth: MEDIA_TABLET })
+
   const featureList = features.map((text) => (
     <li key={text}>
       <CheckIcon />
@@ -14,7 +18,6 @@ export const PageBanner = ({ title, subtitle, features = [], actions, img }) => 
 
   const bannerImgProps = {
     alt: 'dashboard',
-    priority: true,
     quality: 100
   }
 
@@ -32,13 +35,15 @@ export const PageBanner = ({ title, subtitle, features = [], actions, img }) => 
         </S.Left>
 
         <S.ImgContainer>
-          <S.Img>
-            <Image {...bannerImgProps} src={img.desktop} layout="responsive" />
-          </S.Img>
-
-          <S.ImgMobile>
-            <Image {...bannerImgProps} src={img.mobile} layout="intrinsic" />
-          </S.ImgMobile>
+          {!isTablet ? (
+            <S.Img>
+              <Image {...bannerImgProps} priority src={img.desktop} layout="responsive" />
+            </S.Img>
+          ) : (
+            <S.ImgMobile>
+              <Image {...bannerImgProps} src={img.mobile} layout="intrinsic" />
+            </S.ImgMobile>
+          )}
         </S.ImgContainer>
       </S.Wrapper>
     </S.PageBanner>

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Rating as MuiRating } from '@material-ui/lab'
+import MuiRating from '@material-ui/lab/Rating'
 
 import StarIcon from '@public/icons/star.svg'
 

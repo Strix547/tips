@@ -80,7 +80,6 @@ export const UserEditPage = observer(() => {
   }
 
   const intoAdminMode = (userId, adminId) => {
-    console.log(1, userId, adminId)
     adminStore.activateAdminMode(userId, adminId)
   }
 

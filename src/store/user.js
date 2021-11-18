@@ -77,7 +77,8 @@ export const userStore = makeAutoObservable({
     address,
     postalCode,
     policyAgreement,
-    avatar
+    avatar,
+    accountToken
   }) => {
     try {
       userStore.isPersonalDataLoading = true
@@ -99,7 +100,8 @@ export const userStore = makeAutoObservable({
         address,
         postalCode,
         policyAgreement,
-        avatarFileId: avatar && (await getAvatarFileId(avatar))
+        avatarFileId: avatar && (await getAvatarFileId(avatar)),
+        accountToken
       })
       userStore.getPersonalData(userId)
       router.push(ROUTE_NAMES.ACCOUNT)
@@ -132,7 +134,8 @@ export const userStore = makeAutoObservable({
     recipient,
     agent,
     business,
-    stripeToken
+    bankAccountToken,
+    accountToken
   }) => {
     userStore.isIdentifyProcessing = true
 
@@ -147,10 +150,11 @@ export const userStore = makeAutoObservable({
         city,
         address,
         postalCode,
-        policyAgreement
+        policyAgreement,
+        accountToken
       })
       await userApi.addUserRole({ userId, payer, recipient, agent, business })
-      await bankAccountApi.addBankAccount({ userId, stripeToken })
+      await bankAccountApi.addBankAccount({ userId, bankAccountToken })
       await userStore.getUserRole(userId)
       await userStore.getPersonalData(userId)
       router.push(ROUTE_NAMES.ACCOUNT)

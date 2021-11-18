@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { RadioGroup as MuiRadioGroup } from '@material-ui/core'
+import MuiRadioGroup from '@material-ui/core/RadioGroup'
 
 export const RadioGroup = styled((props) => (
   <MuiRadioGroup {...props} classes={{ root: 'radio-group-root' }} />

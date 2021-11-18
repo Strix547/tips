@@ -1,5 +1,5 @@
 import React from 'react'
-import { Autocomplete as MuiAutocomplete } from '@material-ui/lab'
+import MuiAutocomplete from '@material-ui/lab/Autocomplete'
 import { Controller, useFormContext } from 'react-hook-form'
 
 import ArrowIcon from '@public/icons/arrows/gray-rounded-down.svg'

@@ -298,7 +298,6 @@ export const getPaymentsOutgoingStatistics = async ({
   periodFrom,
   periodTo
 }) => {
-  console.log(2, format)
   return await getStatistics(
     `/admin/outgoing-payments-statistics`,
     { format, zoneOffset, period, periodFrom, periodTo },

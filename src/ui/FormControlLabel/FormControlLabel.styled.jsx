@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { FormControlLabel as MuiFormControlLabel } from '@material-ui/core'
+import MuiFormControlLabel from '@material-ui/core/FormControlLabel'
 
 export const FormControlLabel = styled((props) => (
   <MuiFormControlLabel

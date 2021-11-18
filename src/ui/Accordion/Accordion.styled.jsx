@@ -1,9 +1,7 @@
 import styled from 'styled-components'
-import {
-  Accordion as MuiAccordion,
-  AccordionSummary as MuiAccordionSummary,
-  AccordionDetails as MuiAccordionDetails
-} from '@material-ui/core'
+import MuiAccordion from '@material-ui/core/Accordion'
+import MuiAccordionSummary from '@material-ui/core/AccordionSummary'
+import MuiAccordionDetails from '@material-ui/core/AccordionDetails'
 
 export const Accordion = styled((props) => (
   <MuiAccordion {...props} square={false} classes={{ root: 'accordion-root' }} />
