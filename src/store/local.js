@@ -49,9 +49,21 @@ export const localStore = makeAutoObservable({
     localStore.isAddressesLoading = false
   },
 
-  getSuggestedLanguage: async () => {
-    const langCode = await localApi.getSuggestedLanguage()
-    localStore.lang = langCode
-    return langCode
+  getLanguage: async () => {
+    const storageLang = localStorage.getItem('lang')
+
+    if (storageLang) {
+      return storageLang
+    } else {
+      const langCode = await localApi.getSuggestedLanguage()
+      localStore.lang = langCode
+      localStorage.setItem('lang', langCode)
+      return langCode
+    }
+  },
+
+  setLang: (lang) => {
+    localStore.lang = lang
+    localStorage.setItem('lang', lang)
   }
 })

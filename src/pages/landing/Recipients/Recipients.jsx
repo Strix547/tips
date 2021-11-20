@@ -3,13 +3,7 @@ import { useTranslation } from 'next-i18next'
 
 import { Header, Footer } from 'layout'
 import { PageBanner, Section } from 'landing/components'
-import {
-  ListIconSection,
-  TariffsSection,
-  TrustUsSection,
-  MediaAboutUsSection,
-  ConnectFormSection
-} from 'landing/sections'
+import { ListIconSection, TariffsSection, ConnectFormSection } from 'landing/sections'
 import { LinkButton } from 'ui'
 import { HowServiceWorkSection } from './sections'
 
@@ -28,15 +22,15 @@ export const RecipientsPage = () => {
   const agentTypes = [
     {
       icon: <SheetIcon />,
-      label: 'У вас есть клиентская база из ресторанов, салонов красоты или доставок'
+      label: t('have-customer-base')
     },
     {
       icon: <SheetIcon />,
-      label: 'Вы создатель агрегатора ресторанов, салонов красоты, доставок'
+      label: t('you-createtor-business')
     },
     {
       icon: <SheetIcon />,
-      label: 'Автоматизируете рестораны'
+      label: t('you-automate-restaurants')
     }
   ]
 
@@ -69,10 +63,10 @@ export const RecipientsPage = () => {
         </Section>
 
         <HowServiceWorkSection />
-        <ListIconSection title={t('ho-can-be-agent')} list={agentTypes} />
+        <ListIconSection title={t('who-can-be-agent')} list={agentTypes} />
         <TariffsSection />
-        <TrustUsSection />
-        <MediaAboutUsSection />
+        {/* <TrustUsSection /> */}
+        {/* <MediaAboutUsSection /> */}
         <ConnectFormSection />
       </S.Main>
 

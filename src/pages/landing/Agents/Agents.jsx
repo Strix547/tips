@@ -3,14 +3,7 @@ import { useTranslation } from 'next-i18next'
 
 import { Header, Footer } from 'layout'
 import { PageBanner, Section } from 'landing/components'
-import {
-  TipsSection,
-  ListIconSection,
-  TariffsSection,
-  TrustUsSection,
-  MediaAboutUsSection,
-  ConnectFormSection
-} from 'landing/sections'
+import { ListIconSection, TariffsSection, ConnectFormSection } from 'landing/sections'
 import { LinkButton } from 'ui'
 
 import { ROUTE_NAMES } from 'core/routes'
@@ -72,8 +65,8 @@ export const AgentsPage = () => {
 
         <ListIconSection title={t('who-can-be-agent')} list={agentTypes} />
         <TariffsSection />
-        <TrustUsSection />
-        <MediaAboutUsSection />
+        {/* <TrustUsSection /> */}
+        {/* <MediaAboutUsSection /> */}
         <ConnectFormSection />
       </main>
 

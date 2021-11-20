@@ -9,8 +9,7 @@ import * as S from './PhoneField.styled'
 export const PhoneField = ({
   name = 'phone',
   rules = { required: true, minLength: 11 },
-  placeholder = '+7 (___) ___-__-__',
-  country = 'ru',
+  country = 'gb',
   label,
   onChange,
   ...props
@@ -46,8 +45,6 @@ export const PhoneField = ({
               }}
               name={name}
               country={country}
-              placeholder={placeholder}
-              mask={{ ru: '7(...) ...-..-..' }}
             />
           </S.PhoneField>
         )

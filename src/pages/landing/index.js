@@ -10,6 +10,7 @@ import { AboutUsPage } from './AboutUs'
 import { CredentialsPage } from './Credentials'
 import { PublicOfferPage } from './PublicOffer'
 import { PrivacyPolicyPage } from './PrivacyPolicy'
+import { TermsOfUsePage } from './TermsOfUse'
 
 export {
   AgentsPage,
@@ -23,5 +24,6 @@ export {
   AboutUsPage,
   CredentialsPage,
   PublicOfferPage,
-  PrivacyPolicyPage
+  PrivacyPolicyPage,
+  TermsOfUsePage
 }

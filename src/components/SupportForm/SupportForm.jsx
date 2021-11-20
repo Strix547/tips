@@ -91,7 +91,7 @@ export const SupportForm = observer(() => {
   return (
     <S.SupportForm onSubmit={handleSubmit(onFormSubmit)}>
       <S.Faq>
-        <S.Text>{t('faq')}</S.Text>
+        <S.Text>{t('faq-text')}</S.Text>
         <S.Text>
           {t('faq-link')}{' '}
           <Link href={ROUTE_NAMES.FAQ} prefetch={false}>

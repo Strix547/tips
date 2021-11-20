@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { MuiThemeProvider } from '@material-ui/core'
-import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
 import { appWithTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
@@ -19,7 +19,7 @@ import { GlobalStyles } from 'styles/GlobalStyles'
 import 'styles/fonts.css'
 import 'swiper/swiper.min.css'
 
-const stripePromise = loadStripe('pk_test_w8hT3aAuQgK14ENklixWpHfx00b3mKZ9fG')
+const stripePromise = loadStripe(String(process.env.STRIPE_PUBLISH_KEY))
 
 const App = ({ Component, pageProps }) => {
   const router = useRouter()
@@ -109,11 +109,19 @@ const App = ({ Component, pageProps }) => {
   }, [role, currentPathname])
 
   useEffect(async () => {
-    if (!lang && router) {
-      const langCode = await localStore.getSuggestedLanguage()
-      router.replace(currentPathname, currentPathname, { locale: langCode.toLowerCase() })
+    if (lang) return
+
+    const storageLang = localStorage.getItem('lang')
+    console.log(storageLang)
+    if (storageLang) {
+      localStore.setLang(storageLang)
+      router.replace(currentPathname, currentPathname, { locale: storageLang.toLowerCase() })
+      return
     }
-  }, [lang, router, currentPathname])
+
+    const lang = await localStore.getLanguage()
+    router.replace(currentPathname, currentPathname, { locale: lang.toLowerCase() })
+  }, [lang, currentPathname])
 
   return (
     <>

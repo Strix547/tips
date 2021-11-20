@@ -9,8 +9,8 @@ import {
   SupportPage,
   AboutUsPage,
   CredentialsPage,
-  PublicOfferPage,
-  PrivacyPolicyPage
+  PrivacyPolicyPage,
+  TermsOfUsePage
 } from './landing'
 
 import {
@@ -79,8 +79,6 @@ export {
   IdentifyAccountPage,
   AboutUsPage,
   CredentialsPage,
-  PublicOfferPage,
-  PrivacyPolicyPage,
   LoyaltyPage,
   QrStatisticsPage,
   MyEmployeesPage,
@@ -100,5 +98,7 @@ export {
   UserEditPage,
   UserStatisticsPage,
   PaymentsOutgoingStatisticsPage,
-  PaymentsIncomingStatisticsPage
+  PaymentsIncomingStatisticsPage,
+  PrivacyPolicyPage,
+  TermsOfUsePage
 }

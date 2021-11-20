@@ -17,14 +17,15 @@ export const RowSection = ({ title, subtitle, pageLink, features, action, img, r
     <S.RowSection $reversed={reversed}>
       <S.Left>
         <S.LeftTop>
-          <S.Heading level={3}>{title}</S.Heading>
-
-          <Link href={pageLink} prefetch={false}>
-            <a>
-              {t('more')}
-              <ArrowIcon />
-            </a>
-          </Link>
+          <S.Heading level={3}>
+            <span>{title}</span>
+            <Link href={pageLink} prefetch={false}>
+              <a>
+                {t('more')}
+                <ArrowIcon />
+              </a>
+            </Link>
+          </S.Heading>
         </S.LeftTop>
 
         <S.Subtitle>{subtitle}</S.Subtitle>

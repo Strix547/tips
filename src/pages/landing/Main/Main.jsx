@@ -3,12 +3,7 @@ import { useTranslation } from 'next-i18next'
 
 import { Header, Footer } from 'layout'
 import { PageBanner } from 'landing/components'
-import {
-  TariffsSection,
-  TrustUsSection,
-  MediaAboutUsSection,
-  ConnectFormSection
-} from 'landing/sections'
+import { TariffsSection, ConnectFormSection } from 'landing/sections'
 import { LinkButton } from 'ui'
 import { UsersSection, HowServiceWorkSection, WhereCanUseSection } from './sections'
 
@@ -50,8 +45,8 @@ export const MainPage = () => {
         <HowServiceWorkSection />
         <WhereCanUseSection />
         <TariffsSection />
-        <TrustUsSection />
-        <MediaAboutUsSection />
+        {/* <TrustUsSection /> */}
+        {/* <MediaAboutUsSection /> */}
         <ConnectFormSection />
       </main>
 

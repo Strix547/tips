@@ -20,7 +20,7 @@ export const PageBanner = styled.section`
   }
 
   ${media.laptop} {
-    height: 1096px;
+    height: auto;
     padding-top: 80px;
     box-sizing: border-box;
 
@@ -37,10 +37,11 @@ export const PageBanner = styled.section`
 
 export const Left = styled.div`
   position: relative;
-  width: 575px;
+  max-width: 575px;
   z-index: 10;
 
   ${media.laptop} {
+    max-width: 650px;
     margin: 0 auto;
   }
 
@@ -128,7 +129,7 @@ export const ImgContainer = styled.div`
   width: 100vw;
   height: 100%;
 
-  ${media.tablet} {
+  ${media.laptop} {
     position: static;
     margin-top: 30px;
   }
@@ -141,9 +142,8 @@ export const Img = styled.div`
   z-index: 10;
 
   ${media.laptop} {
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: -69px;
+    position: static;
+    width: 100%;
   }
 
   ${media.tablet} {

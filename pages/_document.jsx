@@ -1,4 +1,4 @@
-import Document from 'next/document'
+import Document, { Html, Head, NextScript, Main } from 'next/document'
 import { Fragment } from 'react'
 import { ServerStyleSheet as StyledComponentSheets } from 'styled-components'
 import { ServerStyleSheets as MaterialUiServerStyleSheets } from '@material-ui/core/styles'
@@ -31,5 +31,17 @@ export default class MyDocument extends Document {
     } finally {
       styledComponentSheet.seal()
     }
+  }
+
+  render() {
+    return (
+      <Html lang="en">
+        <Head />
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    )
   }
 }

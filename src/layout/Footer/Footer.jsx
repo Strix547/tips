@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { FormProvider, useForm } from 'react-hook-form'
+import { useTranslation } from 'next-i18next'
 
 import { Logo } from 'common'
 import { Button, EmailField } from 'ui'
@@ -23,20 +24,21 @@ import Telegram from '@public/icons/networks/telegram.svg'
 import CommentIcon from '@public/icons/comment.svg'
 
 export const Footer = () => {
+  const { t } = useTranslation('common')
   const useFormProps = useForm()
 
   const navFirstColumn = [
-    { label: 'О «Fly.tips»‎', link: ROUTE_NAMES.ABOUT_US },
-    { label: 'Реквизиты и информация', link: ROUTE_NAMES.CREDENTIALS },
-    { label: 'Публичная оферта', link: ROUTE_NAMES.PUBLIC_OFFER },
-    { label: 'Положение о конфиденциальности', link: ROUTE_NAMES.PRIVACY_POLICY }
+    { label: t('about-flytips'), link: ROUTE_NAMES.ABOUT_US },
+    { label: t('information'), link: ROUTE_NAMES.CREDENTIALS },
+    { label: t('terms-of-use'), link: ROUTE_NAMES.TERMS_OF_USE },
+    { label: t('privacy-policy'), link: ROUTE_NAMES.PRIVACY_POLICY }
   ]
 
   const navSecondColumn = [
-    { label: 'Частые вопросы', link: ROUTE_NAMES.FAQ },
-    { label: 'Служба поддержки', link: ROUTE_NAMES.SUPPORT },
-    { label: 'Войти в кабинет', link: ROUTE_NAMES.AUTH },
-    { label: 'Зарегистрироваться‎', link: ROUTE_NAMES.AUTH }
+    { label: t('faq'), link: ROUTE_NAMES.FAQ },
+    { label: t('support-service'), link: ROUTE_NAMES.SUPPORT },
+    { label: t('logIn'), link: ROUTE_NAMES.AUTH },
+    { label: t('register'), link: ROUTE_NAMES.AUTH }
   ]
 
   const paymentServices = [
@@ -81,12 +83,12 @@ export const Footer = () => {
             <Logo />
 
             <address>
-              Ulica Stupavska 1345/108, <br /> Malacky city 90101
+              178 rue du Faubourg Saint Honoré <br /> 75008 Paris
             </address>
 
-            <S.PhoneLink href="tel:+4903083798689">+49 030 83798689</S.PhoneLink>
+            <S.PhoneLink href="tel:+33754498401">+33754498401</S.PhoneLink>
 
-            <S.EmailLink href="mailto:support@tipsme.com">support@tipsme.com</S.EmailLink>
+            <S.EmailLink href="mailto:support@flytips.com">support@flytips.com</S.EmailLink>
           </S.Contacts>
 
           <S.NavList>{transformNavToList(navFirstColumn)}</S.NavList>
@@ -97,14 +99,14 @@ export const Footer = () => {
               <CommentIcon />
 
               <S.ConsultationRight>
-                <S.Text>Консультация Online</S.Text>
-                <S.Text>Задавайте вопросы</S.Text>
+                <S.Text>{t('online-consultation')}</S.Text>
+                <S.Text>{t('ask-any-question')}</S.Text>
               </S.ConsultationRight>
             </S.Consultation>
 
             <S.SubscriptionForm>
               <FormProvider {...useFormProps}>
-                <EmailField label="Подписка на новости сервиса" />
+                <EmailField label={t('newsletter-subscribe')} />
 
                 <Button type="submit">
                   <Telegram />
@@ -115,10 +117,10 @@ export const Footer = () => {
         </S.Top>
 
         <S.Bottom>
-          <S.Copyright>© 2021 «FlyTips.com»‎</S.Copyright>
+          <S.Copyright>© 2021 «FlyTips.com»</S.Copyright>
 
           <S.PaymentServices>
-            <S.Text>Принимаем к оплате</S.Text> <ul>{paymentServiceList}</ul>
+            <S.Text>{t('we-do-accept')}</S.Text> <ul>{paymentServiceList}</ul>
           </S.PaymentServices>
 
           <S.NetworkList>{networkList}</S.NetworkList>

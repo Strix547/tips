@@ -1,7 +1,7 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { PublicOfferPage } from 'pages'
+import { TermsOfUsePage } from 'pages'
 
-export async function getServerSideProps({ locale }) {
+export async function getStaticProps({ locale }) {
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common']))
@@ -9,4 +9,4 @@ export async function getServerSideProps({ locale }) {
   }
 }
 
-export default PublicOfferPage
+export default TermsOfUsePage

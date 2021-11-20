@@ -126,7 +126,7 @@
   "you-createtor-business": "Vous étes créateur ou gérez une communauté de restaurateurs, d'instituts de beauté ou services à la personne",
   "you-automate-restaurants": "Vous automatisez des restaurants ou tout autre entreprise avec des travailleurs du domaine des services",
   "support-service": "Le support technique",
-  "faq": "Questions les plus fréquentes",
+  "faq-text": "Questions les plus fréquentes",
   "faq-link": "Vous pouvez trouver les réponses aux questions les plus frequemment posées dans la",
   "section-faq": "section FAQ",
 
@@ -192,5 +192,15 @@
   "save": "Sauvegarder",
   "you-physical-person-receive-tips": "Vous êtes un particulièr voulant recevoir des pourboires ou donations?",
   "register": "enregistrez vous",
-  "in-our-service": "ici"
+  "in-our-service": "ici",
+
+  "faq": "FAQ",
+  "about-flytips": "About «Fly.tips»",
+  "information": "Information",
+  "terms-of-use": "Terms of use",
+  "privacy-policy": "Privacy policy",
+  "online-consultation": "Online consultation",
+  "ask-any-question": "Ask us any question",
+  "newsletter-subscribe": "Subscribe for newsletter",
+  "we-do-accept": "We do accept"
 }

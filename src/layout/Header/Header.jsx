@@ -17,7 +17,7 @@ import { authStore, userStore, localStore } from 'store'
 import * as S from './Header.styled'
 
 import FlagRu from '@public/icons/flags/ru.svg'
-import FlagUsa from '@public/icons/flags/usa.svg'
+import FlagUK from '@public/icons/flags/united-kingdom.svg'
 import FlagFrance from '@public/icons/flags/france.svg'
 import MenuHamburger from '@public/icons/menu-hamburger.svg'
 import UserIcon from '@public/icons/user.svg'
@@ -54,7 +54,7 @@ export const Header = observer(({ withSidebar }) => {
 
   const languages = [
     { label: 'RU', value: 'RU', icon: <FlagRu /> },
-    { label: 'EN', value: 'EN', icon: <FlagUsa /> },
+    { label: 'EN', value: 'EN', icon: <FlagUK /> },
     { label: 'FR', value: 'FR', icon: <FlagFrance /> }
   ]
 
@@ -66,24 +66,32 @@ export const Header = observer(({ withSidebar }) => {
     router.push(role === 'ADMIN' ? ROUTE_NAMES.ADMIN_USERS : ROUTE_NAMES.ACCOUNT)
   }
 
-  const navList = nav.map(({ label, link }) => (
-    <S.NavItem key={link} active={currentPathname === link}>
-      <Link href={link} prefetch={false}>
-        <a>{label}</a>
-      </Link>
-    </S.NavItem>
-  ))
+  const changeLanguange = (lang) => {
+    localStore.setLang(lang)
+  }
 
-  const languageList = languages.map(({ label, value, icon }) => (
-    <MenuItem key={value} value={value}>
-      <Link href={router.pathname} locale={value.toLowerCase()} prefetch={false}>
-        <a>
-          {icon}
-          <S.Text>{label}</S.Text>
-        </a>
-      </Link>
-    </MenuItem>
-  ))
+  const navList = nav.map(({ label, link }) => {
+    return (
+      <S.NavItem key={link} active={currentPathname === link}>
+        <Link href={link} prefetch={false}>
+          <a>{label}</a>
+        </Link>
+      </S.NavItem>
+    )
+  })
+
+  const languageList = languages.map(({ label, value, icon }) => {
+    return (
+      <MenuItem key={value} value={value} onClick={() => changeLanguange(value)}>
+        <Link href={router.pathname} prefetch={false}>
+          <a>
+            {icon}
+            <S.Text>{label}</S.Text>
+          </a>
+        </Link>
+      </MenuItem>
+    )
+  })
 
   const user =
     !isPersonalDataLoading && authStore.isAuth ? (

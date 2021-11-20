@@ -27,15 +27,18 @@ export const Left = styled.div`
 `
 
 export const LeftTop = styled.div`
-  display: inline-flex;
-  align-items: center;
+  ${Heading} {
+    display: inline-block;
+
+    span {
+      padding-right: 20px;
+    }
+  }
 
   a {
-    position: relative;
-    display: flex;
-    align-items: center;
-    margin-top: 7px;
-    margin-left: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: var(--font-size-reg);
     font-weight: 500;
     color: var(--color-primary-200);
 
@@ -46,6 +49,19 @@ export const LeftTop = styled.div`
     svg {
       margin-top: 2px;
       margin-left: 14px;
+    }
+  }
+
+  ${media.createMedia(600)} {
+    ${Heading} {
+      span {
+        padding-right: 0;
+      }
+    }
+
+    a {
+      display: block;
+      margin-top: 5px;
     }
   }
 `
@@ -144,45 +160,6 @@ export const RowSection = styled.div`
     margin-bottom: 190px;
   }
 
-  &:nth-of-type(2),
-  &:nth-of-type(3) {
-    ${LeftTop} {
-      position: relative;
-
-      a {
-        position: absolute;
-        margin-top: 0;
-        margin-left: 0;
-      }
-    }
-  }
-
-  &:nth-of-type(2) {
-    ${LeftTop} {
-      ${Heading} {
-        width: 371px;
-      }
-
-      a {
-        top: 60px;
-        left: 123px;
-      }
-    }
-  }
-
-  &:nth-of-type(3) {
-    ${LeftTop} {
-      ${Heading} {
-        width: 417px;
-      }
-
-      a {
-        top: 58px;
-        left: 249px;
-      }
-    }
-  }
-
   ${media1110} {
     flex-direction: column;
     padding: 0 20px;
@@ -190,64 +167,6 @@ export const RowSection = styled.div`
 
     &:not(:last-child) {
       margin-bottom: 95px;
-    }
-
-    &:nth-of-type(2) {
-      ${LeftTop} {
-        ${Heading} {
-          width: 100%;
-        }
-
-        a {
-          position: relative;
-          top: auto;
-          left: auto;
-          margin-top: 7px;
-          margin-left: 20px;
-        }
-      }
-    }
-
-    &:nth-of-type(3) {
-      ${LeftTop} {
-        flex-direction: column;
-        align-items: flex-start;
-
-        ${Heading} {
-          width: 100%;
-        }
-
-        a {
-          position: relative;
-          margin-top: 10px;
-          top: auto;
-          left: auto;
-          bottom: auto;
-          line-height: 22px;
-        }
-      }
-    }
-  }
-
-  ${media.createMedia(730)} {
-    &:nth-of-type(2) {
-      ${LeftTop} {
-        flex-direction: column;
-        align-items: flex-start;
-
-        ${Heading} {
-          width: 100%;
-        }
-
-        a {
-          position: relative;
-          top: auto;
-          left: auto;
-          margin-top: 10px;
-          margin-left: 0;
-          line-height: 22px;
-        }
-      }
     }
   }
 
@@ -262,10 +181,6 @@ export const RowSection = styled.div`
       ${Heading} {
         font-size: var(--font-size-500);
         line-height: 32px;
-      }
-
-      a {
-        margin-top: 3px;
       }
     }
   }

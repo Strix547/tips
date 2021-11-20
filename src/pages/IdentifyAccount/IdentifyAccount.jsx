@@ -56,7 +56,7 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
 
     const fileResult = await fetch('https://uploads.stripe.com/v1/files', {
       method: 'POST',
-      headers: { Authorization: 'Bearer pk_test_w8hT3aAuQgK14ENklixWpHfx00b3mKZ9fG' },
+      headers: { Authorization: `Bearer ${process.env.STRIPE_PUBLISH_KEY}` },
       body: data
     })
 
@@ -72,7 +72,7 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
 
     const fileResult = await fetch('https://uploads.stripe.com/v1/files', {
       method: 'POST',
-      headers: { Authorization: 'Bearer pk_test_w8hT3aAuQgK14ENklixWpHfx00b3mKZ9fG' },
+      headers: { Authorization: `Bearer ${process.env.STRIPE_PUBLISH_KEY}` },
       body: data
     })
 
@@ -129,43 +129,23 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
     if (step === 2) {
       const ibanElement = stripeElements.getElement(IbanElement)
 
-      const { token: accountToken, error: accountError } = await stripe.createToken('account', {
-        business_type: 'individual',
-        individual: {
-          first_name: firstName,
-          last_name: lastName,
-          address: {
-            country: toJS(country).code,
-            city,
-            line1: address,
-            postal_code: postal
-          },
-          dob: {
-            day: birthDate.split('/')[0],
-            month: birthDate.split('/')[1],
-            year: birthDate.split('/')[2]
-          },
-          email,
-          verification: {
-            document: {
-              front: identityDocumentId
-            },
-            additional_document: {
-              front: addressDocumentId
-            }
-          }
-        },
-        tos_shown_and_accepted: true
+      const accountToken = stripeApi.createAccountToken({
+        firstName,
+        lastName,
+        countryCode,
+        city,
+        address,
+        postal,
+        birthDate,
+        email,
+        identityDocumentId,
+        addressDocumentId
       })
-
-      const { token: bankAccountToken, error: bankAccountError } = await stripe.createToken(
+      const { bankAccountToken, bankAccountError } = stripeApi.createBankAccountToken({
         ibanElement,
-        {
-          account_holder_name: `${firstName} ${lastName}`,
-          account_holder_type: 'individual',
-          currency: 'eur'
-        }
-      )
+        firstName,
+        lastName
+      })
 
       if (bankAccountError) {
         setStripeError(error.message)

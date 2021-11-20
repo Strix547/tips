@@ -3,13 +3,7 @@ import { useTranslation } from 'next-i18next'
 
 import { Header, Footer } from 'layout'
 import { PageBanner, Section } from 'landing/components'
-import {
-  ListIconSection,
-  TariffsSection,
-  TrustUsSection,
-  MediaAboutUsSection,
-  ConnectFormSection
-} from 'landing/sections'
+import { ListIconSection, TariffsSection, ConnectFormSection } from 'landing/sections'
 import { LinkButton } from 'ui'
 
 import { ROUTE_NAMES } from 'core/routes'
@@ -34,7 +28,7 @@ export const BusinessPage = () => {
     },
     {
       icon: <DeviceWindowSettingsIcon />,
-      label: t('Интеграция по API'),
+      label: t('integration-with-api'),
       desc: 'Описание возможностей системы по интеграции с внешними сервисами по API и с мобильными приложениями'
     },
     {
@@ -74,8 +68,8 @@ export const BusinessPage = () => {
 
         <ListIconSection title={t('possibillities-integration')} list={integrationTypes} />
         <TariffsSection />
-        <TrustUsSection />
-        <MediaAboutUsSection />
+        {/* <TrustUsSection /> */}
+        {/* <MediaAboutUsSection /> */}
         <ConnectFormSection />
       </main>
 

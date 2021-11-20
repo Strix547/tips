@@ -3,12 +3,7 @@ import { useTranslation } from 'next-i18next'
 
 import { Header, Footer } from 'layout'
 import { PageBanner, Section } from 'landing/components'
-import {
-  TariffsSection,
-  TrustUsSection,
-  MediaAboutUsSection,
-  ConnectFormSection
-} from 'landing/sections'
+import { TariffsSection, ConnectFormSection } from 'landing/sections'
 import { LinkButton } from 'ui'
 
 import { ROUTE_NAMES } from 'core/routes'
@@ -64,8 +59,8 @@ export const PayersPage = () => {
 
         {/* <ListIconSection title="Кто может быть плательщиком" list={payerTypes} /> */}
         <TariffsSection />
-        <TrustUsSection />
-        <MediaAboutUsSection />
+        {/* <TrustUsSection /> */}
+        {/* <MediaAboutUsSection /> */}
         <ConnectFormSection />
       </main>
 

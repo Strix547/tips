@@ -1,6 +1,6 @@
 {
   "recipients": "For tips receivers",
-  "business": "For businesses",
+  "business": "For business",
   "payers": "For payers",
   "agents": "Agents",
   "support": "Support",
@@ -10,7 +10,7 @@
   "get-tax-free-donations-instantly": "Get tax free tips and donations instantly. Anywhere",
 
   "for-who-receive": "For all who receive",
-  "tips-donates": "tips-donates",
+  "tips-donates": "tips & donates",
   "for-business": "For companies",
   "motivate-employees": "Motivate your employees and increase customer's loyalty",
   "free-for-business": "Free for your business",
@@ -23,7 +23,7 @@
   "free-from-taxes": "Free from any taxes",
 
   "for-artists": "For bloggers, artists musicians",
-  "receive-tips-your-website": "Receive   tips and donations on your website, In your vlogs or on your social network accounts",
+  "receive-tips-your-website": "Receive tips and donations on your website, In your vlogs or on your social network accounts",
   "indicate-qr-code": "Indicate your Qr Code anywhere you want and start receiving your tips",
   "transfer-earned-money-bank-card": "Transfer your earned money to the bank account or credit card",
   "easy-intuitive-interface": "Easy and intuitive interface of your personal account in our service",
@@ -36,7 +36,7 @@
   "pay-tips-by-scan-qr": "Pay tips by scanning a QR Code",
   "pay-tips-2-click": "Don’t have any cash on you? Pay tips by card! 2 clicks only!",
 
-  "how-service-works": "How does our service work?",
+  "how-service-works": "How does our our tipping service work with QR Code?",
   "create-account-minute": "Create your account in 1 minute",
   "get-your-qr": "Get your QR Code",
   "let-qr-scanned": "Let you QR Code to be scanned",
@@ -98,7 +98,7 @@
   "electronic-tips": "Electronic tips instantly",
   "free-from-any-taxes": "Free from any taxes",
   "start-accepting-tips-from-clients": "Start accepting tips from clients who pay them by card",
-  "recipients-text": "Register in our service and receive a personal QR code. Provide this QR code to your customers to tip or donate you! All the client needs is to point the camera of his smartphone at your code and make 2 clicks in the window that opens, leaving you with the desired amount with the card. Tipping has never been easier!",
+  "recipients-text": "Register in our service and receive a personal QR code. Provide this QR code to your customers to tip or donate you! All the client needs is to point the camera of his smartphone at your code and make 2 clicks in the window that will open. Tipping has never been easier!",
 
   "tips-by-card-easy-for-client": "Tips by card - easy for your client and profitable for your employees",
   "connect-company-free": "Connect your company for free",
@@ -125,7 +125,7 @@
   "you-createtor-business": "You are the creator of an aggregator of restaurants, beauty salons, deliveries",
   "you-automate-restaurants": "You automate restaurants or any other business with service workers",
   "support-service": "Support",
-  "faq": "Most frequently asked question",
+  "faq-text": "Most frequently asked question",
   "faq-link": "You can read the most frequently asked questions in the FAQ section",
   "section-faq": "section FAQ",
 
@@ -192,5 +192,15 @@
   "save": "Save",
   "you-physical-person-receive-tips": "You are a physical person and want to receive tips & donations? Please",
   "register": "register",
-  "in-our-service": "in our service"
+  "in-our-service": "in our service",
+
+  "faq": "FAQ",
+  "about-flytips": "About «Fly.tips»",
+  "information": "Information",
+  "terms-of-use": "Terms of use",
+  "privacy-policy": "Privacy policy",
+  "online-consultation": "Online consultation",
+  "ask-any-question": "Ask us any question",
+  "newsletter-subscribe": "Subscribe for newsletter",
+  "we-do-accept": "We do accept"
 }

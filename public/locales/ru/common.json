@@ -125,7 +125,7 @@
   "you-createtor-business": "Вы создатель агрегатора ресторанов, салонов красоты, доставок",
   "you-automate-restaurants": "Автоматизируете рестораны",
   "support-service": "Служба поддержки",
-  "faq": "Часто задаваемые вопросы",
+  "faq-text": "Часто задаваемые вопросы",
   "faq-link": "Прочитать самые частые вопросы вы можете в",
   "section-faq": "разделе FAQ",
 
@@ -190,5 +190,15 @@
   "save": "Сохранить",
   "you-physical-person-receive-tips": "Если вы физ. лицо - получатель чаевых",
   "register": "зарегистрируйтесь",
-  "in-our-service": "в сервисе"
+  "in-our-service": "в сервисе",
+
+  "faq": "FAQ",
+  "about-flytips": "О «Fly.tips»",
+  "information": "Реквизиты и информация",
+  "terms-of-use": "Публичная оферта",
+  "privacy-policy": "Положение о конфиденциальности",
+  "online-consultation": "Консультация Online",
+  "ask-any-question": "Задавайте вопросы",
+  "newsletter-subscribe": "Подписка на новости сервиса",
+  "we-do-accept": "Принимаем к оплате"
 }

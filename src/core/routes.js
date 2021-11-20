@@ -8,7 +8,7 @@ export const ROUTE_NAMES = {
   ABOUT_US: '/about-us',
   CREDENTIALS: '/credentials',
   PRIVACY_POLICY: '/privacy-policy',
-  PUBLIC_OFFER: '/public-offer',
+  TERMS_OF_USE: '/terms-of-use',
   FAQ: '/faq',
 
   ACCOUNT: '/account',
@@ -61,7 +61,7 @@ export const ROUTES = [
   { path: ROUTE_NAMES.ABOUT_US },
   { path: ROUTE_NAMES.CREDENTIALS },
   { path: ROUTE_NAMES.PRIVACY_POLICY },
-  { path: ROUTE_NAMES.PUBLIC_OFFER },
+  { path: ROUTE_NAMES.TERMS_OF_USE },
   { path: ROUTE_NAMES.FAQ },
   { path: ROUTE_NAMES.AUTH },
   { path: ROUTE_NAMES.QR_CODE },
