@@ -42,8 +42,8 @@ const transformPlatform = ({
     type: platformType,
     active,
     employeeCount,
-    tipsAmountMonth: monthIncome,
-    tipsAmountYear: yearIncome
+    tipsAmountMonth: monthIncome / 100,
+    tipsAmountYear: yearIncome / 100
   }
 }
 

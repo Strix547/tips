@@ -16,7 +16,7 @@ const transformStatistics = ({
     qrName,
     paymentPageId,
     dateTime: new Date(localDateTime),
-    tipAmount: sum,
+    tipAmount: sum / 100,
     impression: smile,
     type
   }
@@ -26,7 +26,7 @@ const getStatistics = async (
   url,
   { format, zoneOffset, period, periodFrom, periodTo },
   transformer,
-  diagramTransformer = ({ localDate, sum }) => ({ date: new Date(localDate), tipAmount: sum })
+  diagramTransformer = ({ localDate, sum }) => ({ date: new Date(localDate), tipAmount: sum / 100 })
 ) => {
   const isXlsxFormat = format === 'XLSX'
 
@@ -120,7 +120,7 @@ export const getBusinessAccountIncomeStatistics = async ({
       id: paymentId,
       platformId,
       dateTime: new Date(localDateTime),
-      tipAmount: income,
+      tipAmount: income / 100,
       commission,
       firstName,
       lastName,
@@ -146,7 +146,7 @@ export const getEmployeeIncomeStatistics = async ({
       id: paymentId,
       platformId,
       dateTime: new Date(localDateTime),
-      tipAmount: income,
+      tipAmount: income / 100,
       commission,
       platformName: title,
       rating
@@ -168,7 +168,7 @@ export const getPlatformIncomeStatistics = async ({
     ({ paymentId, localDateTime, income, firstName, lastName, commission, rating }) => ({
       id: paymentId,
       dateTime: new Date(localDateTime),
-      tipAmount: income,
+      tipAmount: income / 100,
       commission,
       firstName,
       lastName,
@@ -192,8 +192,8 @@ export const getAgentIncomeStatistics = async ({
       id: paymentId,
       paymentPageId,
       dateTime: new Date(localDateTime),
-      tipAmount: income,
-      agentIncome,
+      tipAmount: income / 100,
+      agentIncome: agentIncome / 100,
       firstName,
       lastName
     })
@@ -214,15 +214,15 @@ export const getUserPaymentIncomeStatistics = async ({
     ({ paymentId, dateTime, countryName, currency, sum, feeSum, last4Digits }) => ({
       id: paymentId,
       dateTime: new Date(dateTime),
-      tipAmount: sum,
-      commission: feeSum,
+      tipAmount: sum / 100,
+      commission: feeSum / 100,
       country: countryName,
       currency,
       last4Digits
     }),
     ({ day, sum }) => ({
       date: new Date(day),
-      tipAmount: sum
+      tipAmount: sum / 100
     })
   )
 }
@@ -254,14 +254,14 @@ export const getUserAgentIncomeStatistics = async ({
       country: countryName,
       currecny,
       initUserName,
-      agentIncome: agentSum,
-      payment: fullSum,
-      commission: feeSum,
+      agentIncome: agentSum / 100,
+      payment: fullSum / 100,
+      commission: feeSum / 100,
       last4Digits
     }),
     ({ day, sum }) => ({
       date: new Date(day),
-      tipAmount: sum
+      tipAmount: sum / 100
     })
   )
 }
@@ -281,12 +281,12 @@ export const getUserPaymentsStatistics = async ({
       id: paymentId,
       dateTime: new Date(dateTime),
       currency,
-      tipAmount: sum,
+      tipAmount: sum / 100,
       phone
     }),
     ({ day, sum }) => ({
       date: new Date(day),
-      tipAmount: sum
+      tipAmount: sum / 100
     })
   )
 }
@@ -305,8 +305,8 @@ export const getPaymentsOutgoingStatistics = async ({
       id: paymentId,
       dateTime: new Date(localDateTime),
       country: countryName,
-      tipAmount: income,
-      commission: feeIncome
+      tipAmount: income / 100,
+      commission: feeIncome / 100
     }),
     ({ day, sum }) => ({
       date: new Date(day),
@@ -328,13 +328,13 @@ export const getPaymentsIncomingStatistics = async ({
     ({ paymentId, localDateTime, income, phone, last4Digits }) => ({
       id: paymentId,
       dateTime: new Date(localDateTime),
-      tipAmount: income,
+      tipAmount: income / 100,
       phone,
       last4Digits
     }),
     ({ day, sum }) => ({
       date: new Date(day),
-      tipAmount: sum
+      tipAmount: sum / 100
     })
   )
 }

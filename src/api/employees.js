@@ -20,7 +20,7 @@ const transformEmployee = ({
     phone,
     platformName: title,
     available: active,
-    tips: income
+    tips: income / 100
   }
 }
 
