@@ -2,12 +2,15 @@ import Link from 'next/link'
 
 import * as S from './Logo.styled'
 
+import LogoSvg from '@public/icons/logo.svg'
+
 export const Logo = () => (
   <Link href="/" passHref prefetch={false}>
     <S.Link>
-      <span>Fly</span>
+      <LogoSvg />
+      {/* <span>Fly</span>
       <S.Circle />
-      <span>Tips</span>
+      <span>Tips</span> */}
     </S.Link>
   </Link>
 )

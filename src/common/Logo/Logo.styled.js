@@ -10,6 +10,11 @@ export const Link = styled.a`
   span:last-child {
     margin-left: 12px;
   }
+
+  svg {
+    width: 112px;
+    height: 33px;
+  }
 `
 
 export const Circle = styled.span`
