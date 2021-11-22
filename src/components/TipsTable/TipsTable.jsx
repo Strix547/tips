@@ -25,7 +25,7 @@ export const TipsTable = observer(
     const { t } = useTranslation('common')
     const dataJS = toJS(data)
     const notEmpty = rows.length !== 0
-    const currencyLabel = userStore.personalData.currency.label
+    const currencyLabel = userStore.personalData.currency.symbol
 
     const tipsTotal = dataJS
       .map(({ tipAmount }) => tipAmount)

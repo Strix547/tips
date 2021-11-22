@@ -18,7 +18,7 @@ export const PaymentsIncomingStatisticsPage = observer(() => {
   const { watch } = useFormProps
 
   const { incomeStatistics, isIncomeStatisticsLoading } = statisticsStore
-  const currencyLabel = userStore.personalData.currency.label
+  const currencyLabel = userStore.personalData.currency.symbol
   const { period, periodFrom, periodTo } = watch()
 
   useEffect(() => {

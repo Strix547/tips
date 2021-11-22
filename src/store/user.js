@@ -57,7 +57,7 @@ export const userStore = makeAutoObservable({
     userStore.personalData = {
       ...personalData,
       currency: {
-        label: getCurrencySymbol(personalData.currency),
+        symbol: getCurrencySymbol(personalData.currency),
         value: personalData.currency
       }
     }

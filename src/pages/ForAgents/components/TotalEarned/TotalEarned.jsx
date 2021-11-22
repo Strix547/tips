@@ -9,7 +9,7 @@ import * as S from './TotalEarned.styled'
 export const TotalEarned = observer(({ amount }) => {
   const { t } = useTranslation('common')
 
-  const currency = userStore.personalData.currency.label
+  const currency = userStore.personalData.currency.symbol
 
   return (
     <S.TotalEarned>

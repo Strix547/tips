@@ -8,7 +8,7 @@ import { transformDateTimeToLabel, getPriceLabel } from 'utils'
 import * as S from './AgentsTable.styled'
 
 export const AgentsTable = observer(({ statistics = [], isStatisticsLoading }) => {
-  const currencyLabel = userStore.personalData.currency.label
+  const currencyLabel = userStore.personalData.currency.symbol
 
   const columns = [
     {
@@ -58,7 +58,7 @@ export const AgentsTable = observer(({ statistics = [], isStatisticsLoading }) =
         {statistics.length !== 0 || isStatisticsLoading ? (
           <StatisticRow
             stats={[{ label: 'Итого заработано', value: 0 }]}
-            currency={userStore.personalData.currency.label}
+            currency={userStore.personalData.currency.symbol}
           />
         ) : null}
       </S.TableContainer>

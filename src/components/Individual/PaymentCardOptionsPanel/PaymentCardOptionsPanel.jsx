@@ -10,7 +10,7 @@ import * as S from './PaymentCardOptionsPanel.styled'
 export const PaymentCardOptionsPanelIndividual = observer(({ action }) => {
   const { control } = useFormContext()
 
-  const currency = userStore.personalData.currency.label
+  const currency = userStore.personalData.currency.symbol
 
   const tipAmountPresetFileds = ['preset1', 'preset2', 'preset3'].map((name) => (
     <Controller

@@ -24,7 +24,7 @@ export const PlatformCard = observer(
     })
     const { watch } = useFormProps
 
-    const currency = userStore.personalData.currency.label
+    const currency = userStore.personalData.currency.symbol
     const available = watch('available')
 
     const toPlatformStatisticsPage = (id) => {

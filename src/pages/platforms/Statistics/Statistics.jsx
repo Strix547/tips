@@ -23,7 +23,7 @@ export const PlatformStatisticsPage = observer(() => {
   const platformId = router.query.id
   const userId = userStore.id
   const { incomeStatistics, isIncomeStatisticsLoading } = statisticsStore
-  const currencyLabel = userStore.personalData.currency.label
+  const currencyLabel = userStore.personalData.currency.symbol
 
   const { period, periodFrom, periodTo } = watch()
 

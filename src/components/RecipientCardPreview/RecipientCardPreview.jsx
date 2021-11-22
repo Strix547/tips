@@ -24,7 +24,7 @@ export const RecipientCardPreview = observer(
     company
   }) => {
     const avatarPreview = userStore.personalData.avatar || avatar
-    const currencySymbol = userStore.personalData.currency
+    const currencySymbol = userStore.personalData.currency.symbol
 
     const bgColorText = bgColor && getTextColorBgBased(convertHexToRgb(bgColor))
     const btnColorText = btnColor && getTextColorBgBased(convertHexToRgb(btnColor))
