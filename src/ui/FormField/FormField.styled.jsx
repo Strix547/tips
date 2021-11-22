@@ -59,6 +59,16 @@ export const FormField = styled((props) => (
       font-size: var(--font-size-md);
       color: var(--color-black-100);
 
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      &[type='number'] {
+        -moz-appearance: textfield;
+      }
+
       &::placeholder {
         opacity: 1;
         color: var(--color-gray-300);

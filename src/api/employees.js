@@ -1,6 +1,6 @@
 import { API } from 'core/axios'
 
-import { handleResponse } from 'utils'
+import { handleResponse, convertCents } from 'utils'
 
 const transformEmployee = ({
   firstName,
@@ -20,7 +20,7 @@ const transformEmployee = ({
     phone,
     platformName: title,
     available: active,
-    tips: income / 100
+    tips: convertCents(income)
   }
 }
 

@@ -3,14 +3,14 @@ import { observer } from 'mobx-react-lite'
 
 import { Switch, Button, FormField } from 'ui'
 
-import { localStore } from 'store'
+import { userStore } from 'store'
 
 import * as S from './PaymentCardOptionsPanel.styled'
 
 export const PaymentCardOptionsPanelIndividual = observer(({ action }) => {
   const { control } = useFormContext()
 
-  const currency = localStore.currency.label
+  const currency = userStore.personalData.currency.label
 
   const tipAmountPresetFileds = ['preset1', 'preset2', 'preset3'].map((name) => (
     <Controller

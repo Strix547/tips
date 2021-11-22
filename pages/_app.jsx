@@ -36,7 +36,7 @@ const App = ({ Component, pageProps }) => {
     }
   })
 
-  const { role } = userStore
+  const { role, isIdLoading } = userStore
   const { lang } = localStore
 
   const currentPathname = router.pathname
@@ -122,6 +122,8 @@ const App = ({ Component, pageProps }) => {
     const lang = await localStore.getLanguage()
     router.replace(currentPathname, currentPathname, { locale: lang.toLowerCase() })
   }, [lang, currentPathname])
+
+  if (isIdLoading) return null
 
   return (
     <>

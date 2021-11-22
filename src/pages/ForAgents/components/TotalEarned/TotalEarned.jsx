@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'next-i18next'
 
-import { localStore } from 'store'
+import { localStore, userStore } from 'store'
 import { getPriceLabel } from 'utils'
 
 import * as S from './TotalEarned.styled'
@@ -9,7 +9,7 @@ import * as S from './TotalEarned.styled'
 export const TotalEarned = observer(({ amount }) => {
   const { t } = useTranslation('common')
 
-  const currency = localStore.currency.label
+  const currency = userStore.personalData.currency.label
 
   return (
     <S.TotalEarned>

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 
 import { Switch } from 'ui'
 
-import { localStore, platformsStore } from 'store'
+import { platformsStore, userStore } from 'store'
 import { getPriceLabel } from 'utils'
 import { ROUTE_NAMES } from 'core/routes'
 
@@ -24,7 +24,7 @@ export const PlatformCard = observer(
     })
     const { watch } = useFormProps
 
-    const currency = localStore.currency.label
+    const currency = userStore.personalData.currency.label
     const available = watch('available')
 
     const toPlatformStatisticsPage = (id) => {

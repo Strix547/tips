@@ -8,8 +8,13 @@ import { AccountLayout } from 'layout'
 import { BarChart, TipsTable, TableRowCard } from 'components'
 import { Tabs, Tab } from 'ui'
 
-import { userStore, statisticsStore } from 'store'
-import { getTimeZoneOffset, transformDateTimeToLabel, getPriceLabel } from 'utils'
+import { statisticsStore } from 'store'
+import {
+  getTimeZoneOffset,
+  transformDateTimeToLabel,
+  getPriceLabel,
+  getCurrencySymbol
+} from 'utils'
 
 import * as S from './UserStatistics.styled'
 
@@ -25,7 +30,6 @@ export const UserStatisticsPage = observer(() => {
   const [tab, setTab] = useState('income')
   const userId = router.query.id
   const { incomeStatistics, isIncomeStatisticsLoading } = statisticsStore
-  const currencyLabel = userStore.personalData.currency.label
 
   const { period, periodFrom, periodTo } = watch()
 
@@ -89,8 +93,8 @@ export const UserStatisticsPage = observer(() => {
         id,
         dateTime: transformDateTimeToLabel(dateTime),
         country,
-        tipAmount: getPriceLabel(tipAmount, currencyLabel),
-        commission: getPriceLabel(commission, currencyLabel),
+        tipAmount: getPriceLabel(tipAmount, getCurrencySymbol(currency)),
+        commission: getPriceLabel(commission, getCurrencySymbol(currency)),
         last4Digits: last4Digits && `* ${last4Digits}`
       })
     )
@@ -98,7 +102,7 @@ export const UserStatisticsPage = observer(() => {
     const tableCards = statistics?.map(
       ({ id, dateTime, tipAmount, commission, country, currency, last4Digits }) => {
         const rows = [
-          { label: 'Комиссия', value: getPriceLabel(commission, currencyLabel) },
+          { label: 'Комиссия', value: getPriceLabel(commission, getCurrencySymbol(currency)) },
           { label: 'Страна', value: country },
           { label: 'Счёт', value: last4Digits && `* ${last4Digits}` }
         ]
@@ -108,7 +112,7 @@ export const UserStatisticsPage = observer(() => {
             key={id}
             top={{
               left: transformDateTimeToLabel(dateTime),
-              right: getPriceLabel(tipAmount, currencyLabel)
+              right: getPriceLabel(tipAmount, getCurrencySymbol(currency))
             }}
             rows={rows}
           />
@@ -163,9 +167,9 @@ export const UserStatisticsPage = observer(() => {
         id,
         dateTime: transformDateTimeToLabel(dateTime),
         country,
-        payment: getPriceLabel(payment, currencyLabel),
-        agentIncome: getPriceLabel(agentIncome, currencyLabel),
-        commission: getPriceLabel(commission, currencyLabel),
+        payment: getPriceLabel(payment, getCurrencySymbol(currency)),
+        agentIncome: getPriceLabel(agentIncome, getCurrencySymbol(currency)),
+        commission: getPriceLabel(commission, getCurrencySymbol(currency)),
         last4Digits: last4Digits && `* ${last4Digits}`
       })
     )
@@ -174,8 +178,8 @@ export const UserStatisticsPage = observer(() => {
       ({ id, dateTime, payment, agentIncome, commission, country, currency, last4Digits }) => {
         const rows = [
           { label: 'Страна', value: country },
-          { label: 'Сумма агента', value: getPriceLabel(agentIncome, currencyLabel) },
-          { label: 'Комиссия', value: getPriceLabel(commission, currencyLabel) },
+          { label: 'Сумма агента', value: getPriceLabel(agentIncome, getCurrencySymbol(currency)) },
+          { label: 'Комиссия', value: getPriceLabel(commission, getCurrencySymbol(currency)) },
           { label: 'Счёт', value: last4Digits && `* ${last4Digits}` }
         ]
 
@@ -184,7 +188,7 @@ export const UserStatisticsPage = observer(() => {
             key={id}
             top={{
               left: transformDateTimeToLabel(dateTime),
-              right: getPriceLabel(payment, currencyLabel)
+              right: getPriceLabel(payment, getCurrencySymbol(currency))
             }}
             rows={rows}
           />
@@ -217,7 +221,7 @@ export const UserStatisticsPage = observer(() => {
     const rows = statistics?.map(({ paymentId, dateTime, currency, tipAmount, phone }) => ({
       id: paymentId,
       dateTime: transformDateTimeToLabel(dateTime),
-      tipAmount: getPriceLabel(tipAmount, currencyLabel),
+      tipAmount: getPriceLabel(tipAmount, getCurrencySymbol(currency)),
       phone
     }))
 
@@ -229,7 +233,7 @@ export const UserStatisticsPage = observer(() => {
           key={id}
           top={{
             left: transformDateTimeToLabel(dateTime),
-            right: getPriceLabel(tipAmount, currencyLabel)
+            right: getPriceLabel(tipAmount, getCurrencySymbol(currency))
           }}
           rows={rows}
         />

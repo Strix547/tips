@@ -1,7 +1,7 @@
 import { API } from 'core/axios'
 
 import { PLATFORM_TYPES } from 'core/constants'
-import { handleResponse } from 'utils'
+import { handleResponse, convertCents } from 'utils'
 
 const root = '/business-platform'
 
@@ -42,8 +42,8 @@ const transformPlatform = ({
     type: platformType,
     active,
     employeeCount,
-    tipsAmountMonth: monthIncome / 100,
-    tipsAmountYear: yearIncome / 100
+    tipsAmountMonth: convertCents(monthIncome),
+    tipsAmountYear: convertCents(yearIncome)
   }
 }
 

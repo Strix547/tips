@@ -7,8 +7,13 @@ import Head from 'next/head'
 import { AccountLayout } from 'layout'
 import { BarChart, TipsTable, TableRowCard } from 'components'
 
-import { userStore, statisticsStore } from 'store'
-import { getTimeZoneOffset, transformDateTimeToLabel, getPriceLabel } from 'utils'
+import { statisticsStore } from 'store'
+import {
+  getTimeZoneOffset,
+  transformDateTimeToLabel,
+  getPriceLabel,
+  getCurrencySymbol
+} from 'utils'
 
 export const QrStatisticsPage = observer(() => {
   const router = useRouter()
@@ -21,7 +26,6 @@ export const QrStatisticsPage = observer(() => {
 
   const qrId = router?.query?.id
   const { incomeStatistics, isIncomeStatisticsLoading } = statisticsStore
-  const currencyLabel = userStore.personalData.currency.label
   const { period, periodFrom, periodTo } = watch()
 
   useEffect(() => {
@@ -60,16 +64,18 @@ export const QrStatisticsPage = observer(() => {
     }
   ]
 
-  const rows = incomeStatistics.table.map(({ id, dateTime, qrName, tipAmount, impression }) => ({
-    id,
-    dateTime: transformDateTimeToLabel(dateTime),
-    qrName,
-    tipAmount: getPriceLabel(tipAmount, currencyLabel),
-    impression
-  }))
+  const rows = incomeStatistics.table.map(
+    ({ id, dateTime, qrName, tipAmount, impression, currency }) => ({
+      id,
+      dateTime: transformDateTimeToLabel(dateTime),
+      qrName,
+      tipAmount: getPriceLabel(tipAmount, getCurrencySymbol(currency)),
+      impression
+    })
+  )
 
   const tableCards = incomeStatistics.table.map(
-    ({ qrId, qrName, dateTime, tipAmount, impression }) => {
+    ({ qrId, qrName, dateTime, tipAmount, impression, currency }) => {
       const rows = [
         { label: 'Имя QR-кода', value: qrName },
         { label: 'Впечатление', value: impression }
@@ -80,7 +86,7 @@ export const QrStatisticsPage = observer(() => {
           key={qrId}
           top={{
             left: transformDateTimeToLabel(dateTime),
-            right: getPriceLabel(tipAmount, currencyLabel)
+            right: getPriceLabel(tipAmount, getCurrencySymbol(currency))
           }}
           rows={rows}
         />

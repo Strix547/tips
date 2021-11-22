@@ -15,7 +15,8 @@ const transformIndividualPaymentData = ({
   reviews,
   rating,
   backgroundHexColor,
-  buttonHexColor
+  buttonHexColor,
+  currency
 }) => {
   return {
     type,
@@ -30,7 +31,8 @@ const transformIndividualPaymentData = ({
     comment: reviews,
     rating,
     bgColor: backgroundHexColor,
-    btnColor: buttonHexColor
+    btnColor: buttonHexColor,
+    currency
   }
 }
 

@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { Drawer } from 'ui'
 
 import { Wrapper, Text } from 'styled'
 import { Button } from 'ui/Button/Button.styled'
@@ -109,24 +110,10 @@ export const Nav = styled.nav`
     `}
 `
 
-export const Right = styled.div`
-  display: flex;
-  align-items: center;
-
-  ${Button} {
-    height: 48px;
-    margin-left: 20px;
-    padding: 0 40px;
-
-    ${media.mobile} {
-      margin-left: 15px;
-      padding: 0 30px;
-    }
-  }
+export const LanguageSelect = styled.div`
+  width: 80px;
 
   ${Select} {
-    width: 80px;
-
     .icon {
       right: 0;
     }
@@ -141,9 +128,7 @@ export const Right = styled.div`
         align-items: center;
 
         svg {
-          width: 20px;
-          border-radius: 50%;
-          border: 1px solid var(--color-gray-200);
+          width: 25px;
         }
       }
     }
@@ -162,9 +147,7 @@ export const Right = styled.div`
         align-items: center;
 
         svg {
-          width: 20px;
-          border-radius: 50%;
-          border: 1px solid var(--color-gray-200);
+          width: 25px;
         }
       }
     }
@@ -176,9 +159,27 @@ export const Right = styled.div`
       color: #787576;
     }
   }
+`
 
-  ${media.laptop} {
-    margin-left: 0;
+export const Right = styled.div`
+  display: flex;
+  align-items: center;
+
+  ${Button} {
+    height: 48px;
+    margin-left: 20px;
+    padding: 0 40px;
+
+    ${media.mobile} {
+      margin-left: 15px;
+      padding: 0 30px;
+    }
+  }
+
+  ${media.createMedia(1100)} {
+    ${LanguageSelect} {
+      display: none;
+    }
   }
 `
 
@@ -257,10 +258,8 @@ export const UserInfo = styled.div`
 
 export const NavDropdown = styled.nav`
   width: 100vw;
-  height: 320px;
-  padding: 100px 20px 30px;
+  padding: 100px 20px 0 20px;
   background: #fff;
-  box-shadow: 0px 5px 20px rgba(46, 51, 68, 0.05);
   transition: 1s;
   box-sizing: border-box;
   z-index: 110;
@@ -326,4 +325,29 @@ export const UserAvatarImg = styled.div`
   border-radius: 10px;
   height: 100%;
   overflow: hidden;
+`
+
+export const DropdownDivider = styled.div`
+  width: calc(100% - 40px);
+  height: 1px;
+  margin: 20px;
+  background: var(--color-gray-200);
+`
+
+export const DropdownTop = styled(Drawer)`
+  .MuiDrawer-paper {
+    padding-bottom: 30px;
+    background: #fff;
+    opacity: 1;
+  }
+
+  ${LanguageSelect} {
+    height: 19px;
+    margin-left: 20px;
+
+    ${Select} {
+      height: 19px;
+      overflow: hidden;
+    }
+  }
 `

@@ -93,6 +93,14 @@ export const Header = observer(({ withSidebar }) => {
     )
   })
 
+  const langSelect = (
+    <FormProvider {...useFormProps}>
+      <S.LanguageSelect>
+        <Select name="lang">{languageList}</Select>
+      </S.LanguageSelect>
+    </FormProvider>
+  )
+
   const user =
     !isPersonalDataLoading && authStore.isAuth ? (
       <S.User onClick={toAccountPage}>
@@ -136,9 +144,7 @@ export const Header = observer(({ withSidebar }) => {
           </S.Nav>
 
           <S.Right>
-            <FormProvider {...useFormProps}>
-              <Select name="lang">{languageList}</Select>
-            </FormProvider>
+            {langSelect}
 
             {authStore.isAuth ? (
               user
@@ -156,11 +162,20 @@ export const Header = observer(({ withSidebar }) => {
           <Sidebar />
         </Drawer>
       ) : (
-        <Drawer anchor="top" open={isMenuOpen} elevation={70} onClose={() => toggleMenuOpen()}>
+        <S.DropdownTop
+          anchor="top"
+          open={isMenuOpen}
+          elevation={70}
+          onClose={() => toggleMenuOpen()}
+        >
           <S.NavDropdown>
             <ul>{navList}</ul>
           </S.NavDropdown>
-        </Drawer>
+
+          <S.DropdownDivider />
+
+          {langSelect}
+        </S.DropdownTop>
       )}
     </S.Header>
   )

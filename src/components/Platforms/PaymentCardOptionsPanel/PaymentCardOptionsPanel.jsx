@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 import { Switch, Button, ColorPickerField, Dropzone } from 'ui'
 
-import { localStore } from 'store'
+import { userStore } from 'store'
 
 import * as S from './PaymentCardOptionsPanel.styled'
 
@@ -15,7 +15,7 @@ export const PlatformPaymentCardOptionsPanel = observer(
   ({ action, btnDefaultColor, bgDefaultColor, companyLogo, onLogoChange }) => {
     const { control } = useFormContext()
 
-    const currency = localStore.currency.label
+    const currency = userStore.personalData.currency.label
 
     const tipAmountPresetFileds = ['preset1', 'preset2', 'preset3'].map((name) => (
       <Controller

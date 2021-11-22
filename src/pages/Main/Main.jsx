@@ -11,7 +11,12 @@ import { RatingCell } from 'common'
 
 import { userStore, statisticsStore } from 'store'
 import { ROUTE_NAMES } from 'core/routes'
-import { getTimeZoneOffset, transformDateTimeToLabel, getPriceLabel } from 'utils'
+import {
+  getTimeZoneOffset,
+  transformDateTimeToLabel,
+  getPriceLabel,
+  getCurrencySymbol
+} from 'utils'
 
 export const UserMainPage = observer(() => {
   const { t } = useTranslation('common')
@@ -23,7 +28,6 @@ export const UserMainPage = observer(() => {
   })
   const { watch } = useFormProps
 
-  const currencyLabel = userStore.personalData.currency.label
   const { id: userId, role } = userStore
   const { incomeStatistics, isIncomeStatisticsLoading } = statisticsStore
   const { period, periodFrom, periodTo } = watch()
@@ -101,32 +105,42 @@ export const UserMainPage = observer(() => {
       ]
 
   const individualRows = incomeStatistics.table.map(
-    ({ id, dateTime, qrName, tipAmount, impression }) => ({
+    ({ id, dateTime, qrName, tipAmount, impression, currency }) => ({
       id,
       dateTime: transformDateTimeToLabel(dateTime),
       qrName,
-      tipAmount: getPriceLabel(tipAmount, currencyLabel),
+      tipAmount: getPriceLabel(tipAmount, getCurrencySymbol(currency)),
       impression
     })
   )
 
   const platformRows = incomeStatistics.table.map(
-    ({ id, dateTime, platformName, firstName, lastName, tipAmount, commission, rating }) => ({
+    ({
+      id,
+      dateTime,
+      platformName,
+      firstName,
+      lastName,
+      tipAmount,
+      commission,
+      rating,
+      currency
+    }) => ({
       id,
       dateTime: transformDateTimeToLabel(dateTime),
       platformName,
       fullName: `${lastName} ${firstName}`,
-      tipAmount: getPriceLabel(tipAmount, currencyLabel),
-      commission: getPriceLabel(commission, currencyLabel),
+      tipAmount: getPriceLabel(tipAmount, getCurrencySymbol(currency)),
+      commission: getPriceLabel(commission, getCurrencySymbol(currency)),
       rating
     })
   )
 
   const individualTableCards = incomeStatistics.table.map(
-    ({ qrId, qrName, dateTime, tipAmount, impression }) => {
+    ({ qrId, qrName, dateTime, tipAmount, impression, currency }) => {
       const rows = [
         { label: t('name-qr-code'), value: qrName },
-        { label: t('tip-size'), value: getPriceLabel(tipAmount, currencyLabel) },
+        { label: t('tip-size'), value: getPriceLabel(tipAmount, getCurrencySymbol(currency)) },
         { label: 'Впечатление', value: impression }
       ]
 
@@ -135,7 +149,7 @@ export const UserMainPage = observer(() => {
           key={qrId}
           top={{
             left: transformDateTimeToLabel(dateTime),
-            right: getPriceLabel(tipAmount, currencyLabel)
+            right: getPriceLabel(tipAmount, getCurrencySymbol(currency))
           }}
           rows={rows}
         />
@@ -144,12 +158,22 @@ export const UserMainPage = observer(() => {
   )
 
   const platformTableCards = incomeStatistics.table.map(
-    ({ id, platformName, dateTime, firstName, lastName, tipAmount, commission, rating }) => {
+    ({
+      id,
+      platformName,
+      dateTime,
+      firstName,
+      lastName,
+      tipAmount,
+      commission,
+      rating,
+      currency
+    }) => {
       const rows = [
         { label: 'Площадка', value: platformName },
         { label: 'Пользователь', value: `${lastName} ${firstName}` },
-        { label: t('tip-size'), value: getPriceLabel(tipAmount, currencyLabel) },
-        { label: 'Комссия', value: getPriceLabel(commission, currencyLabel) },
+        { label: t('tip-size'), value: getPriceLabel(tipAmount, getCurrencySymbol(currency)) },
+        { label: 'Комссия', value: getPriceLabel(commission, getCurrencySymbol(currency)) },
         { label: 'Рейтинг', value: <RatingCell rating={rating} /> }
       ]
 
@@ -158,7 +182,7 @@ export const UserMainPage = observer(() => {
           key={id}
           top={{
             left: transformDateTimeToLabel(dateTime),
-            right: getPriceLabel(tipAmount, currencyLabel)
+            right: getPriceLabel(tipAmount, getCurrencySymbol(currency))
           }}
           rows={rows}
         />

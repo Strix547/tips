@@ -20,9 +20,14 @@ export const Autocomplete = styled.div`
     }
   }
 
-  [aria-expanded='false'] ${FormField} .form-field-input-root {
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
+  [aria-expanded='false'] {
+    ${FormField} .form-field-input-root {
+      border-radius: 8px;
+    }
+
+    .autocomplete-end-adornment button svg {
+      margin-top: 3px;
+    }
   }
 
   .autocomplete-no-options {
@@ -54,10 +59,6 @@ export const Autocomplete = styled.div`
       &:hover {
         background: transparent;
       }
-    }
-
-    svg {
-      margin-top: 3px;
     }
   }
 

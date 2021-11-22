@@ -10,7 +10,7 @@ import * as S from './PaymentCard.styled'
 
 import avatar from '@public/img/placeholders/avatar.png'
 
-export const IndividualPaymentCard = observer(() => {
+export const IndividualPaymentCard = observer(({ currency }) => {
   const { firstName, lastName, amountPresets, impression } = paymentStore.paymentData
 
   const avatarPreview = paymentStore.paymentData.avatar || avatar
@@ -22,7 +22,7 @@ export const IndividualPaymentCard = observer(() => {
       </S.RecipientCardTop>
 
       <S.RecipientCardMain>
-        <TipAmount presets={amountPresets} />
+        <TipAmount currency={currency} presets={amountPresets} />
 
         {impression && <ImpressionRow />}
 

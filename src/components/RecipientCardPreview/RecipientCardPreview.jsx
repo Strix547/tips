@@ -24,6 +24,7 @@ export const RecipientCardPreview = observer(
     company
   }) => {
     const avatarPreview = userStore.personalData.avatar || avatar
+    const currencySymbol = userStore.personalData.currency
 
     const bgColorText = bgColor && getTextColorBgBased(convertHexToRgb(bgColor))
     const btnColorText = btnColor && getTextColorBgBased(convertHexToRgb(btnColor))
@@ -53,7 +54,7 @@ export const RecipientCardPreview = observer(
           </S.RecipientCardTop>
 
           <S.RecipientCardMain>
-            <TipAmount presets={amountPresets} required={false} />
+            <TipAmount currency={currencySymbol} presets={amountPresets} required={false} />
 
             {impression && <ImpressionRow />}
             {rating && <RatingRow />}

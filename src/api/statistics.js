@@ -1,6 +1,6 @@
 import { API } from 'core/axios'
 
-import { downloadExcel } from 'utils'
+import { downloadExcel, convertCents } from 'utils'
 
 const transformStatistics = ({
   localDateTime,
@@ -9,16 +9,18 @@ const transformStatistics = ({
   qrName,
   sum,
   smile,
-  type
+  type,
+  currency
 }) => {
   return {
     id: paymentId,
     qrName,
     paymentPageId,
     dateTime: new Date(localDateTime),
-    tipAmount: sum / 100,
+    tipAmount: convertCents(sum),
     impression: smile,
-    type
+    type,
+    currency
   }
 }
 
@@ -26,7 +28,10 @@ const getStatistics = async (
   url,
   { format, zoneOffset, period, periodFrom, periodTo },
   transformer,
-  diagramTransformer = ({ localDate, sum }) => ({ date: new Date(localDate), tipAmount: sum / 100 })
+  diagramTransformer = ({ localDate, sum }) => ({
+    date: new Date(localDate),
+    tipAmount: convertCents(sum)
+  })
 ) => {
   const isXlsxFormat = format === 'XLSX'
 
@@ -57,10 +62,10 @@ const getStatistics = async (
   return {
     table: table.map((item) => transformer(item)),
     diagram: diagram.map((item) => diagramTransformer(item)),
-    diagramIncome: diagramIncome.map(({ month, sum }) => ({ month, tipAmount: sum })),
+    diagramIncome: diagramIncome.map(({ month, sum }) => ({ month, tipAmount: convertCents(sum) })),
     diagramReferralsQuantity: diagramReferralsQuantity.map(({ localDate, sum }) => ({
       date: new Date(localDate),
-      tipAmount: sum
+      tipAmount: convertCents(sum)
     }))
   }
 }
@@ -120,7 +125,7 @@ export const getBusinessAccountIncomeStatistics = async ({
       id: paymentId,
       platformId,
       dateTime: new Date(localDateTime),
-      tipAmount: income / 100,
+      tipAmount: convertCents(income),
       commission,
       firstName,
       lastName,
@@ -146,7 +151,7 @@ export const getEmployeeIncomeStatistics = async ({
       id: paymentId,
       platformId,
       dateTime: new Date(localDateTime),
-      tipAmount: income / 100,
+      tipAmount: convertCents(income),
       commission,
       platformName: title,
       rating
@@ -168,7 +173,7 @@ export const getPlatformIncomeStatistics = async ({
     ({ paymentId, localDateTime, income, firstName, lastName, commission, rating }) => ({
       id: paymentId,
       dateTime: new Date(localDateTime),
-      tipAmount: income / 100,
+      tipAmount: convertCents(income),
       commission,
       firstName,
       lastName,
@@ -192,8 +197,8 @@ export const getAgentIncomeStatistics = async ({
       id: paymentId,
       paymentPageId,
       dateTime: new Date(localDateTime),
-      tipAmount: income / 100,
-      agentIncome: agentIncome / 100,
+      tipAmount: convertCents(income),
+      agentIncome: convertCents(agentIncome),
       firstName,
       lastName
     })
@@ -214,15 +219,15 @@ export const getUserPaymentIncomeStatistics = async ({
     ({ paymentId, dateTime, countryName, currency, sum, feeSum, last4Digits }) => ({
       id: paymentId,
       dateTime: new Date(dateTime),
-      tipAmount: sum / 100,
-      commission: feeSum / 100,
+      tipAmount: convertCents(sum),
+      commission: convertCents(feeSum),
       country: countryName,
       currency,
       last4Digits
     }),
     ({ day, sum }) => ({
       date: new Date(day),
-      tipAmount: sum / 100
+      tipAmount: convertCents(sum)
     })
   )
 }
@@ -254,14 +259,14 @@ export const getUserAgentIncomeStatistics = async ({
       country: countryName,
       currecny,
       initUserName,
-      agentIncome: agentSum / 100,
-      payment: fullSum / 100,
-      commission: feeSum / 100,
+      agentIncome: convertCents(agentSum),
+      payment: convertCents(fullSum),
+      commission: convertCents(feeSum),
       last4Digits
     }),
     ({ day, sum }) => ({
       date: new Date(day),
-      tipAmount: sum / 100
+      tipAmount: convertCents(sum)
     })
   )
 }
@@ -281,12 +286,12 @@ export const getUserPaymentsStatistics = async ({
       id: paymentId,
       dateTime: new Date(dateTime),
       currency,
-      tipAmount: sum / 100,
+      tipAmount: convertCents(sum),
       phone
     }),
     ({ day, sum }) => ({
       date: new Date(day),
-      tipAmount: sum / 100
+      tipAmount: convertCents(sum)
     })
   )
 }
@@ -305,12 +310,12 @@ export const getPaymentsOutgoingStatistics = async ({
       id: paymentId,
       dateTime: new Date(localDateTime),
       country: countryName,
-      tipAmount: income / 100,
-      commission: feeIncome / 100
+      tipAmount: convertCents(income),
+      commission: convertCents(feeIncome)
     }),
     ({ day, sum }) => ({
       date: new Date(day),
-      tipAmount: sum
+      tipAmount: convertCents(sum)
     })
   )
 }
@@ -328,13 +333,13 @@ export const getPaymentsIncomingStatistics = async ({
     ({ paymentId, localDateTime, income, phone, last4Digits }) => ({
       id: paymentId,
       dateTime: new Date(localDateTime),
-      tipAmount: income / 100,
+      tipAmount: convertCents(income),
       phone,
       last4Digits
     }),
     ({ day, sum }) => ({
       date: new Date(day),
-      tipAmount: sum / 100
+      tipAmount: convertCents(sum)
     })
   )
 }

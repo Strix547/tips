@@ -51,7 +51,6 @@ export const QrIndividualCreatePage = observer(() => {
               lastName={userStore.personalData.lastName}
               amountPresets={[preset1, preset2, preset3]}
               impression={impression}
-              // btnColor="#3bc76b"
             />
           </FormProvider>
         </S.Content>

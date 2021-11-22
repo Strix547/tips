@@ -8,12 +8,18 @@ import { IndividualPaymentCard, PlatformPaymentCard } from 'components'
 import { CircularProgress } from 'ui'
 
 import { paymentStore } from 'store'
-import { getTextColorBgBased, convertHexToRgb, changeColorLuminosity } from 'utils'
+import {
+  getTextColorBgBased,
+  convertHexToRgb,
+  changeColorLuminosity,
+  getCurrencySymbol
+} from 'utils'
 
 import * as S from './Payment.styled'
 
 export const QrPaymentPage = observer(() => {
   const router = useRouter()
+
   const useFormProps = useForm({
     defaultValues: {
       impression: '😊',
@@ -22,13 +28,14 @@ export const QrPaymentPage = observer(() => {
   })
   const { handleSubmit } = useFormProps
 
+  const qrId = router.query.id
   const { paymentData, isPaymentDataLoading } = paymentStore
-  const { name, firstName, lastName, type, bgColor } = paymentData
+  const { name, firstName, lastName, type, bgColor, currency } = paymentData
 
   const isPlatformQr = type === 'BUSINESS'
-  const qrId = router.query.id
   const bgColorDarker = bgColor && changeColorLuminosity(bgColor, -0.15)
   const bgColorText = bgColorDarker && getTextColorBgBased(convertHexToRgb(bgColorDarker))
+  const currencySymbol = getCurrencySymbol(currency)
 
   useEffect(() => {
     if (qrId) {
@@ -38,9 +45,15 @@ export const QrPaymentPage = observer(() => {
 
   const onTipsPay = ({ tipAmount, impression, rating, comment }) => {
     if (isPlatformQr) {
-      paymentStore.payTipsPlatform({ qrId, tipAmount, impression, rating, comment })
+      paymentStore.payTipsPlatform({
+        qrId,
+        tipAmount: parseFloat(tipAmount),
+        impression,
+        rating,
+        comment
+      })
     } else {
-      paymentStore.payTipsIndividual({ qrId, tipAmount, impression })
+      paymentStore.payTipsIndividual({ qrId, tipAmount: parseFloat(tipAmount), impression })
     }
   }
 
@@ -74,7 +87,11 @@ export const QrPaymentPage = observer(() => {
 
         <form onSubmit={handleSubmit(onTipsPay)}>
           <FormProvider {...useFormProps}>
-            {isPlatformQr ? <PlatformPaymentCard /> : <IndividualPaymentCard />}
+            {isPlatformQr ? (
+              <PlatformPaymentCard currency={currencySymbol} />
+            ) : (
+              <IndividualPaymentCard currency={currencySymbol} />
+            )}
           </FormProvider>
         </form>
       </S.RecipientCardContainer>

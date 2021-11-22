@@ -4,6 +4,8 @@ import { getCookie, setCookie, deleteCookie } from './cookie'
 import { getTimeZoneOffset } from './getTimeZoneOffset'
 import { handleResponse } from './handleResponse'
 import { downloadExcel } from './downloadExcel'
+import { convertCents } from './convertCents'
+import { getCurrencySymbol } from './getCurrencySymbol'
 
 import {
   transformDateLabelToIso,
@@ -29,5 +31,7 @@ export {
   changeColorLuminosity,
   convertHexToRgb,
   getTextColorBgBased,
-  downloadExcel
+  downloadExcel,
+  convertCents,
+  getCurrencySymbol
 }

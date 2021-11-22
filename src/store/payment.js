@@ -26,7 +26,7 @@ export const paymentStore = makeAutoObservable({
     const payUrl = await paymentApi.payTipsIndividual({
       paymentPageId: qrId,
       userId,
-      sum: tipAmount,
+      sum: tipAmount * 100,
       smile: impression
     })
 
@@ -36,7 +36,7 @@ export const paymentStore = makeAutoObservable({
   payTipsPlatform: async ({ qrId, tipAmount, impression, comment, rating }) => {
     const payUrl = await paymentApi.payTipsPlatform({
       paymentPageId: qrId,
-      sum: tipAmount,
+      sum: tipAmount * 100,
       smile: impression,
       reviews: comment,
       rating

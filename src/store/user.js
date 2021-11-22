@@ -2,9 +2,9 @@ import { makeAutoObservable } from 'mobx'
 import { toast } from 'react-toastify'
 import router from 'next/router'
 
-import { CURRENCIES } from 'core/constants'
 import { ROUTE_NAMES } from 'core/routes'
 import { authStore } from 'store'
+import { getCurrencySymbol } from 'utils'
 import * as userApi from 'api/user'
 import * as bankAccountApi from 'api/bankAccount'
 
@@ -57,7 +57,7 @@ export const userStore = makeAutoObservable({
     userStore.personalData = {
       ...personalData,
       currency: {
-        label: CURRENCIES.find(({ value }) => personalData.currency === value)?.symbol,
+        label: getCurrencySymbol(personalData.currency),
         value: personalData.currency
       }
     }

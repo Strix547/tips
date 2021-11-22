@@ -4,7 +4,7 @@
   "payers": "Pour les payeurs",
   "agents": "Agents",
   "support": "Support",
-  "logIn": "Connectez-vous",
+  "logIn": "Connexion",
 
   "get-tips-instantly": "Recevez vos pourboires instantanément. Partout. De qui que ce soit",
   "get-tax-free-donations-instantly": "Receptionnez ies pourboires ou les dons libres d'impôt en quelques secondes.",
@@ -202,5 +202,7 @@
   "online-consultation": "Online consultation",
   "ask-any-question": "Ask us any question",
   "newsletter-subscribe": "Subscribe for newsletter",
-  "we-do-accept": "We do accept"
+  "we-do-accept": "We do accept",
+  "remember-me": "Souviens-toi de moi",
+  "proceed": "Procéder"
 }
