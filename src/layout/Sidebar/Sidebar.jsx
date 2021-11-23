@@ -27,7 +27,7 @@ import UserWithLaptopSvg from '@public/icons/user-with-laptop.svg'
 
 export const Sidebar = observer(() => {
   const { t } = useTranslation('common')
-  const { pathname } = useRouter()
+  const { pathname, locale } = useRouter()
 
   const { role } = userStore
   const { isAdminMode } = adminStore
@@ -90,7 +90,7 @@ export const Sidebar = observer(() => {
     const subNavItems = subNav?.map(({ label, link }) => {
       return (
         <S.SubNavItem key={label} active={pathname === link}>
-          <Link href={link} prefetch={false}>
+          <Link href={link} prefetch={false} locale={locale}>
             <a>{label}</a>
           </Link>
         </S.SubNavItem>
@@ -105,7 +105,7 @@ export const Sidebar = observer(() => {
         active={subNav ? isSomeSubPath : pathname === link}
         bgRed={forBusiness && !isBusinessAccount}
       >
-        <Link href={link} prefetch={false}>
+        <Link href={link} prefetch={false} locale={locale}>
           <a>
             {icon} {label}
           </a>

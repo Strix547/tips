@@ -11,6 +11,7 @@ import { Button, Stepper, Step, StepLabel, CircularProgress } from 'ui'
 
 import { userStore, localStore, authStore } from 'store'
 import { transformDateLabelToIso } from 'utils'
+import * as stripeApi from 'api/stripe'
 
 import { MEDIA_TABLET } from 'styles/media'
 import * as S from './IdentifyAccount.styled'
@@ -56,7 +57,7 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
 
     const fileResult = await fetch('https://uploads.stripe.com/v1/files', {
       method: 'POST',
-      headers: { Authorization: `Bearer ${process.env.STRIPE_PUBLISH_KEY}` },
+      headers: { Authorization: `Bearer pk_test_w8hT3aAuQgK14ENklixWpHfx00b3mKZ9fG` },
       body: data
     })
 
@@ -72,7 +73,7 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
 
     const fileResult = await fetch('https://uploads.stripe.com/v1/files', {
       method: 'POST',
-      headers: { Authorization: `Bearer ${process.env.STRIPE_PUBLISH_KEY}` },
+      headers: { Authorization: `Bearer pk_test_w8hT3aAuQgK14ENklixWpHfx00b3mKZ9fG` },
       body: data
     })
 
@@ -129,10 +130,11 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
     if (step === 2) {
       const ibanElement = stripeElements.getElement(IbanElement)
 
-      const accountToken = stripeApi.createAccountToken({
+      const accountToken = await stripeApi.createAccountToken({
+        stripe,
         firstName,
         lastName,
-        countryCode,
+        countryCode: toJS(country).code,
         city,
         address,
         postal,
@@ -141,7 +143,8 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
         identityDocumentId,
         addressDocumentId
       })
-      const { bankAccountToken, bankAccountError } = stripeApi.createBankAccountToken({
+      const { bankAccountToken, bankAccountError } = await stripeApi.createBankAccountToken({
+        stripe,
         ibanElement,
         firstName,
         lastName
@@ -151,7 +154,7 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
         setStripeError(error.message)
         return
       }
-
+      console.log(accountToken, bankAccountToken)
       if (accountToken && bankAccountToken) {
         userStore.identifyAccount({
           userId: userStore.id,

@@ -19,7 +19,7 @@ import { GlobalStyles } from 'styles/GlobalStyles'
 import 'styles/fonts.css'
 import 'swiper/swiper.min.css'
 
-const stripePromise = loadStripe(String(process.env.STRIPE_PUBLISH_KEY))
+const stripePromise = loadStripe('pk_test_w8hT3aAuQgK14ENklixWpHfx00b3mKZ9fG')
 
 const App = ({ Component, pageProps }) => {
   const router = useRouter()
