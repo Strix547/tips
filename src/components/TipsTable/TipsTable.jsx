@@ -45,7 +45,7 @@ export const TipsTable = observer(
       : [
           { label: t('total-tip'), value: tipsTotal },
           { label: t('average-tip'), value: tipsAverage },
-          { label: 'Всего комиссия', value: commissionTotal }
+          { label: t('commission-total'), value: commissionTotal }
         ]
 
     const statisticRow =
@@ -72,7 +72,7 @@ export const TipsTable = observer(
             cards={cardList}
             cardHeight={cardHeight}
             isLoading={isDataLoading}
-            noText="Чаевые за этот период отсутствуют"
+            noText={t('no-tip-this-period')}
           />
 
           {statisticRow}

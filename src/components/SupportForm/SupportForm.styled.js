@@ -91,6 +91,7 @@ export const Faq = styled.div`
 
   ${media570} {
     padding: 20px;
+    height: auto;
 
     ${Text} {
       &:nth-child(1) {

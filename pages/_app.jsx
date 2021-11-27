@@ -9,7 +9,7 @@ import Head from 'next/head'
 
 import { Notifications } from 'components'
 
-import { userStore, localStore } from 'store'
+import { userStore, localStore, authStore } from 'store'
 import { ROUTE_NAMES, ROUTES } from 'core/routes'
 
 import { createTheme } from '@material-ui/core/styles'
@@ -36,7 +36,8 @@ const App = ({ Component, pageProps }) => {
     }
   })
 
-  const { role, isIdLoading } = userStore
+  const { id, role, isIdLoading, isRoleLoading } = userStore
+  const { isAuth } = authStore
   const { lang } = localStore
 
   const currentPathname = router.pathname
@@ -59,6 +60,7 @@ const App = ({ Component, pageProps }) => {
     if (!id) return
 
     const role = await userStore.getUserRole(id)
+
     await userStore.getPersonalData(id)
 
     if (
@@ -108,22 +110,23 @@ const App = ({ Component, pageProps }) => {
     }
   }, [role, currentPathname])
 
-  useEffect(async () => {
-    if (lang) return
+  // useEffect(async () => {
+  //   if (lang) return
 
-    const storageLang = localStorage.getItem('lang')
-    console.log(storageLang)
-    if (storageLang) {
-      localStore.setLang(storageLang)
-      router.replace(currentPathname, currentPathname, { locale: storageLang.toLowerCase() })
-      return
-    }
+  //   const storageLang = localStorage.getItem('lang')
 
-    const lang = await localStore.getLanguage()
-    router.replace(currentPathname, currentPathname, { locale: lang.toLowerCase() })
-  }, [lang, currentPathname])
+  //   if (storageLang) {
+  //     localStore.setLang(storageLang)
+  //     router.replace(currentPathname, currentPathname, { locale: storageLang.toLowerCase() })
+  //     return
+  //   }
 
-  if (isIdLoading) return null
+  //   const lang = await localStore.getLanguage()
+  //   router.replace(currentPathname, currentPathname, { locale: lang.toLowerCase() })
+  // }, [lang, currentPathname])
+
+  if (!id && !isIdLoading && isAuth) return null
+  if (isProtectedRoute && (isIdLoading || isRoleLoading)) return null
 
   return (
     <>
@@ -138,7 +141,7 @@ const App = ({ Component, pageProps }) => {
 
       <MuiThemeProvider theme={theme}>
         <Elements stripe={stripePromise}>
-          <Component {...pageProps} stripePromise={stripePromise} />
+          <Component {...pageProps} id={id} role={role} stripePromise={stripePromise} />
           <Notifications />
         </Elements>
       </MuiThemeProvider>

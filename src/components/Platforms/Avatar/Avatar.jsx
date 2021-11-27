@@ -1,8 +1,11 @@
+import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
 
 import * as S from './Avatar.styled'
 
 export const PlatformAvatar = ({ company, avatar, firstName, lastName }) => {
+  const { t } = useTranslation('common')
+
   return (
     <S.PlatformAvatar>
       {company.logo && (
@@ -13,7 +16,7 @@ export const PlatformAvatar = ({ company, avatar, firstName, lastName }) => {
 
       <S.EmployeeRow>
         <S.Avatar>
-          <Image src={avatar} width={90} height={90} alt={`фото ${firstName} ${lastName}`} />
+          <Image src={avatar} width={90} height={90} alt={`photo ${firstName} ${lastName}`} />
         </S.Avatar>
 
         <S.Right>
@@ -21,7 +24,9 @@ export const PlatformAvatar = ({ company, avatar, firstName, lastName }) => {
             <span>{firstName}</span> <span>{lastName}</span>
           </S.Text>
 
-          <S.Text>Сотрудник в {company.name}</S.Text>
+          <S.Text>
+            {t('employee-in')} {company.name}
+          </S.Text>
         </S.Right>
       </S.EmployeeRow>
     </S.PlatformAvatar>

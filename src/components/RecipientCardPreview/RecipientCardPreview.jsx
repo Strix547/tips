@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react-lite'
+import { useTranslation } from 'next-i18next'
 
 import { PlatformAvatar, AvatarIndividual, TipAmount } from 'components'
 import { ImpressionRow, RatingRow, FeedbackTextarea } from 'common'
@@ -23,6 +24,7 @@ export const RecipientCardPreview = observer(
     btnColor,
     company
   }) => {
+    const { t } = useTranslation('common')
     const avatarPreview = userStore.personalData.avatar || avatar
     const currencySymbol = userStore.personalData.currency.symbol
 
@@ -37,7 +39,7 @@ export const RecipientCardPreview = observer(
         <S.RecipientCard>
           <S.Top>
             <S.TopBackground $color={bgColorDarker} />
-            <S.Text style={{ color: bgColorText }}>Так выглядит ваша страница</S.Text>
+            <S.Text style={{ color: bgColorText }}>{t('this-what-page-looks')}</S.Text>
           </S.Top>
 
           <S.RecipientCardTop>
@@ -61,10 +63,10 @@ export const RecipientCardPreview = observer(
             {reviews && <FeedbackTextarea />}
 
             <S.Button bgColor={btnColorDarker} textColor={btnColorText}>
-              Поблагодарить
+              {t('give-thanks')}
             </S.Button>
 
-            <S.Text>Tips.me - это сервис для перевод чаевых и донатов.</S.Text>
+            <S.Text>{t('flytips-service-for')}</S.Text>
           </S.RecipientCardMain>
         </S.RecipientCard>
       </S.RecipientCardPreview>

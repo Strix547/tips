@@ -1,5 +1,6 @@
 import { useFormContext, Controller } from 'react-hook-form'
 import { observer } from 'mobx-react-lite'
+import { useTranslation } from 'next-i18next'
 
 import Image from 'next/image'
 
@@ -13,6 +14,7 @@ import UploadIcon from '@public/icons/upload.svg'
 
 export const PlatformPaymentCardOptionsPanel = observer(
   ({ action, btnDefaultColor, bgDefaultColor, companyLogo, onLogoChange }) => {
+    const { t } = useTranslation('common')
     const { control } = useFormContext()
 
     const currency = userStore.personalData.currency.symbol
@@ -50,25 +52,25 @@ export const PlatformPaymentCardOptionsPanel = observer(
     return (
       <S.PlatformPaymentCardOptionsPanel>
         <S.AmountPresetsRow>
-          <S.Label>Предустановленные суммы чаевых</S.Label>
+          <S.Label>{t('preset-tip-amounts')}</S.Label>
 
           <S.AmountPresetsFields>{tipAmountPresetFileds}</S.AmountPresetsFields>
         </S.AmountPresetsRow>
 
         <S.Options>
-          <S.Label>Рейтинг (звездочки)</S.Label>
+          <S.Label>{t('rating')}</S.Label>
           <Switch name="ratingSwitch" size="big" />
 
-          <S.Label>Отзывы</S.Label>
+          <S.Label>{t('reviews')}</S.Label>
           <Switch name="reviews" size="big" />
 
-          <S.Label>Впечатления</S.Label>
+          <S.Label>{t('impressions')}</S.Label>
           <Switch name="impressions" size="big" />
         </S.Options>
 
         <ColorPickerField
           name="bgColor"
-          label="Код цвета для подложки"
+          label={t('substrate-color-code')}
           defaultColor={bgDefaultColor}
         />
 
@@ -76,7 +78,7 @@ export const PlatformPaymentCardOptionsPanel = observer(
           {!companyLogo.src ? (
             <>
               <UploadIcon />
-              <S.Text>Загрузите логотип</S.Text>
+              <S.Text>{t('upload-logo')}</S.Text>
             </>
           ) : (
             <S.DropzoneImage>
@@ -93,7 +95,7 @@ export const PlatformPaymentCardOptionsPanel = observer(
 
         <ColorPickerField
           name="btnColor"
-          label="Код цвета для кнопки"
+          label={t('button-color-code')}
           defaultColor={btnDefaultColor}
         />
 

@@ -17,8 +17,8 @@ export const UsersTable = ({ users = [], isUsersLoading, onExcelDownload }) => {
 
   const toUserStatisticsPage = (userId) => {
     router.push({
-      pathname: ROUTE_NAMES.ADMIN_USERS_STATISTICS,
-      query: { id: userId }
+      pathname: `/admin/users/${userId}/statistics`,
+      query: { lang: router.locale }
     })
   }
 

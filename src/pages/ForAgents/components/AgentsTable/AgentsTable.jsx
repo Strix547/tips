@@ -1,4 +1,6 @@
 import { observer } from 'mobx-react-lite'
+import { useTranslation } from 'next-i18next'
+
 import { TimePeriodFilter, StatisticRow } from 'components'
 import { Table } from 'ui'
 
@@ -8,26 +10,27 @@ import { transformDateTimeToLabel, getPriceLabel } from 'utils'
 import * as S from './AgentsTable.styled'
 
 export const AgentsTable = observer(({ statistics = [], isStatisticsLoading }) => {
+  const { t } = useTranslation('common')
   const currencyLabel = userStore.personalData.currency.symbol
 
   const columns = [
     {
-      headerName: 'Дата и время',
+      headerName: t('date-time'),
       field: 'dateTime',
       flex: 1
     },
     {
-      headerName: 'Размер чаевых',
+      headerName: t('tip-amount'),
       field: 'tipAmount',
       flex: 1
     },
     {
-      headerName: 'Агенту',
+      headerName: t('agent'),
       field: 'agentIncome',
       flex: 1
     },
     {
-      headerName: 'Имя',
+      headerName: t('first-name'),
       field: 'fullName',
       flex: 1
     }
@@ -52,12 +55,12 @@ export const AgentsTable = observer(({ statistics = [], isStatisticsLoading }) =
           columns={columns}
           rows={rows}
           isLoading={isStatisticsLoading}
-          noText="Чаевые за этот период отсутствуют"
+          noText={t('no-tips-this-period')}
         />
 
         {statistics.length !== 0 || isStatisticsLoading ? (
           <StatisticRow
-            stats={[{ label: 'Итого заработано', value: 0 }]}
+            stats={[{ label: t('earned'), value: 0 }]}
             currency={userStore.personalData.currency.symbol}
           />
         ) : null}

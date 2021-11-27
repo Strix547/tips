@@ -1,5 +1,6 @@
 import { useFormContext, Controller } from 'react-hook-form'
 import { observer } from 'mobx-react-lite'
+import { useTranslation } from 'next-i18next'
 
 import { Switch, Button, FormField } from 'ui'
 
@@ -8,6 +9,7 @@ import { userStore } from 'store'
 import * as S from './PaymentCardOptionsPanel.styled'
 
 export const PaymentCardOptionsPanelIndividual = observer(({ action }) => {
+  const { t } = useTranslation('common')
   const { control } = useFormContext()
 
   const currency = userStore.personalData.currency.symbol
@@ -45,16 +47,16 @@ export const PaymentCardOptionsPanelIndividual = observer(({ action }) => {
 
   return (
     <S.PaymentCardOptionsPanelIndividual>
-      <FormField name="name" label="Название" placeholder="Введите название" required />
+      <FormField name="name" label={t('title')} placeholder={t('enter-title')} required />
 
       <S.AmountPresetsRow>
-        <S.Label>Предустановленные суммы чаевых</S.Label>
+        <S.Label>{t('preset-tip-amounts')}</S.Label>
 
         <S.AmountPresetsFields>{tipAmountPresetFileds}</S.AmountPresetsFields>
       </S.AmountPresetsRow>
 
       <S.Options>
-        <Switch name="impression" label="Впечатления" labelPlacement="start" size="big" />
+        <Switch name="impression" label={t('impressions')} labelPlacement="start" size="big" />
       </S.Options>
 
       <Button type="submit">{action.label}</Button>

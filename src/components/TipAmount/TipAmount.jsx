@@ -1,12 +1,14 @@
 import { useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { Radio } from '@material-ui/core'
+import { useTranslation } from 'next-i18next'
 
 import { FormField, RadioGroup, FormControlLabel } from 'ui'
 
 import * as S from './TipAmount.styled'
 
 export const TipAmount = ({ currency, presets, required = true }) => {
+  const { t } = useTranslation('common')
   const useFormProps = useFormContext()
   const { watch, setValue, clearErrors } = useFormProps
 
@@ -43,7 +45,7 @@ export const TipAmount = ({ currency, presets, required = true }) => {
   return (
     <S.TipAmount>
       <FormField
-        label="Сумма чаевых"
+        label={t('tip-amount')}
         name="tipAmount"
         type="number"
         placeholder={`От ${minPresetValue} до ${maxPresetValue}`}

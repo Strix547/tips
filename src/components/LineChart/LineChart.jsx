@@ -1,5 +1,6 @@
 import { Line } from 'react-chartjs-2'
 import Skeleton from 'react-loading-skeleton'
+import { useTranslation } from 'next-i18next'
 
 import { NoResultFound } from 'common'
 
@@ -7,7 +8,8 @@ import { createChartTooltip } from 'utils'
 
 import * as S from './LineChart.styled'
 
-export const LineChart = ({ data, title, isLoading, noText = 'Нет данных' }) => {
+export const LineChart = ({ data, title, isLoading, noText }) => {
+  const { t } = useTranslation('common')
   const labels = data.map(({ date }) => date?.getDate())
   const values = data.map(({ tipAmount }) => tipAmount)
 
@@ -108,7 +110,7 @@ export const LineChart = ({ data, title, isLoading, noText = 'Нет данны�
           }}
         />
       ) : (
-        <NoResultFound>{noText}</NoResultFound>
+        <NoResultFound>{noText || t('no-data')}</NoResultFound>
       )}
     </S.LineChartContainer>
   )

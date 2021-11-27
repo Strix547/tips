@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'next-i18next'
 
 import { TimePeriodFilter } from 'components'
 import { Select, PlatformSearch, MenuItem } from 'ui'
@@ -8,12 +9,14 @@ import * as S from './ReviewsFilter.styled'
 import StarIcon from '@public/icons/star.svg'
 
 export const ReviewsFilter = ({ period }) => {
+  const { t } = useTranslation('common')
+
   const renderStars = (count) => {
     return new Array(count).fill(<StarIcon />)
   }
 
   const ratings = [
-    { label: 'Любой', value: 'any' },
+    { label: t('any'), value: 'any' },
     {
       label: <S.StarList>{renderStars(1)}</S.StarList>,
       value: 1
@@ -46,19 +49,19 @@ export const ReviewsFilter = ({ period }) => {
     <S.ReviewsFilter>
       <S.Row>
         <S.PeriodField>
-          <S.Label>Выберите период:</S.Label>
+          <S.Label>{t('select-period')}</S.Label>
           <TimePeriodFilter period={period} miniVersionMedia={864} />
         </S.PeriodField>
       </S.Row>
 
       <S.Row>
         <S.PlatformField>
-          <S.Label>Площадки:</S.Label>
+          <S.Label>{t('platforms')}</S.Label>
           <PlatformSearch />
         </S.PlatformField>
 
         <S.RatingField>
-          <S.Label>Рейтинг:</S.Label>
+          <S.Label>{t('rating')}:</S.Label>
 
           <Select name="rating" rounded>
             {ratingMenuItems}

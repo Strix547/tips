@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react-lite'
+import { useTranslation } from 'next-i18next'
 
 import { PlatformAvatar, TipAmount } from 'components'
 import { ImpressionRow, RatingRow, FeedbackTextarea } from 'common'
@@ -11,6 +12,7 @@ import * as S from './PaymentCard.styled'
 import avatar from '@public/img/placeholders/avatar.png'
 
 export const PlatformPaymentCard = observer(({ currency }) => {
+  const { t } = useTranslation('common')
   const { name, firstName, lastName, amountPresets, impression, comment, rating, logo, btnColor } =
     paymentStore.paymentData
 
@@ -42,10 +44,10 @@ export const PlatformPaymentCard = observer(({ currency }) => {
           bgColor={changeColorLuminosity(btnColor, -0.15)}
           textColor={btnColorText}
         >
-          Заплатить
+          {t('pay')}
         </S.Button>
 
-        <S.Text>Tips.me - это сервис для перевод чаевых и донатов.</S.Text>
+        <S.Text>{t('flytips-service-for')}</S.Text>
       </S.RecipientCardMain>
     </S.RecipientCard>
   )

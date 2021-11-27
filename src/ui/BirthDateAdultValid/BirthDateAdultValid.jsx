@@ -1,6 +1,10 @@
+import { useTranslation } from 'next-i18next'
+
 import { FormField } from 'ui'
 
-export const BirthDateAdultValid = ({ label = 'Дата рождения' }) => {
+export const BirthDateAdultValid = ({ label }) => {
+  const { t } = useTranslation('common')
+
   const checkDateHaventPlaceholderSymbols = (date) => {
     const haventPlaceholderSymbol = date?.indexOf('_') === -1
 
@@ -34,7 +38,7 @@ export const BirthDateAdultValid = ({ label = 'Дата рождения' }) => 
         }
       }}
       name="birthDate"
-      label={label}
+      label={label || t('birthdate')}
       placeholder="dd/mm/yyyy"
       MaskProps={{ mask: '99/99/9999' }}
     />

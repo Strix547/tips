@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useTranslation } from 'next-i18next'
 
 import { AccountLayout } from 'layout'
 
@@ -7,21 +8,19 @@ import * as S from './Loyalty.styled'
 import LoyaltyImg from '@public/img/loyalty.svg'
 
 export const LoyaltyPage = () => {
+  const { t } = useTranslation('common')
+
   return (
     <>
       <Head>
-        <title>Программа лояльности</title>
+        <title>{t('loyalty-program')}</title>
       </Head>
 
-      <AccountLayout title="Программа лояльности">
+      <AccountLayout title={t('loyalty-program')}>
         <S.Content>
           <LoyaltyImg />
 
-          <S.Text>
-            На странице указано, что при оплате чаевых при этом будучи авторизованном в сервисе,
-            начисляется бонус, который можно потратить в ресторанах, подключенных к сервису
-            получения чаевых.
-          </S.Text>
+          <S.Text>{t('loyalty-text')}</S.Text>
         </S.Content>
       </AccountLayout>
     </>

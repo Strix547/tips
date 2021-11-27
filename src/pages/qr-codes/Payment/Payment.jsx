@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite'
 import { FormProvider, useForm } from 'react-hook-form'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 
 import { IndividualPaymentCard, PlatformPaymentCard } from 'components'
 import { CircularProgress } from 'ui'
@@ -18,19 +19,20 @@ import {
 import * as S from './Payment.styled'
 
 export const QrPaymentPage = observer(() => {
+  const { t } = useTranslation('common')
   const router = useRouter()
-
   const useFormProps = useForm({
     defaultValues: {
       impression: '😊',
       rating: 5
     }
   })
-  const { handleSubmit } = useFormProps
 
   const qrId = router.query.id
+
+  const { handleSubmit } = useFormProps
   const { paymentData, isPaymentDataLoading } = paymentStore
-  const { name, firstName, lastName, type, bgColor, currency } = paymentData
+  const { name, firstName, lastName, type, bgColor, currency } = paymentData || {}
 
   const isPlatformQr = type === 'BUSINESS'
   const bgColorDarker = bgColor && changeColorLuminosity(bgColor, -0.15)
@@ -62,7 +64,7 @@ export const QrPaymentPage = observer(() => {
       <>
         <Head>
           <title>
-            Оплата чаевых {firstName} {lastName}
+            {t('payment-tips')} {firstName} {lastName}
           </title>
         </Head>
 
@@ -76,7 +78,7 @@ export const QrPaymentPage = observer(() => {
     <>
       <Head>
         <title>
-          Оплата чаевых {firstName} {lastName}
+          {t('payment-tips')} {firstName} {lastName}
         </title>
       </Head>
 

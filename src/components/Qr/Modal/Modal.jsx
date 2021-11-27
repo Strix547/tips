@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Tooltip from '@material-ui/core/Tooltip'
+import { useTranslation } from 'next-i18next'
 
 import { QrImage } from 'components'
 import { Button } from 'ui'
@@ -16,6 +17,7 @@ import CrossIcon from '@public/icons/cross-circle-filled.svg'
 import CopyIcon from '@public/icons/bind.svg'
 
 export const QrModal = ({ id, open, onClose, label, img }) => {
+  const { t } = useTranslation('common')
   const [copyTooltipOpen, setCopyTooltipOpen] = useState(false)
 
   useEffect(() => {
@@ -62,20 +64,22 @@ export const QrModal = ({ id, open, onClose, label, img }) => {
     <S.QrModal open={open} onClose={onClose}>
       <S.Wrapper>
         <S.Top>
-          <S.Label>QR-код {label}</S.Label>
+          <S.Label>
+            {t('qr-code')} {label}
+          </S.Label>
           <CrossIcon onClick={() => onClose()} />
         </S.Top>
 
         <S.Main>
           <S.LinkRow>
-            <S.Text>Основная ссылка для получения денег</S.Text>
+            <S.Text>{t('main-link-for-get-money')}</S.Text>
 
             <Tooltip open={copyTooltipOpen} title="Скопировано">
               <S.Link onClick={copyLinkToClipboard}>
                 <span>{link}</span>
 
                 <Button iconStart={<CopyIcon />}>
-                  <span>Скопировать</span>
+                  <span>{t('copy')}</span>
                 </Button>
               </S.Link>
             </Tooltip>
@@ -84,11 +88,11 @@ export const QrModal = ({ id, open, onClose, label, img }) => {
           <QrImage src={img} />
 
           <Button iconStart={<DownloadIcon />} variant="bordered" onClick={downloadQr}>
-            Скачать в формате png
+            {t('download-png-format')}
           </Button>
 
           <S.Share>
-            <S.Text>Поделиться</S.Text>
+            <S.Text>{t('share')}</S.Text>
             <S.Networks>{networkButtons}</S.Networks>
           </S.Share>
         </S.Main>

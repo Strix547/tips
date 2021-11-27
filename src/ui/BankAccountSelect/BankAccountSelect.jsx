@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useFormContext } from 'react-hook-form'
 import Skeleton from 'react-loading-skeleton'
+import { useTranslation } from 'next-i18next'
 
 import { MenuItem, Select } from 'ui'
 
@@ -9,15 +10,18 @@ import { bankAccountStore, userStore } from 'store'
 
 import * as S from './BankAccountSelect.styled'
 
-export const BankAccountSelect = observer(({ label = 'Мои IBAN номера:', onChange = () => {} }) => {
+export const BankAccountSelect = observer(({ label, onChange = () => {} }) => {
+  const { t } = useTranslation('common')
   const useFormProps = useFormContext()
 
   const userId = userStore.id
   const { selectedBankAccountId, bankAccounts, isBankAccountsLoading } = bankAccountStore
 
   useEffect(() => {
-    bankAccountStore.getBankAccounts(userId)
-  }, [])
+    if (userId) {
+      bankAccountStore.getBankAccounts(userId)
+    }
+  }, [userId])
 
   useEffect(() => {
     if (selectedBankAccountId) {
@@ -44,7 +48,7 @@ export const BankAccountSelect = observer(({ label = 'Мои IBAN номера:'
 
   return (
     <S.BankAccountSelect>
-      <S.Label>{label}</S.Label>
+      <S.Label>{label || t('my-iban-numbers')}</S.Label>
 
       {!isBankAccountsLoading ? (
         <Select name="bankAccount" defaultValue={selectedBankAccountId}>

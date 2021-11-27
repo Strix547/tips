@@ -55,7 +55,7 @@ export const ForAgentsPage = observer(() => {
 
           <BarChart data={diagramReferralsQuantity} title={t('number-referal-users')} />
 
-          <LineChart data={diagramIncome} title="Чаевые заработанные реферальными пользователями" />
+          <LineChart data={diagramIncome} title={t('tips-earned-referral')} />
 
           <FormProvider {...useFormProps}>
             <AgentsTable statistics={table} isStatisticsLoading={isIncomeStatisticsLoading} />

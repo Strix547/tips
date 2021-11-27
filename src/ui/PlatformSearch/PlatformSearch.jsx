@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useFormContext } from 'react-hook-form'
 import throttle from 'lodash.throttle'
+import { useTranslation } from 'next-i18next'
 
 import { Autocomplete } from 'ui'
 
@@ -10,6 +11,7 @@ import { platformsStore, userStore } from 'store'
 import * as S from './PlatformSearch.styled'
 
 export const PlatformSearch = observer(({ label }) => {
+  const { t } = useTranslation('common')
   const useFormProps = useFormContext()
 
   const [platform, setPlatform] = useState('')
@@ -43,10 +45,10 @@ export const PlatformSearch = observer(({ label }) => {
       options={platformSearchList}
       required
       getOptionLabel={({ title }) => title}
-      noOptionsText={platform.length ? 'Площадки не найдены' : 'Введите название площадки'}
+      noOptionsText={platform.length ? t('no-platforms') : t('enter-platform-name')}
       onInputChange={onPlatformInputChange}
       onChange={onPlatformChange}
-      renderInput={(props) => <S.FormField {...props} placeholder="Введите название площадки" />}
+      renderInput={(props) => <S.FormField {...props} placeholder={t('enter-platform-name')} />}
     />
   )
 })

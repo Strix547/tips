@@ -33,7 +33,7 @@ export const Header = observer(({ withSidebar }) => {
   const { t } = useTranslation('common')
 
   const [isMenuOpen, setMenuOpen] = useState(false)
-  const { personalData, isPersonalDataLoading, role } = userStore
+  const { isIdLoading, personalData, isPersonalDataLoading, role } = userStore
   const { lang } = localStore
   const { firstName, lastName, avatar } = personalData
   const currentPathname = router.pathname
@@ -146,7 +146,7 @@ export const Header = observer(({ withSidebar }) => {
           <S.Right>
             {langSelect}
 
-            {authStore.isAuth ? (
+            {authStore.isAuth || isIdLoading ? (
               user
             ) : (
               <LinkButton href={ROUTE_NAMES.AUTH} size="inline">

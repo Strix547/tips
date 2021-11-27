@@ -6,6 +6,7 @@ import { handleResponse } from './handleResponse'
 import { downloadExcel } from './downloadExcel'
 import { convertCents } from './convertCents'
 import { getCurrencySymbol } from './getCurrencySymbol'
+import { storage } from './storage'
 
 import {
   transformDateLabelToIso,
@@ -33,5 +34,6 @@ export {
   getTextColorBgBased,
   downloadExcel,
   convertCents,
-  getCurrencySymbol
+  getCurrencySymbol,
+  storage
 }

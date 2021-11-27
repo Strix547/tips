@@ -1,3 +1,5 @@
+import { useTranslation } from 'next-i18next'
+
 import { TableRowCard } from 'components'
 import { RatingCell } from 'common'
 import { Table } from 'ui'
@@ -7,30 +9,32 @@ import { transformDateTimeToLabel } from 'utils'
 import * as S from './Table.styled'
 
 export const ReviewsTable = ({ reviews = [], isReviewsLoading }) => {
+  const { t } = useTranslation('common')
+
   const columns = [
     {
-      headerName: 'Дата и время',
+      headerName: t('date-time'),
       field: 'dateTime',
       flex: 1
     },
     {
-      headerName: 'Рейтинг',
+      headerName: t('rating'),
       field: 'rating',
       flex: 1,
       renderCell: ({ row }) => <RatingCell rating={row.rating} />
     },
     {
-      headerName: 'Комментарий',
+      headerName: t('comment'),
       field: `comment`,
       flex: 1
     },
     {
-      headerName: 'Впечатление',
+      headerName: t('impression'),
       field: 'impression',
       flex: 1
     },
     {
-      headerName: 'Площадка',
+      headerName: t('platform'),
       field: 'platformName',
       flex: 1
     },
@@ -56,9 +60,9 @@ export const ReviewsTable = ({ reviews = [], isReviewsLoading }) => {
   const tableCards = reviews.map(
     ({ dateTime, rating, comment, impression, platformName, firstName, lastName }) => {
       const rows = [
-        { label: 'Комментарий', value: comment || '' },
-        { label: 'Впечатление', value: impression || '' },
-        { label: 'Площадка', value: platformName },
+        { label: t('comment'), value: comment || '' },
+        { label: t('impression'), value: impression || '' },
+        { label: t('platform'), value: platformName },
         { label: 'Сотрудник', value: `${lastName} ${firstName}` }
       ]
 
@@ -79,7 +83,7 @@ export const ReviewsTable = ({ reviews = [], isReviewsLoading }) => {
         isLoading={isReviewsLoading}
         cards={tableCards}
         cardHeight={219}
-        noText="Отзывы не найдены"
+        noText={t('no-reviews')}
       />
     </S.ReviewsTable>
   )

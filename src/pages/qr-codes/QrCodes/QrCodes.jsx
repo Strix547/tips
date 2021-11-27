@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite'
 import Skeleton from 'react-loading-skeleton'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 
 import { AccountLayout } from 'layout'
 import { QrCard } from 'components'
@@ -14,6 +15,7 @@ import { userStore, qrCodesStore } from 'store'
 import * as S from './QrCodes.styled'
 
 export const QrCodesPage = observer(() => {
+  const { t } = useTranslation('common')
   const router = useRouter()
 
   const { id: userId, role } = userStore
@@ -59,16 +61,16 @@ export const QrCodesPage = observer(() => {
   const qrListContent = qrCardList.length ? (
     <S.QrGrid>{qrCardList}</S.QrGrid>
   ) : (
-    <NoResultFound>Qr-коды отсутствуют</NoResultFound>
+    <NoResultFound></NoResultFound>
   )
 
   return (
     <>
       <Head>
-        <title>Мои QR</title>
+        <title>{t('my-qr')}</title>
       </Head>
 
-      <AccountLayout title="Мои QR" button={{ label: 'Добавить QR-код', onClick: toQrCreatePage }}>
+      <AccountLayout title={t('my-qr')} button={{ label: t('add-qr'), onClick: toQrCreatePage }}>
         {!isQrCodesLoading ? (
           qrListContent
         ) : (

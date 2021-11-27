@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { observer } from 'mobx-react-lite'
+import { useTranslation } from 'next-i18next'
 
 import { QrImage, QrModal } from 'components'
 import { ConfirmModal } from 'common'
@@ -19,6 +20,7 @@ import TrashIcon from '@public/icons/trash.svg'
 import ArrowRightIcon from '@public/icons/arrows/gray-right.svg'
 
 export const QrCard = observer(({ id, type, templateId, label, img, tag }) => {
+  const { t } = useTranslation('common')
   const router = useRouter()
 
   const [isQrModalOpen, setQrModalOpen] = useState(false)
@@ -78,7 +80,7 @@ export const QrCard = observer(({ id, type, templateId, label, img, tag }) => {
       <QrImage src={img} />
 
       <S.AppleWallet>
-        <Button iconStart={<WalletIcon />}>Добавить в Apple Wallet</Button>
+        <Button iconStart={<WalletIcon />}>{t('add-to-apple-wallet')}</Button>
       </S.AppleWallet>
 
       <S.ActionRow>

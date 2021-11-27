@@ -1,6 +1,7 @@
 import { useFormContext } from 'react-hook-form'
 import { Radio } from '@material-ui/core'
 import Image from 'next/image'
+import { useTranslation } from 'next-i18next'
 
 import { FormControlLabel, RadioGroup } from 'ui'
 
@@ -13,6 +14,7 @@ import smilingHeartEyesImg from '@public/img/emodji/smiling-heart-eyes.png'
 import smilingSunglassesImg from '@public/img/emodji/smiling-sunglasses.png'
 
 export const ImpressionRow = () => {
+  const { t } = useTranslation('common')
   const useFormProps = useFormContext()
   const { watch } = useFormProps
 
@@ -41,7 +43,7 @@ export const ImpressionRow = () => {
 
   return (
     <S.ImpressionRow>
-      <S.Text>Ваши впечатления</S.Text>
+      <S.Text>{t('your-impressions')}</S.Text>
 
       <RadioGroup name="impression">{emodjiRadios}</RadioGroup>
     </S.ImpressionRow>

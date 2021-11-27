@@ -80,14 +80,14 @@ export const PlatformCard = observer(
         <S.Border />
 
         <S.EmployeeNumberRow>
-          <S.Text>Кол-во сотрудников</S.Text>
+          <S.Text>{t('number-employees')}</S.Text>
           <S.Text>{employeeCount}</S.Text>
         </S.EmployeeNumberRow>
 
         <S.TipsAmount>
-          <S.Text>Сумма чаевых за месяц</S.Text>
+          <S.Text>{t('tip-amount-month')}</S.Text>
           <S.Text>{getPriceLabel(tipsAmountMonth, currency)}</S.Text>
-          <S.Text>Сумма чаевых за год</S.Text>
+          <S.Text>{t('tip-amount-year')}</S.Text>
           <S.Text>{getPriceLabel(tipsAmountYear, currency)}</S.Text>
         </S.TipsAmount>
 

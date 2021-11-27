@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useMediaQuery } from 'react-responsive'
 import { Radio } from '@material-ui/core'
+import { useTranslation } from 'next-i18next'
 
 import { FormControlLabel, MenuItem, Select, DatePicker, RadioGroup } from 'ui'
 import { transformDateToIso } from 'utils'
@@ -9,6 +10,7 @@ import { transformDateToIso } from 'utils'
 import * as S from './TimePeriodFilter.styled'
 
 export const TimePeriodFilter = ({ period, miniVersionMedia = 1500 }) => {
+  const { t } = useTranslation('common')
   const screenLess1500 = useMediaQuery({ maxWidth: miniVersionMedia })
   const screenLess700 = useMediaQuery({ maxWidth: 700 })
   const { setValue } = useFormContext()
@@ -18,12 +20,12 @@ export const TimePeriodFilter = ({ period, miniVersionMedia = 1500 }) => {
   const [endDate, setEndDate] = useState(null)
 
   const periods = [
-    { label: 'За сегодня', value: 'TODAY' },
-    { label: 'За вчера', value: 'YESTERDAY' },
-    { label: 'За неделю', value: 'WEEK' },
-    { label: 'За месяц', value: 'MONTH' },
-    { label: 'За прошлый месяц', value: 'LAST_MONTH' },
-    { label: 'За период', value: 'custom' }
+    { label: t('for-today'), value: 'TODAY' },
+    { label: t('for-yesterday'), value: 'YESTERDAY' },
+    { label: t('for-week'), value: 'WEEK' },
+    { label: t('for-month'), value: 'MONTH' },
+    { label: t('for-last-month'), value: 'LAST_MONTH' },
+    { label: t('for-period'), value: 'custom' }
   ]
 
   const chooseCustomPeriod = (value) => {

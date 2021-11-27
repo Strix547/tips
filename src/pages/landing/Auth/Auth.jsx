@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import { observer } from 'mobx-react-lite'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 
 import { Logo } from 'common'
@@ -17,6 +18,8 @@ import CommentRegulationIcon from '@public/img/landing/comment-regulation.svg'
 
 export const AuthPage = observer(() => {
   const { t } = useTranslation('common')
+  const router = useRouter()
+
   const isTablet = useMediaQuery({ maxWidth: MEDIA_TABLET })
 
   const [rememberUser, setRememberUser] = useState(false)
@@ -65,13 +68,13 @@ export const AuthPage = observer(() => {
   }
 
   const onAuth = async ({ phone, code, remember }) => {
-    await authStore.auth({ phone, code, remember })
+    await authStore.auth({ phone, code, remember, referralAgentId: parseInt(router.query.agent) })
   }
 
   return (
     <>
       <Head>
-        <title>Вход</title>
+        <title>{t('logIn')}</title>
       </Head>
 
       {isTablet && <Header />}

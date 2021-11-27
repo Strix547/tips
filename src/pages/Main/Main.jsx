@@ -55,12 +55,12 @@ export const UserMainPage = observer(() => {
           flex: 1
         },
         {
-          headerName: 'Площадка',
+          headerName: t('platform'),
           field: 'platformName',
           flex: 1
         },
         {
-          headerName: 'Пользователь',
+          headerName: t('user'),
           field: `fullName`,
           flex: 1
         },
@@ -70,12 +70,12 @@ export const UserMainPage = observer(() => {
           flex: 1
         },
         {
-          headerName: 'Комиссия',
+          headerName: t('commission'),
           field: 'commission',
           flex: 1
         },
         {
-          headerName: 'Рейтинг',
+          headerName: t('rating'),
           field: 'rating',
           flex: 1,
           renderCell: ({ row }) => <RatingCell rating={row.rating} />
@@ -98,7 +98,7 @@ export const UserMainPage = observer(() => {
           flex: 1
         },
         {
-          headerName: 'Впечатление',
+          headerName: t('impression'),
           field: 'impression',
           flex: 1
         }

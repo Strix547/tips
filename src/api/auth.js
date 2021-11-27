@@ -22,13 +22,14 @@ export const sendCode = async (phone) => {
   }
 }
 
-export const confirmCode = async ({ phone, code, remember }) => {
+export const confirmCode = async ({ phone, code, remember, referralUserId }) => {
   try {
     const res = await API.post(
       `${root}/sign-in/phone/confirm-code`,
       {
         phone: `+${phone}`,
-        code
+        code,
+        referralUserId
       },
       { params: { 'remember-me': remember } }
     )

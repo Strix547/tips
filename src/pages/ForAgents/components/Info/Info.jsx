@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Tooltip from '@material-ui/core/Tooltip'
+import { observer } from 'mobx-react-lite'
 import { useTranslation } from 'next-i18next'
+
+import Tooltip from '@material-ui/core/Tooltip'
+
+import { userStore } from 'store'
 
 import * as S from './Info.styled'
 
@@ -12,11 +16,17 @@ import InstagramIcon from '@public/icons/networks/instagram-big.svg'
 import TelegramIcon from '@public/icons/networks/telegram-big.svg'
 import WhatsAppIcon from '@public/icons/networks/whats-app-big.svg'
 
-export const Info = () => {
+export const Info = observer(() => {
   const { t } = useTranslation('common')
   const [copyTooltipOpen, setCopyTooltipOpen] = useState(false)
+  const [link, setLink] = useState('')
+  const { id } = userStore
 
-  const link = 'https://tips.me/signup/agent=SjddSzj41Fz'
+  useEffect(() => {
+    if (id) {
+      setLink(`${window.location.origin}/auth?agent=${id}`)
+    }
+  }, [id])
 
   useEffect(() => {
     const tooltipTimeout = setTimeout(() => {
@@ -76,4 +86,4 @@ export const Info = () => {
       </S.LinksBlock>
     </S.Info>
   )
-}
+})

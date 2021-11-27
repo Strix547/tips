@@ -63,17 +63,17 @@ export const Sidebar = observer(() => {
   ]
 
   const adminNav = [
-    { label: 'Список пользователей', link: ROUTE_NAMES.ADMIN_USERS, icon: <UserGroupIcon /> },
+    { label: t('users-list'), link: ROUTE_NAMES.ADMIN_USERS, icon: <UserGroupIcon /> },
     {
-      label: 'Статистика платежей',
+      label: t('payment-statistics'),
       link: ROUTE_NAMES.ADMIN_PAYMENT_STATISTICS_OUTGOING,
       icon: <PieChartIcon />,
       subNav: [
-        { label: 'Исходящие', link: ROUTE_NAMES.ADMIN_PAYMENT_STATISTICS_OUTGOING },
-        { label: 'Входящие', link: ROUTE_NAMES.ADMIN_PAYMENT_STATISTICS_INCOMING }
+        { label: t('outgoing'), link: ROUTE_NAMES.ADMIN_PAYMENT_STATISTICS_OUTGOING },
+        { label: t('incoming'), link: ROUTE_NAMES.ADMIN_PAYMENT_STATISTICS_INCOMING }
       ]
     },
-    { label: 'Комиссии', link: ROUTE_NAMES.ADMIN_COMMISSION, icon: <DiscountIcon /> }
+    { label: t('commissions'), link: ROUTE_NAMES.ADMIN_COMMISSION, icon: <DiscountIcon /> }
   ]
 
   const nav = isAdminAccount && !isAdminMode ? adminNav : userNav
@@ -129,19 +129,19 @@ export const Sidebar = observer(() => {
           <S.Support>
             <UserWithLaptopSvg />
 
-            <LinkButton href={ROUTE_NAMES.ACCOUNT_SUPPORT}>Служба поддержки</LinkButton>
+            <LinkButton href={ROUTE_NAMES.ACCOUNT_SUPPORT}>{t('support')}</LinkButton>
           </S.Support>
         ) : null}
 
         <S.LogoutButton type="button" onClick={() => onSignOut()}>
           <LogoutIcon />
-          Выйти
+          {t('exit')}
         </S.LogoutButton>
 
         {isAdminMode ? (
           <S.LogoutAdminButton type="button" onClick={() => onAdminModeOff()}>
             <LogoutIcon />
-            Выйти из режима админа
+            {t('exit-admin-mode')}
           </S.LogoutAdminButton>
         ) : null}
       </S.Main>

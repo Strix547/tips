@@ -1,7 +1,7 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { QrPaymentPage } from 'pages'
 
-export async function getServerSideProps({ locale }) {
+export const getServerSideProps = async ({ locale }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common']))

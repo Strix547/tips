@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
+import { useTranslation } from 'next-i18next'
 
 import { AccountLayout } from 'layout'
 import { BarChart, TipsTable, TableRowCard } from 'components'
@@ -16,6 +17,7 @@ import {
 } from 'utils'
 
 export const QrStatisticsPage = observer(() => {
+  const { t } = useTranslation('common')
   const router = useRouter()
   const useFormProps = useForm({
     defaultValues: {
@@ -23,8 +25,8 @@ export const QrStatisticsPage = observer(() => {
     }
   })
   const { watch } = useFormProps
-
   const qrId = router?.query?.id
+
   const { incomeStatistics, isIncomeStatisticsLoading } = statisticsStore
   const { period, periodFrom, periodTo } = watch()
 
@@ -43,22 +45,22 @@ export const QrStatisticsPage = observer(() => {
 
   const columns = [
     {
-      headerName: 'Дата и время',
+      headerName: t('date-time'),
       field: 'dateTime',
       flex: 1
     },
     {
-      headerName: 'Имя QR-кода',
+      headerName: t('name-qr-code'),
       field: 'qrName',
       flex: 1
     },
     {
-      headerName: 'Размер чаевых',
+      headerName: t('tip-size'),
       field: 'tipAmount',
       flex: 1
     },
     {
-      headerName: 'Впечатление',
+      headerName: t('impression'),
       field: 'impression',
       flex: 1
     }
@@ -77,8 +79,8 @@ export const QrStatisticsPage = observer(() => {
   const tableCards = incomeStatistics.table.map(
     ({ qrId, qrName, dateTime, tipAmount, impression, currency }) => {
       const rows = [
-        { label: 'Имя QR-кода', value: qrName },
-        { label: 'Впечатление', value: impression }
+        { label: t('name-qr-code'), value: qrName },
+        { label: t('impression'), value: impression }
       ]
 
       return (
@@ -106,14 +108,14 @@ export const QrStatisticsPage = observer(() => {
   return (
     <>
       <Head>
-        <title>Статистика qr кода</title>
+        <title>{t('qr-statistics')}</title>
       </Head>
 
-      <AccountLayout title="Статистика qr кода">
+      <AccountLayout title={t('qr-statistics')}>
         {useMemo(
           () => (
             <BarChart
-              title="Статистика входящих оплат"
+              title={t('incoming-payments-statistics')}
               data={incomeStatistics.diagram}
               isLoading={isIncomeStatisticsLoading}
             />

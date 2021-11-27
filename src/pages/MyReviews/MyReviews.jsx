@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { observer } from 'mobx-react-lite'
 import Head from 'next/head'
+import { useTranslation } from 'next-i18next'
 
 import { AccountLayout } from 'layout'
 import { ReviewsFilter, ReviewsTable } from './components'
@@ -10,6 +11,7 @@ import { userStore, platformsStore } from 'store'
 import { getTimeZoneOffset } from 'utils'
 
 export const MyReviewsPage = observer(() => {
+  const { t } = useTranslation('common')
   const useFormProps = useForm({
     defaultValues: {
       period: 'MONTH',
@@ -51,10 +53,10 @@ export const MyReviewsPage = observer(() => {
   return (
     <>
       <Head>
-        <title>Мои отзывы</title>
+        <title>{t('my-reviews')}</title>
       </Head>
 
-      <AccountLayout title="Мои отзывы">
+      <AccountLayout title={t('my-reviews')}>
         <FormProvider {...useFormProps}>
           <ReviewsFilter period={period} />
 

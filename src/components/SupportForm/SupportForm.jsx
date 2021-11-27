@@ -105,7 +105,7 @@ export const SupportForm = observer(() => {
           {!userStore.id ? guestFields : null}
 
           <S.ThemeRow>
-            <S.Label>Выберите тему письма</S.Label>
+            <S.Label>{t('choose-message-theme')}</S.Label>
 
             <RadioGroup name="letterTheme">{letterThemeRadios}</RadioGroup>
           </S.ThemeRow>

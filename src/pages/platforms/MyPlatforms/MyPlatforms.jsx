@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite'
 import Skeleton from 'react-loading-skeleton'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 
 import { AccountLayout } from 'layout'
 import { PlatformCard } from 'components'
@@ -14,6 +15,7 @@ import { ROUTE_NAMES } from 'core/routes'
 import * as S from './MyPlatforms.styled'
 
 export const MyPlatformsPage = observer(() => {
+  const { t } = useTranslation('common')
   const router = useRouter()
 
   const { platforms, isPlatformsLoading } = platformsStore
@@ -46,18 +48,18 @@ export const MyPlatformsPage = observer(() => {
     platforms?.length !== 0 ? (
       <S.PlatformsGrid>{platformCardList}</S.PlatformsGrid>
     ) : (
-      <NoResultFound>Платформы отсутствуют</NoResultFound>
+      <NoResultFound>{t('no-platforms')}</NoResultFound>
     )
 
   return (
     <>
       <Head>
-        <title>Мои площадки</title>
+        <title>{t('my-working-places')}</title>
       </Head>
 
       <AccountLayout
-        title="Мои площадки"
-        button={{ label: 'Добавить площадку', onClick: addPlatform }}
+        title={t('my-working-places')}
+        button={{ label: t('add-platform'), onClick: addPlatform }}
         styles={S.layoutStyles}
       >
         {!isPlatformsLoading ? (

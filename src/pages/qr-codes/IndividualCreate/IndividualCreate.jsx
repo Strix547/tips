@@ -1,6 +1,7 @@
 import { FormProvider, useForm } from 'react-hook-form'
 import { observer } from 'mobx-react-lite'
 import Head from 'next/head'
+import { useTranslation } from 'next-i18next'
 
 import { AccountLayout } from 'layout'
 import { PaymentCardOptionsPanelIndividual, RecipientCardPreview } from 'components'
@@ -10,6 +11,7 @@ import { userStore, qrCodesStore } from 'store'
 import * as S from './IndividualCreate.styled'
 
 export const QrIndividualCreatePage = observer(() => {
+  const { t } = useTranslation('common')
   const useFormProps = useForm({
     defaultValues: {
       name: '',
@@ -37,13 +39,13 @@ export const QrIndividualCreatePage = observer(() => {
   return (
     <>
       <Head>
-        <title>Создание QR-кода физ. лица</title>
+        <title>{t('creating-qr-individual')}</title>
       </Head>
 
-      <AccountLayout title="Создать QR-код">
+      <AccountLayout title={t('create-new-qr-code')}>
         <S.Content onSubmit={handleSubmit(createQr)}>
           <FormProvider {...useFormProps}>
-            <PaymentCardOptionsPanelIndividual action={{ label: 'Создать QR-код' }} />
+            <PaymentCardOptionsPanelIndividual action={{ label: t('create-new-qr-code') }} />
 
             <RecipientCardPreview
               type="individual"

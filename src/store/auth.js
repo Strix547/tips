@@ -43,9 +43,9 @@ export const authStore = makeAutoObservable({
     }
   },
 
-  auth: async ({ phone, code, remember }) => {
+  auth: async ({ phone, code, remember, referralAgentId }) => {
     try {
-      await authApi.confirmCode({ phone, code, remember })
+      await authApi.confirmCode({ phone, code, remember, referralUserId: referralAgentId })
       const userId = await userStore.getMyId()
       const userRole = await userStore.getUserRole(userId)
       await userStore.getPersonalData(userId)

@@ -1,5 +1,6 @@
 import { Bar } from 'react-chartjs-2'
 import Skeleton from 'react-loading-skeleton'
+import { useTranslation } from 'next-i18next'
 
 import { NoResultFound } from 'common'
 
@@ -7,7 +8,8 @@ import { createChartTooltip } from 'utils'
 
 import * as S from './BarChart.styled'
 
-export const BarChart = ({ title, data, isLoading, noText = 'Нет данных', gradient = 'red' }) => {
+export const BarChart = ({ title, data, isLoading, noText, gradient = 'red' }) => {
+  const { t } = useTranslation('common')
   const labels = data.map(({ date }) => date?.getDate())
   const values = data.map(({ tipAmount }) => tipAmount)
 
@@ -126,7 +128,7 @@ export const BarChart = ({ title, data, isLoading, noText = 'Нет данных
           }}
         />
       ) : (
-        <NoResultFound>{noText}</NoResultFound>
+        <NoResultFound>{noText || t('no-data')}</NoResultFound>
       )}
     </S.BarContainer>
   )

@@ -1,8 +1,10 @@
 import { useFormContext, Controller } from 'react-hook-form'
+import { useTranslation } from 'next-i18next'
 
 import * as S from './FeedbackTextarea.styled'
 
 export const FeedbackTextarea = () => {
+  const { t } = useTranslation('common')
   const { control, watch } = useFormContext()
 
   const lengthAvailable = 1000
@@ -11,11 +13,11 @@ export const FeedbackTextarea = () => {
   return (
     <S.FeedbackTextarea>
       <S.Top>
-        <S.Text>Оставить отзыв</S.Text>
+        <S.Text>{t('leave-feedback')}</S.Text>
         <S.Text>
           {commentLength
-            ? `Осталось ${lengthAvailable - commentLength} знаков`
-            : `До ${lengthAvailable} знаков`}
+            ? `${t('left')} ${lengthAvailable - commentLength} ${t('characters')}`
+            : `${t('to')} ${lengthAvailable} ${t('characters')}`}
         </S.Text>
       </S.Top>
 
@@ -24,7 +26,7 @@ export const FeedbackTextarea = () => {
         name="comment"
         render={({ field: { value, onChange } }) => (
           <S.Textarea
-            placeholder="Ваш комментарий"
+            placeholder={t('your-comment')}
             value={value}
             onChange={(e) => {
               if (e.target.value.length > lengthAvailable) {

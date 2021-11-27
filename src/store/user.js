@@ -14,6 +14,7 @@ export const userStore = makeAutoObservable({
   isPersonalDataLoading: false,
   isIdentifyProcessing: false,
   role: null,
+  isRoleLoading: false,
   personalData: {
     firstName: '',
     lastName: '',
@@ -46,8 +47,10 @@ export const userStore = makeAutoObservable({
   },
 
   getUserRole: async (userId) => {
+    userStore.isRoleLoading = true
     const role = await userApi.getUserRole(userId)
     userStore.role = role
+    userStore.isRoleLoading = false
     return role
   },
 
