@@ -28,15 +28,15 @@ export const PayersPage = () => {
   const payerTypes = [
     {
       icon: <PackageIcon />,
-      label: 'У вас есть клиентская база из ресторанов, салонов красоты или доставок'
+      label: t('have-customer-base')
     },
     {
       icon: <CartIcon />,
-      label: 'Вы создатель агрегатора ресторанов, салонов красоты, доставок'
+      label: t('you-createtor-business')
     },
     {
       icon: <GearsIcon />,
-      label: 'Автоматизируете рестораны'
+      label: t('you-automate-restaurants')
     }
   ]
 

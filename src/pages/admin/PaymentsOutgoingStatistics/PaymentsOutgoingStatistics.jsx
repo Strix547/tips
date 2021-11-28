@@ -2,6 +2,7 @@ import { useEffect, useMemo } from 'react'
 import { observer } from 'mobx-react-lite'
 import { FormProvider, useForm } from 'react-hook-form'
 import Head from 'next/head'
+import { useTranslation } from 'next-i18next'
 
 import { AccountLayout } from 'layout'
 import { BarChart, TipsTable, TableRowCard } from 'components'
@@ -10,6 +11,7 @@ import { userStore, statisticsStore } from 'store'
 import { getTimeZoneOffset, transformDateTimeToLabel, getPriceLabel } from 'utils'
 
 export const PaymentsOutgoingStatisticsPage = observer(() => {
+  const { t } = useTranslation('common')
   const useFormProps = useForm({
     defaultValues: {
       period: 'MONTH'
@@ -35,22 +37,22 @@ export const PaymentsOutgoingStatisticsPage = observer(() => {
 
   const columns = [
     {
-      headerName: 'Дата и время',
+      headerName: t('date-time'),
       field: 'dateTime',
       flex: 1
     },
     {
-      headerName: 'Страна',
+      headerName: t('country'),
       field: 'country',
       flex: 1
     },
     {
-      headerName: 'Размер чаевых',
+      headerName: t('tip-amount'),
       field: 'tipAmount',
       flex: 1
     },
     {
-      headerName: 'Комиссия',
+      headerName: t('commission'),
       field: 'commission',
       flex: 1
     }
@@ -67,8 +69,8 @@ export const PaymentsOutgoingStatisticsPage = observer(() => {
   const tableCards = incomeStatistics.table.map(
     ({ id, dateTime, country, tipAmount, commission }) => {
       const rows = [
-        { label: 'Страна', value: country },
-        { label: 'Комиссия', value: commission }
+        { label: t('country'), value: country },
+        { label: t('commission'), value: commission }
       ]
 
       return (
@@ -97,14 +99,14 @@ export const PaymentsOutgoingStatisticsPage = observer(() => {
   return (
     <>
       <Head>
-        <title>Статистика исходящих оплат</title>
+        <title>{t('outgoing-payments-statistics')}</title>
       </Head>
 
       <AccountLayout>
         {useMemo(
           () => (
             <BarChart
-              title="Статистика исходящих оплат"
+              title={t('outgoing-payments-statistics')}
               data={incomeStatistics.diagram}
               isLoading={isIncomeStatisticsLoading}
             />

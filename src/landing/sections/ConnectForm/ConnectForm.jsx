@@ -58,7 +58,7 @@ export const ConnectFormSection = () => {
             <S.Text>
               {t('you-physical-person-receive-tips')}{' '}
               <Link href={ROUTE_NAMES.AUTH} prefetch={false}>
-                <a>{t('register')}</a>
+                <a>{t('register').toLowerCase()}</a>
               </Link>{' '}
               {t('in-our-service')}
             </S.Text>

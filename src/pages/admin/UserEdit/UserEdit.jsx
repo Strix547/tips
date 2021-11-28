@@ -127,7 +127,7 @@ export const UserEditPage = observer(() => {
               <S.Label>{t('acitivity')}</S.Label>
               <Switch name="activity" size="big" />
 
-              <S.Label>Агент</S.Label>
+              <S.Label>{t('agent')}</S.Label>
               <Switch name="agentActive" size="big" />
             </S.Options>
 

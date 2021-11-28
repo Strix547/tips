@@ -31,7 +31,7 @@ export const UserStatisticsPage = observer(() => {
 
   const [tab, setTab] = useState('income')
   const userId = router.query.id
-  console.log(userId)
+  
   const { incomeStatistics, isIncomeStatisticsLoading } = statisticsStore
 
   const { period, periodFrom, periodTo } = watch()

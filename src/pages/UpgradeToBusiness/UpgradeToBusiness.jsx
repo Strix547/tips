@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 
 import { AccountLayout } from 'layout'
 import { Button } from 'ui'
@@ -11,6 +12,7 @@ import { ROUTE_NAMES } from 'core/routes'
 import * as S from './UpgradeToBusiness.styled'
 
 export const UpgradeToBusinessPage = observer(() => {
+  const { t } = useTranslation('common')
   const router = useRouter()
 
   const userId = userStore.id
@@ -26,19 +28,19 @@ export const UpgradeToBusinessPage = observer(() => {
   return (
     <>
       <Head>
-        <title>Обновиться до бизнес-аккаунта</title>
+        <title>{t('upgrade-to-business')}</title>
       </Head>
 
-      <AccountLayout title="Обновление">
+      <AccountLayout title={t('upgrade')}>
         <S.Content>
-          <S.Text>Хотите ли вы обновиться до бизнес-аккаунта?</S.Text>
+          <S.Text>{t('do-you-want-upgrade-to-business')}</S.Text>
 
           <S.ActionsRow>
             <Button onClick={toMainPage} variant="bordered">
-              Нет, не хочу
+              {t('no-dont-want')}
             </Button>
 
-            <Button onClick={onUpgradeSubmit}>Да, обновить</Button>
+            <Button onClick={onUpgradeSubmit}>{t('yes-upgrade')}</Button>
           </S.ActionsRow>
         </S.Content>
       </AccountLayout>

@@ -2,6 +2,7 @@ import { useEffect, useMemo } from 'react'
 import { observer } from 'mobx-react-lite'
 import { FormProvider, useForm } from 'react-hook-form'
 import Head from 'next/head'
+import { useTranslation } from 'next-i18next'
 
 import { AccountLayout } from 'layout'
 import { BarChart, TipsTable, TableRowCard } from 'components'
@@ -10,6 +11,8 @@ import { userStore, statisticsStore } from 'store'
 import { getTimeZoneOffset, transformDateTimeToLabel, getPriceLabel } from 'utils'
 
 export const PaymentsIncomingStatisticsPage = observer(() => {
+  const { t } = useTranslation('common')
+
   const useFormProps = useForm({
     defaultValues: {
       period: 'MONTH'
@@ -35,22 +38,22 @@ export const PaymentsIncomingStatisticsPage = observer(() => {
 
   const columns = [
     {
-      headerName: 'Дата и время',
+      headerName: t('date-time'),
       field: 'dateTime',
       flex: 1
     },
     {
-      headerName: 'Телефон',
+      headerName: t('phone'),
       field: 'phone',
       flex: 1
     },
     {
-      headerName: 'Размер чаевых',
+      headerName: t('tip-amount'),
       field: 'tipAmount',
       flex: 1
     },
     {
-      headerName: 'Счёт',
+      headerName: t('card-number'),
       field: 'last4Digits',
       flex: 1
     }
@@ -67,8 +70,8 @@ export const PaymentsIncomingStatisticsPage = observer(() => {
   const tableCards = incomeStatistics.table.map(
     ({ id, dateTime, tipAmount, phone, last4Digits }) => {
       const rows = [
-        { label: 'Телефон', value: phone },
-        { label: 'Счёт', value: last4Digits }
+        { label: t('phone'), value: phone },
+        { label: t('card-number'), value: last4Digits }
       ]
 
       return (
@@ -97,14 +100,14 @@ export const PaymentsIncomingStatisticsPage = observer(() => {
   return (
     <>
       <Head>
-        <title>Статистика входящих оплат</title>
+        <title>{t('incoming-payments-statistics')}</title>
       </Head>
 
       <AccountLayout>
         {useMemo(
           () => (
             <BarChart
-              title="Статистика входящих оплат"
+              title={t('incoming-payments-statistics')}
               data={incomeStatistics.diagram}
               isLoading={isIncomeStatisticsLoading}
             />

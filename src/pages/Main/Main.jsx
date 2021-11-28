@@ -50,7 +50,7 @@ export const UserMainPage = observer(() => {
   const columns = isBusinessAccount
     ? [
         {
-          headerName: t('Date & time'),
+          headerName: t('date-time'),
           field: 'dateTime',
           flex: 1
         },
@@ -83,7 +83,7 @@ export const UserMainPage = observer(() => {
       ]
     : [
         {
-          headerName: t('Date & time'),
+          headerName: t('date-time'),
           field: 'dateTime',
           flex: 1
         },
@@ -141,7 +141,7 @@ export const UserMainPage = observer(() => {
       const rows = [
         { label: t('name-qr-code'), value: qrName },
         { label: t('tip-size'), value: getPriceLabel(tipAmount, getCurrencySymbol(currency)) },
-        { label: 'Впечатление', value: impression }
+        { label: t('impression'), value: impression }
       ]
 
       return (
@@ -170,11 +170,11 @@ export const UserMainPage = observer(() => {
       currency
     }) => {
       const rows = [
-        { label: 'Площадка', value: platformName },
-        { label: 'Пользователь', value: `${lastName} ${firstName}` },
+        { label: t('platform'), value: platformName },
+        { label: t('user'), value: `${lastName} ${firstName}` },
         { label: t('tip-size'), value: getPriceLabel(tipAmount, getCurrencySymbol(currency)) },
-        { label: 'Комссия', value: getPriceLabel(commission, getCurrencySymbol(currency)) },
-        { label: 'Рейтинг', value: <RatingCell rating={rating} /> }
+        { label: t('commission'), value: getPriceLabel(commission, getCurrencySymbol(currency)) },
+        { label: t('rating'), value: <RatingCell rating={rating} /> }
       ]
 
       return (

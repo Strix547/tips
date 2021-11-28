@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 
 import { Table, FormField } from 'ui'
 import { ExcelDownload, ActionCell } from 'common'
@@ -13,6 +14,7 @@ import * as S from './Table.styled'
 import LoupeIcon from '@public/icons/loupe.svg'
 
 export const UsersTable = ({ users = [], isUsersLoading, onExcelDownload }) => {
+  const { t } = useTranslation('common')
   const router = useRouter()
 
   const toUserStatisticsPage = (userId) => {
@@ -49,37 +51,37 @@ export const UsersTable = ({ users = [], isUsersLoading, onExcelDownload }) => {
 
   const columns = [
     {
-      headerName: 'Имя',
+      headerName: t('name'),
       field: 'fullName',
       flex: 1
     },
     {
-      headerName: 'Телефон',
+      headerName: t('phone'),
       field: 'phone',
       flex: 1
     },
     {
-      headerName: 'E-mail',
+      headerName: t('email'),
       field: 'email',
       flex: 1
     },
     {
-      headerName: 'Дата регистрации',
+      headerName: t('sign-up-date'),
       field: 'date',
       flex: 1
     },
     {
-      headerName: 'Страна',
+      headerName: t('country'),
       field: 'country',
       flex: 1
     },
     {
-      headerName: 'Группа',
+      headerName: t('group'),
       field: 'group',
       flex: 1
     },
     {
-      headerName: 'Действия',
+      headerName: t('actions'),
       field: 'actions',
       flex: 1,
       sortable: false,
@@ -103,11 +105,11 @@ export const UsersTable = ({ users = [], isUsersLoading, onExcelDownload }) => {
   const tableCards = users.map(
     ({ id, firstName, lastName, phone, country, role, email, signUpDateTime, active }) => {
       const rows = [
-        { label: 'Телефон', value: phone },
-        { label: 'E-mail', value: email },
-        { label: 'Дата', value: transformDateTimeToLabel(signUpDateTime) },
-        { label: 'Группа', value: getRoleLabel(role) },
-        { label: 'Страна', value: country }
+        { label: t('phone'), value: phone },
+        { label: t('email'), value: email },
+        { label: t('date'), value: transformDateTimeToLabel(signUpDateTime) },
+        { label: t('group'), value: getRoleLabel(role) },
+        { label: t('country'), value: country }
       ]
 
       return (
@@ -128,7 +130,7 @@ export const UsersTable = ({ users = [], isUsersLoading, onExcelDownload }) => {
       <S.Top>
         <FormField
           name="name"
-          placeholder="Поиск по сотруднику"
+          placeholder={t('search-employee')}
           InputProps={{ endAdornment: <LoupeIcon /> }}
         />
 
@@ -141,7 +143,7 @@ export const UsersTable = ({ users = [], isUsersLoading, onExcelDownload }) => {
         cards={tableCards}
         cardHeight={254}
         isLoading={isUsersLoading}
-        noText="Пользователи не найдены"
+        noText={t('users-not-found')}
       />
     </S.UsersTable>
   )

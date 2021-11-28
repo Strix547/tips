@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite'
 import Skeleton from 'react-loading-skeleton'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 
 import { AccountLayout } from 'layout'
 import { PaymentCardOptionsPanelIndividual, RecipientCardPreview } from 'components'
@@ -13,6 +14,7 @@ import { qrCodesStore, userStore } from 'store'
 import * as S from './IndividualEdit.styled'
 
 export const QrIndividualEditPage = observer(() => {
+  const { t } = useTranslation('common')
   const router = useRouter()
 
   const useFormProps = useForm()
@@ -56,15 +58,15 @@ export const QrIndividualEditPage = observer(() => {
   return (
     <>
       <Head>
-        <title>Редактирование QR-кода физ. лица</title>
+        <title>{t('editing-qr-code-physical')}</title>
       </Head>
 
-      <AccountLayout title="Редактировать QR-код">
+      <AccountLayout title={t('edit-qr-code')}>
         <S.Content>
           {!isQrCodeLoading ? (
             <FormProvider {...useFormProps}>
               <PaymentCardOptionsPanelIndividual
-                action={{ label: 'Редактировать QR-код', onClick: editQr }}
+                action={{ label: t('edit-qr-code'), onClick: editQr }}
               />
 
               <RecipientCardPreview

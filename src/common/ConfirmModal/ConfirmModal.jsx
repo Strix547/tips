@@ -1,19 +1,23 @@
+import { useTranslation } from 'next-i18next'
+
 import { Button } from 'ui'
 
 import * as S from './ConfirmModal.styled'
 
 export const ConfirmModal = ({ open, onConfirm, onClose }) => {
+  const { t } = useTranslation('common')
+
   return (
     <S.ConfirmModal open={open} onClose={onClose}>
       <S.Wrapper>
-        <S.Heading level={6}>Подтвердите действие</S.Heading>
+        <S.Heading level={6}>{t('confirm-action')}</S.Heading>
 
         <S.Actions>
           <Button variant="bordered" onClick={onClose}>
-            Нет, это ошибка
+            {t('no-it-mistake')}
           </Button>
 
-          <Button onClick={onConfirm}>Да, уверен</Button>
+          <Button onClick={onConfirm}>{t('yes-i-sure')}</Button>
         </S.Actions>
       </S.Wrapper>
     </S.ConfirmModal>

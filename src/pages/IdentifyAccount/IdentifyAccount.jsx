@@ -5,6 +5,7 @@ import { useStripe, useElements, IbanElement } from '@stripe/react-stripe-js'
 import { observer } from 'mobx-react-lite'
 import { toJS } from 'mobx'
 import Head from 'next/head'
+import { useTranslation } from 'next-i18next'
 
 import { PersonalDataStep, AccountTypeStep, LocationStep } from './steps'
 import { Button, Stepper, Step, StepLabel, CircularProgress } from 'ui'
@@ -19,6 +20,7 @@ import * as S from './IdentifyAccount.styled'
 import CommentRegulationIcon from '@public/img/landing/comment-regulation.svg'
 
 export const IdentifyAccountPage = observer(({ stripePromise }) => {
+  const { t } = useTranslation('common')
   const stripe = useStripe()
   const stripeElements = useElements()
 
@@ -154,7 +156,7 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
         setStripeError(error.message)
         return
       }
-      console.log(accountToken, bankAccountToken)
+      
       if (accountToken && bankAccountToken) {
         userStore.identifyAccount({
           userId: userStore.id,
@@ -188,14 +190,14 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
   return (
     <>
       <Head>
-        <title>Идентификация аккаунта</title>
+        <title>{t('account-identification')}</title>
       </Head>
 
       <S.IdentifyAccountPage>
         <S.Left>
           {!isIdentifyProcessing ? (
             <S.Content>
-              <S.Heading level={6}>Идентификация аккаунта</S.Heading>
+              <S.Heading level={6}>{t('account-identification')}</S.Heading>
 
               <Stepper activeStep={step}>{stepList}</Stepper>
 
@@ -212,7 +214,7 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
               </FormProvider>
 
               <S.StepNav>
-                {step !== 0 && <Button onClick={onPrevStep}>Назад</Button>}
+                {step !== 0 && <Button onClick={onPrevStep}>{t('back')}</Button>}
                 {step !== 3 && (
                   <Button
                     type="submit"

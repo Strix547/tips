@@ -38,7 +38,7 @@ export const Header = observer(({ withSidebar }) => {
   const { firstName, lastName, avatar } = personalData
   const currentPathname = router.pathname
   const isIdentifyRole = role === 'UNVERIFIED'
-  console.log(isIdentifyRole)
+  
   useEffect(() => {
     if (lang) {
       reset({ lang })

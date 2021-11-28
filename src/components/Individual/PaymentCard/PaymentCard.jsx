@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react-lite'
+import { useTranslation } from 'next-i18next'
 
 import { AvatarIndividual, TipAmount } from 'components'
 import { ImpressionRow } from 'common'
@@ -11,6 +12,8 @@ import * as S from './PaymentCard.styled'
 import avatar from '@public/img/placeholders/avatar.png'
 
 export const IndividualPaymentCard = observer(({ currency }) => {
+  const { t } = useTranslation('common')
+
   const { firstName, lastName, amountPresets, impression } = paymentStore.paymentData
 
   const avatarPreview = paymentStore.paymentData.avatar || avatar
@@ -26,9 +29,9 @@ export const IndividualPaymentCard = observer(({ currency }) => {
 
         {impression && <ImpressionRow />}
 
-        <Button>Заплатить</Button>
+        <Button>{t('pay')}</Button>
 
-        <S.Text>Tips.me - это сервис для перевод чаевых и донатов.</S.Text>
+        <S.Text>{t('flytips-service-for')}</S.Text>
       </S.RecipientCardMain>
     </S.RecipientCard>
   )

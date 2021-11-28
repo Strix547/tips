@@ -3,6 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 import { observer } from 'mobx-react-lite'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 
 import { AccountLayout } from 'layout'
 import { PlatformSearch, Button } from 'ui'
@@ -12,6 +13,7 @@ import { employeesStore } from 'store'
 import * as S from './Edit.styled'
 
 export const EmployeeEditPage = observer(() => {
+  const { t } = useTranslation('common')
   const router = useRouter()
   const useFormProps = useForm()
   const { handleSubmit } = useFormProps
@@ -29,16 +31,16 @@ export const EmployeeEditPage = observer(() => {
   return (
     <>
       <Head>
-        <title>Редактирование сотрудника</title>
+        <title>{t('user-editing')}</title>
       </Head>
 
-      <AccountLayout title="Редактирование сотрудника">
+      <AccountLayout title={t('user-editing')}>
         <S.FormContainer onSubmit={handleSubmit(onEmployeeEdit)}>
           {!isEmployeeConnecting ? (
             <FormProvider {...useFormProps}>
-              <PlatformSearch label="Площадка, с которой связывается профиль сотрудника" />
+              <PlatformSearch label={t('platform-connected-to-employee')} />
 
-              <Button type="submit">Сохранить</Button>
+              <Button type="submit">{t('save')}</Button>
             </FormProvider>
           ) : (
             <Skeleton height={164} />

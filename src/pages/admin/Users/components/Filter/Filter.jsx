@@ -29,7 +29,7 @@ export const UsersFilter = () => {
   return (
     <S.Filter>
       <S.Column>
-        <DatePicker name="date" label={`${t('date')}:`} placeholderText="Выберите дату" withIcon />
+        <DatePicker name="date" label={`${t('date')}:`} placeholderText={t('choose-date')} withIcon />
       </S.Column>
 
       <S.Column>

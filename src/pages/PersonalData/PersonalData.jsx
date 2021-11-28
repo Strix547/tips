@@ -132,17 +132,17 @@ export const PersonalDataPage = observer(() => {
       <AccountLayout title={t('personal-information')}>
         <S.Content>
           <FormProvider {...useFormProps}>
-            <FormField name="firstName" label={t('First name')} placeholder="Введите имя" />
+            <FormField name="firstName" label={t('First name')} placeholder={t('write-name')} />
 
-            <FormField name="lastName" label={t('last-name')} placeholder="Введите фамилию" />
+            <FormField name="lastName" label={t('last-name')} placeholder={t('enter-lastname')} />
 
             <BirthDateAdultValid />
 
             <EmailField />
 
-            <FormField name="address" label={t('address')} placeholder="Введите адрес" />
+            <FormField name="address" label={t('address')} placeholder={t('enter-address')} />
 
-            <FormField name="postal" label={t('zip-code')} placeholder="Введите почтовый индекс" />
+            <FormField name="postal" label={t('zip-code')} placeholder={t('enter-zip-code')} />
 
             <S.AvatarField>
               <S.Label>{t('avatar')}</S.Label>

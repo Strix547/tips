@@ -4,6 +4,7 @@ import { toJS } from 'mobx'
 import { useForm, FormProvider } from 'react-hook-form'
 import Head from 'next/head'
 import throttle from 'lodash.throttle'
+import { useTranslation } from 'next-i18next'
 
 import { AccountLayout } from 'layout'
 import { UsersFilter, UsersTable } from './components'
@@ -14,6 +15,8 @@ import { getTimeZoneOffset, transformDateToIso } from 'utils'
 import * as S from './Users.styled'
 
 export const UsersPage = observer(() => {
+  const { t } = useTranslation('common')
+
   const useFormProps = useForm({
     defaultValues: {
       group: 'REGULAR',
@@ -60,15 +63,15 @@ export const UsersPage = observer(() => {
   return (
     <>
       <Head>
-        <title>Список пользователей</title>
+        <title>{t('users-list')}</title>
       </Head>
 
-      <AccountLayout title="Список пользователей">
+      <AccountLayout title="{t('users-list')}">
         <FormProvider {...useFormProps}>
           <UsersFilter />
 
           <S.UserCountRow>
-            <S.Text>Кол-во пользователей:</S.Text>
+            <S.Text>{t('number-of-users')}:</S.Text>
             <S.Text>{users.length}</S.Text>
           </S.UserCountRow>
 

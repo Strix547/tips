@@ -94,7 +94,7 @@ export const PlatformEditPage = observer(() => {
               />
 
               <S.ActionRow>
-                <Button type="submit">Сохранить</Button>
+                <Button type="submit">{t('save')}</Button>
                 <Button
                   type="button"
                   variant="bordered"
@@ -103,7 +103,7 @@ export const PlatformEditPage = observer(() => {
                     setConfirmModalOpen(true)
                   }}
                 >
-                  Удалить
+                  {t('delete')}
                 </Button>
               </S.ActionRow>
             </S.Form>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useTranslation } from 'next-i18next'
 
 import { Checkbox, FormField, LocationSearch, Dropzone } from 'ui'
 
@@ -13,6 +14,7 @@ export const LocationStep = ({
   onIndetityDocumentUpload,
   onAddressDocumentUpload
 }) => {
+  const { t } = useTranslation('common')
   const [identityImg, setIdentityImg] = useState({ src: null, name: null })
   const [addressImg, setAddressImg] = useState({ src: null, name: null })
 
@@ -47,22 +49,22 @@ export const LocationStep = ({
 
   return (
     <S.LocationStep>
-      <S.FieldsLabel>Заполните поля:</S.FieldsLabel>
+      <S.FieldsLabel>{t('fill-fields')}:</S.FieldsLabel>
 
       <LocationSearch />
 
-      <FormField name="address" label="Адрес" placeholder="Введите адрес" required />
+      <FormField name="address" label={t('address')} placeholder={t('enter-address')} required />
 
-      <FormField name="postal" label="Индекс" placeholder="Введите почтовый индекс" required />
+      <FormField name="postal" label={t('zip-code')} placeholder={t('enter-zip-code')} required />
 
       {stripePromise && (
         <S.IbanContainer>
-          <S.Label>IBAN</S.Label>
+          <S.Label>{t('your-bank-account-iban')}</S.Label>
           <S.Iban options={ibanOptions} />
         </S.IbanContainer>
       )}
 
-      <S.Label>Passport or Local ID card</S.Label>
+      <S.Label>{t('passport-or-local-id')}</S.Label>
 
       <Dropzone accept="image/*" multiple={false} onFileChange={uploadIdentityDocument}>
         {!identityImg.src ? (
@@ -80,7 +82,7 @@ export const LocationStep = ({
         )}
       </Dropzone>
 
-      <S.Label>A Document showing address</S.Label>
+      <S.Label>{t('document-showing-address')}</S.Label>
 
       <Dropzone accept="image/*" multiple={false} onFileChange={uploadAddressDocument}>
         {!addressImg.src ? (
@@ -101,10 +103,10 @@ export const LocationStep = ({
       <S.Agreement>
         <Checkbox rules={{ required: true }} name="agreement" />
 
-        <S.Text>Соглашаюсь с </S.Text>
+        <S.Text>{t('i-agree-with')}</S.Text>
 
         <Link href="https://stripe.com/connect-account/legal/recipient" prefetch={false}>
-          <a>политикой stripe</a>
+          <a>{t('stripe-policy')}</a>
         </Link>
       </S.Agreement>
     </S.LocationStep>

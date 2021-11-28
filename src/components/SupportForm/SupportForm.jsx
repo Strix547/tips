@@ -111,7 +111,7 @@ export const SupportForm = observer(() => {
           </S.ThemeRow>
 
           {letterTheme === 'other' && (
-            <FormField name="theme" placeholder="Введите название темы" />
+            <FormField name="theme" placeholder={t('enter-topic-title')} />
           )}
 
           <Controller
