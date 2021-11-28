@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import { Tooltip } from '@material-ui/core'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 
 import { TableRowCard } from 'components'
 import { ActionCell } from 'common'
@@ -12,6 +13,7 @@ import { ROUTE_NAMES } from 'core/routes'
 import * as S from './EmployeeTable.styled'
 
 export const EmployeeTable = observer(({ employees, isEmployeesLoading }) => {
+  const { t } = useTranslation('common')
   const router = useRouter()
 
   const userId = userStore.id
@@ -89,10 +91,10 @@ export const EmployeeTable = observer(({ employees, isEmployeesLoading }) => {
     available
   }) => {
     const rows = [
-      { label: 'Имя', value: fullName },
-      { label: 'Телефон', value: phone },
-      { label: 'Площадка', value: platform },
-      { label: 'Статистика', value: statistics }
+      { label: t('name'), value: fullName },
+      { label: t('phone'), value: phone },
+      { label: t('platform'), value: platform },
+      { label: t('statistics'), value: statistics }
     ]
 
     return (
@@ -106,30 +108,30 @@ export const EmployeeTable = observer(({ employees, isEmployeesLoading }) => {
 
   const columns = [
     {
-      headerName: 'ФИО',
+      headerName: t('fullName'),
       field: 'fullName',
       flex: 1,
       renderCell: ({ row }) => renderTooltip(row.fullName)
     },
     {
-      headerName: 'Телефон',
+      headerName: t('phone'),
       field: 'phone',
       flex: 1,
       renderCell: ({ row }) => renderTooltip(row.phone)
     },
     {
-      headerName: 'Площадка',
+      headerName: t('platform'),
       field: 'platform',
       flex: 1,
       renderCell: ({ row }) => renderTooltip(row.platform)
     },
     {
-      headerName: 'Статистика',
+      headerName: t('statistics'),
       field: 'statistics',
       flex: 1
     },
     {
-      headerName: 'Действия',
+      headerName: t('actions'),
       field: 'actions',
       flex: 1,
       sortable: false,
@@ -173,7 +175,7 @@ export const EmployeeTable = observer(({ employees, isEmployeesLoading }) => {
         cards={employeeTableCards}
         cardHeight={219}
         isLoading={isEmployeesLoading}
-        noText="Сотрудники не найдены"
+        noText={t('no-employees-found')}
         onRowClick={({ row }) => toEmployeeEditPage(row.employeeId)}
       />
     </S.EmployeeTable>

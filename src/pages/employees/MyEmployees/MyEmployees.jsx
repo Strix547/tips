@@ -1,9 +1,8 @@
 import { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
-import Skeleton from 'react-loading-skeleton'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
-
+import { useTranslation } from 'next-i18next'
 import { AccountLayout } from 'layout'
 import { EmployeeTable } from 'components'
 
@@ -13,6 +12,7 @@ import { ROUTE_NAMES } from 'core/routes'
 import * as S from './MyEmployees.styled'
 
 export const MyEmployeesPage = observer(() => {
+  const { t } = useTranslation('common')
   const router = useRouter()
 
   const userId = userStore.id
@@ -31,12 +31,12 @@ export const MyEmployeesPage = observer(() => {
   return (
     <>
       <Head>
-        <title>Мои сотрудники</title>
+        <title>{t('my-salarees')}</title>
       </Head>
 
       <AccountLayout
-        title="Мои сотрудники"
-        button={{ label: 'Создать сотрудника', onClick: toCreateEmployeePage }}
+        title={t('my-salarees')}
+        button={{ label: t('create-employee'), onClick: toCreateEmployeePage }}
         styles={S.layoutStyles}
       >
         <EmployeeTable employees={employees} isEmployeesLoading={isEmployeesLoading} />

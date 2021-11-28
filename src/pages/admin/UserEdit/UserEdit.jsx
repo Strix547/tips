@@ -4,6 +4,7 @@ import { useForm, FormProvider } from 'react-hook-form'
 import Skeleton from 'react-loading-skeleton'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 
 import { AccountLayout } from 'layout'
 import { FormField, Button, Switch, Select, MenuItem, PhoneField } from 'ui'
@@ -15,6 +16,7 @@ import { USER_ROLES } from 'core/constants'
 import * as S from './UserEdit.styled'
 
 export const UserEditPage = observer(() => {
+  const { t } = useTranslation('common')
   const router = useRouter()
   const useFormProps = useForm()
   const { reset, watch, handleSubmit } = useFormProps
@@ -87,10 +89,10 @@ export const UserEditPage = observer(() => {
     return (
       <>
         <Head>
-          <title>Редактирование сотрудника</title>
+          <title>{t('user-editing')}</title>
         </Head>
 
-        <AccountLayout title="Редактирование сотрудника">
+        <AccountLayout title={t('user-editing')}>
           <S.Form>
             <Skeleton count={8} height={88} />
           </S.Form>
@@ -103,26 +105,26 @@ export const UserEditPage = observer(() => {
     <>
       <Head>
         <title>
-          Редактирование сотрудника {lastName} {firstName}
+          {t('user-editing')} {lastName} {firstName}
         </title>
       </Head>
 
-      <AccountLayout title={`Редактирование сотрудника ${lastName} ${firstName}`}>
+      <AccountLayout title={`${t('user-editing')} ${lastName} ${firstName}`}>
         <FormProvider {...useFormProps}>
           <S.Form onSubmit={handleSubmit(onUserSave)}>
-            <FormField name="signUpDateTime" label="Дата регистрации" disabled />
-            <FormField name="lastSignInDateTime" label="Дата последнего входа" disabled />
-            <FormField name="country" label="Страна регистрации" disabled />
-            <FormField name="firstName" label="Имя" placeholder="Введите имя" />
-            <FormField name="lastName" label="Фамилия" placeholder="Введите фамилию" />
+            <FormField name="signUpDateTime" label={t('sign-up-date')} disabled />
+            <FormField name="lastSignInDateTime" label={t('last-log-in-date')} disabled />
+            <FormField name="country" label={t('register-country')} disabled />
+            <FormField name="firstName" label={t('name')} placeholder={t('write-name')} />
+            <FormField name="lastName" label={t('last-name')} placeholder={t('enter-lastname')} />
             <PhoneField />
-            <FormField name="email" label="Email" placeholder="Введите email" />
+            <FormField name="email" label={t('email')} placeholder={t('write-email')} />
 
-            <S.Label>Группа</S.Label>
+            <S.Label>{t('group')}</S.Label>
             <Select name="group">{groupMenuItems}</Select>
 
             <S.Options>
-              <S.Label>Активность</S.Label>
+              <S.Label>{t('acitivity')}</S.Label>
               <Switch name="activity" size="big" />
 
               <S.Label>Агент</S.Label>
@@ -130,9 +132,9 @@ export const UserEditPage = observer(() => {
             </S.Options>
 
             <S.ActionsRow>
-              <Button type="submit">Сохранить</Button>
+              <Button type="submit">{t('save')}</Button>
               <Button type="button" onClick={() => intoAdminMode(userId, adminId)}>
-                Залогиниться
+                {t('login')}
               </Button>
             </S.ActionsRow>
           </S.Form>

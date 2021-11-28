@@ -25,7 +25,7 @@ export const PaymentCardOptionsPanelIndividual = observer(({ action }) => {
           <S.FormField
             key={name}
             value={value}
-            placeholder="Сумма"
+            placeholder={t('tip-amount')}
             InputProps={{ endAdornment: currency }}
             onChange={({ target: { value } }) => {
               const numReg = /^\d+$/
@@ -47,7 +47,7 @@ export const PaymentCardOptionsPanelIndividual = observer(({ action }) => {
 
   return (
     <S.PaymentCardOptionsPanelIndividual>
-      <FormField name="name" label={t('title')} placeholder={t('enter-title')} required />
+      <FormField name="name" label={t('qr-name')} placeholder={t('enter-name')} required />
 
       <S.AmountPresetsRow>
         <S.Label>{t('preset-tip-amounts')}</S.Label>

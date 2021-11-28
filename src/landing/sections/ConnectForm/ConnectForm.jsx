@@ -1,5 +1,6 @@
 import { FormProvider, useForm } from 'react-hook-form'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 
@@ -11,7 +12,7 @@ import { authStore } from 'store'
 
 import * as S from './ConnectForm.styled'
 
-import GreenDotesSvg from '@public/img/landing/green-dotes.svg'
+import greenDotesSrc from '@public/img/landing/green-dotes.jpg'
 
 export const ConnectFormSection = () => {
   const router = useRouter()
@@ -55,7 +56,7 @@ export const ConnectFormSection = () => {
 
           <S.FormBottom>
             <S.Text>
-              {t('you-physical-person-receive-tips')} <br />
+              {t('you-physical-person-receive-tips')}{' '}
               <Link href={ROUTE_NAMES.AUTH} prefetch={false}>
                 <a>{t('register')}</a>
               </Link>{' '}
@@ -65,8 +66,12 @@ export const ConnectFormSection = () => {
         </S.FormContainer>
 
         <S.Background>
-          <GreenDotesSvg />
-          <GreenDotesSvg />
+          <S.GreenDotes>
+            <Image src={greenDotesSrc} alt="green dotes" />
+          </S.GreenDotes>
+          <S.GreenDotes>
+            <Image src={greenDotesSrc} alt="green dotes" />
+          </S.GreenDotes>
         </S.Background>
       </S.Content>
     </Section>

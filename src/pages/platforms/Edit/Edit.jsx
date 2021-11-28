@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite'
 import Skeleton from 'react-loading-skeleton'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 
 import { AccountLayout } from 'layout'
 import { ConfirmModal } from 'common'
@@ -16,6 +17,7 @@ import { PLATFORM_TYPES } from 'core/constants'
 import * as S from './Edit.styled'
 
 export const PlatformEditPage = observer(() => {
+  const { t } = useTranslation('common')
   const router = useRouter()
   const useFormProps = useForm()
   const { handleSubmit, reset } = useFormProps
@@ -79,10 +81,10 @@ export const PlatformEditPage = observer(() => {
   return (
     <>
       <Head>
-        <title>Редактировать площадку</title>
+        <title>{t('platform-edit')}</title>
       </Head>
 
-      <AccountLayout title="Редактировать площадку">
+      <AccountLayout title={t('platform-edit')}>
         <FormProvider {...useFormProps}>
           {!isPlatformLoading ? (
             <S.Form onSubmit={handleSubmit(onEditPlatform)}>

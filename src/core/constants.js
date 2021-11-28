@@ -1,20 +1,20 @@
 export const CURRENCIES = [
-  { label: 'USD', value: 'USD', symbol: '$' },
+  { label: 'USD', value: 'USD', symbol: '$', locale: '' },
   { label: 'EUR', value: 'EUR', symbol: '€' },
   { label: 'GBP', value: 'GBP', symbol: '£' }
 ]
 
 export const PLATFORM_TYPES = [
-  { label: 'Ресторан', value: 'RESTAURANT' },
-  { label: 'Фитнес-центр', value: 'FITNESS_CENTER' },
-  { label: 'Салон красоты', value: 'BEAUTY_SALON' },
-  { label: 'Автосервис', value: 'CAR_SERVICE' },
-  { label: 'Другое', value: 'OTHER' }
+  { label: 'restaurant', value: 'RESTAURANT' },
+  { label: 'fitnes-center', value: 'FITNESS_CENTER' },
+  { label: 'beauty-saloon', value: 'BEAUTY_SALON' },
+  { label: 'car-service', value: 'CAR_SERVICE' },
+  { label: 'other', value: 'OTHER' }
 ]
 
 export const USER_ROLES = [
-  { label: 'Пользователи', value: 'REGULAR' },
-  { label: 'Бизнес', value: 'BUSINESS' },
-  { label: 'Не верифицированные', value: 'UNVERIFIED' },
-  { label: 'Админы', value: 'ADMIN' }
+  { label: 'users', value: 'REGULAR' },
+  { label: 'business-acocunt', value: 'BUSINESS' },
+  { label: 'unverified', value: 'UNVERIFIED' },
+  { label: 'admins', value: 'ADMIN' }
 ]

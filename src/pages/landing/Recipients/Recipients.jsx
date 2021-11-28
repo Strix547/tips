@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 
 import { Header, Footer } from 'layout'
@@ -10,7 +11,9 @@ import { HowServiceWorkSection } from './sections'
 import { ROUTE_NAMES } from 'core/routes'
 
 import dashboard from '@public/img/landing/recipients-banner-dashboard.png'
+import dashboardEn from '@public/img/landing/recipients-banner-dashboard-en.png'
 import dashboardMobile from '@public/img/landing/recipients-banner-dashboard-mobile.png'
+import dashboardMobileEn from '@public/img/landing/recipients-banner-dashboard-mobile-en.png'
 
 import SheetIcon from '@public/icons/sheet.svg'
 
@@ -18,6 +21,8 @@ import * as S from './Recipients.styled'
 
 export const RecipientsPage = () => {
   const { t } = useTranslation('common')
+  const { locale } = useRouter()
+  const isLocaleRu = locale === 'ru'
 
   const agentTypes = [
     {
@@ -55,7 +60,10 @@ export const RecipientsPage = () => {
           title={t('electronic-tips')}
           features={bannerFeatures}
           actions={bannerAction}
-          img={{ desktop: dashboard, mobile: dashboardMobile }}
+          img={{
+            desktop: isLocaleRu ? dashboard : dashboardEn,
+            mobile: isLocaleRu ? dashboardMobile : dashboardMobileEn
+          }}
         />
 
         <Section styles={S.sectionStyles}>

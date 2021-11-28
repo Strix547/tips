@@ -21,6 +21,7 @@ import * as S from './Payment.styled'
 export const QrPaymentPage = observer(() => {
   const { t } = useTranslation('common')
   const router = useRouter()
+
   const useFormProps = useForm({
     defaultValues: {
       impression: '😊',

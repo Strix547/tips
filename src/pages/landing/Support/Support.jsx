@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Image from 'next/image'
 import { useTranslation } from 'next-i18next'
 
 import { Header, Footer } from 'layout'
@@ -6,7 +7,7 @@ import { SupportForm } from 'components'
 
 import * as S from './Support.styled'
 
-import GreenDotesSvg from '@public/img/landing/green-dotes.svg'
+import greenDotesSrc from '@public/img/landing/green-dotes.jpg'
 
 export const SupportPage = () => {
   const { t } = useTranslation('common')
@@ -26,8 +27,12 @@ export const SupportPage = () => {
           <SupportForm />
 
           <S.Background>
-            <GreenDotesSvg />
-            <GreenDotesSvg />
+            <S.GreenDotes>
+              <Image src={greenDotesSrc} alt="green dotes" />
+            </S.GreenDotes>
+            <S.GreenDotes>
+              <Image src={greenDotesSrc} alt="green dotes" />
+            </S.GreenDotes>
           </S.Background>
         </S.Wrapper>
       </S.Main>

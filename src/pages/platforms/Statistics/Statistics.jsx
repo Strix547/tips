@@ -3,6 +3,7 @@ import { useForm, FormProvider } from 'react-hook-form'
 import { observer } from 'mobx-react-lite'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 
 import { AccountLayout } from 'layout'
 import { LineChart, TipsTable, TableRowCard } from 'components'
@@ -12,6 +13,7 @@ import { userStore, statisticsStore } from 'store'
 import { getTimeZoneOffset, transformDateTimeToLabel, getPriceLabel } from 'utils'
 
 export const PlatformStatisticsPage = observer(() => {
+  const { t } = useTranslation('common')
   const router = useRouter()
   const useFormProps = useForm({
     defaultValues: {
@@ -53,27 +55,27 @@ export const PlatformStatisticsPage = observer(() => {
 
   const columns = [
     {
-      headerName: 'Дата и время',
+      headerName: t('date-time'),
       field: 'dateTime',
       flex: 1
     },
     {
-      headerName: 'Пользователь',
+      headerName: t('user'),
       field: 'fullName',
       flex: 1
     },
     {
-      headerName: 'Размер чаевых',
+      headerName: t('tip-amount'),
       field: 'tipAmount',
       flex: 1
     },
     {
-      headerName: 'Комиссия',
+      headerName: t('commission'),
       field: 'commission',
       flex: 1
     },
     {
-      headerName: 'Рейтинг',
+      headerName: t('rating'),
       field: 'rating',
       flex: 1,
       renderCell: ({ row }) => <RatingCell rating={row.rating} />
@@ -94,10 +96,10 @@ export const PlatformStatisticsPage = observer(() => {
   const tableCards = incomeStatistics.table.map(
     ({ id, dateTime, firstName, lastName, tipAmount, commission, rating }) => {
       const rows = [
-        { label: 'Пользователь', value: `${lastName} ${firstName}` },
-        { label: 'Размер чаевых', value: getPriceLabel(tipAmount, currencyLabel) },
-        { label: 'Комссия', value: getPriceLabel(commission, currencyLabel) },
-        { label: 'Рейтинг', value: <RatingCell rating={rating} /> }
+        { label: t('user'), value: `${lastName} ${firstName}` },
+        { label: t('tip-amount'), value: getPriceLabel(tipAmount, currencyLabel) },
+        { label: t('commission'), value: getPriceLabel(commission, currencyLabel) },
+        { label: t('rating'), value: <RatingCell rating={rating} /> }
       ]
 
       return (
@@ -116,10 +118,12 @@ export const PlatformStatisticsPage = observer(() => {
   return (
     <>
       <Head>
-        <title>Статистика по сотруднику №{platformId}</title>
+        <title>
+          {t('platform-statistics')} №{platformId}
+        </title>
       </Head>
 
-      <AccountLayout title={`Статистика по площадке №${platformId}`}>
+      <AccountLayout title={`${t('platform-statistics')} №${platformId}`}>
         {useMemo(
           () => (
             <LineChart data={incomeStatistics.diagram} isLoading={isIncomeStatisticsLoading} />

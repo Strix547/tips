@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { FormProvider, useForm } from 'react-hook-form'
 import Head from 'next/head'
+import { useTranslation } from 'next-i18next'
 
 import { AccountLayout } from 'layout'
 import { Button } from 'ui'
@@ -13,6 +14,8 @@ import { PLATFORM_TYPES } from 'core/constants'
 import * as S from './Create.styled'
 
 export const PlatformCreatePage = observer(() => {
+  const { t } = useTranslation('common')
+
   const useFormProps = useForm({
     defaultValues: {
       platformType: PLATFORM_TYPES[0].value,
@@ -44,10 +47,10 @@ export const PlatformCreatePage = observer(() => {
   return (
     <>
       <Head>
-        <title>Создать площадку</title>
+        <title>{t('create-platform')}</title>
       </Head>
 
-      <AccountLayout title="Создать площадку">
+      <AccountLayout title={t('create-platform')}>
         <FormProvider {...useFormProps}>
           <S.Form onSubmit={handleSubmit(onCreatePlatform)}>
             <PlatformFields
@@ -55,7 +58,7 @@ export const PlatformCreatePage = observer(() => {
               onIncomePercentageChange={setIncomePercentage}
             />
 
-            <Button type="submit">Создать</Button>
+            <Button type="submit">{t('create')}</Button>
           </S.Form>
         </FormProvider>
       </AccountLayout>

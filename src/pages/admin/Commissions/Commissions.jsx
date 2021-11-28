@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite'
 import { FormProvider, useForm } from 'react-hook-form'
 import Skeleton from 'react-loading-skeleton'
 import Head from 'next/head'
+import { useTranslation } from 'next-i18next'
 
 import { AccountLayout } from 'layout'
 import { FormField, Button } from 'ui'
@@ -12,6 +13,7 @@ import { adminStore } from 'store'
 import * as S from './Commissions.styled'
 
 export const CommissionsPage = observer(() => {
+  const { t } = useTranslation('common')
   const useFormProps = useForm()
   const { handleSubmit, formState, reset } = useFormProps
 
@@ -53,24 +55,29 @@ export const CommissionsPage = observer(() => {
     <>
       <FormField
         name="personal"
-        label="Пресональный"
-        placeholder="Введите процент"
+        label={t('personal')}
+        placeholder={t('enter-percentage')}
         {...fieldCommon}
       />
 
       <FormField
         name="business"
-        label="Бизнес-аккаунт"
-        placeholder="Введите процент"
+        label={t('business-account')}
+        placeholder={t('enter-percentage')}
         {...fieldCommon}
       />
 
-      <FormField name="agent" label="Агент" placeholder="Введите процент" {...fieldCommon} />
+      <FormField
+        name="agent"
+        label={t('agent')}
+        placeholder={t('enter-percentage')}
+        {...fieldCommon}
+      />
 
       <FormField
         name="loyalty"
-        label="Программа лояльности"
-        placeholder="Введите процент"
+        label={t('loyalty-program')}
+        placeholder={t('enter-percentage')}
         {...fieldCommon}
       />
     </>
@@ -83,23 +90,19 @@ export const CommissionsPage = observer(() => {
   return (
     <>
       <Head>
-        <title>Комиссии</title>
+        <title>{t('commissions')}</title>
       </Head>
 
-      <AccountLayout title="Комиссии">
+      <AccountLayout title={t('commissions')}>
         <S.Content>
-          <S.Text>
-            Раздел с указанием величины комиссии для персонального использования, бизнес-аккаунтов,
-            агентской схемы и программы лояльности. Состоит из списка цифровых инпутов с указанием
-            точного значения индекса комиссии.
-          </S.Text>
+          <S.Text>{t('commission-text')}</S.Text>
 
           <FormProvider {...useFormProps}>
             <S.Form onSubmit={handleSubmit(onSaveComissions)}>
               {fields}
 
               {errorFirstMessage && <S.ErrorText>{errorFirstMessage}</S.ErrorText>}
-              <Button type="submit">Сохранить</Button>
+              <Button type="submit">{t('save')}</Button>
             </S.Form>
           </FormProvider>
         </S.Content>

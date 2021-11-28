@@ -15,7 +15,7 @@ export const EmailField = (props) => {
       }}
       type="email"
       name="email"
-      label="E-mail"
+      label={t('email')}
       placeholder={t('write-email')}
       required
       {...props}

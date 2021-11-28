@@ -3,6 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { observer } from 'mobx-react-lite'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 import Skeleton from 'react-loading-skeleton'
 
 import { AccountLayout } from 'layout'
@@ -13,6 +14,7 @@ import { qrCodesStore, platformsStore } from 'store'
 import * as S from './PlatformEdit.styled'
 
 export const QrPlatformEditPage = observer(() => {
+  const { t } = useTranslation('common')
   const router = useRouter()
   const useFormProps = useForm()
   const { reset, watch, getValues } = useFormProps
@@ -81,15 +83,15 @@ export const QrPlatformEditPage = observer(() => {
   return (
     <>
       <Head>
-        <title>Редактирование QR-кода платформы</title>
+        <title>{t('customizing-display-tipping-platform-page')}</title>
       </Head>
 
-      <AccountLayout title="Настройка отображения страницы получения чаевых площадки">
+      <AccountLayout title={t('customizing-display-tipping-platform-page')}>
         <S.Content>
           {!isQrCodeLoading && !isPlatformNameLoading ? (
             <FormProvider {...useFormProps}>
               <PlatformPaymentCardOptionsPanel
-                action={{ label: 'Сохранить QR-код', onClick: editQr }}
+                action={{ label: t('save-qr-code'), onClick: editQr }}
                 btnDefaultColor={btnColor?.hex}
                 bgDefaultColor={bgColor?.hex}
                 companyLogo={companyImg}

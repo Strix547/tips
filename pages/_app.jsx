@@ -110,20 +110,23 @@ const App = ({ Component, pageProps }) => {
     }
   }, [role, currentPathname])
 
-  // useEffect(async () => {
-  //   if (lang) return
+  useEffect(async () => {
+    if (lang) return
 
-  //   const storageLang = localStorage.getItem('lang')
+    const storageLang = localStorage.getItem('lang')
 
-  //   if (storageLang) {
-  //     localStore.setLang(storageLang)
-  //     router.replace(currentPathname, currentPathname, { locale: storageLang.toLowerCase() })
-  //     return
-  //   }
+    if (storageLang) {
+      router.push({ pathname: currentPathname, query: router.query }, router.asPath, {
+        locale: storageLang.toLowerCase()
+      })
+      return
+    }
 
-  //   const lang = await localStore.getLanguage()
-  //   router.replace(currentPathname, currentPathname, { locale: lang.toLowerCase() })
-  // }, [lang, currentPathname])
+    const lang = await localStore.getLanguage()
+    router.push({ pathname: currentPathname, query: router.query }, router.asPath, {
+      locale: lang.toLowerCase()
+    })
+  }, [lang, currentPathname])
 
   if (!id && !isIdLoading && isAuth) return null
   if (isProtectedRoute && (isIdLoading || isRoleLoading)) return null

@@ -3,6 +3,7 @@ import { useForm, FormProvider } from 'react-hook-form'
 import { observer } from 'mobx-react-lite'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 
 import { AccountLayout } from 'layout'
 import { BarChart, TipsTable, TableRowCard } from 'components'
@@ -19,6 +20,7 @@ import {
 import * as S from './UserStatistics.styled'
 
 export const UserStatisticsPage = observer(() => {
+  const { t } = useTranslation('common')
   const router = useRouter()
   const useFormProps = useForm({
     defaultValues: {
@@ -63,27 +65,27 @@ export const UserStatisticsPage = observer(() => {
   const getTableIncomeData = (statistics) => {
     const columns = [
       {
-        headerName: 'Дата и время',
+        headerName: t('date-time'),
         field: 'dateTime',
         flex: 1
       },
       {
-        headerName: 'Страна',
+        headerName: t('country'),
         field: 'country',
         flex: 1
       },
       {
-        headerName: 'Размер чаевых',
+        headerName: t('tip-amount'),
         field: 'tipAmount',
         flex: 1
       },
       {
-        headerName: 'Комиссия',
+        headerName: t('commission'),
         field: 'commission',
         flex: 1
       },
       {
-        headerName: 'Счёт',
+        headerName: t('card-number'),
         field: 'last4Digits',
         flex: 1
       }
@@ -103,9 +105,9 @@ export const UserStatisticsPage = observer(() => {
     const tableCards = statistics?.map(
       ({ id, dateTime, tipAmount, commission, country, currency, last4Digits }) => {
         const rows = [
-          { label: 'Комиссия', value: getPriceLabel(commission, getCurrencySymbol(currency)) },
-          { label: 'Страна', value: country },
-          { label: 'Счёт', value: last4Digits && `* ${last4Digits}` }
+          { label: t('commission'), value: getPriceLabel(commission, getCurrencySymbol(currency)) },
+          { label: t('country'), value: country },
+          { label: t('card-number'), value: last4Digits && `* ${last4Digits}` }
         ]
 
         return (
@@ -127,37 +129,37 @@ export const UserStatisticsPage = observer(() => {
   const getTableAgentsData = (statistics) => {
     const columns = [
       {
-        headerName: 'Дата и время',
+        headerName: t('date-time'),
         field: 'dateTime',
         flex: 1
       },
       {
-        headerName: 'Страна',
+        headerName: t('country'),
         field: 'country',
         flex: 1
       },
       {
-        headerName: 'Сумма выплаты',
+        headerName: t('payout-amount'),
         field: 'payment',
         flex: 1
       },
       {
-        headerName: 'Инициатор',
+        headerName: t('initiator'),
         field: 'initUserName',
         flex: 1
       },
       {
-        headerName: 'Сумма агента',
+        headerName: t('agent-amount'),
         field: 'agentIncome',
         flex: 1
       },
       {
-        headerName: 'Комиссия',
+        headerName: t('commission'),
         field: 'commission',
         flex: 1
       },
       {
-        headerName: 'Счёт',
+        headerName: t('card-number'),
         field: 'last4Digits',
         flex: 1
       }
@@ -178,10 +180,13 @@ export const UserStatisticsPage = observer(() => {
     const tableCards = statistics?.map(
       ({ id, dateTime, payment, agentIncome, commission, country, currency, last4Digits }) => {
         const rows = [
-          { label: 'Страна', value: country },
-          { label: 'Сумма агента', value: getPriceLabel(agentIncome, getCurrencySymbol(currency)) },
-          { label: 'Комиссия', value: getPriceLabel(commission, getCurrencySymbol(currency)) },
-          { label: 'Счёт', value: last4Digits && `* ${last4Digits}` }
+          { label: t('country'), value: country },
+          {
+            label: t('agent-amount'),
+            value: getPriceLabel(agentIncome, getCurrencySymbol(currency))
+          },
+          { label: t('commission'), value: getPriceLabel(commission, getCurrencySymbol(currency)) },
+          { label: t('card-number'), value: last4Digits && `* ${last4Digits}` }
         ]
 
         return (
@@ -203,17 +208,17 @@ export const UserStatisticsPage = observer(() => {
   const getTablePaymentsData = (statistics) => {
     const columns = [
       {
-        headerName: 'Дата и время',
+        headerName: t('date-time'),
         field: 'dateTime',
         flex: 1
       },
       {
-        headerName: 'Размер чаевых',
+        headerName: t('tip-amount'),
         field: 'tipAmount',
         flex: 1
       },
       {
-        headerName: 'Телефон',
+        headerName: t('phone'),
         field: 'phone',
         flex: 1
       }
@@ -227,7 +232,7 @@ export const UserStatisticsPage = observer(() => {
     }))
 
     const tableCards = statistics?.map(({ id, dateTime, tipAmount, currency, phone }) => {
-      const rows = [{ label: 'Телефон', value: phone }]
+      const rows = [{ label: t('phone'), value: phone }]
 
       return (
         <TableRowCard
@@ -258,9 +263,9 @@ export const UserStatisticsPage = observer(() => {
   const { columns, rows, tableCards, haveCommission } = getTableData(tab, incomeStatistics.table)
 
   const tabs = [
-    { label: 'Поступления на пользователя', value: 'income' },
-    { label: 'Выплаты пользователю по агентской схеме', value: 'agents' },
-    { label: 'Оплата пользователем', value: 'payments' }
+    { label: t('income-per-user'), value: 'income' },
+    { label: t('payments-according-agency-scheme'), value: 'agents' },
+    { label: t('user-payment'), value: 'payments' }
   ]
 
   const tabList = tabs.map(({ label, value }) => (
@@ -287,10 +292,12 @@ export const UserStatisticsPage = observer(() => {
   return (
     <>
       <Head>
-        <title>Статистика по сотруднику №{userId}</title>
+        <title>
+          {t('mployee-statistics')} №{userId}
+        </title>
       </Head>
 
-      <AccountLayout title={`Статистика по сотруднику №${userId}`}>
+      <AccountLayout title={`${t('mployee-statistics')} №${userId}`}>
         <S.TabLine>
           <Tabs value={tab}>{tabList}</Tabs>
         </S.TabLine>

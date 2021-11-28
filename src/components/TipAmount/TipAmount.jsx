@@ -48,7 +48,9 @@ export const TipAmount = ({ currency, presets, required = true }) => {
         label={t('tip-amount')}
         name="tipAmount"
         type="number"
-        placeholder={`От ${minPresetValue} до ${maxPresetValue}`}
+        placeholder={`${t('from').toLowerCase()} ${minPresetValue} ${t(
+          'to'
+        ).toLowerCase()} ${maxPresetValue}`}
         InputProps={{ endAdornment: currency }}
         required={required}
       />

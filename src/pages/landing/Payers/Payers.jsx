@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 
 import { Header, Footer } from 'layout'
@@ -11,7 +12,9 @@ import { ROUTE_NAMES } from 'core/routes'
 import * as S from './Payers.styled'
 
 import dashboard from '@public/img/landing/payers-banner-dashboard.png'
+import dashboardEn from '@public/img/landing/payers-banner-dashboard-en.png'
 import dashboardMobile from '@public/img/landing/payers-banner-dashboard-mobile.png'
+import dashboardMobileEn from '@public/img/landing/payers-banner-dashboard-mobile-en.png'
 
 import PackageIcon from '@public/icons/package.svg'
 import CartIcon from '@public/icons/cart.svg'
@@ -19,6 +22,8 @@ import GearsIcon from '@public/icons/gears.svg'
 
 export const PayersPage = () => {
   const { t } = useTranslation('common')
+  const { locale } = useRouter()
+  const isLocaleRu = locale === 'ru'
 
   const payerTypes = [
     {
@@ -40,7 +45,7 @@ export const PayersPage = () => {
   return (
     <>
       <Head>
-        <title>Плательщикам</title>
+        <title>{t('for-payers')}</title>
       </Head>
 
       <Header />
@@ -50,7 +55,10 @@ export const PayersPage = () => {
           title={t('pay-tips-donates-anyone')}
           subtitle={t('pay-tips-immediately-wherever')}
           actions={bannerActions}
-          img={{ desktop: dashboard, mobile: dashboardMobile }}
+          img={{
+            desktop: isLocaleRu ? dashboard : dashboardEn,
+            mobile: isLocaleRu ? dashboardMobile : dashboardMobileEn
+          }}
         />
 
         <Section title={t('leave-tip-2-clicks')} styles={S.sectionStyles}>

@@ -3,6 +3,7 @@ import { useForm, FormProvider } from 'react-hook-form'
 import { observer } from 'mobx-react-lite'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 
 import { AccountLayout } from 'layout'
 import { LineChart, TipsTable, TableRowCard } from 'components'
@@ -12,6 +13,7 @@ import { userStore, statisticsStore } from 'store'
 import { getTimeZoneOffset, transformDateTimeToLabel, getPriceLabel } from 'utils'
 
 export const EmployeeStatisticsPage = observer(() => {
+  const { t } = useTranslation('common')
   const router = useRouter()
   const useFormProps = useForm({
     defaultValues: {
@@ -43,27 +45,27 @@ export const EmployeeStatisticsPage = observer(() => {
 
   const columns = [
     {
-      headerName: 'Дата и время',
+      headerName: t('date-time'),
       field: 'dateTime',
       flex: 1
     },
     {
-      headerName: 'Площадка',
+      headerName: t('platform'),
       field: 'platformName',
       flex: 1
     },
     {
-      headerName: 'Размер чаевых',
+      headerName: t('tip-amount'),
       field: 'tipAmount',
       flex: 1
     },
     {
-      headerName: 'Комиссия',
+      headerName: t('commission'),
       field: 'commission',
       flex: 1
     },
     {
-      headerName: 'Рейтинг',
+      headerName: t('rating'),
       field: 'rating',
       flex: 1,
       renderCell: ({ row }) => <RatingCell rating={row.rating} />
@@ -84,9 +86,9 @@ export const EmployeeStatisticsPage = observer(() => {
   const tableCards = incomeStatistics.table.map(
     ({ id, platformName, dateTime, tipAmount, commission, rating }) => {
       const rows = [
-        { label: 'Площадка', value: platformName },
-        { label: 'Комссия', value: getPriceLabel(commission, currencyLabel) },
-        { label: 'Рейтинг', value: <RatingCell rating={rating} /> }
+        { label: t('platform'), value: platformName },
+        { label: t('commission'), value: getPriceLabel(commission, currencyLabel) },
+        { label: t('rating'), value: <RatingCell rating={rating} /> }
       ]
       return (
         <TableRowCard
@@ -116,14 +118,16 @@ export const EmployeeStatisticsPage = observer(() => {
   return (
     <>
       <Head>
-        <title>Статистика по сотруднику №{employeeId}</title>
+        <title>
+          {t('employee-statistics')} №{employeeId}
+        </title>
       </Head>
 
-      <AccountLayout title={`Статистика по сотруднику №${employeeId}`}>
+      <AccountLayout title={`${t('employee-statistics')} №${employeeId}`}>
         {useMemo(
           () => (
             <LineChart
-              title="Статистика входящих оплат"
+              title={t('incoming-payments-statistics')}
               data={incomeStatistics.diagram}
               isLoading={isIncomeStatisticsLoading}
             />

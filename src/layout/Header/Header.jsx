@@ -37,7 +37,8 @@ export const Header = observer(({ withSidebar }) => {
   const { lang } = localStore
   const { firstName, lastName, avatar } = personalData
   const currentPathname = router.pathname
-
+  const isIdentifyRole = role === 'UNVERIFIED'
+  console.log(isIdentifyRole)
   useEffect(() => {
     if (lang) {
       reset({ lang })
@@ -146,10 +147,13 @@ export const Header = observer(({ withSidebar }) => {
           <S.Right>
             {langSelect}
 
-            {authStore.isAuth || isIdLoading ? (
+            {(authStore.isAuth || isIdLoading) && !isIdentifyRole ? (
               user
             ) : (
-              <LinkButton href={ROUTE_NAMES.AUTH} size="inline">
+              <LinkButton
+                href={isIdentifyRole ? ROUTE_NAMES.ACCOUNT_IDENTIFY : ROUTE_NAMES.AUTH}
+                size="inline"
+              >
                 {t('logIn')}
               </LinkButton>
             )}

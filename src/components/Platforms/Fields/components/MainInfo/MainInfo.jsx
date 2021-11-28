@@ -1,5 +1,6 @@
 import { useFormContext } from 'react-hook-form'
 import { Radio } from '@material-ui/core'
+import { useTranslation } from 'next-i18next'
 
 import { PLATFORM_TYPES } from 'core/constants'
 
@@ -8,6 +9,7 @@ import { FormField, FormControlLabel, RadioGroup } from 'ui'
 import * as S from './MainInfo.styled'
 
 export const MainInfo = () => {
+  const { t } = useTranslation('common')
   const { watch } = useFormContext()
 
   const isOtherPlatformType = watch('platformType') === 'OTHER'
@@ -19,7 +21,7 @@ export const MainInfo = () => {
         value={value}
         label={
           <S.PlatformTypeRadio active={watch('platformType') === value}>
-            {label}
+            {t(label)}
           </S.PlatformTypeRadio>
         }
         control={<Radio />}
@@ -29,19 +31,24 @@ export const MainInfo = () => {
 
   return (
     <S.MainInfo>
-      <S.Heading level={6}>Основная информация</S.Heading>
+      <S.Heading level={6}>{t('main-info')}</S.Heading>
 
-      <FormField label="Заголовок площадки" name="name" placeholder="Введите заголовок" required />
-      <FormField label="Адрес площадки" name="address" placeholder="Введите адрес" required />
+      <FormField label={t('platform-title')} name="name" placeholder={t('enter-title')} required />
+      <FormField
+        label={t('platform-address')}
+        name="address"
+        placeholder={t('enter-address')}
+        required
+      />
 
       <S.PlatformTypeRow>
-        <S.Label>Тип площадки</S.Label>
+        <S.Label>{t('platform-type')}</S.Label>
 
         <RadioGroup name="platformType">{platformTypeRadios}</RadioGroup>
       </S.PlatformTypeRow>
 
       {isOtherPlatformType && (
-        <FormField name="platformTypeCustom" placeholder="Введите тип площадки" required />
+        <FormField name="platformTypeCustom" placeholder={t('enter-platform-type')} required />
       )}
     </S.MainInfo>
   )

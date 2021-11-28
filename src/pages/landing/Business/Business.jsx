@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 
 import { Header, Footer } from 'layout'
@@ -9,7 +10,9 @@ import { LinkButton } from 'ui'
 import { ROUTE_NAMES } from 'core/routes'
 
 import dashboard from '@public/img/landing/business-banner-dashboard.png'
+import dashboardEn from '@public/img/landing/business-banner-dashboard-en.png'
 import dashboardMobile from '@public/img/landing/business-banner-dashboard-mobile.png'
+import dashboardMobileEn from '@public/img/landing/business-banner-dashboard-mobile-en.png'
 
 import DeviceDesignIcon from '@public/icons/device-design.svg'
 import DeviceWindowSettingsIcon from '@public/icons/devices-window-settings.svg'
@@ -19,22 +22,24 @@ import * as S from './Business.styled'
 
 export const BusinessPage = () => {
   const { t } = useTranslation('common')
+  const { locale } = useRouter()
+  const isLocaleRu = locale === 'ru'
 
   const integrationTypes = [
     {
       icon: <DeviceDesignIcon />,
       label: t('without-integration'),
-      desc: 'Описание возможностей системы по генерации QR кода и информация о статистике'
+      desc: t('without-integration-text')
     },
     {
       icon: <DeviceWindowSettingsIcon />,
       label: t('integration-with-api'),
-      desc: 'Описание возможностей системы по интеграции с внешними сервисами по API и с мобильными приложениями'
+      desc: t('integration-api-text')
     },
     {
       icon: <CashierMachineIcon />,
       label: t('integration-cash-register'),
-      desc: 'Описание возможностей интеграции с кассовым ПО'
+      desc: t('integration-cash-register-text')
     }
   ]
 
@@ -59,7 +64,10 @@ export const BusinessPage = () => {
           title={t('tips-by-card-easy-for-client')}
           features={bannerFeatures}
           actions={bannerAction}
-          img={{ desktop: dashboard, mobile: dashboardMobile }}
+          img={{
+            desktop: isLocaleRu ? dashboard : dashboardEn,
+            mobile: isLocaleRu ? dashboardMobile : dashboardMobileEn
+          }}
         />
 
         <Section title={t('your-company-your-tips')} styles={S.sectionStyles}>

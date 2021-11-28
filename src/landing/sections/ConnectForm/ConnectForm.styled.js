@@ -101,14 +101,16 @@ export const FormBottom = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 40px;
-  height: 80px;
+  min-height: 80px;
   background: rgba(59, 199, 107, 0.1);
   border-radius: 15px;
 
   ${Text} {
-    width: 385px;
+    width: 100%;
+    padding: 10px 15px;
     text-align: center;
     line-height: 28px;
+    box-sizing: border-box;
   }
 
   a {
@@ -125,6 +127,12 @@ export const FormBottom = styled.div`
   }
 `
 
+export const GreenDotes = styled.div`
+  position: absolute;
+  width: 156px;
+  height: 152px;
+`
+
 export const Background = styled.div`
   position: absolute;
   width: 100%;
@@ -132,16 +140,12 @@ export const Background = styled.div`
   top: 0;
   left: 0;
 
-  svg {
-    position: absolute;
-
-    /* green dotes left */
+  ${GreenDotes} {
     &:nth-child(1) {
       top: -58px;
       left: -35px;
     }
 
-    /* green dotes right */
     &:nth-child(2) {
       right: -35px;
       bottom: -27px;

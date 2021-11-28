@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 
 import { Box } from '../Box'
@@ -5,16 +6,25 @@ import { Box } from '../Box'
 import * as S from './BoxList.styled'
 
 import qrFirst from '@public/img/landing/qr-1.png'
+import qrFirstEn from '@public/img/landing/qr-1-en.png'
 import qrSecond from '@public/img/landing/qr-2.png'
+import qrSecondEn from '@public/img/landing/qr-2-en.png'
 import qrSecondMobile from '@public/img/landing/qr-2-mobile.png'
+import qrSecondMobileEn from '@public/img/landing/qr-2-mobile-en.png'
 import qrThird from '@public/img/landing/qr-3.png'
+import qrThirdEn from '@public/img/landing/qr-3-en.png'
 
 import recipientCard from '@public/img/landing/recipient-card.png'
+import recipientCardEn from '@public/img/landing/recipient-card-en.png'
 import recipientCardMobile from '@public/img/landing/recipient-card-mobile.png'
+import recipientCardMobileEn from '@public/img/landing/recipient-card-mobile-en.png'
 import emotionsBlock from '@public/img/landing/emotions-block.png'
+import emotionsBlockEn from '@public/img/landing/emotions-block-en.png'
 
 export const BoxList = () => {
   const { t } = useTranslation('common')
+  const { locale } = useRouter()
+  const isLocaleRu = locale === 'ru'
 
   const boxes = [
     {
@@ -27,7 +37,7 @@ export const BoxList = () => {
         t('bills'),
         t('on-tables')
       ],
-      preview: [{ label: 'qr-код заведения', desktop: qrFirst }]
+      preview: [{ label: 'qr-код заведения', desktop: isLocaleRu ? qrFirst : qrFirstEn }]
     },
     {
       title: t('tips-donate-link'),
@@ -42,7 +52,13 @@ export const BoxList = () => {
         t('in-live-streams'),
         t('in-messengers')
       ],
-      preview: [{ label: 'qr-код заведения с сылками', desktop: qrSecond, mobile: qrSecondMobile }]
+      preview: [
+        {
+          label: 'qr-код заведения с сылками',
+          desktop: isLocaleRu ? qrSecond : qrSecondEn,
+          mobile: isLocaleRu ? qrSecondMobile : qrSecondMobileEn
+        }
+      ]
     },
     {
       title: t('integration-api-sdk'),
@@ -53,14 +69,22 @@ export const BoxList = () => {
         t('register-users-analyse-statistics')
       ],
       preview: [
-        { label: 'карточка получателя', desktop: recipientCard, mobile: recipientCardMobile },
-        { label: 'блок ваши впечатлений', desktop: emotionsBlock, mobile: null }
+        {
+          label: 'карточка получателя',
+          desktop: isLocaleRu ? recipientCard : recipientCardEn,
+          mobile: isLocaleRu ? recipientCardMobile : recipientCardMobileEn
+        },
+        {
+          label: 'блок ваши впечатлений',
+          desktop: isLocaleRu ? emotionsBlock : emotionsBlockEn,
+          mobile: null
+        }
       ]
     },
     {
       title: t('cash-register-integration'),
       subtitle: t('cash-register-integration-text'),
-      preview: [{ label: 'qr-код заведения', desktop: qrThird }]
+      preview: [{ label: 'qr-код заведения', desktop: isLocaleRu ? qrThird : qrThirdEn }]
     }
   ]
 

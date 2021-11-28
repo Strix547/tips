@@ -37,6 +37,12 @@ export const Main = styled.main`
   }
 `
 
+export const GreenDotes = styled.div`
+  position: absolute;
+  width: 156px;
+  height: 152px;
+`
+
 export const Background = styled.div`
   position: absolute;
   width: 100%;
@@ -44,16 +50,12 @@ export const Background = styled.div`
   top: 0;
   left: 0;
 
-  svg {
-    position: absolute;
-
-    /* green dotes left */
+  ${GreenDotes} {
     &:nth-child(1) {
       top: 20px;
       left: -173px;
     }
 
-    /* green dotes right */
     &:nth-child(2) {
       right: -180px;
       bottom: 144px;
@@ -61,7 +63,7 @@ export const Background = styled.div`
   }
 
   ${media.createMedia(1350)} {
-    svg {
+    ${GreenDotes} {
       &:nth-child(1) {
         left: -112px;
       }

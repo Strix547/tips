@@ -55,7 +55,7 @@ export const AgentsTable = observer(({ statistics = [], isStatisticsLoading }) =
           columns={columns}
           rows={rows}
           isLoading={isStatisticsLoading}
-          noText={t('no-tips-this-period')}
+          noText={t('no-tip-this-period')}
         />
 
         {statistics.length !== 0 || isStatisticsLoading ? (

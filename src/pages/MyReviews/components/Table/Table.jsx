@@ -39,7 +39,7 @@ export const ReviewsTable = ({ reviews = [], isReviewsLoading }) => {
       flex: 1
     },
     {
-      headerName: 'Сотрудник',
+      headerName: t('employee'),
       field: `employee`,
       flex: 1
     }
@@ -63,7 +63,7 @@ export const ReviewsTable = ({ reviews = [], isReviewsLoading }) => {
         { label: t('comment'), value: comment || '' },
         { label: t('impression'), value: impression || '' },
         { label: t('platform'), value: platformName },
-        { label: 'Сотрудник', value: `${lastName} ${firstName}` }
+        { label: t('employee'), value: `${lastName} ${firstName}` }
       ]
 
       return (

@@ -2,13 +2,19 @@ import styled from 'styled-components'
 
 import { WhiteBox } from 'styled'
 import { StatisticRow } from 'components/StatisticRow/StatisticRow.styled'
+import { TimePeriodFilter } from 'components/TimePeriodFilter/TimePeriodFilter.styled'
 import { Table } from 'ui/Table/Table.styled'
 
 export const AgentsTable = styled(WhiteBox)``
 
 export const Top = styled.div`
   display: flex;
+  justify-content: flex-start;
   padding: 20px 30px 0;
+
+  ${TimePeriodFilter} {
+    width: auto;
+  }
 `
 
 export const TableContainer = styled.div`

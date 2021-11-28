@@ -1,6 +1,7 @@
 import { FormProvider, useForm } from 'react-hook-form'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 
 import { Switch } from 'ui'
 
@@ -16,6 +17,7 @@ import ChartIcon from '@public/icons/chart.svg'
 
 export const PlatformCard = observer(
   ({ id, type, name, address, tipsAmountMonth, tipsAmountYear, active, employeeCount }) => {
+    const { t } = useTranslation('common')
     const router = useRouter()
     const useFormProps = useForm({
       defaultValues: {

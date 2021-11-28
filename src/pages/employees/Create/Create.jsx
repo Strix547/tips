@@ -3,6 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { observer } from 'mobx-react-lite'
 import Skeleton from 'react-loading-skeleton'
 import Head from 'next/head'
+import { useTranslation } from 'next-i18next'
 
 import { AccountLayout } from 'layout'
 import {
@@ -13,8 +14,7 @@ import {
   PhoneField,
   BirthDateAdultValid,
   PlatformSearch,
-  CircularProgress,
-  AddressSearch
+  CircularProgress
 } from 'ui'
 
 import { employeesStore } from 'store'
@@ -23,6 +23,7 @@ import { transformDateLabelToIso } from 'utils'
 import * as S from './Create.styled'
 
 export const EmployeeCreatePage = observer(() => {
+  const { t } = useTranslation('common')
   const useFormProps = useForm()
   const { handleSubmit } = useFormProps
 
@@ -73,9 +74,14 @@ export const EmployeeCreatePage = observer(() => {
   const newEmployeeForm = !isEmployeeConnecting ? (
     <S.FormContainer onSubmit={handleSubmit(onCreateEmployee)}>
       <FormProvider {...useFormProps}>
-        <FormField name="firstName" label="Имя" placeholder="Введите имя" required />
+        <FormField name="firstName" label={t('name')} placeholder={t('write-name')} required />
 
-        <FormField name="lastName" label="Фамилия" placeholder="Введите фамилию" required />
+        <FormField
+          name="lastName"
+          label={t('last-name')}
+          placeholder={t('enter-lastname')}
+          required
+        />
 
         <EmailField />
 
@@ -83,13 +89,13 @@ export const EmployeeCreatePage = observer(() => {
 
         <LocationSearch />
 
-        <FormField name="address" label="Адрес" placeholder="Введите адрес" />
+        <FormField name="address" label={t('address')} placeholder={t('enter-address')} />
 
-        <FormField name="postal" label="Индекс" placeholder="Введите почтовый индекс" required />
+        <FormField name="postal" label={t('zip-code')} placeholder={t('enter-zip-code')} required />
 
-        <PlatformSearch label="Площадка, с которой связывается профиль сотрудника" />
+        <PlatformSearch label={t('platform-connected-to-employee')} />
 
-        <Button type="submit">Создать сотрудника</Button>
+        <Button type="submit">{t('create-employee')}</Button>
       </FormProvider>
     </S.FormContainer>
   ) : (
@@ -104,7 +110,7 @@ export const EmployeeCreatePage = observer(() => {
         <FormProvider {...useFormProps}>
           <PhoneField />
 
-          <Button type="submit">Найти сотрудника</Button>
+          <Button type="submit">{t('find-employee')}</Button>
         </FormProvider>
       ) : (
         <Skeleton height={164} />
@@ -118,7 +124,7 @@ export const EmployeeCreatePage = observer(() => {
         <FormProvider {...useFormProps}>
           <PlatformSearch />
 
-          <Button type="submit">Подключить к площадке</Button>
+          <Button type="submit">{t('connect-to-platform')}</Button>
         </FormProvider>
       ) : (
         <Skeleton height={164} />
@@ -131,10 +137,10 @@ export const EmployeeCreatePage = observer(() => {
   return (
     <>
       <Head>
-        <title>Создание сотрудника</title>
+        <title>{t('creating-employee')}</title>
       </Head>
 
-      <AccountLayout title="Создание сотрудника">
+      <AccountLayout title={t('creating-employee')}>
         {employeeFieldsVisible && !isEmployeeFinding ? employeeFields : findEmployeeForm}
       </AccountLayout>
     </>
