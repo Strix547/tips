@@ -342,7 +342,7 @@
   "personal": "Personnel",
   "enter-percentage": "Entrez le pourcentage",
   "business-account": "Compte professionnel",
-  "commission-text": "Раздел с указанием величины комиссии для персонального использования, бизнес-аккаунтов, агентской схемы и программы лояльности. Состоит из списка цифровых инпутов с указанием точного значения индекса комиссии.",
+  "commission-text": "Rubrique indiquant le montant de la commission pour usage personnel, comptes professionnels, programme d'agence et programme de fidélité. Se compose d'une liste d'entrées numériques indiquant la valeur exacte de l'indice de commission.",
 
   "confirm-action": "Confirmer l'action",
   "no-it-mistake": "non c'est une erreur",
