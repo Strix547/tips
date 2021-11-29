@@ -116,20 +116,21 @@ const App = ({ Component, pageProps }) => {
     const storageLang = localStorage.getItem('lang')
 
     if (storageLang) {
-      router.push({ pathname: currentPathname, query: router.query }, router.asPath, {
+      router.replace({ pathname: currentPathname, query: router.query }, router.asPath, {
         locale: storageLang.toLowerCase()
       })
       return
     }
 
     const lang = await localStore.getLanguage()
-    router.push({ pathname: currentPathname, query: router.query }, router.asPath, {
+    router.replace({ pathname: currentPathname, query: router.query }, router.asPath, {
       locale: lang.toLowerCase()
     })
   }, [lang, currentPathname])
 
   if (!id && !isIdLoading && isAuth) return null
   if (isProtectedRoute && (isIdLoading || isRoleLoading)) return null
+  if (role === 'UNVERIFIED' && isProtectedRoute) return null
 
   return (
     <>
