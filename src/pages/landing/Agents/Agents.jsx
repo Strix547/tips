@@ -8,11 +8,15 @@ import { ListIconSection, TariffsSection, ConnectFormSection } from 'landing/sec
 import { LinkButton } from 'ui'
 
 import { ROUTE_NAMES } from 'core/routes'
+import { localeImg } from 'utils'
 
 import dashboard from '@public/img/landing/agents-banner-dashboard.png'
 import dashboardEn from '@public/img/landing/agents-banner-dashboard-en.png'
+import dashboardFr from '@public/img/landing/agents-banner-dashboard-fr.png'
+
 import dashboardMobile from '@public/img/landing/agents-banner-dashboard-mobile.png'
 import dashboardMobileEn from '@public/img/landing/agents-banner-dashboard-mobile-en.png'
+import dashboardMobileFr from '@public/img/landing/agents-banner-dashboard-mobile-fr.png'
 
 import SheetIcon from '@public/icons/sheet.svg'
 import DeviceDesignClickIcon from '@public/icons/device-design-click.svg'
@@ -23,7 +27,6 @@ import * as S from './Agents.styled'
 export const AgentsPage = () => {
   const { t } = useTranslation('common')
   const { locale } = useRouter()
-  const isLocaleRu = locale === 'ru'
 
   const agentTypes = [
     {
@@ -61,8 +64,8 @@ export const AgentsPage = () => {
           features={bannerFeatures}
           actions={bannerAction}
           img={{
-            desktop: isLocaleRu ? dashboard : dashboardEn,
-            mobile: isLocaleRu ? dashboardMobile : dashboardMobileEn
+            desktop: localeImg(locale, dashboard, dashboardEn, dashboardFr),
+            mobile: localeImg(locale, dashboardMobile, dashboardMobileEn, dashboardMobileFr)
           }}
         />
 

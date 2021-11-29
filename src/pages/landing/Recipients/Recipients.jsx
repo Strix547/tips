@@ -9,6 +9,7 @@ import { LinkButton } from 'ui'
 import { HowServiceWorkSection } from './sections'
 
 import { ROUTE_NAMES } from 'core/routes'
+import { localeImg } from 'utils'
 
 import dashboard from '@public/img/landing/recipients-banner-dashboard.png'
 import dashboardEn from '@public/img/landing/recipients-banner-dashboard-en.png'
@@ -22,7 +23,6 @@ import * as S from './Recipients.styled'
 export const RecipientsPage = () => {
   const { t } = useTranslation('common')
   const { locale } = useRouter()
-  const isLocaleRu = locale === 'ru'
 
   const agentTypes = [
     {
@@ -61,8 +61,8 @@ export const RecipientsPage = () => {
           features={bannerFeatures}
           actions={bannerAction}
           img={{
-            desktop: isLocaleRu ? dashboard : dashboardEn,
-            mobile: isLocaleRu ? dashboardMobile : dashboardMobileEn
+            desktop: localeImg(locale, dashboard, dashboardEn, dashboardFr),
+            mobile: localeImg(locale, dashboardMobile, dashboardMobileEn, dashboardMobileFr)
           }}
         />
 

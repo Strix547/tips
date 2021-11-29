@@ -9,16 +9,19 @@ import { LinkButton } from 'ui'
 import { UsersSection, HowServiceWorkSection, WhereCanUseSection } from './sections'
 
 import { ROUTE_NAMES } from 'core/routes'
+import { localeImg } from 'utils'
 
 import dashboard from '@public/img/landing/main-banner-dashboard.png'
 import dashboardEn from '@public/img/landing/main-banner-dashboard-en.png'
+import dashboardFr from '@public/img/landing/main-banner-dashboard-fr.png'
+
 import dashboardMobile from '@public/img/landing/main-banner-dashboard-mobile.png'
 import dashboardMobileEn from '@public/img/landing/main-banner-dashboard-mobile-en.png'
+import dashboardMobileFr from '@public/img/landing/main-banner-dashboard-mobile-fr.png'
 
 export const MainPage = () => {
   const { t } = useTranslation('common')
   const { locale } = useRouter()
-  const isLocaleRu = locale === 'ru'
 
   const bannerActions = (
     <>
@@ -44,8 +47,8 @@ export const MainPage = () => {
           subtitle={t('get-tax-free-donations-instantly')}
           actions={bannerActions}
           img={{
-            desktop: isLocaleRu ? dashboard : dashboardEn,
-            mobile: isLocaleRu ? dashboardMobile : dashboardMobileEn
+            desktop: localeImg(locale, dashboard, dashboardEn, dashboardFr),
+            mobile: localeImg(locale, dashboardMobile, dashboardMobileEn, dashboardMobileFr)
           }}
         />
 

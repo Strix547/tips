@@ -8,13 +8,17 @@ import { TariffsSection, ConnectFormSection } from 'landing/sections'
 import { LinkButton } from 'ui'
 
 import { ROUTE_NAMES } from 'core/routes'
+import { localeImg } from 'utils'
 
 import * as S from './Payers.styled'
 
 import dashboard from '@public/img/landing/payers-banner-dashboard.png'
 import dashboardEn from '@public/img/landing/payers-banner-dashboard-en.png'
+import dashboardFr from '@public/img/landing/payers-banner-dashboard-fr.png'
+
 import dashboardMobile from '@public/img/landing/payers-banner-dashboard-mobile.png'
 import dashboardMobileEn from '@public/img/landing/payers-banner-dashboard-mobile-en.png'
+import dashboardMobileFr from '@public/img/landing/payers-banner-dashboard-mobile-fr.png'
 
 import PackageIcon from '@public/icons/package.svg'
 import CartIcon from '@public/icons/cart.svg'
@@ -23,7 +27,6 @@ import GearsIcon from '@public/icons/gears.svg'
 export const PayersPage = () => {
   const { t } = useTranslation('common')
   const { locale } = useRouter()
-  const isLocaleRu = locale === 'ru'
 
   const payerTypes = [
     {
@@ -56,8 +59,8 @@ export const PayersPage = () => {
           subtitle={t('pay-tips-immediately-wherever')}
           actions={bannerActions}
           img={{
-            desktop: isLocaleRu ? dashboard : dashboardEn,
-            mobile: isLocaleRu ? dashboardMobile : dashboardMobileEn
+            desktop: localeImg(locale, dashboard, dashboardEn, dashboardFr),
+            mobile: localeImg(locale, dashboardMobile, dashboardMobileEn, dashboardMobileFr)
           }}
         />
 

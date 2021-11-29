@@ -130,7 +130,8 @@ const App = ({ Component, pageProps }) => {
 
   if (!id && !isIdLoading && isAuth) return null
   if (isProtectedRoute && (isIdLoading || isRoleLoading)) return null
-  if (role === 'UNVERIFIED' && isProtectedRoute) return null
+  if (role === 'UNVERIFIED' && isProtectedRoute && currentPathname !== ROUTE_NAMES.ACCOUNT_IDENTIFY)
+    return null
 
   return (
     <>

@@ -34,16 +34,13 @@ export const Header = observer(({ withSidebar }) => {
 
   const [isMenuOpen, setMenuOpen] = useState(false)
   const { isIdLoading, personalData, isPersonalDataLoading, role } = userStore
-  const { lang } = localStore
   const { firstName, lastName, avatar } = personalData
   const currentPathname = router.pathname
   const isIdentifyRole = role === 'UNVERIFIED'
-  
+
   useEffect(() => {
-    if (lang) {
-      reset({ lang })
-    }
-  }, [lang, reset])
+    reset({ lang: router.locale })
+  }, [reset])
 
   const nav = [
     { label: t('recipients'), link: ROUTE_NAMES.RECIPIENTS },
@@ -54,9 +51,9 @@ export const Header = observer(({ withSidebar }) => {
   ]
 
   const languages = [
-    { label: 'RU', value: 'RU', icon: <FlagRu /> },
-    { label: 'EN', value: 'EN', icon: <FlagUK /> },
-    { label: 'FR', value: 'FR', icon: <FlagFrance /> }
+    { label: 'RU', value: 'ru', icon: <FlagRu /> },
+    { label: 'EN', value: 'en', icon: <FlagUK /> },
+    { label: 'FR', value: 'fr', icon: <FlagFrance /> }
   ]
 
   const toggleMenuOpen = () => {

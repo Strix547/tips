@@ -5,22 +5,31 @@ import { Section } from 'landing/components'
 import { RowSection } from './components'
 
 import { ROUTE_NAMES } from 'core/routes'
+import { localeImg } from 'utils'
 
 import businessDashboard from '@public/img/landing/business-dashboard.png'
 import businessDashboardEn from '@public/img/landing/business-dashboard-en.png'
+import businessDashboardFr from '@public/img/landing/business-dashboard-fr.png'
+
 import recipientDashboard from '@public/img/landing/recipient-dashboard.png'
 import recipientDashboardEn from '@public/img/landing/recipient-dashboard-en.png'
+import recipientDashboardFr from '@public/img/landing/recipient-dashboard-fr.png'
+
 import artistDashboard from '@public/img/landing/artist-dashboard.png'
 import artistDashboardEn from '@public/img/landing/artist-dashboard-en.png'
+import artistDashboardFr from '@public/img/landing/artist-dashboard-fr.png'
+
 import agentDashboard from '@public/img/landing/agent-dashboard.png'
 import agentDashboardEn from '@public/img/landing/agent-dashboard-en.png'
+import agentDashboardFr from '@public/img/landing/agent-dashboard-fr.png'
+
 import payerDashboard from '@public/img/landing/payer-dashboard.png'
 import payerDashboardEn from '@public/img/landing/payer-dashboard-en.png'
+import payerDashboardFr from '@public/img/landing/payer-dashboard-fr.png'
 
 export const UsersSection = () => {
   const { t } = useTranslation('common')
   const { locale } = useRouter()
-  const isLocaleRu = locale === 'ru'
 
   const sections = [
     {
@@ -34,7 +43,7 @@ export const UsersSection = () => {
         t('quick-api-skd-integration')
       ],
       action: { label: t('business-connect') },
-      img: isLocaleRu ? businessDashboard : businessDashboardEn
+      img: localeImg(locale, businessDashboard, businessDashboardEn, businessDashboardFr)
     },
     {
       title: t('for-service-workers'),
@@ -42,7 +51,7 @@ export const UsersSection = () => {
       pageLink: ROUTE_NAMES.RECIPIENTS,
       features: [t('free-from-taxes')],
       action: { label: t('start-receive-tips') },
-      img: isLocaleRu ? recipientDashboard : recipientDashboardEn
+      img: localeImg(locale, recipientDashboard, recipientDashboardEn, recipientDashboardFr)
     },
     {
       title: t('for-artists'),
@@ -54,7 +63,7 @@ export const UsersSection = () => {
         t('easy-intuitive-interface')
       ],
       action: { label: t('start-receive-donates') },
-      img: isLocaleRu ? artistDashboard : artistDashboardEn
+      img: localeImg(locale, artistDashboard, artistDashboardEn, artistDashboardFr)
     },
     {
       title: t('for-agents'),
@@ -62,7 +71,7 @@ export const UsersSection = () => {
       pageLink: ROUTE_NAMES.AGENTS,
       features: [t('transfer-earned-money-bank')],
       action: { label: t('become-agent') },
-      img: isLocaleRu ? agentDashboard : agentDashboardEn
+      img: localeImg(locale, agentDashboard, agentDashboardEn, agentDashboardFr)
     },
     {
       title: t('for-payers'),
@@ -70,7 +79,7 @@ export const UsersSection = () => {
       pageLink: ROUTE_NAMES.PAYERS,
       features: [t('pay-tips-2-click')],
       action: { label: t('pay-tips') },
-      img: isLocaleRu ? payerDashboard : payerDashboardEn
+      img: localeImg(locale, payerDashboard, payerDashboardEn, payerDashboardFr)
     }
   ]
 

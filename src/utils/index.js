@@ -7,6 +7,7 @@ import { downloadExcel } from './downloadExcel'
 import { convertCents } from './convertCents'
 import { getCurrencySymbol } from './getCurrencySymbol'
 import { storage } from './storage'
+import { localeImg } from './localeImg'
 
 import {
   transformDateLabelToIso,
@@ -35,5 +36,6 @@ export {
   downloadExcel,
   convertCents,
   getCurrencySymbol,
-  storage
+  storage,
+  localeImg
 }

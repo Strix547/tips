@@ -8,11 +8,15 @@ import { ListIconSection, TariffsSection, ConnectFormSection } from 'landing/sec
 import { LinkButton } from 'ui'
 
 import { ROUTE_NAMES } from 'core/routes'
+import { localeImg } from 'utils'
 
 import dashboard from '@public/img/landing/business-banner-dashboard.png'
 import dashboardEn from '@public/img/landing/business-banner-dashboard-en.png'
+import dashboardFr from '@public/img/landing/business-banner-dashboard-fr.png'
+
 import dashboardMobile from '@public/img/landing/business-banner-dashboard-mobile.png'
 import dashboardMobileEn from '@public/img/landing/business-banner-dashboard-mobile-en.png'
+import dashboardMobileFr from '@public/img/landing/business-banner-dashboard-mobile-fr.png'
 
 import DeviceDesignIcon from '@public/icons/device-design.svg'
 import DeviceWindowSettingsIcon from '@public/icons/devices-window-settings.svg'
@@ -23,7 +27,6 @@ import * as S from './Business.styled'
 export const BusinessPage = () => {
   const { t } = useTranslation('common')
   const { locale } = useRouter()
-  const isLocaleRu = locale === 'ru'
 
   const integrationTypes = [
     {
@@ -65,8 +68,8 @@ export const BusinessPage = () => {
           features={bannerFeatures}
           actions={bannerAction}
           img={{
-            desktop: isLocaleRu ? dashboard : dashboardEn,
-            mobile: isLocaleRu ? dashboardMobile : dashboardMobileEn
+            desktop: localeImg(locale, dashboard, dashboardEn, dashboardFr),
+            mobile: localeImg(locale, dashboardMobile, dashboardMobileEn, dashboardMobileFr)
           }}
         />
 
