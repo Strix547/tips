@@ -18,3 +18,6 @@ export const USER_ROLES = [
   { label: 'unverified', value: 'UNVERIFIED' },
   { label: 'admins', value: 'ADMIN' }
 ]
+
+export const stripeKey =
+  process.env.NODE_ENV === 'production' ? process.env.STIPE_KEY_PROD : process.env.STIPE_KEY_DEV

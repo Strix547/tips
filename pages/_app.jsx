@@ -11,6 +11,7 @@ import { Notifications } from 'components'
 
 import { userStore, localStore, authStore } from 'store'
 import { ROUTE_NAMES, ROUTES } from 'core/routes'
+import { stripeKey } from 'core/constants'
 
 import { createTheme } from '@material-ui/core/styles'
 
@@ -19,7 +20,7 @@ import { GlobalStyles } from 'styles/GlobalStyles'
 import 'styles/fonts.css'
 import 'swiper/swiper.min.css'
 
-const stripePromise = loadStripe('pk_test_w8hT3aAuQgK14ENklixWpHfx00b3mKZ9fG')
+const stripePromise = loadStripe(stripeKey)
 
 const App = ({ Component, pageProps }) => {
   const router = useRouter()

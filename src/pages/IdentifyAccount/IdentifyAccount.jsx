@@ -12,6 +12,7 @@ import { Button, Stepper, Step, StepLabel, CircularProgress } from 'ui'
 
 import { userStore, localStore, authStore } from 'store'
 import { transformDateLabelToIso } from 'utils'
+import { stripeKey } from 'core/constants'
 import * as stripeApi from 'api/stripe'
 
 import { MEDIA_TABLET } from 'styles/media'
@@ -59,7 +60,7 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
 
     const fileResult = await fetch('https://uploads.stripe.com/v1/files', {
       method: 'POST',
-      headers: { Authorization: `Bearer pk_test_w8hT3aAuQgK14ENklixWpHfx00b3mKZ9fG` },
+      headers: { Authorization: `Bearer ${stripeKey}` },
       body: data
     })
 
@@ -75,7 +76,7 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
 
     const fileResult = await fetch('https://uploads.stripe.com/v1/files', {
       method: 'POST',
-      headers: { Authorization: `Bearer pk_test_w8hT3aAuQgK14ENklixWpHfx00b3mKZ9fG` },
+      headers: { Authorization: `Bearer ${stripeKey}` },
       body: data
     })
 
@@ -156,7 +157,7 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
         setStripeError(error.message)
         return
       }
-      
+
       if (accountToken && bankAccountToken) {
         userStore.identifyAccount({
           userId: userStore.id,

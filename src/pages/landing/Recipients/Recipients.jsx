@@ -13,8 +13,11 @@ import { localeImg } from 'utils'
 
 import dashboard from '@public/img/landing/recipients-banner-dashboard.png'
 import dashboardEn from '@public/img/landing/recipients-banner-dashboard-en.png'
+import dashboardFr from '@public/img/landing/recipients-banner-dashboard-fr.png'
+
 import dashboardMobile from '@public/img/landing/recipients-banner-dashboard-mobile.png'
 import dashboardMobileEn from '@public/img/landing/recipients-banner-dashboard-mobile-en.png'
+import dashboardMobileFr from '@public/img/landing/recipients-banner-dashboard-mobile-fr.png'
 
 import SheetIcon from '@public/icons/sheet.svg'
 
