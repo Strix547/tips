@@ -20,4 +20,4 @@ export const USER_ROLES = [
 ]
 
 export const stripeKey =
-  process.env.NODE_ENV === 'production' ? process.env.STIPE_KEY_PROD : process.env.STIPE_KEY_DEV
+  process.env.NODE_ENV === 'development' ? process.env.STIPE_KEY_PROD : process.env.STIPE_KEY_DEV
