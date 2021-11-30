@@ -9,7 +9,7 @@ export const AboutUsPage = () => {
 
       <S.Main>
         <S.Wrapper>
-          <S.Heading level={1}>О «Tips.me»‎</S.Heading>
+          <S.Heading level={1}>О «FlyTips.com»‎</S.Heading>
           <S.Text>Text</S.Text>
         </S.Wrapper>
       </S.Main>
