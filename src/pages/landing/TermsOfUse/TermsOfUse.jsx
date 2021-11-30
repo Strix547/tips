@@ -48,7 +48,7 @@ export const TermsOfUsePage = () => {
         </S.Text>
         <S.Text>
           Restaurant administrator in two stages: Consent to the User Agreement posted at
-          waiter.netmonet.co - by sending the Operator to the email address: business@flytips.com an
+          www.FlyTips.com - by sending the Operator to the email address: business@flytips.com an
           application for registration in the Service indicating the full name, mobile phone number,
           email address of the Administrator and the name of the restaurant with a note in the text
           of the letter "I accept the terms of the User Agreement and the Personal Data Processing
@@ -124,7 +124,7 @@ export const TermsOfUsePage = () => {
           the Service and on other sites and services, as well as other information that cannot be
           confidential information in accordance with the current International legislation .
         </S.Text>
-        <S.Text>II. Using the "FlyTips" service provided by SARL “BANIONIS NAZAR”</S.Text>
+        <S.Text>III. Using the "FlyTips" service provided by SARL “BANIONIS NAZAR”</S.Text>
         <S.Text>
           III.1. The Operator acts as an intermediary in the implementation of money transfers from
           the Guest to the Service Waiter using the Payment System. The operator acts on its own
@@ -204,13 +204,13 @@ export const TermsOfUsePage = () => {
           System, transfers funds to the Waiter at his request, minus the Operator's commission.
         </S.Text>
         <S.Text>
-          III.11. The Operator reserves the right at any time to establish and / or change the
+          III.13. The Operator reserves the right at any time to establish and / or change the
           individual limit of each Guest for the transfer amount per day / month / for another
           period, as well as check the purpose and purpose of the transfer in order to protect the
           rights and legitimate interests of the Guest and third parties.
         </S.Text>
         <S.Text>
-          III.12. The Operator charges a commission on money transfers from the Guest to the Waiter.
+          III.14. The Operator charges a commission on money transfers from the Guest to the Waiter.
           The waiter agrees that the Operator's remuneration for using the Service is the commission
           charged by the Payment System. The Service, through the use of the Payment System,
           transfers funds to the Waiter at his request, minus the Operator's commission.
@@ -228,7 +228,7 @@ export const TermsOfUsePage = () => {
           support of the Service with questions, claims and suggestions related to the functioning
           of the Service by sending an email to the email address: support@flytips.com. The deadline
           for sending claims is 3 (three) business days from the date of the event in connection
-          with which the claim is sent.Waiters and Restaurant Administrators have the right to gain
+          with which the claim is sent. Waiters and Restaurant Administrators have the right to gain
           access to information about the feedback left about the work of the Waiters, as well as
           the date and amount of money transfers received to the personal account of the Waiter;
         </S.Text>
