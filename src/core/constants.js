@@ -19,9 +19,5 @@ export const USER_ROLES = [
   { label: 'admins', value: 'ADMIN' }
 ]
 
-console.log(process.env.NODE_ENV);
-console.log(process.env.STIPE_KEY_DEV);
-console.log(process.env.STIPE_KEY_PROD);
-
 export const stripeKey =
   process.env.NODE_ENV === 'development' ?  process.env.STIPE_KEY_DEV : process.env.STIPE_KEY_PROD 
