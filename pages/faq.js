@@ -1,7 +1,7 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { FaqPage } from 'pages'
 
-export async function getStaticProps({ locale }) {
+export async function getServerSideProps({ locale }) {
   if (locale !== 'ru') {
     return {
       redirect: {
