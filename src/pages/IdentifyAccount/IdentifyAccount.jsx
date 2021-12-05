@@ -74,7 +74,7 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
     const data = new FormData()
 
     data.append('file', file)
-    data.append('purpose', 'additional_verification')
+    data.append('purpose', 'identity_document')
 
     const fileResult = await fetch('https://uploads.stripe.com/v1/files', {
       method: 'POST',
