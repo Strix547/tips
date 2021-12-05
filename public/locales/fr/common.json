@@ -161,7 +161,7 @@
   "main-page": "Page principale",
   "my-qr-codes": "Mes QR codes",
   "my-bank-info": "Mes infos bancaires",
-  "personal-info": "Mes infos bancaires",
+  "personal-info": "Informations personnelles",
   "my-working-places": "Mes lieux de travail",
   "my-salarees": "Mes salariés",
   "my-reviews": "Mes notes",
@@ -359,7 +359,6 @@
   "choose-your-type": "Choisissez votre genre",
   "payer": "Payeur",
   "recipient": "Destinataire",
-  "business": "Entreprise",
   "fill-fields": "Remplissez les champs",
   "i-agree-with": "je suis d'accord avec",
   "stripe-policy": "politique des rayures",
@@ -372,5 +371,14 @@
   "upgrade": "Mettre à jour",
   "editing-qr-code-physical": "Modification du QR code physique visages",
   "edit-qr-code": "Modifier le code QR",
-  "delete": "Effacer"
+  "delete": "Effacer",
+  "step": "Étape",
+  "city": "Ville",
+  "enter-city-name": "Entrez le nom de la ville",
+  "cities-not-found": "Aucune ville trouvée",
+  "enter-country-name": "Entrez le nom du pays",
+  "countries-not-found": "Pays introuvables",
+  "further": "Plus loin",
+  "all": "Tout",
+  "admin": "Administrateur"
 }

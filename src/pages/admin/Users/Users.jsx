@@ -19,8 +19,8 @@ export const UsersPage = observer(() => {
 
   const useFormProps = useForm({
     defaultValues: {
-      group: 'REGULAR',
-      activity: false
+      group: 'all',
+      activity: 'all'
     }
   })
   const { watch } = useFormProps
@@ -33,9 +33,9 @@ export const UsersPage = observer(() => {
         adminStore.searchUsers({
           name,
           phone: phone && phone.length >= 7 ? `+${phone}` : null,
-          role: group,
+          role: activity === 'all' ? undefined : group,
           date: transformDateToIso(date),
-          active: activity,
+          active: activity === 'all' ? undefined : activity,
           zoneOffset: getTimeZoneOffset(),
           format: 'JSON'
         }),
@@ -66,7 +66,7 @@ export const UsersPage = observer(() => {
         <title>{t('users-list')}</title>
       </Head>
 
-      <AccountLayout title="{t('users-list')}">
+      <AccountLayout title={t('users-list')}>
         <FormProvider {...useFormProps}>
           <UsersFilter />
 

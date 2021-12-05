@@ -85,6 +85,7 @@ export const userStore = makeAutoObservable({
   }) => {
     try {
       userStore.isPersonalDataLoading = true
+
       const getAvatarFileId = async (avatar) => {
         const formData = new FormData()
         formData.append('file', avatar)
@@ -177,5 +178,9 @@ export const userStore = makeAutoObservable({
     } catch ({ message }) {
       toast.error(message)
     }
+  },
+
+  startIdentifyProcessing: (value) => {
+    userStore.isIdentifyProcessing = value
   }
 })

@@ -342,7 +342,7 @@
   "personal": "Personal",
   "enter-percentage": "Enter percentage",
   "business-account": "Business account",
-  "commission-text": "Rubrique indiquant le montant de la commission pour usage personnel, comptes professionnels, programme d'agence et programme de fidélité. Se compose d'une liste d'entrées numériques indiquant la valeur exacte de l'indice de commission.",
+  "commission-text": "Section indicating the size of the commission for personal use, business accounts, agency scheme and loyalty program. Consists of a list of digital inputs indicating the exact value of the commission index.",
 
   "confirm-action": "Confirm Action",
   "no-it-mistake": "No it is a mistake",
@@ -359,7 +359,6 @@
   "choose-your-type": "Choose your type",
   "payer": "Payer",
   "recipient": "Recipient",
-  "business": "Business",
   "fill-fields": "Fill in the fields",
   "i-agree-with": "I agree with",
   "stripe-policy": "stripe policy",
@@ -372,5 +371,14 @@
   "upgrade": "Upgrade",
   "editing-qr-code-physical": "Editing the QR code physical faces",
   "edit-qr-code": "Edit QR Code",
-  "delete": "Delete"
+  "delete": "Delete",
+  "step": "Step",
+  "city": "City",
+  "enter-city-name": "Enter the name of the city",
+  "cities-not-found": "No cities found",
+  "enter-country-name": "Enter the country name",
+  "countries-not-found": "Countries not found",
+  "further": "Further",
+  "all": "All",
+  "admin": "Admin"
 }

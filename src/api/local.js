@@ -49,11 +49,3 @@ export const getCities = async ({ search, countryCode, languageCode, limit = 10 
 
   return transformCities(data)
 }
-
-export const getAddress = async (text) => {
-  const { data } = await axios.get(
-    `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${text}&key=AIzaSyDSVk9cak0LLFi-PjTkpVXFXTm9VzGkNfI`
-  )
-
-  return data
-}

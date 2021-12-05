@@ -54,6 +54,7 @@ export const AuthPage = observer(() => {
     if (!isCodeSendAllow) return
 
     authStore.setAuthData({ phone })
+
     setRememberUser(remember)
     const isCodeSended = await authStore.sendCode(phone)
 
@@ -68,6 +69,8 @@ export const AuthPage = observer(() => {
   }
 
   const onAuth = async ({ phone, code, remember }) => {
+    authStore.setAuthData({ phone })
+
     await authStore.auth({
       phone,
       code,

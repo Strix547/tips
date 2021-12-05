@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { Heading, Text, ErrorText } from 'styled'
 import { Button } from 'ui/Button/Button.styled'
@@ -24,6 +24,7 @@ export const IdentifyAccountPage = styled.div`
 `
 
 export const Left = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,6 +44,7 @@ export const Left = styled.div`
 `
 
 export const Content = styled.div`
+  position: relative;
   width: 100%;
   outline: none;
   box-sizing: border-box;
@@ -88,6 +90,12 @@ export const Content = styled.div`
   @media (max-height: 835px) {
     padding: 50px 0 100px;
   }
+
+  ${({ invisible }) =>
+    invisible &&
+    css`
+      visibility: hidden;
+    `}
 `
 
 export const FieldsLabel = styled(Text)`
@@ -149,5 +157,13 @@ export const Right = styled.div`
 `
 
 export const Progress = styled.div`
-  margin: auto;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: #fff;
 `

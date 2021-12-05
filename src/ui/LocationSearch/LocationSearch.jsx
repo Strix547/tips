@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { observer } from 'mobx-react-lite'
 import throttle from 'lodash.throttle'
+import { useTranslation } from 'next-i18next'
 
 import { localStore } from 'store'
 
@@ -10,7 +11,9 @@ import { Autocomplete } from 'ui'
 import * as S from './LocationSearch.styled'
 
 export const LocationSearch = observer(() => {
+  const { t } = useTranslation('common')
   const useFormProps = useFormContext()
+
   const [countryInput, setCountryInput] = useState('')
   const [cityInput, setCityInput] = useState('')
 
@@ -57,26 +60,26 @@ export const LocationSearch = observer(() => {
     <>
       <Autocomplete
         name="country"
-        label="Страна"
+        label={t('country')}
         options={localStore.countries}
         required
         getOptionLabel={({ name }) => name}
-        noOptionsText={countryInput.length ? 'Страны не найдены' : 'Введите название страны'}
+        noOptionsText={countryInput.length ? t('countries-not-found') : t('enter-country-name')}
         onInputChange={onCountryInputChange}
         onChange={onCountryChange}
-        renderInput={(props) => <S.FormField {...props} placeholder="Введите название страны" />}
+        renderInput={(props) => <S.FormField {...props} placeholder={t('enter-country-name')} />}
       />
 
       {localStore.selectedCountryCode && (
         <Autocomplete
           name="city"
-          label="Город"
+          label={t('city')}
           options={localStore.cities}
-          noOptionsText={cityInput.length ? 'Города не найдены' : 'Введите название города'}
+          noOptionsText={cityInput.length ? t('cities-not-found') : t('enter-city-name')}
           required
           onInputChange={onCityInputChange}
           onChange={onCityChange}
-          renderInput={(props) => <S.FormField {...props} placeholder="Введите название города" />}
+          renderInput={(props) => <S.FormField {...props} placeholder={t('enter-city-name')} />}
         />
       )}
     </>

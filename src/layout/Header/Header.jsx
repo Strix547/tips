@@ -33,6 +33,7 @@ export const Header = observer(({ withSidebar }) => {
   const { t } = useTranslation('common')
 
   const [isMenuOpen, setMenuOpen] = useState(false)
+  const { isAuth } = authStore
   const { isIdLoading, personalData, isPersonalDataLoading, role } = userStore
   const { firstName, lastName, avatar } = personalData
   const currentPathname = router.pathname
@@ -134,7 +135,8 @@ export const Header = observer(({ withSidebar }) => {
             <S.MenuButton type="button" onClick={toggleMenuOpen}>
               <MenuHamburger />
             </S.MenuButton>
-            <Logo />
+
+            <Logo href={isAuth ? ROUTE_NAMES.ACCOUNT : '/'} />
           </S.Left>
 
           <S.Nav withSidebar={withSidebar}>

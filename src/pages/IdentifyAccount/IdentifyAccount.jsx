@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useMediaQuery } from 'react-responsive'
 import { useStripe, useElements, IbanElement } from '@stripe/react-stripe-js'
@@ -24,7 +24,6 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
   const { t } = useTranslation('common')
   const stripe = useStripe()
   const stripeElements = useElements()
-
   const firstNameDefault =
     authStore.authData.firstName === 'undefined' ? '' : authStore.authData.firstName
   const emailDefault = authStore.authData.email === 'undefined' ? '' : authStore.authData.email
@@ -40,13 +39,22 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
   const isTablet = useMediaQuery({ maxWidth: MEDIA_TABLET })
   const [step, setStep] = useState(0)
   const [stripeError, setStripeError] = useState()
-  const [identityDocumentId, setIdentityDocumentId] = useState()
-  const [addressDocumentId, setAddressDocumentId] = useState()
+  const [identityDocument, setIdentityDocument] = useState()
+  const [addressDocument, setAddressDocument] = useState()
+  const [ibanElement, setIbanElement] = useState()
 
-  const { phone } = authStore.authData
-  console.log(phone)
+  useEffect(() => {
+    if (!stripeElements) return
+
+    const ibanElement = stripeElements.getElement(IbanElement)
+
+    if (ibanElement) {
+      setIbanElement(ibanElement)
+    }
+  }, [step, stripeElements, setIbanElement])
+
   const { isIdentifyProcessing } = userStore
-  const steps = ['Шаг 1', 'Шаг 2', 'Шаг 3']
+  const steps = [`${t('step')} 1`, `${t('step')} 2`, `${t('step')} 3`]
 
   const stepList = steps.map((label, idx) => (
     <Step key={label}>
@@ -54,7 +62,7 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
     </Step>
   ))
 
-  const sendIdentityDocument = async (file) => {
+  const uploadStripeIdentityDocument = async (file) => {
     const data = new FormData()
 
     data.append('file', file)
@@ -67,34 +75,18 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
     })
 
     const { id } = await fileResult.json()
-    setIdentityDocumentId(id)
-  }
-
-  const sentAddressDocument = async (file) => {
-    const data = new FormData()
-
-    data.append('file', file)
-    data.append('purpose', 'identity_document')
-
-    const fileResult = await fetch('https://uploads.stripe.com/v1/files', {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${stripeKey}` },
-      body: data
-    })
-
-    const { id } = await fileResult.json()
-    setAddressDocumentId(id)
+    return id
   }
 
   const crediteCardStepMemo = useMemo(
     () => (
       <LocationStep
         stripePromise={stripePromise}
-        onIndetityDocumentUpload={sendIdentityDocument}
-        onAddressDocumentUpload={sentAddressDocument}
+        onIndetityDocumentUpload={setIdentityDocument}
+        onAddressDocumentUpload={setAddressDocument}
       />
     ),
-    [stripePromise, useFormProps, sendIdentityDocument, sentAddressDocument]
+    [stripePromise, setIdentityDocument, setAddressDocument]
   )
 
   const getStepContent = (step) => {
@@ -133,9 +125,12 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
     }
 
     if (step === 2) {
-      const ibanElement = stripeElements.getElement(IbanElement)
+      userStore.startIdentifyProcessing(true)
 
-      const accountToken = await stripeApi.createAccountToken({
+      const identityDocumentId = await uploadStripeIdentityDocument(identityDocument)
+      const addressDocumentId = await uploadStripeIdentityDocument(addressDocument)
+
+      const { accountToken, accountTokenError } = await stripeApi.createAccountToken({
         stripe,
         firstName,
         lastName,
@@ -144,11 +139,12 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
         address,
         postal,
         birthDate,
-        phone: `+${phone}`,
+        phone: `+${localStorage.getItem('phone')}`,
         email,
         identityDocumentId,
         addressDocumentId
       })
+
       const { bankAccountToken, bankAccountError } = await stripeApi.createBankAccountToken({
         stripe,
         ibanElement,
@@ -156,8 +152,13 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
         lastName
       })
 
-      if (bankAccountError) {
-        setStripeError(error.message)
+      if (bankAccountError || accountTokenError) {
+        if (bankAccountError) {
+          setStripeError(bankAccountError)
+        } else {
+          setStripeError(accountTokenError)
+        }
+        userStore.startIdentifyProcessing(false)
         return
       }
 
@@ -199,38 +200,38 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
 
       <S.IdentifyAccountPage>
         <S.Left>
-          {!isIdentifyProcessing ? (
-            <S.Content>
-              <S.Heading level={6}>{t('account-identification')}</S.Heading>
+          <S.Content invisible={isIdentifyProcessing}>
+            <S.Heading level={6}>{t('account-identification')}</S.Heading>
 
-              <Stepper activeStep={step}>{stepList}</Stepper>
+            <Stepper activeStep={step}>{stepList}</Stepper>
 
-              <FormProvider {...useFormProps}>
-                <S.Step>
-                  {getStepContent(step)}
+            <FormProvider {...useFormProps}>
+              <S.Step>
+                {getStepContent(step)}
 
-                  {step === 2 && stripeError && <S.ErrorText>{stripeError}</S.ErrorText>}
+                {step === 2 && stripeError && <S.ErrorText>{stripeError}</S.ErrorText>}
 
-                  {birthdateError?.type === 'moreThanEighteen' && (
-                    <S.ErrorText>{birthdateError?.message}</S.ErrorText>
-                  )}
-                </S.Step>
-              </FormProvider>
-
-              <S.StepNav>
-                {step !== 0 && <Button onClick={onPrevStep}>{t('back')}</Button>}
-                {step !== 3 && (
-                  <Button
-                    type="submit"
-                    disabled={isStripeNotLoaded}
-                    onClick={useFormProps.handleSubmit(onStepSubmit)}
-                  >
-                    {step !== 2 ? 'Далее' : 'Войти'}
-                  </Button>
+                {birthdateError?.type === 'moreThanEighteen' && (
+                  <S.ErrorText>{birthdateError?.message}</S.ErrorText>
                 )}
-              </S.StepNav>
-            </S.Content>
-          ) : (
+              </S.Step>
+            </FormProvider>
+
+            <S.StepNav>
+              {step !== 0 && <Button onClick={onPrevStep}>{t('back')}</Button>}
+              {step !== 3 && (
+                <Button
+                  type="submit"
+                  disabled={isStripeNotLoaded}
+                  onClick={useFormProps.handleSubmit(onStepSubmit)}
+                >
+                  {step !== 2 ? t('further') : t('logIn')}
+                </Button>
+              )}
+            </S.StepNav>
+          </S.Content>
+
+          {isIdentifyProcessing && (
             <S.Progress>
               <CircularProgress size={80} />
             </S.Progress>

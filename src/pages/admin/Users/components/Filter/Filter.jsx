@@ -10,6 +10,7 @@ export const UsersFilter = () => {
   const { t } = useTranslation('common')
 
   const activities = [
+    { label: t('all'), value: 'all' },
     { label: t('inactive'), value: false },
     { label: t('active'), value: true }
   ]
@@ -20,16 +21,23 @@ export const UsersFilter = () => {
     </MenuItem>
   ))
 
-  const groupMenuItems = USER_ROLES.map(({ label, value }) => (
-    <MenuItem key={label} value={value}>
-      {label}
-    </MenuItem>
-  ))
+  const groupMenuItems = [{ label: t('all'), value: 'all' }, ...USER_ROLES].map(
+    ({ label, value }) => (
+      <MenuItem key={label} value={value}>
+        {t(label)}
+      </MenuItem>
+    )
+  )
 
   return (
     <S.Filter>
       <S.Column>
-        <DatePicker name="date" label={`${t('date')}:`} placeholderText={t('choose-date')} withIcon />
+        <DatePicker
+          name="date"
+          label={`${t('date')}:`}
+          placeholderText={t('choose-date')}
+          withIcon
+        />
       </S.Column>
 
       <S.Column>

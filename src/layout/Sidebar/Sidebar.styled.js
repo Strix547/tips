@@ -2,7 +2,10 @@ import styled, { css } from 'styled-components'
 
 import { Button } from 'ui/Button/Button.styled'
 
+import { Text } from 'styled'
 import { media } from 'styles/media'
+
+export { Text }
 
 export const Sidebar = styled.aside`
   position: fixed;
@@ -209,5 +212,15 @@ export const SubNav = styled.ul``
 export const SubNavItem = styled(NavItem)`
   a {
     padding-left: 54px;
+  }
+`
+
+export const AdminViewPanel = styled.div`
+  margin-left: auto;
+  margin-right: 5px;
+
+  ${Text} {
+    margin-bottom: 5px;
+    font-size: var(--font-size-sm);
   }
 `

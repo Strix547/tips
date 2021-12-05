@@ -24,7 +24,6 @@ import { EmailField } from './EmailField'
 import { BankAccountSelect } from './BankAccountSelect'
 import { BirthDateAdultValid } from './BirthDateAdultValid'
 import { PlatformSearch } from './PlatformSearch'
-import { AddressSearch } from './AddressSearch'
 import { CurrencySelect } from './CurrencySelect'
 import { Tabs, Tab } from './Tabs'
 
@@ -60,7 +59,6 @@ export {
   BankAccountSelect,
   BirthDateAdultValid,
   PlatformSearch,
-  AddressSearch,
   CurrencySelect,
   Tabs,
   Tab

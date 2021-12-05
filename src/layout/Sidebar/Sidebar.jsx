@@ -1,10 +1,11 @@
 import { observer } from 'mobx-react-lite'
+import { FormProvider, useForm } from 'react-hook-form'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 
 import { Logo } from 'common'
-import { LinkButton } from 'ui'
+import { LinkButton, Switch } from 'ui'
 
 import { ROUTE_NAMES } from 'core/routes'
 import { authStore, userStore, adminStore } from 'store'
@@ -30,10 +31,18 @@ export const Sidebar = observer(() => {
   const { pathname, locale } = useRouter()
 
   const { role } = userStore
-  const { isAdminMode } = adminStore
-
   const isBusinessAccount = role === 'BUSINESS'
-  const isAdminAccount = role === 'ADMIN'
+  const isAdminAccount = true
+
+  const useFormProps = useForm({
+    defaultValues: {
+      adminView: isAdminAccount
+    }
+  })
+  const { watch } = useFormProps
+
+  const { isAdminMode } = adminStore
+  const adminView = watch('adminView')
 
   const userNav = [
     { label: t('main-page'), link: ROUTE_NAMES.ACCOUNT, icon: <PieChartIcon /> },
@@ -76,7 +85,7 @@ export const Sidebar = observer(() => {
     { label: t('commissions'), link: ROUTE_NAMES.ADMIN_COMMISSION, icon: <DiscountIcon /> }
   ]
 
-  const nav = isAdminAccount && !isAdminMode ? adminNav : userNav
+  const nav = isAdminAccount && !isAdminMode && adminView ? adminNav : userNav
 
   const onSignOut = () => {
     authStore.signOut()
@@ -119,7 +128,17 @@ export const Sidebar = observer(() => {
   return (
     <S.Sidebar>
       <S.Top>
-        <Logo />
+        <Logo href={ROUTE_NAMES.ACCOUNT} />
+
+        {isAdminAccount && (
+          <S.AdminViewPanel>
+            <S.Text>{t('admin')}</S.Text>
+
+            <FormProvider {...useFormProps}>
+              <Switch name="adminView" />
+            </FormProvider>
+          </S.AdminViewPanel>
+        )}
       </S.Top>
 
       <S.Main>

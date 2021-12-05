@@ -40,15 +40,6 @@ export const localStore = makeAutoObservable({
     })
   },
 
-  getAddress: async (address) => {
-    localStore.isAddressesLoading = true
-
-    const addreses = await localApi.getAddress(address)
-    localStore.addresses = addreses
-
-    localStore.isAddressesLoading = false
-  },
-
   getLanguage: async () => {
     const storageLang = localStorage.getItem('lang')
 
