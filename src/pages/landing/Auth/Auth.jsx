@@ -19,7 +19,6 @@ import CommentRegulationIcon from '@public/img/landing/comment-regulation.svg'
 export const AuthPage = observer(() => {
   const { t } = useTranslation('common')
   const router = useRouter()
-  console.log(router.asPath.slice(router.asPath.indexOf('agent') + 6))
 
   const isTablet = useMediaQuery({ maxWidth: MEDIA_TABLET })
 

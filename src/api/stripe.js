@@ -7,6 +7,7 @@ export const createAccountToken = async ({
   address,
   postal,
   birthDate,
+  phone,
   email,
   identityDocumentId,
   addressDocumentId
@@ -27,6 +28,7 @@ export const createAccountToken = async ({
         month: birthDate.split('/')[1],
         year: birthDate.split('/')[2]
       },
+      phone,
       email,
       verification: {
         document: {

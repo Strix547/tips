@@ -43,6 +43,8 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
   const [identityDocumentId, setIdentityDocumentId] = useState()
   const [addressDocumentId, setAddressDocumentId] = useState()
 
+  const { phone } = authStore.authData
+  console.log(phone)
   const { isIdentifyProcessing } = userStore
   const steps = ['Шаг 1', 'Шаг 2', 'Шаг 3']
 
@@ -142,6 +144,7 @@ export const IdentifyAccountPage = observer(({ stripePromise }) => {
         address,
         postal,
         birthDate,
+        phone: `+${phone}`,
         email,
         identityDocumentId,
         addressDocumentId
