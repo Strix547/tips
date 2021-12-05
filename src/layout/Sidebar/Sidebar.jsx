@@ -32,7 +32,7 @@ export const Sidebar = observer(() => {
 
   const { role } = userStore
   const isBusinessAccount = role === 'BUSINESS'
-  const isAdminAccount = true
+  const isAdminAccount = role === 'ADMIN'
 
   const useFormProps = useForm({
     defaultValues: {
