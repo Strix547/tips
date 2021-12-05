@@ -31,7 +31,7 @@ export const TipsTable = observer(
       .map(({ tipAmount }) => tipAmount)
       .reduce((amount, total) => amount + total, 0)
 
-    const tipsAverage = dataJS.length ? Number(Number(tipsTotal / dataJS.length).toFixed(0)) : 0
+    const tipsAverage = dataJS.length ? Number(Number(tipsTotal / dataJS.length).toFixed(3)) : 0
 
     const commissionTotal = dataJS
       .map(({ commission }) => commission)
