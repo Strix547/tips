@@ -54,7 +54,8 @@ export const BarChart = ({ title, data, isLoading, noText, gradient = 'red' }) =
               gradient === 'red' ? gradientRedColors : gradientBlueColors
             )
           ],
-          borderRadius: { topLeft: 5, topRight: 5 }
+          borderRadius: { topLeft: 5, topRight: 5 },
+          maxBarThickness: 100
         }
       ]
     }
