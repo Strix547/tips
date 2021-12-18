@@ -28,7 +28,7 @@ export const MyPlatformsPage = observer(() => {
     router.push(ROUTE_NAMES.ACCOUNT_PLATFORMS_CREATE)
   }
 
-  const platformCardList = platforms.map(
+  const platformCardList = platforms?.map(
     ({ id, type, name, address, tipsAmountMonth, tipsAmountYear, active, employeeCount }) => (
       <PlatformCard
         key={id}

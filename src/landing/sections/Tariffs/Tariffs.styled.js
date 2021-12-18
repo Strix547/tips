@@ -24,13 +24,18 @@ export const Content = styled.div`
 
 export const Card = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
   width: 570px;
   padding: 50px;
   background: #fff;
   box-shadow: 0px 10px 40px rgba(20, 32, 60, 0.05);
   border-radius: 20px;
   box-sizing: border-box;
+
+  ${Button} {
+    margin-top: 35px;
+  }
 
   ${media1030} {
     position: relative;
@@ -43,9 +48,23 @@ export const Card = styled.div`
   }
 
   ${media570} {
-    flex-direction: column-reverse;
     justify-content: flex-start;
     padding: 30px;
+
+    ${Button} {
+      margin-top: 30px;
+      padding: 0 20px;
+    }
+  }
+`
+
+export const CardTop = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  ${media570} {
+    flex-direction: column-reverse;
+    justify-content: flex-start;
   }
 `
 
@@ -62,10 +81,6 @@ export const CardLeft = styled.div`
       font-size: var(--font-size-md);
       line-height: 28px;
     }
-  }
-
-  ${Button} {
-    margin-top: 35px;
   }
 
   ${media570} {

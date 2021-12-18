@@ -15,6 +15,10 @@ export const sectionStyles = css`
     margin: 40px auto 0;
   }
 
+  a {
+    min-width: 280px;
+  }
+
   ${media.tablet} {
     margin: 80px 0;
     padding: 0;

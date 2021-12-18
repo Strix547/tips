@@ -18,6 +18,8 @@ export const sectionStyles = css`
 
   ${Wrapper} > ${Heading}:first-of-type {
     margin-bottom: 30px;
+    position: relative;
+    z-index: 10;
   }
 
   ${media.mobile} {

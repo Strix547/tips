@@ -19,14 +19,16 @@ export const TariffsSection = () => {
     <Section title={t('fees-for-using-service')} gray styles={S.sectionStyles}>
       <S.Content>
         <S.Card>
-          <S.CardLeft>
-            <S.Text>{t('tariff-section-fees')}</S.Text>
-            <S.Text>{t('additional-fees')}</S.Text>
+          <S.CardTop>
+            <S.CardLeft>
+              <S.Text>{t('tariff-section-fees')}</S.Text>
+              <S.Text>{t('additional-fees')}</S.Text>
+            </S.CardLeft>
 
-            <LinkButton href={ROUTE_NAMES.AUTH}>{t('start-getting-tips')}</LinkButton>
-          </S.CardLeft>
+            <S.Percentage>7%</S.Percentage>
+          </S.CardTop>
 
-          <S.Percentage>7%</S.Percentage>
+          <LinkButton href={ROUTE_NAMES.AUTH}>{t('start-getting-tips')}</LinkButton>
         </S.Card>
 
         {!isTablet && (

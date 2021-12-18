@@ -18,7 +18,7 @@ export const UpgradeToBusinessPage = observer(() => {
   const userId = userStore.id
 
   const toMainPage = () => {
-    router.push(ROUTE_NAMES.ACCOUNT)
+    router.push(ROUTE_NAMES.ACCOUNT_PERSONAL_DATA)
   }
 
   const onUpgradeSubmit = () => {

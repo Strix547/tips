@@ -74,7 +74,7 @@ export const RequisitesPage = observer(({ stripePromise }) => {
 
               <Button
                 variant="bordered"
-                onClick={() => (!isIbanVisible ? setIbanVisible(true) : onAddIban)}
+                onClick={() => (!isIbanVisible ? setIbanVisible(true) : onAddIban())}
               >
                 {t('add-iban')}
               </Button>
