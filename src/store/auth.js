@@ -74,6 +74,6 @@ export const authStore = makeAutoObservable({
     adminStore.adminId = null
     adminStore.isAdminMode = false
 
-    router.push(ROUTE_NAMES.RECIPIENTS)
+    router.push('/')
   }
 })

@@ -10,9 +10,15 @@ export const changeUserLanguage = ({ userId, languageCode }) => {
 }
 
 export const getMyId = async () => {
-  const { data } = await API.get('/me')
+  try {
+    const { data } = await API.get('/me')
 
-  return data?.userId
+    return data?.userId
+  } catch ({ response }) {
+    if (response.status === 401) {
+      return
+    }
+  }
 }
 
 export const getUserRole = async (userId) => {
@@ -96,9 +102,15 @@ export const upgradeAccountToBusiness = async (userId) => {
 }
 
 export const getUserByPhone = async (phone) => {
-  const { data } = await API.get(`/person-by-phone`, {
-    params: { phone: `+${phone}` }
-  })
+  try {
+    const { data } = await API.get(`/person-by-phone`, {
+      params: { phone: `+${phone}` }
+    })
 
-  return data.personUserId
+    return data.personUserId
+  } catch ({ response }) {
+    if (response.status === 404) {
+      return null
+    }
+  }
 }

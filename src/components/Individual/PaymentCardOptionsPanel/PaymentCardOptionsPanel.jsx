@@ -47,7 +47,7 @@ export const PaymentCardOptionsPanelIndividual = observer(({ action }) => {
 
   return (
     <S.PaymentCardOptionsPanelIndividual>
-      <FormField name="name" label={t('qr-name')} placeholder={t('enter-name')} required />
+      <FormField name="name" label={t('name-qr-code')} placeholder={t('enter-name')} required />
 
       <S.AmountPresetsRow>
         <S.Label>{t('preset-tip-amounts')}</S.Label>

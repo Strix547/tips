@@ -105,7 +105,7 @@ export const LocationStep = ({
 
         <S.Text>{t('i-agree-with')}</S.Text>
 
-        <Link href="https://stripe.com/connect-account/legal/recipient" prefetch={false}>
+        <Link href="https://stripe.com/privacy" prefetch={false}>
           <a>{t('stripe-policy')}</a>
         </Link>
       </S.Agreement>

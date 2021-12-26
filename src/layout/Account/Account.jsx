@@ -8,7 +8,7 @@ import * as S from './Account.styled'
 
 import CrossCircleIcon from '@public/icons/cross-circle.svg'
 
-export const AccountLayout = ({ title, button, children, styles }) => {
+export const AccountLayout = ({ title, button, children, styles, noSidebar }) => {
   const screenMore1280 = useMediaQuery({ minWidth: 1281 })
 
   return (

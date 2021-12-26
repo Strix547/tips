@@ -6,7 +6,8 @@ export async function getServerSideProps(context) {
   return {
     props: {
       ...(await serverSideTranslations(context.locale, ['common'])),
-      protected: true
+      protected: true,
+      roles: ['REGULAR', 'BUSINESS', 'ADMIN']
     }
   }
 }

@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from 'react'
 import { useForm, FormProvider } from 'react-hook-form'
 import { observer } from 'mobx-react-lite'
+import { toJS } from 'mobx'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
@@ -32,6 +33,7 @@ export const UserMainPage = observer(() => {
   const { incomeStatistics, isIncomeStatisticsLoading } = statisticsStore
   const { period, periodFrom, periodTo } = watch()
   const isBusinessAccount = role === 'BUSINESS'
+  const userCurrency = toJS(userStore.personalData.currency.value)
 
   useEffect(() => {
     if (!userId || !role || (period === 'custom' && !periodFrom && !periodTo)) return
@@ -114,28 +116,6 @@ export const UserMainPage = observer(() => {
     })
   )
 
-  const platformRows = incomeStatistics.table.map(
-    ({
-      id,
-      dateTime,
-      platformName,
-      firstName,
-      lastName,
-      tipAmount,
-      commission,
-      rating,
-      currency
-    }) => ({
-      id,
-      dateTime: transformDateTimeToLabel(dateTime),
-      platformName,
-      fullName: `${lastName} ${firstName}`,
-      tipAmount: getPriceLabel(tipAmount, getCurrencySymbol(currency)),
-      commission: getPriceLabel(commission, getCurrencySymbol(currency)),
-      rating
-    })
-  )
-
   const individualTableCards = incomeStatistics.table.map(
     ({ qrId, qrName, dateTime, tipAmount, impression, currency }) => {
       const rows = [
@@ -157,23 +137,31 @@ export const UserMainPage = observer(() => {
     }
   )
 
-  const platformTableCards = incomeStatistics.table.map(
-    ({
+  const platformRows = incomeStatistics.table.map(
+    ({ id, dateTime, platformName, firstName, lastName, tipAmount, commission, rating }) => ({
       id,
+      dateTime: transformDateTimeToLabel(dateTime),
       platformName,
-      dateTime,
-      firstName,
-      lastName,
-      tipAmount,
-      commission,
-      rating,
-      currency
-    }) => {
+      fullName: `${lastName} ${firstName}`,
+      tipAmount: getPriceLabel(tipAmount, getCurrencySymbol(userCurrency)),
+      commission: getPriceLabel(commission, getCurrencySymbol(userCurrency)),
+      rating
+    })
+  )
+
+  const platformTableCards = incomeStatistics.table.map(
+    ({ id, platformName, dateTime, firstName, lastName, tipAmount, commission, rating }) => {
       const rows = [
         { label: t('platform'), value: platformName },
         { label: t('user'), value: `${lastName} ${firstName}` },
-        { label: t('tip-size'), value: getPriceLabel(tipAmount, getCurrencySymbol(currency)) },
-        { label: t('commission'), value: getPriceLabel(commission, getCurrencySymbol(currency)) },
+        {
+          label: t('tip-size'),
+          value: getPriceLabel(tipAmount, getCurrencySymbol(userCurrency))
+        },
+        {
+          label: t('commission'),
+          value: getPriceLabel(commission, getCurrencySymbol(userCurrency))
+        },
         { label: t('rating'), value: <RatingCell rating={rating} /> }
       ]
 
@@ -182,7 +170,7 @@ export const UserMainPage = observer(() => {
           key={id}
           top={{
             left: transformDateTimeToLabel(dateTime),
-            right: getPriceLabel(tipAmount, getCurrencySymbol(currency))
+            right: getPriceLabel(tipAmount, getCurrencySymbol(userCurrency))
           }}
           rows={rows}
         />

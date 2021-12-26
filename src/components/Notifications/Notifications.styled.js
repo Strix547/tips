@@ -19,7 +19,8 @@ export const Notifications = styled.div`
       background: var(--color-red-100);
     }
 
-    &--info {
+    &--info,
+    &--warning {
       color: var(--color-black-200);
 
       .Toastify__toast-icon svg {

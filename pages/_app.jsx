@@ -5,12 +5,14 @@ import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 import { appWithTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
+import { toast } from 'react-toastify'
 import Head from 'next/head'
 
 import { Notifications } from 'components'
+import { CircularProgress } from 'ui'
 
-import { userStore, localStore, authStore } from 'store'
-import { ROUTE_NAMES, ROUTES } from 'core/routes'
+import { userStore, localStore } from 'store'
+import { ROUTE_NAMES } from 'core/routes'
 import { stripeKey } from 'core/constants'
 
 import { createTheme } from '@material-ui/core/styles'
@@ -27,89 +29,28 @@ const App = ({ Component, pageProps }) => {
   const theme = createTheme({
     props: {
       MuiButtonBase: { disableRipple: true }
-    },
-    breakpoints: {
-      values: {
-        mobile: 405,
-        tablet: 798,
-        laptop: 1210
-      }
     }
   })
 
-  const { id, role, isIdLoading, isRoleLoading } = userStore
-  const { isAuth } = authStore
+  const { id, role } = userStore
   const { lang } = localStore
-
   const currentPathname = router.pathname
-  const isAuthRoute = currentPathname === ROUTE_NAMES.AUTH
-  const currentRouteConfig = ROUTES.find(({ path }) => currentPathname === path)
-  const isProtectedRoute = currentRouteConfig?.isProtected
-  const isBusinessRoute = currentRouteConfig?.role === 'BUSINESS'
-  const isAdminRoute = currentRouteConfig?.role === 'ADMIN'
+  const { protected: isProtectedPage, roles: pageRoles } = pageProps
 
   useEffect(async () => {
-    // first load data and redirects
-
     const id = await userStore.getMyId()
 
-    if (!id && isProtectedRoute && !isAuthRoute) {
+    if (isProtectedPage && !id) {
       router.push(ROUTE_NAMES.AUTH)
-      return
     }
-
-    if (!id) return
-
-    const role = await userStore.getUserRole(id)
-
-    await userStore.getPersonalData(id)
-
-    if (
-      role === 'UNVERIFIED' &&
-      (isProtectedRoute || currentPathname === ROUTE_NAMES.AUTH) &&
-      currentPathname !== ROUTE_NAMES.ACCOUNT_IDENTIFY
-    ) {
-      router.push(ROUTE_NAMES.ACCOUNT_IDENTIFY)
-      return
-    }
-
-    if (role !== 'BUSINESS' && isBusinessRoute && role !== 'ADMIN') {
-      router.push(ROUTE_NAMES.ACCOUNT_UPGRADE_TO_BUSINESS)
-      return
-    }
-
-    if (role !== 'ADMIN' && isAdminRoute) {
-      router.push(ROUTE_NAMES.ACCOUNT)
-      return
-    }
-
-    if (role === 'ADMIN' && isProtectedRoute) {
-      router.push(ROUTE_NAMES.ADMIN_USERS)
-      return
-    }
-
-    if (role === 'BUSINESS' && currentPathname === ROUTE_NAMES.ACCOUNT_UPGRADE_TO_BUSINESS) {
-      router.push(ROUTE_NAMES.ACCOUNT)
-      return
-    }
-
-    if (isAuthRoute) {
-      router.push(ROUTE_NAMES.ACCOUNT)
-    }
-  }, [])
+  }, [userStore, isProtectedPage, router])
 
   useEffect(() => {
-    if (!role) return
-
-    if (role !== 'BUSINESS' && isBusinessRoute && role !== 'ADMIN') {
-      router.push(ROUTE_NAMES.ACCOUNT_UPGRADE_TO_BUSINESS)
-      return
+    if (id) {
+      userStore.getUserRole(id)
+      userStore.getPersonalData(id)
     }
-
-    if (role === 'BUSINESS' && currentPathname === ROUTE_NAMES.ACCOUNT_UPGRADE_TO_BUSINESS) {
-      router.push(ROUTE_NAMES.ACCOUNT)
-    }
-  }, [role, currentPathname])
+  }, [id])
 
   useEffect(async () => {
     if (lang) return
@@ -129,10 +70,22 @@ const App = ({ Component, pageProps }) => {
     })
   }, [lang, currentPathname])
 
-  if (!id && !isIdLoading && isAuth) return null
-  if (isProtectedRoute && (isIdLoading || isRoleLoading)) return null
-  if (role === 'UNVERIFIED' && isProtectedRoute && currentPathname !== ROUTE_NAMES.ACCOUNT_IDENTIFY)
-    return null
+  useEffect(() => {
+    if (!role) return
+
+    const isAuthRoute = currentPathname === ROUTE_NAMES.AUTH
+
+    if (role === 'UNVERIFIED' && isProtectedPage && !isAuthRoute) {
+      router.push(ROUTE_NAMES.ACCOUNT_IDENTIFY)
+      return
+    }
+
+    if (pageRoles && !pageRoles.includes(role)) {
+      router.push(ROUTE_NAMES.ACCOUNT)
+      toast.warning('No permission for this page')
+      return
+    }
+  }, [role, isProtectedPage, pageRoles, currentPathname])
 
   return (
     <>
@@ -147,7 +100,20 @@ const App = ({ Component, pageProps }) => {
 
       <MuiThemeProvider theme={theme}>
         <Elements stripe={stripePromise}>
-          <Component {...pageProps} id={id} role={role} stripePromise={stripePromise} />
+          {pageProps.protected && (!id || !role || (role && !pageRoles.includes(role))) ? (
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                minHeight: '100vh'
+              }}
+            >
+              <CircularProgress size={80} />
+            </div>
+          ) : (
+            <Component {...pageProps} stripePromise={stripePromise} />
+          )}
           <Notifications />
         </Elements>
       </MuiThemeProvider>

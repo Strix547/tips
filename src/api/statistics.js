@@ -126,7 +126,7 @@ export const getBusinessAccountIncomeStatistics = async ({
       platformId,
       dateTime: new Date(localDateTime),
       tipAmount: convertCents(income),
-      commission,
+      commission: convertCents(commission),
       firstName,
       lastName,
       rating,
@@ -152,7 +152,7 @@ export const getEmployeeIncomeStatistics = async ({
       platformId,
       dateTime: new Date(localDateTime),
       tipAmount: convertCents(income),
-      commission,
+      commission: convertCents(commission),
       platformName: title,
       rating
     })
@@ -174,7 +174,7 @@ export const getPlatformIncomeStatistics = async ({
       id: paymentId,
       dateTime: new Date(localDateTime),
       tipAmount: convertCents(income),
-      commission,
+      commission: convertCents(commission),
       firstName,
       lastName,
       rating

@@ -107,14 +107,19 @@ export const Sidebar = observer(() => {
     })
 
     const isSomeSubPath = subNav?.map(({ link }) => link).some((link) => link === pathname)
+    const forbiddenBusiness = forBusiness && !isBusinessAccount
 
     return (
       <S.NavItem
         key={label}
         active={subNav ? isSomeSubPath : pathname === link}
-        bgRed={forBusiness && !isBusinessAccount}
+        bgRed={forbiddenBusiness}
       >
-        <Link href={link} prefetch={false} locale={locale}>
+        <Link
+          href={forbiddenBusiness ? ROUTE_NAMES.ACCOUNT_UPGRADE_TO_BUSINESS : link}
+          prefetch={false}
+          locale={locale}
+        >
           <a>
             {icon} {label}
           </a>

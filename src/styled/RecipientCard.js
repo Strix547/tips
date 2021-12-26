@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { media } from 'styles/media'
+
 import { Text } from './Text'
 import { Button } from 'ui/Button/Button.styled'
 
@@ -15,6 +17,10 @@ export const RecipientCard = styled.div`
 export const RecipientCardTop = styled.div`
   padding: 30px;
   border-bottom: 1px solid var(--color-gray-200);
+
+  ${media.createMedia(350)} {
+    padding: 15px 0;
+  }
 `
 
 export const RecipientCardMain = styled.div`
@@ -39,5 +45,11 @@ export const RecipientCardMain = styled.div`
     color: var(--color-gray-300);
     line-height: 20px;
     text-align: center;
+  }
+
+  ${media.createMedia(350)} {
+    width: auto;
+    padding: 15px;
+    box-sizing: border-box;
   }
 `

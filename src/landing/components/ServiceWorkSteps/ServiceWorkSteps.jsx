@@ -95,7 +95,7 @@ export const ServiceWorkSteps = () => {
   const stepListSlides = steps.map(({ title, img }, idx) => (
     <SwiperSlide key={title}>
       <S.Img>
-        <Image src={img} alt={title} quality={100} />
+        <Image src={img} alt={title} quality={100} placeholder="blur" />
       </S.Img>
 
       <S.Text>{title}</S.Text>

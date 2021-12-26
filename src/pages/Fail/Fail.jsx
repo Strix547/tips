@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useTranslation } from 'next-i18next'
 
-import { AccountLayout } from 'layout'
+import { Header } from 'layout'
 
 import * as S from './Fail.styled'
 
@@ -14,11 +14,11 @@ export const FailPage = () => {
         <title>{t('error')}</title>
       </Head>
 
-      <AccountLayout>
-        <S.Content>
-          <S.Text>{t('error')}!</S.Text>
-        </S.Content>
-      </AccountLayout>
+      <Header />
+
+      <S.Content>
+        <S.Text>{t('error')}!</S.Text>
+      </S.Content>
     </>
   )
 }

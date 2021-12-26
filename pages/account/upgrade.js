@@ -4,7 +4,9 @@ import { UpgradeToBusinessPage } from 'pages'
 export async function getStaticProps({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common']))
+      ...(await serverSideTranslations(locale, ['common'])),
+      protected: true,
+      roles: ['REGULAR', 'ADMIN']
     }
   }
 }
