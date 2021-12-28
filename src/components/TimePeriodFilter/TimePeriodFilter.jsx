@@ -39,6 +39,7 @@ export const TimePeriodFilter = ({ period, miniVersionMedia = 1500 }) => {
     setEndDate(endDate)
 
     if (startDate && endDate) {
+      onDatePickerModalClose(startDate, endDate)
       setDatePickerModalOpen(false)
     }
   }
