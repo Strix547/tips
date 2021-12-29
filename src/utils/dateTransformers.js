@@ -15,7 +15,8 @@ export const transformDateTimeToLabel = (dateTime) => {
 export const transformDateToIso = (date) => {
   if (!date) return
 
-  return new Date(date).toISOString().split('T')[0]
+  const [d, m, y] = new Date(date).toLocaleDateString().split('.')
+  return `${y}-${m}-${d}`
 }
 
 export const transformDateToLabel = (date) => {

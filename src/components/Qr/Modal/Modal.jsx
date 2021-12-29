@@ -30,7 +30,7 @@ export const QrModal = ({ id, open, onClose, label, img }) => {
     }
   }, [copyTooltipOpen])
 
-  const link = `${window.location.origin}/qr-codes/individuals/${id}`
+  const link = `${window.location.origin}/qr-codes/${id}`
 
   const networks = [
     { label: 'Vkontakte', icon: <VkIcon /> },

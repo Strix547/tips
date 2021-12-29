@@ -66,7 +66,8 @@ export const QrIndividualEditPage = observer(() => {
           {!isQrCodeLoading ? (
             <FormProvider {...useFormProps}>
               <PaymentCardOptionsPanelIndividual
-                action={{ label: t('edit-qr-code'), onClick: editQr }}
+                action={{ label: t('edit-qr-code') }}
+                onEdit={editQr}
               />
 
               <RecipientCardPreview

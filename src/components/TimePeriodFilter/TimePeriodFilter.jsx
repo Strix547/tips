@@ -19,6 +19,8 @@ export const TimePeriodFilter = ({ period, miniVersionMedia = 1500 }) => {
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(null)
 
+  console.log('st', transformDateToIso(startDate), 'en', transformDateToIso(endDate))
+
   const periods = [
     { label: t('for-today'), value: 'TODAY' },
     { label: t('for-yesterday'), value: 'YESTERDAY' },
@@ -50,8 +52,6 @@ export const TimePeriodFilter = ({ period, miniVersionMedia = 1500 }) => {
       setValue('periodTo', transformDateToIso(endDate))
     }
 
-    setStartDate(new Date())
-    setEndDate(null)
     setDatePickerModalOpen(false)
   }
 
@@ -86,7 +86,7 @@ export const TimePeriodFilter = ({ period, miniVersionMedia = 1500 }) => {
         onClose={() => onDatePickerModalClose(startDate, endDate)}
       >
         <DatePicker
-          selected={startDate}
+          selected={[startDate, endDate]}
           onChange={onDateChange}
           startDate={startDate}
           endDate={endDate}

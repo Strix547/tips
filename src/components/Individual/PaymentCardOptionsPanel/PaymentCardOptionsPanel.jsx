@@ -8,7 +8,7 @@ import { userStore } from 'store'
 
 import * as S from './PaymentCardOptionsPanel.styled'
 
-export const PaymentCardOptionsPanelIndividual = observer(({ action }) => {
+export const PaymentCardOptionsPanelIndividual = observer(({ action, onEdit }) => {
   const { t } = useTranslation('common')
   const { control } = useFormContext()
 
@@ -59,7 +59,9 @@ export const PaymentCardOptionsPanelIndividual = observer(({ action }) => {
         <Switch name="impression" label={t('impressions')} labelPlacement="start" size="big" />
       </S.Options>
 
-      <Button type="submit">{action.label}</Button>
+      <Button type="submit" onClick={() => onEdit()}>
+        {action.label}
+      </Button>
     </S.PaymentCardOptionsPanelIndividual>
   )
 })
