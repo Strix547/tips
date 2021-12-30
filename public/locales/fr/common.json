@@ -352,7 +352,6 @@
   "search-employee": "Recherche par employé",
   "users-not-found": "Utilisateurs introuvables",
   "number-of-users": "Nombre d'utilisateurs",
-  "error": "Erreur",
   "account-identification": "Identification du compte",
   "back": "Arrière",
   "choose-your-type": "Choisissez votre genre",
@@ -380,5 +379,9 @@
   "further": "Plus loin",
   "all": "Tout",
   "admin": "Administrateur",
-  "qr-name": "Nom du QR Code"
+  "qr-name": "Nom du QR Code",
+
+  "error": "Erreur",
+  "payment-not-completed": "Votre paiement n'a pas été effectué. Veuillez réessayer",
+  "repeat": "Répéter"
 }

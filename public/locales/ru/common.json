@@ -350,7 +350,6 @@
   "search-employee": "Поиск по сотруднику",
   "users-not-found": "Пользователи не найдены",
   "number-of-users": "Кол-во пользователей",
-  "error": "Ошибка",
   "account-identification": "Идентификация аккаунта",
   "back": "Назад",
   "choose-your-type": "Выберите ваш тип",
@@ -377,5 +376,9 @@
   "countries-not-found": "Страны не найдены",
   "further": "Далее",
   "all": "Все",
-  "admin": "Админ"
+  "admin": "Админ",
+
+  "error": "Ошибка",
+  "payment-not-completed": "Ваш платеж не совершен. Пожалуйста, повторите попытку",
+  "repeat": "Повторить"
 }

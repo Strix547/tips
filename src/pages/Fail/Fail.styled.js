@@ -17,4 +17,8 @@ export const Content = styled(WhiteBox)`
     line-height: 32px;
     text-align: center;
   }
+
+  a {
+    margin-top: 15px;
+  }
 `

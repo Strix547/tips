@@ -352,7 +352,6 @@
   "search-employee": "Search by employee",
   "users-not-found": "Users not found",
   "number-of-users": "Number of users",
-  "error": "Error",
   "account-identification": "Account identification",
   "back": "Back",
   "choose-your-type": "Choose your type",
@@ -379,5 +378,9 @@
   "countries-not-found": "Countries not found",
   "further": "Further",
   "all": "All",
-  "admin": "Admin"
+  "admin": "Admin",
+
+  "error": "Error",
+  "payment-not-completed": "Your payment has not been completed. Please try again",
+  "repeat": "Repeat"
 }
