@@ -16,7 +16,7 @@ import {
   getCurrencySymbol
 } from 'utils'
 
-export const QrStatisticsPage = observer(() => {
+export const QrIndividualStatisticsPage = observer(() => {
   const { t } = useTranslation('common')
   const router = useRouter()
   const useFormProps = useForm({

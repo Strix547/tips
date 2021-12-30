@@ -1,0 +1,1 @@
+export { QrIndividualStatisticsPage } from './IndividualStatistics'

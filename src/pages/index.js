@@ -34,7 +34,8 @@ import {
   QrIndividualEditPage,
   QrPaymentPage,
   QrCodesPage,
-  QrStatisticsPage,
+  QrIndividualStatisticsPage,
+  QrPlatformStatisticsPage,
   QrPlatformEditPage
 } from './qr-codes'
 
@@ -80,7 +81,8 @@ export {
   AboutUsPage,
   CredentialsPage,
   LoyaltyPage,
-  QrStatisticsPage,
+  QrIndividualStatisticsPage,
+  QrPlatformStatisticsPage,
   MyEmployeesPage,
   EmployeeCreatePage,
   CommissionsPage,

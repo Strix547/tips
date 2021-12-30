@@ -73,6 +73,26 @@ export const statisticsStore = makeAutoObservable({
     )
   },
 
+  getPlatformPaymentIncomeStatistics: async ({
+    qrId,
+    format,
+    period,
+    zoneOffset,
+    periodFrom,
+    periodTo
+  }) => {
+    await getStaitsitcs(
+      {
+        qrId,
+        format,
+        zoneOffset,
+        ...getStatisticsPeriodProps(period, periodFrom, periodTo)
+      },
+      statisticsApi.getPlatformPaymentIncomeStatistics,
+      statisticsStore
+    )
+  },
+
   getQrIncomeStatistics: async ({ qrId, format, zoneOffset, period, periodFrom, periodTo }) => {
     await getStaitsitcs(
       {

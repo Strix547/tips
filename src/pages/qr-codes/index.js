@@ -2,7 +2,8 @@ import { QrIndividualCreatePage } from './IndividualCreate'
 import { QrIndividualEditPage } from './IndividualEdit'
 import { QrPaymentPage } from './Payment'
 import { QrCodesPage } from './QrCodes'
-import { QrStatisticsPage } from './Statistics'
+import { QrIndividualStatisticsPage } from './IndividualStatistics'
+import { QrPlatformStatisticsPage } from './PlatformStatistics'
 import { QrPlatformEditPage } from './PlatformEdit'
 
 export {
@@ -10,6 +11,7 @@ export {
   QrIndividualEditPage,
   QrPaymentPage,
   QrCodesPage,
-  QrStatisticsPage,
+  QrIndividualStatisticsPage,
+  QrPlatformStatisticsPage,
   QrPlatformEditPage
 }

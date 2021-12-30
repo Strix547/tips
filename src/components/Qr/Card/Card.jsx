@@ -27,10 +27,17 @@ export const QrCard = observer(({ id, type, templateId, label, img, tag }) => {
   const [isConfirmDeleteModalOpen, setConfirmDeleteModalOpen] = useState(false)
 
   const toQrStatisticsPage = () => {
-    router.push({
-      pathname: ROUTE_NAMES.ACCOUNT_QR_INDIVIDUALS_STATISTICS,
-      query: { id }
-    })
+    if (type === 'individual') {
+      router.push({
+        pathname: ROUTE_NAMES.ACCOUNT_QR_INDIVIDUALS_STATISTICS,
+        query: { id }
+      })
+    } else {
+      router.push({
+        pathname: ROUTE_NAMES.ACCOUNT_QR_PLATFORMS_STATISTICS,
+        query: { id }
+      })
+    }
   }
 
   const onShare = () => {

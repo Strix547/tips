@@ -1,5 +1,5 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { QrIndividualStatisticsPage } from 'pages'
+import { QrPlatformStatisticsPage } from 'pages'
 
 export async function getServerSideProps({ locale }) {
   return {
@@ -11,4 +11,4 @@ export async function getServerSideProps({ locale }) {
   }
 }
 
-export default QrIndividualStatisticsPage
+export default QrPlatformStatisticsPage

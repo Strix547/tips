@@ -100,6 +100,21 @@ export const getQrIncomeStatistics = async ({
   )
 }
 
+export const getPlatformPaymentIncomeStatistics = async ({
+  qrId,
+  format,
+  zoneOffset,
+  period,
+  periodFrom,
+  periodTo
+}) => {
+  return await getStatistics(
+    `/platform-payment-page-income-statistics/${qrId}`,
+    { format, zoneOffset, period, periodFrom, periodTo },
+    transformStatistics
+  )
+}
+
 export const getBusinessAccountIncomeStatistics = async ({
   userId,
   format,

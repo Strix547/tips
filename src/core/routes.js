@@ -19,6 +19,7 @@ export const ROUTE_NAMES = {
   ACCOUNT_QR_INDIVIDUALS_CREATE: '/account/qr-codes/individuals/create',
   ACCOUNT_QR_INDIVIDUALS_EDIT: '/account/qr-codes/individuals/[id]/edit',
   ACCOUNT_QR_INDIVIDUALS_STATISTICS: '/account/qr-codes/individuals/[id]/statistics',
+  ACCOUNT_QR_PLATFORMS_STATISTICS: '/account/qr-codes/platforms/[id]/statistics',
 
   ACCOUNT_QR_PLATFORMS_EDIT: '/account/qr-codes/platforms/[id]/edit',
   ACCOUNT_QR_PLATFORMS_STATISTICS: '/account/qr-codes/platforms/[id]/statistics',

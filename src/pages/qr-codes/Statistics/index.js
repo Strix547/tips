@@ -1,1 +1,0 @@
-export { QrStatisticsPage } from './Statistics'

@@ -35,7 +35,7 @@ export const PlatformEditPage = observer(() => {
   }, [platformId])
 
   useEffect(() => {
-    if (isPlatformLoading || !platform.incomePercentage) return
+    if (isPlatformLoading || typeof platform.incomePercentage === 'undefined') return
 
     const { name, address, type, incomePercentage, bankAccount } = platform
     const typeDefaultItem = PLATFORM_TYPES.find(({ label }) => label === type)

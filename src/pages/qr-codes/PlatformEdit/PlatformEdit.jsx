@@ -101,8 +101,8 @@ export const QrPlatformEditPage = observer(() => {
               <RecipientCardPreview
                 type="platform"
                 company={{ name: platformName, logo: companyImg.src }}
-                firstName="Вася"
-                lastName="Пупкин"
+                firstName={t('first-name')}
+                lastName={t('last-name')}
                 rating={ratingSwitch}
                 reviews={reviews}
                 amountPresets={[preset1, preset2, preset3]}
