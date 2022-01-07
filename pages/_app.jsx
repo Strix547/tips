@@ -38,6 +38,8 @@ const App = ({ Component, pageProps }) => {
   const { protected: isProtectedPage, roles: pageRoles } = pageProps
 
   useEffect(async () => {
+    if (id) return
+
     const id = await userStore.getMyId()
 
     if (isProtectedPage && !id) {
@@ -74,16 +76,17 @@ const App = ({ Component, pageProps }) => {
     if (!role) return
 
     const isAuthRoute = currentPathname === ROUTE_NAMES.AUTH
+    const isIdentifyRoute = currentPathname === ROUTE_NAMES.ACCOUNT_IDENTIFY
+    const isRequisitesRoute = currentPathname === ROUTE_NAMES.ACCOUNT_REQUISITES
 
-    if (role === 'UNVERIFIED' && isProtectedPage && !isAuthRoute) {
-      router.push(ROUTE_NAMES.ACCOUNT_IDENTIFY)
+    if (role === 'UNVERIFIED' && !isIdentifyRoute && !isRequisitesRoute) {
+      router.push(ROUTE_NAMES.ACCOUNT_REQUISITES)
       return
     }
 
     if (pageRoles && !pageRoles.includes(role)) {
       router.push(ROUTE_NAMES.ACCOUNT)
       toast.warning('No permission for this page')
-      return
     }
   }, [role, isProtectedPage, pageRoles, currentPathname])
 
@@ -112,7 +115,7 @@ const App = ({ Component, pageProps }) => {
               <CircularProgress size={80} />
             </div>
           ) : (
-            <Component {...pageProps} stripePromise={stripePromise} />
+            <Component {...pageProps} />
           )}
           <Notifications />
         </Elements>

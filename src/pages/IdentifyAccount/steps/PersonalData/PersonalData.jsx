@@ -13,7 +13,12 @@ export const PersonalDataStep = () => {
 
       <FormField name="firstName" label={t('name')} placeholder={t('write-name')} required />
 
-      <FormField name="lastName" label={t('last-name')} placeholder={t('enter-lastname')} required />
+      <FormField
+        name="lastName"
+        label={t('last-name')}
+        placeholder={t('enter-lastname')}
+        required
+      />
 
       <BirthDateAdultValid />
 

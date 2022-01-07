@@ -1,11 +1,13 @@
 import styled, { css } from 'styled-components'
 import { IbanElement } from '@stripe/react-stripe-js'
 
-import { WhiteBox, Label, ErrorText } from 'styled'
+import { WhiteBox, Text, Label, ErrorText } from 'styled'
 import { media } from 'styles/media'
 import { Button } from 'ui/Button/Button.styled'
+import { FormField } from 'ui/FormField/FormField.styled'
+import { Dropzone } from 'ui/Dropzone/Dropzone.styled'
 
-export { Label, ErrorText }
+export { Label, Text, ErrorText }
 
 export const Requisites = styled.div``
 
@@ -52,7 +54,7 @@ export const CheckboxField = styled.div`
 `
 
 export const IbanContainer = styled.div`
-  margin-top: 30px;
+  /* margin-top: 30px; */
 `
 
 export const Iban = styled(IbanElement)`
@@ -60,10 +62,64 @@ export const Iban = styled(IbanElement)`
   font-family: 'Formular';
   font-size: var(--font-size-md);
   border: 1px solid var(--color-gray-400);
+  background: #fff;
   border-radius: 8px;
   box-sizing: border-box;
 
   @media (max-height: 835px) {
     padding: 14px 20px;
+  }
+`
+
+export const Agreement = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+
+  ${Text} {
+    margin-left: 10px;
+  }
+
+  a {
+    margin-left: 5px;
+    color: var(--color-primary-200);
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+`
+
+export const DropzoneImage = styled.div`
+  position: relative;
+  width: 100%;
+  height: 40px;
+  margin: 20px;
+
+  img {
+    width: auto !important;
+    height: auto !important;
+    min-width: auto !important;
+    min-height: auto !important;
+  }
+`
+
+export const RequisitesDataForm = styled.form`
+  ${Text}:first-child {
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+
+  ${FormField}, ${Dropzone} {
+    background-color: #fff;
+  }
+
+  ${Button} {
+    margin-top: 20px;
+  }
+
+  & > *:not(:last-child) {
+    margin-bottom: 10px;
   }
 `

@@ -13,6 +13,7 @@ export const userStore = makeAutoObservable({
   isIdLoading: false,
   isPersonalDataLoading: false,
   isIdentifyProcessing: false,
+  isRequisitesDataLoading: false,
   role: null,
   isRoleLoading: false,
   personalData: {
@@ -123,7 +124,28 @@ export const userStore = makeAutoObservable({
     return true
   },
 
-  identifyAccount: async ({
+  identifyAccount: async ({ userId, email, firstName, lastName, birthDate }) => {
+    userStore.isIdentifyProcessing = true
+
+    try {
+      await userApi.changeUserInfo({
+        userId,
+        firstName,
+        lastName,
+        birthDate,
+        email
+      })
+      await userStore.getUserRole(userId)
+      await userStore.getPersonalData(userId)
+      router.push(ROUTE_NAMES.ACCOUNT_REQUISITES)
+    } catch ({ message }) {
+      toast.error(message)
+    } finally {
+      userStore.isIdentifyProcessing = false
+    }
+  },
+
+  addRequisitesData: async ({
     userId,
     email,
     firstName,
@@ -134,14 +156,10 @@ export const userStore = makeAutoObservable({
     address,
     postalCode,
     policyAgreement,
-    payer,
-    recipient,
-    agent,
-    business,
     bankAccountToken,
     accountToken
   }) => {
-    userStore.isIdentifyProcessing = true
+    userStore.isRequisitesDataLoading = true
 
     try {
       await userApi.changeUserInfo({
@@ -157,7 +175,6 @@ export const userStore = makeAutoObservable({
         policyAgreement,
         accountToken
       })
-      await userApi.addUserRole({ userId, payer, recipient, agent, business })
       await bankAccountApi.addBankAccount({ userId, bankAccountToken })
       await userStore.getUserRole(userId)
       await userStore.getPersonalData(userId)
@@ -165,7 +182,7 @@ export const userStore = makeAutoObservable({
     } catch ({ message }) {
       toast.error(message)
     } finally {
-      userStore.isIdentifyProcessing = false
+      userStore.isRequisitesDataLoading = false
     }
   },
 

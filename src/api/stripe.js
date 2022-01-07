@@ -25,9 +25,9 @@ export const createAccountToken = async ({
           postal_code: postal
         },
         dob: {
-          day: birthDate.split('/')[0],
-          month: birthDate.split('/')[1],
-          year: birthDate.split('/')[2]
+          day: birthDate.split('-')[2],
+          month: birthDate.split('-')[1],
+          year: birthDate.split('-')[0]
         },
         phone,
         email,
@@ -45,6 +45,7 @@ export const createAccountToken = async ({
 
     return { accountToken, accountTokenError }
   } catch ({ message }) {
+    console.log(message)
     return { accountTokenError }
   }
 }

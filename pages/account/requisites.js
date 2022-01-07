@@ -6,7 +6,7 @@ export async function getStaticProps({ locale }) {
     props: {
       ...(await serverSideTranslations(locale, ['common'])),
       protected: true,
-      roles: ['REGULAR', 'BUSINESS', 'ADMIN']
+      roles: ['UNVERIFIED', 'REGULAR', 'BUSINESS', 'ADMIN']
     }
   }
 }
