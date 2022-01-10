@@ -7,6 +7,7 @@ import { appWithTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 import Head from 'next/head'
+import { setCookie } from 'utils/cookie'
 
 import { Notifications } from 'components'
 import { CircularProgress } from 'ui'
@@ -36,6 +37,14 @@ const App = ({ Component, pageProps }) => {
   const { lang } = localStore
   const currentPathname = router.pathname
   const { protected: isProtectedPage, roles: pageRoles } = pageProps
+
+  useEffect(async () => {
+    const { JSESSIONID } = router.query
+    if (JSESSIONID) {
+      setCookie('JSESSIONID', JSESSIONID)
+      await userStore.getMyId()
+    }
+  }, [router, userStore])
 
   useEffect(async () => {
     if (id) return
