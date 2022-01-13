@@ -7,13 +7,13 @@ import { appWithTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 import Head from 'next/head'
-
 import { Notifications } from 'components'
 import { CircularProgress } from 'ui'
 
 import { userStore, localStore } from 'store'
 import { ROUTE_NAMES } from 'core/routes'
 import { stripeKey } from 'core/constants'
+import { setCookie } from 'utils/cookie'
 
 import { createTheme } from '@material-ui/core/styles'
 
@@ -36,6 +36,17 @@ const App = ({ Component, pageProps }) => {
   const { lang } = localStore
   const currentPathname = router.pathname
   const { protected: isProtectedPage, roles: pageRoles } = pageProps
+
+  useEffect(() => {
+    if (!router) return
+
+    const { JSESSIONID } = router.query
+
+    console.log(JSESSIONID)
+    if (JSESSIONID) {
+      setCookie('JSESSIONID', JSESSIONID)
+    }
+  }, [router])
 
   useEffect(async () => {
     if (id) return
@@ -75,7 +86,6 @@ const App = ({ Component, pageProps }) => {
   useEffect(() => {
     if (!role) return
 
-    const isAuthRoute = currentPathname === ROUTE_NAMES.AUTH
     const isIdentifyRoute = currentPathname === ROUTE_NAMES.ACCOUNT_IDENTIFY
     const isRequisitesRoute = currentPathname === ROUTE_NAMES.ACCOUNT_REQUISITES
 
@@ -115,7 +125,7 @@ const App = ({ Component, pageProps }) => {
               <CircularProgress size={80} />
             </div>
           ) : (
-            <Component {...pageProps} />
+            <Component stripePromise={stripePromise} {...pageProps} />
           )}
           <Notifications />
         </Elements>

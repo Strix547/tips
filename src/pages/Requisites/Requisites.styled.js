@@ -53,9 +53,7 @@ export const CheckboxField = styled.div`
     `}
 `
 
-export const IbanContainer = styled.div`
-  /* margin-top: 30px; */
-`
+export const IbanContainer = styled.div``
 
 export const Iban = styled(IbanElement)`
   padding: 14px 20px;

@@ -4,7 +4,6 @@ import { observer } from 'mobx-react-lite'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useStripe, useElements, IbanElement } from '@stripe/react-stripe-js'
 import { useTranslation } from 'next-i18next'
-import { loadStripe } from '@stripe/stripe-js'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -28,9 +27,7 @@ import * as S from './Requisites.styled'
 
 import UploadIcon from '@public/icons/upload.svg'
 
-const stripePromise = loadStripe(String(stripeKey))
-
-export const RequisitesPage = observer(() => {
+export const RequisitesPage = observer(({ stripePromise }) => {
   const { t } = useTranslation('common')
   const stripe = useStripe()
   const stripeElements = useElements()
@@ -169,7 +166,7 @@ export const RequisitesPage = observer(() => {
       firstName,
       lastName
     })
-    console.log(accountTokenError, bankAccountError)
+
     if (bankAccountError || accountTokenError) {
       if (bankAccountError) {
         setStripeError(bankAccountError)
