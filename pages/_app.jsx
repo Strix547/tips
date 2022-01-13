@@ -125,7 +125,7 @@ const App = ({ Component, pageProps }) => {
               <CircularProgress size={80} />
             </div>
           ) : (
-            <Component {...pageProps} />
+            <Component stripePromise={stripePromise} {...pageProps} />
           )}
           <Notifications />
         </Elements>
