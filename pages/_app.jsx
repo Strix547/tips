@@ -38,6 +38,12 @@ const App = ({ Component, pageProps }) => {
   const { protected: isProtectedPage, roles: pageRoles } = pageProps
 
   useEffect(async () => {
+    const { JSESSIONID } = router.query
+
+    if (JSESSIONID) {
+      setCookie('JSESSIONID', JSESSIONID)
+    }
+
     if (id) return
 
     const id = await userStore.getMyId()
