@@ -104,6 +104,8 @@ export const DropzoneImage = styled.div`
 `
 
 export const RequisitesDataForm = styled.form`
+  position: relative;
+
   ${Text}:first-child {
     margin-bottom: 20px;
     font-weight: 700;
@@ -120,4 +122,16 @@ export const RequisitesDataForm = styled.form`
   & > *:not(:last-child) {
     margin-bottom: 10px;
   }
+`
+
+export const Progress = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: #fff;
 `

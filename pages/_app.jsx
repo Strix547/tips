@@ -37,17 +37,6 @@ const App = ({ Component, pageProps }) => {
   const currentPathname = router.pathname
   const { protected: isProtectedPage, roles: pageRoles } = pageProps
 
-  useEffect(() => {
-    if (!router) return
-
-    const { JSESSIONID } = router.query
-
-    console.log(JSESSIONID)
-    if (JSESSIONID) {
-      setCookie('JSESSIONID', JSESSIONID)
-    }
-  }, [router])
-
   useEffect(async () => {
     if (id) return
 

@@ -48,7 +48,7 @@ export const RequisitesPage = observer(({ stripePromise }) => {
     id: userId,
     personalData: { email, firstName, lastName, dateOfBirth },
     role,
-    isRequisitesDataLoading
+    isIdentifyProcessing
   } = userStore
 
   useEffect(() => {
@@ -125,25 +125,10 @@ export const RequisitesPage = observer(({ stripePromise }) => {
   }
 
   const onRequisitesDataSubmit = async ({ country, city, address, postal, agreement }) => {
-    userStore.startIdentifyProcessing(true)
+    userStore.changeIsIdentifyProcessing(true)
 
     const identityDocumentId = await uploadStripeIdentityDocument(identityDocument)
     const addressDocumentId = await uploadStripeIdentityDocument(addressDocument)
-
-    console.log({
-      stripe,
-      firstName,
-      lastName,
-      countryCode: toJS(country).code,
-      city,
-      address,
-      postal,
-      birthDate: dateOfBirth,
-      phone: `+${localStorage.getItem('phone')}`,
-      email: 'strix547@mail.ru',
-      identityDocumentId,
-      addressDocumentId
-    })
 
     const { accountToken, accountTokenError } = await stripeApi.createAccountToken({
       stripe,
@@ -159,26 +144,26 @@ export const RequisitesPage = observer(({ stripePromise }) => {
       identityDocumentId,
       addressDocumentId
     })
-
+    console.log(accountToken)
     const { bankAccountToken, bankAccountError } = await stripeApi.createBankAccountToken({
       stripe,
       ibanElement,
       firstName,
       lastName
     })
-
+    console.log(bankAccountToken)
     if (bankAccountError || accountTokenError) {
       if (bankAccountError) {
         setStripeError(bankAccountError)
       } else {
         setStripeError(accountTokenError)
       }
-      userStore.startIdentifyProcessing(false)
+      userStore.changeIsIdentifyProcessing(false)
       return
     }
 
     if (accountToken && bankAccountToken) {
-      userStore.addRequisitesData({
+      await userStore.addRequisitesData({
         userId,
         email,
         firstName,
@@ -192,10 +177,12 @@ export const RequisitesPage = observer(({ stripePromise }) => {
         bankAccountToken: bankAccountToken.id,
         accountToken: accountToken.id
       })
+
+      userStore.changeIsIdentifyProcessing(false)
     }
   }
 
-  const requisites = !isRequisitesDataLoading ? (
+  const requisites = (
     <S.RequisitesDataForm onSubmit={handleSubmit(onRequisitesDataSubmit)}>
       <FormProvider {...useFormProps}>
         <S.Text>{t('fill-fields')}:</S.Text>
@@ -265,9 +252,13 @@ export const RequisitesPage = observer(({ stripePromise }) => {
           {t('save')}
         </Button>
       </FormProvider>
+
+      {isIdentifyProcessing && (
+        <S.Progress>
+          <CircularProgress size={80} style={{ margin: 'auto' }} />
+        </S.Progress>
+      )}
     </S.RequisitesDataForm>
-  ) : (
-    <CircularProgress size={80} style={{ margin: 'auto' }} />
   )
 
   return (

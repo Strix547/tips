@@ -197,7 +197,7 @@ export const userStore = makeAutoObservable({
     }
   },
 
-  startIdentifyProcessing: (value) => {
+  changeIsIdentifyProcessing: (value) => {
     userStore.isIdentifyProcessing = value
   }
 })
