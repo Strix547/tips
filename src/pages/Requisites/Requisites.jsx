@@ -144,21 +144,23 @@ export const RequisitesPage = observer(({ stripePromise }) => {
       identityDocumentId,
       addressDocumentId
     })
-    console.log(accountToken)
+
     const { bankAccountToken, bankAccountError } = await stripeApi.createBankAccountToken({
       stripe,
       ibanElement,
       firstName,
       lastName
     })
-    console.log(bankAccountToken)
+
     if (bankAccountError || accountTokenError) {
       if (bankAccountError) {
         setStripeError(bankAccountError)
       } else {
         setStripeError(accountTokenError)
       }
+
       userStore.changeIsIdentifyProcessing(false)
+
       return
     }
 

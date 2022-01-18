@@ -38,13 +38,13 @@ const App = ({ Component, pageProps }) => {
   const { protected: isProtectedPage, roles: pageRoles } = pageProps
 
   useEffect(async () => {
+    if (id) return
+
     const { JSESSIONID } = router.query
 
     if (JSESSIONID) {
       setCookie('JSESSIONID', JSESSIONID)
     }
-
-    if (id) return
 
     const id = await userStore.getMyId()
 
@@ -66,17 +66,17 @@ const App = ({ Component, pageProps }) => {
     const storageLang = localStorage.getItem('lang')
 
     if (storageLang) {
-      router.replace({ pathname: currentPathname, query: router.query }, router.asPath, {
+      router.replace(router, router.asPath, {
         locale: storageLang.toLowerCase()
       })
       return
     }
 
     const lang = await localStore.getLanguage()
-    router.replace({ pathname: currentPathname, query: router.query }, router.asPath, {
+    router.replace(router, router.asPath, {
       locale: lang.toLowerCase()
     })
-  }, [lang, currentPathname])
+  }, [lang])
 
   useEffect(() => {
     if (!role) return
@@ -84,8 +84,8 @@ const App = ({ Component, pageProps }) => {
     const isIdentifyRoute = currentPathname === ROUTE_NAMES.ACCOUNT_IDENTIFY
     const isRequisitesRoute = currentPathname === ROUTE_NAMES.ACCOUNT_REQUISITES
 
-    if (role === 'UNVERIFIED' && !isIdentifyRoute && !isRequisitesRoute) {
-      router.push(ROUTE_NAMES.ACCOUNT_REQUISITES)
+    if (role && role === 'UNVERIFIED' && !isIdentifyRoute && !isRequisitesRoute) {
+      router.replace(ROUTE_NAMES.ACCOUNT_REQUISITES)
       return
     }
 
@@ -93,7 +93,7 @@ const App = ({ Component, pageProps }) => {
       router.push(ROUTE_NAMES.ACCOUNT)
       toast.warning('No permission for this page')
     }
-  }, [role, isProtectedPage, pageRoles, currentPathname])
+  }, [role, pageRoles, currentPathname])
 
   return (
     <>
