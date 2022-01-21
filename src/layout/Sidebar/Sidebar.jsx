@@ -24,6 +24,7 @@ import TagIcon from '@public/icons/tag.svg'
 import LogoutIcon from '@public/icons/logout.svg'
 import DiscountIcon from '@public/icons/discount.svg'
 
+import LogoSvg from '@public/icons/logo-sidebar.svg'
 import UserWithLaptopSvg from '@public/icons/user-with-laptop.svg'
 
 export const Sidebar = observer(() => {
@@ -133,7 +134,7 @@ export const Sidebar = observer(() => {
   return (
     <S.Sidebar>
       <S.Top>
-        <Logo href={ROUTE_NAMES.ACCOUNT} />
+        <Logo href={ROUTE_NAMES.ACCOUNT} logo={<LogoSvg />} />
 
         {isAdminAccount && (
           <S.AdminViewPanel>
