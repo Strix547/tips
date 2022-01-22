@@ -24,7 +24,8 @@ export const userStore = makeAutoObservable({
     countryCode: '',
     city: '',
     address: '',
-    currency: { label: '', value: '' }
+    currency: { label: '', value: '' },
+    phone: ''
   },
 
   getMyId: async () => {

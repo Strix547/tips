@@ -46,7 +46,7 @@ export const RequisitesPage = observer(({ stripePromise }) => {
   const { selectedCountryCode } = localStore
   const {
     id: userId,
-    personalData: { email, firstName, lastName, dateOfBirth },
+    personalData: { email, firstName, lastName, dateOfBirth, phone },
     role,
     isIdentifyProcessing
   } = userStore
@@ -139,7 +139,7 @@ export const RequisitesPage = observer(({ stripePromise }) => {
       address,
       postal,
       birthDate: dateOfBirth,
-      phone: `+${localStorage.getItem('phone')}`,
+      phone,
       email: 'strix547@mail.ru',
       identityDocumentId,
       addressDocumentId
@@ -244,7 +244,7 @@ export const RequisitesPage = observer(({ stripePromise }) => {
           <S.Text>{t('i-agree-with')}</S.Text>
 
           <Link href="https://stripe.com/privacy" prefetch={false}>
-            <a>{t('stripe-policy')}</a>
+            <a target="_blank">{t('stripe-policy')}</a>
           </Link>
         </S.Agreement>
 
