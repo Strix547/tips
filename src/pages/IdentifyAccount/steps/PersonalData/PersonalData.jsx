@@ -11,7 +11,7 @@ export const PersonalDataStep = () => {
     <S.PersonalDataStep>
       <S.FieldsLabel>{t('personal-info')}:</S.FieldsLabel>
 
-      <FormField name="firstName" label={t('name')} placeholder={t('write-name')} required />
+      <FormField name="firstName" label={t('first-name')} placeholder={t('write-name')} required />
 
       <FormField
         name="lastName"
