@@ -7,6 +7,8 @@ import { appWithTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 import Head from 'next/head'
+import { YMInitializer } from 'react-yandex-metrika'
+
 import { Notifications } from 'components'
 import { CircularProgress } from 'ui'
 
@@ -124,6 +126,16 @@ const App = ({ Component, pageProps }) => {
           )}
           <Notifications />
         </Elements>
+
+        <YMInitializer
+          accounts={[87517387]}
+          options={{
+            clickmap: true,
+            trackLinks: true,
+            accurateTrackBounce: true,
+            webvisor: true
+          }}
+        />
       </MuiThemeProvider>
     </>
   )
