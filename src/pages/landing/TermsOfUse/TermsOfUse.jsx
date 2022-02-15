@@ -18,12 +18,20 @@ export const TermsOfUsePage = () => {
 
       <S.Main>
         <S.Text>Terms of use</S.Text>
-        <S.Text>Publication date: November 11, 2021</S.Text>
+        <S.Text>Publication date: February 15, 2022</S.Text>
         <S.Text>I. General</S.Text>
         <S.Text>
-          I.1. SARL “BANIONIS NAZAR” (SIREN number: 794 253 203 hereinafter referred to as the
-          Operator of tips service called FlyTips) has developed and approved this User Agreement.
+          I.1. If you are a resident of France, you are entering into a relationship with SARL
+          “BANIONIS NAZAR” (SIREN: 794 253 203, 178 rue du Faubourg Saint Honoré 75008, Paris,
+          France) hereinafter referred to as “FlyTips Tip Service Operator”, “FlyTips Service”
         </S.Text>
+        <S.Text>
+          If you are a resident of another country, you are entering into a relationship with the
+          parent company FlyTips International Limited (No: 62712/2021, 7/F MW TOWER 111 BONHAM
+          STRAND SHEUNG WAN, Hong Kong, China) hereinafter referred to as the “FlyTips Tip Service
+          Operator”, “ FlyTips Service»
+        </S.Text>
+        <S.Text>The Company has developed and approved this User Agreement.</S.Text>
         <S.Text>
           I.2. The User is obliged to familiarize himself with this User Agreement before using the
           FlyTips Service and accept its terms in full. Disagreement of the User with the terms of
@@ -43,8 +51,8 @@ export const TermsOfUsePage = () => {
           / or in the Service application. When performing registration actions, the Waiter puts a
           tick in the box "I agree with the terms of the User Agreement and the Personal Data
           Processing Policy". Disagreement of the Waiter with the terms of the User Agreement and
-          the Policy entails the impossibility of using the FlyTips Service provided by SARL
-          “BANIONIS NAZAR” by the Waiter and refusal to register.
+          the Policy entails the impossibility of using the FlyTips Service provided by Company by
+          the Waiter and refusal to register.
         </S.Text>
         <S.Text>
           Restaurant administrator in two stages: Consent to the User Agreement posted at
@@ -122,9 +130,9 @@ export const TermsOfUsePage = () => {
           Information subject to protection and non-disclosure in accordance with this Agreement
           does not include information posted by the User in the public domain on the resources of
           the Service and on other sites and services, as well as other information that cannot be
-          confidential information in accordance with the current International legislation .
+          confidential information in accordance with the current International legislation.
         </S.Text>
-        <S.Text>III. Using the "FlyTips" service provided by SARL “BANIONIS NAZAR”</S.Text>
+        <S.Text>III. Using the "FlyTips" service provided by Company</S.Text>
         <S.Text>
           III.1. The Operator acts as an intermediary in the implementation of money transfers from
           the Guest to the Service Waiter using the Payment System. The operator acts on its own
@@ -198,10 +206,11 @@ export const TermsOfUsePage = () => {
           protect the rights and legitimate interests of the Guest and third parties.
         </S.Text>
         <S.Text>
-          III.12. The Operator (FlyTips) charges a commission on money transfers from the Guest to
-          the Waiter. The waiter agrees that the Operator's remuneration for using the Service is
-          the commission charged by the Payment System. The Service, through the use of the Payment
-          System, transfers funds to the Waiter at his request, minus the Operator's commission.
+          III.12. The Operator (FlyTips service) charges a commission on money transfers from the
+          Guest to the Waiter. The waiter agrees that the Operator's remuneration for using the
+          Service is the commission charged by the Payment System. The Service, through the use of
+          the Payment System, transfers funds to the Waiter at his request, minus the Operator's
+          commission.
         </S.Text>
         <S.Text>
           III.13. The Operator reserves the right at any time to establish and / or change the
@@ -218,23 +227,23 @@ export const TermsOfUsePage = () => {
         <S.Text>IV. Rights and obligations of the User and the Operator</S.Text>
         <S.Text>
           IV.1. The user has the right to: use the functionality of the FlyTips Service provided by
-          SARL “BANIONIS NAZAR” in accordance with the assigned category of the User; transfer
-          Confidential information to the Operator to take actions necessary to use the SARL
-          “BANIONIS NAZAR” Service; refuse to receive informational messages by sending a
-          notification to the Operator to the email address support@flytips.com; restrict access to
-          your personal data in whole, by refusing to use the Service, or in part, provided that the
-          use of the Service will be possible without access to the relevant data, by sending a
-          notification to the Operator at the e-mail address: support@flytips.com contact the
-          support of the Service with questions, claims and suggestions related to the functioning
-          of the Service by sending an email to the email address: support@flytips.com. The deadline
-          for sending claims is 3 (three) business days from the date of the event in connection
-          with which the claim is sent. Waiters and Restaurant Administrators have the right to gain
-          access to information about the feedback left about the work of the Waiters, as well as
-          the date and amount of money transfers received to the personal account of the Waiter;
+          Company in accordance with the assigned category of the User; transfer Confidential
+          information to the Operator to take actions necessary to use the Company Service; refuse
+          to receive informational messages by sending a notification to the Operator to the email
+          address support@flytips.com; restrict access to your personal data in whole, by refusing
+          to use the Service, or in part, provided that the use of the Service will be possible
+          without access to the relevant data, by sending a notification to the Operator at the
+          e-mail address: support@flytips.com contact the support of the Service with questions,
+          claims and suggestions related to the functioning of the Service by sending an email to
+          the email address: support@flytips.com. The deadline for sending claims is 3 (three)
+          business days from the date of the event in connection with which the claim is sent.
+          Waiters and Restaurant Administrators have the right to gain access to information about
+          the feedback left about the work of the Waiters, as well as the date and amount of money
+          transfers received to the personal account of the Waiter;
         </S.Text>
         <S.Text>
           IV.2. The user undertakes: To provide true, current, accurate and complete information
-          when using the FlyTips Service provided by SARL “BANIONIS NAZAR”.
+          when using the FlyTips Service provided by Company.
         </S.Text>
         <S.Text>
           At the same time, the User agrees that the Operator is not obliged to check the accuracy
@@ -249,7 +258,9 @@ export const TermsOfUsePage = () => {
         </S.Text>
         <S.Text>
           IV.3. The operator has the right to: change the terms of the User Agreement and the
-          Personal Data Processing Policy; at any time to refuse the User to use the Service.
+          Personal Data Processing Policy; at any time to refuse the User to use the Service.{' '}
+        </S.Text>
+        <S.Text>
           Refusal to use the Service can be expressed by refusing to transfer funds, refusing to
           register on the resources of the Service, or deleting the User's account. The Operator is
           not obliged to disclose to the User the reasons for refusing to use the Service; attract
@@ -288,16 +299,14 @@ export const TermsOfUsePage = () => {
           bank.
         </S.Text>
         <S.Text>
-          V.5. The Operator (SARL “BANIONIS NAZAR”) has the right to make amendments and changes to
-          this User Agreement by posting a new version of the User Agreement on the website and in
-          the Service application. The user undertakes to independently periodically check this User
+          V.5. The Operator (Service FlyTips) has the right to make amendments and changes to this
+          User Agreement by posting a new version of the User Agreement on the website and in the
+          Service application. The user undertakes to independently periodically check this User
           Agreement for changes (the document indicates the date of its publication). Changes to the
           User Agreement made by the Operator come into force after 3 (three) business days from the
-          date of publication of the new edition of the User Agreement.
-        </S.Text>
-        <S.Text>
-          The User has the right to refuse to accept changes and additions to this User Agreement,
-          which means the User's refusal to use the Service.
+          date of publication of the new edition of the User Agreement. The User has the right to
+          refuse to accept changes and additions to this User Agreement, which means the User's
+          refusal to use the Service.
         </S.Text>
         <S.Text>
           V.6. This User Agreement is available in the account of the Waiter and the Administrator
@@ -310,8 +319,7 @@ export const TermsOfUsePage = () => {
           not be resolved by the parties, they are subject to consideration in an arbitration court
           or a court of general jurisdiction at the location of the Operator.
         </S.Text>
-        <S.Text>Terms of use</S.Text>
-        <S.Text>© 2021 SARL “BANIONIS NAZAR” , FlyTips Service. All rights reserved.</S.Text>
+        <S.Text>© 2022 FlyTips Service. All rights reserved. </S.Text>
       </S.Main>
 
       <Footer />
