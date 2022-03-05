@@ -1,0 +1,1 @@
+export { PayTipsQr } from './PayTipsQr'

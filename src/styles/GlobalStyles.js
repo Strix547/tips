@@ -7,6 +7,10 @@ export const GlobalStyles = createGlobalStyle`
   ${reset}
   ${variables}
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   html, body, #root {
     min-height: 100vh;
   }

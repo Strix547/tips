@@ -34,5 +34,12 @@ export const variables = css`
     --font-size-reg: 16px;
     --font-size-sm: 14px;
     --font-size-xs: 12px;
+
+    --gradient-main: radial-gradient(
+      100% 225% at 100% 100%,
+      #ccff00 0%,
+      #ffaa00 22.16%,
+      #ff0000 100%
+    );
   }
 `
