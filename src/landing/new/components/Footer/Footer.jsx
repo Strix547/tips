@@ -8,7 +8,7 @@ import { ROUTE_NAMES } from 'core/routes'
 import * as S from './Footer.styled'
 
 import LogoSVG from '@public/img/landing/new/logo-black.svg'
-import InstagramIcon from '@public/img/landing/new/social/Instagram.svg'
+import InstagramIcon from '@public/img/landing/new/social/instagram.svg'
 import FacebookIcon from '@public/img/landing/new/social/facebook.svg'
 import YoutubeIcon from '@public/img/landing/new/social/youtube.svg'
 import TelegramIcon from '@public/img/landing/new/social/telegram.svg'
