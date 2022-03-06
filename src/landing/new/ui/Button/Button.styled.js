@@ -14,6 +14,7 @@ const getColorStyles = (color) => {
 }
 
 export const Button = styled.button`
+  display: inline-block;
   padding: 17px 24px;
   border-radius: 100px;
   border: none;

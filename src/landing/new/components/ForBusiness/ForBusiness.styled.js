@@ -293,6 +293,7 @@ export const ControlTransparency = styled.div`
 
     img {
       position: static;
+      max-width: 100%;
       transform: none;
       margin-top: 24px;
     }

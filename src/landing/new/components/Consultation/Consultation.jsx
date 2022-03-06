@@ -29,13 +29,13 @@ export const Consultation = () => {
             </S.LeftText>
           </S.Left>
 
-          <FormProvider {...useFormProps}>
+          {/* <FormProvider {...useFormProps}>
             <S.Form>
               <FormField name="name" placeholder={t('whats-your-name')} />
               <PhoneField name="phone" placeholder={t('your-phone')} />
               <Button>{t('get-advise')}</Button>
             </S.Form>
-          </FormProvider>
+          </FormProvider> */}
         </S.Body>
       </S.Wrapper>
     </S.Consultation>

@@ -23,7 +23,7 @@ export const MainPage = () => {
 
       <Header />
 
-      <main>
+      <main style={{ overflowX: 'hidden' }}>
         <PaymentMethods />
         <Info />
         <ForBusiness />

@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 
 import { Button } from 'landing/new/ui'
@@ -77,7 +78,11 @@ export const ForBusiness = () => {
 
           <S.Text tag="h2">{t('allow-guest-leave-review-thank-staff')}</S.Text>
 
-          <Button color="white">{t('connect-free')}</Button>
+          <Link href="/auth?utm_source=site&utm_medium=inner&utm_campaign=index1" passHref>
+            <Button color="white" as="a">
+              {t('connect-free')}
+            </Button>
+          </Link>
         </S.Top>
 
         <S.CountersList>{countersItems}</S.CountersList>
@@ -91,7 +96,11 @@ export const ForBusiness = () => {
 
               <S.Text>{t('personal-qr-codes-for-each-employee')}</S.Text>
 
-              <Button color="white">{t('sign-up')}</Button>
+              <Link href="/auth?utm_source=site&utm_medium=inner&utm_campaign=index1" passHref>
+                <Button color="white" as="a">
+                  {t('sign-up')}
+                </Button>
+              </Link>
             </S.ControlTransparencyLeft>
 
             <img src={dashboard.src} alt="dashboard" />
@@ -122,7 +131,11 @@ export const ForBusiness = () => {
 
             <S.Text tag="h3">{t('start-accepting-tips-after-five-min')}</S.Text>
 
-            <Button color="white">{t('connect-free')}</Button>
+            <Link href="/auth?utm_source=site&utm_medium=inner&utm_campaign=index1" passHref>
+              <Button color="white" as="a">
+                {t('connect-free')}
+              </Button>
+            </Link>
           </S.SmallBusiness>
 
           <S.NetworkEstablishments>
@@ -134,7 +147,11 @@ export const ForBusiness = () => {
               {t('unlimited-number-estlishments')}. {t('setting-up-qr-code')}
             </S.Text>
 
-            <Button color="white">{t('connect-free')}</Button>
+            <Link href="/auth?utm_source=site&utm_medium=inner&utm_campaign=index1" passHref>
+              <Button color="white" as="a">
+                {t('connect-free')}
+              </Button>
+            </Link>
           </S.NetworkEstablishments>
         </S.BusinessTypes>
 
@@ -162,7 +179,11 @@ export const ForBusiness = () => {
 
             <S.Text>{t('place-qr-code-to-payment-page')}</S.Text>
 
-            <Button color="white">{t('connect-free')}</Button>
+            <Link href="/auth?utm_source=site&utm_medium=inner&utm_campaign=index1" passHref>
+              <Button color="white" as="a">
+                {t('connect-free')}
+              </Button>
+            </Link>
           </S.AcceptDonationsBody>
         </S.AcceptDonations>
       </S.Wrapper>

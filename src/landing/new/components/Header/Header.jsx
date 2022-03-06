@@ -59,7 +59,7 @@ export const Header = observer(() => {
     { label: t('recipients'), href: '#payment-methods' },
     { label: t('business'), href: '#for-business' },
     { label: t('support-service'), href: ROUTE_NAMES.SUPPORT },
-    { label: t('sign-up'), href: ROUTE_NAMES.AUTH }
+    { label: t('sign-up'), href: '/auth?utm_source=site&utm_medium=inner&utm_campaign=index1' }
   ]
 
   const changeLanguange = (lang) => {
@@ -145,7 +145,9 @@ export const Header = observer(() => {
 
             <S.Text tag="h1">{t('tips-by-qr-fast-safely')}</S.Text>
 
-            <Button>{t('connect-free')}</Button>
+            <Link href="/auth?utm_source=site&utm_medium=inner&utm_campaign=index1" passHref>
+              <Button as="a">{t('connect-free')}</Button>
+            </Link>
 
             {/* <S.Stores>
               <a href="/">

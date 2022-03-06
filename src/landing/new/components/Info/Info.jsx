@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 
@@ -97,7 +98,9 @@ export const Info = () => {
 
             <S.Text>{t('when-you-connect-cashless-payment')}</S.Text>
 
-            <Button>{t('connect-free')}</Button>
+            <Link href="/auth?utm_source=site&utm_medium=inner&utm_campaign=index1" passHref>
+              <Button as="a">{t('connect-free')}</Button>
+            </Link>
           </S.GetTipsLeft>
 
           <S.TipsList>{tipsItems}</S.TipsList>
