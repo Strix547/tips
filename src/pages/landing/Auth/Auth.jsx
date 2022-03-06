@@ -19,7 +19,11 @@ import CommentRegulationIcon from '@public/img/landing/comment-regulation.svg'
 export const AuthPage = observer(() => {
   const { t } = useTranslation('common')
   const router = useRouter()
-
+  console.log(
+    router.asPath.indexOf('agent') !== -1
+      ? router.asPath.slice(router.asPath.indexOf('agent') + 6)
+      : undefined
+  )
   const isTablet = useMediaQuery({ maxWidth: MEDIA_TABLET })
 
   const [rememberUser, setRememberUser] = useState(false)
@@ -75,7 +79,10 @@ export const AuthPage = observer(() => {
       phone,
       code,
       remember,
-      referralAgentId: router.asPath.slice(router.asPath.indexOf('agent') + 6)
+      referralAgentId:
+        router.asPath.indexOf('agent') !== -1
+          ? router.asPath.slice(router.asPath.indexOf('agent') + 6)
+          : undefined
     })
   }
 
