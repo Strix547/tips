@@ -262,6 +262,8 @@ export const ControlTransparency = styled.div`
   img {
     position: relative;
     bottom: -40px;
+    width: 580px;
+    height: 360px;
   }
 
   ${media.createMedia(1170)} {
@@ -271,6 +273,7 @@ export const ControlTransparency = styled.div`
     img {
       position: absolute;
       right: -110px;
+      bottom: 0;
     }
   }
 
@@ -294,6 +297,7 @@ export const ControlTransparency = styled.div`
     img {
       position: static;
       max-width: 100%;
+      height: auto;
       transform: none;
       margin-top: 24px;
     }

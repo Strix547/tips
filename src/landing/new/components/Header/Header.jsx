@@ -143,7 +143,7 @@ export const Header = observer(() => {
           <S.BodyLeft>
             <S.Text>{t('for-those-who-work-service-sector')}</S.Text>
 
-            <S.Text tag="h1">{t('tips-by-qr-fast-safely')}</S.Text>
+            <S.Text tag="h1">{t('Tipping by QR code quickly and safely to your account')}</S.Text>
 
             <Link href="/auth?utm_source=site&utm_medium=inner&utm_campaign=index1" passHref>
               <Button as="a">{t('connect-free')}</Button>
